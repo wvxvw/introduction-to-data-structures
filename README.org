@@ -8,7 +8,7 @@
 * Compiling
   The exercises contain some C code.  To compile it, you would need to
   have a C compiler on your system (I used GCC 5.3.1).  The code inside should
-  be just the standard C99.  The project comes with a [[./assignment11/Makefile][Makefile]].  You can use
+  be just the standard C99.  The project comes with a [[./assignment-11/Makefile][Makefile]].  You can use
   it to build the project by running:
 
   #+BEGIN_SRC sh
@@ -26,5 +26,5 @@
   Once compiled, you should be able to run the code by:
 
   #+BEGIN_SRC sh
-    cd ./assignment11 && ./assignment11
+    cd ./assignment-11 && ./assignment11
   #+END_SRC
