@@ -1,0 +1,30 @@
+* Obtaining
+  You can download the source code for the assignments form Github:
+  
+  #+BEGIN_SRC sh
+    git clone https://github.com/wvxvw/introduction-to-data-structures.git
+  #+END_SRC
+
+* Compiling
+  The exercises contain some C code.  To compile it, you would need to
+  have a C compiler on your system (I used GCC 5.3.1).  The code inside should
+  be just the standard C99.  The project comes with a [[./assignment/Makefile][Makefile]].  You can use
+  it to build the project by running:
+
+  #+BEGIN_SRC sh
+    make
+  #+END_SRC
+
+* Documentation
+  You can also generate HTML documenation for the project using:
+
+  #+BEGIN_SRC sh
+    make doc
+  #+END_SRC
+
+* Running
+  Once compiled, you should be able to run the code by:
+
+  #+BEGIN_SRC sh
+    cd ./assignment11 && ./assignment11
+  #+END_SRC
