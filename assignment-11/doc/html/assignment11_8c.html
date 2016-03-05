@@ -95,11 +95,43 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a55b8d68484b4255afe1f883c062d1df3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assignment11_8c.html#a55b8d68484b4255afe1f883c062d1df3">is_sparse</a> (const <a class="el" href="structarray.html">array</a> *<a class="el" href="array_8h.html#a60d65c817587296555101f8b50591151">sorted</a>)</td></tr>
+<tr class="memdesc:a55b8d68484b4255afe1f883c062d1df3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find out whether the give <code>array</code> is sparce, i.e. whether it has all of its elements in increasing order without ``gaps''.  <a href="#a55b8d68484b4255afe1f883c062d1df3">More...</a><br /></td></tr>
 <tr class="separator:a55b8d68484b4255afe1f883c062d1df3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cc1798027cf0362fc0e3972afc0e8d2"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assignment11_8c.html#a5cc1798027cf0362fc0e3972afc0e8d2">binsearch_missing</a> (const <a class="el" href="structarray.html">array</a> *sparse)</td></tr>
+<tr class="memdesc:a5cc1798027cf0362fc0e3972afc0e8d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the index of the first element after the ``gap''.  <a href="#a5cc1798027cf0362fc0e3972afc0e8d2">More...</a><br /></td></tr>
+<tr class="separator:a5cc1798027cf0362fc0e3972afc0e8d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3d00ffe668fbb98c4f0063dcf05faa9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assignment11_8c.html#ab3d00ffe668fbb98c4f0063dcf05faa9">report</a> (<a class="el" href="structarray.html">array</a> *tested, char *message)</td></tr>
+<tr class="separator:ab3d00ffe668fbb98c4f0063dcf05faa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assignment11_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
 <tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a5cc1798027cf0362fc0e3972afc0e8d2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t binsearch_missing </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structarray.html">array</a> *&#160;</td>
+          <td class="paramname"><em>sparse</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Find the index of the first element after the ``gap''. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sparse</td><td>The array to look in </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the index of the element right after the first gap.</dd></dl>
+<p>This task is equivalent to finding the shortest dense prefix of the given array, where by ``dense'' I mean that all elements in this array are in increasing order and there is no three elements N1, N2 and N3 s.t. N1 &gt; N2 &gt; N3 and N2 is not a member of the given array, but N1 and N3 are. </p>
+
+</div>
+</div>
 <a class="anchor" id="a55b8d68484b4255afe1f883c062d1df3"></a>
 <div class="memitem">
 <div class="memproto">
@@ -114,6 +146,15 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Find out whether the give <code>array</code> is sparce, i.e. whether it has all of its elements in increasing order without ``gaps''. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sorted</td><td>The array to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true iff there are ``gaps'' in the array. </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
@@ -125,6 +166,32 @@ Functions</h2></td></tr>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab3d00ffe668fbb98c4f0063dcf05faa9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void report </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structarray.html">array</a> *&#160;</td>
+          <td class="paramname"><em>tested</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>message</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">

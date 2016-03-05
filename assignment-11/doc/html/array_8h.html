@@ -128,6 +128,12 @@ Functions</h2></td></tr>
 <tr class="memitem:ab5c161f80dd5d7765b13fc73a3a85f2f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structarray.html">array</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#ab5c161f80dd5d7765b13fc73a3a85f2f">make_array</a> (const size_t size, <a class="el" href="structprintable.html">printable</a> **data)</td></tr>
 <tr class="memdesc:ab5c161f80dd5d7765b13fc73a3a85f2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates new <code>array</code> using <code>data</code> elements as input and returns it.  <a href="#ab5c161f80dd5d7765b13fc73a3a85f2f">More...</a><br /></td></tr>
 <tr class="separator:ab5c161f80dd5d7765b13fc73a3a85f2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72b4095ac333bcd08004fdaa9fa14e08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a72b4095ac333bcd08004fdaa9fa14e08">free_array</a> (<a class="el" href="structarray.html">array</a> *freed)</td></tr>
+<tr class="memdesc:a72b4095ac333bcd08004fdaa9fa14e08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees the array (you must first free the elements if you want them being freed too.  <a href="#a72b4095ac333bcd08004fdaa9fa14e08">More...</a><br /></td></tr>
+<tr class="separator:a72b4095ac333bcd08004fdaa9fa14e08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3340550f4a0f549ef9ba8ce4b776294b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structarray.html">array</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a3340550f4a0f549ef9ba8ce4b776294b">slice</a> (const <a class="el" href="structarray.html">array</a> *input, const size_t from, const size_t to)</td></tr>
+<tr class="memdesc:a3340550f4a0f549ef9ba8ce4b776294b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an array that shares data with <code>input</code>, but starts from <code>from</code> and up to <code>to</code>.  <a href="#a3340550f4a0f549ef9ba8ce4b776294b">More...</a><br /></td></tr>
+<tr class="separator:a3340550f4a0f549ef9ba8ce4b776294b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a562d539650b6a5247baf17e56aaae58a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a562d539650b6a5247baf17e56aaae58a">make_printable</a> (size_t size, void *data)</td></tr>
 <tr class="memdesc:a562d539650b6a5247baf17e56aaae58a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates new <code>printable</code> wrapping <code>data</code> and returns it.  <a href="#a562d539650b6a5247baf17e56aaae58a">More...</a><br /></td></tr>
 <tr class="separator:a562d539650b6a5247baf17e56aaae58a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -200,6 +206,24 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a72b4095ac333bcd08004fdaa9fa14e08"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void free_array </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structarray.html">array</a> *&#160;</td>
+          <td class="paramname"><em>freed</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Frees the array (you must first free the elements if you want them being freed too. </p>
+
+</div>
+</div>
 <a class="anchor" id="ab5c161f80dd5d7765b13fc73a3a85f2f"></a>
 <div class="memitem">
 <div class="memproto">
@@ -271,6 +295,40 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Shuffles the <code>array</code> in-place and returns it. </p>
+
+</div>
+</div>
+<a class="anchor" id="a3340550f4a0f549ef9ba8ce4b776294b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structarray.html">array</a>* slice </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structarray.html">array</a> *&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>from</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>to</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates an array that shares data with <code>input</code>, but starts from <code>from</code> and up to <code>to</code>. </p>
 
 </div>
 </div>

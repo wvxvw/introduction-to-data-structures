@@ -129,6 +129,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a827d44c9d8ee331a9d8b903238ddb751"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structarray.html">array</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="int__array_8h.html#a827d44c9d8ee331a9d8b903238ddb751">make_random_array</a> (const size_t size, const size_t low, const size_t high)</td></tr>
 <tr class="memdesc:a827d44c9d8ee331a9d8b903238ddb751"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate an array where all elements are between <code>low</code> and <code>high</code> of size size. Elements may be repeated and appear in no particular order.  <a href="#a827d44c9d8ee331a9d8b903238ddb751">More...</a><br /></td></tr>
 <tr class="separator:a827d44c9d8ee331a9d8b903238ddb751"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a063c76a91727945a155a2b12a8b30e69"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structarray.html">array</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="int__array_8h.html#a063c76a91727945a155a2b12a8b30e69">make_array_from_pointer</a> (const int *data, const size_t size)</td></tr>
+<tr class="memdesc:a063c76a91727945a155a2b12a8b30e69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate an array from a simile C array of ints.  <a href="#a063c76a91727945a155a2b12a8b30e69">More...</a><br /></td></tr>
+<tr class="separator:a063c76a91727945a155a2b12a8b30e69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This is an implementation of <code>array</code> which has all integer members. </p>
@@ -184,6 +187,42 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 if the value of a is the same as the value of b. 1 if a is smaller than b and -1 otherwise. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a063c76a91727945a155a2b12a8b30e69"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structarray.html">array</a>* make_array_from_pointer </td>
+          <td>(</td>
+          <td class="paramtype">const int *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generate an array from a simile C array of ints. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>How many elements to generate. </td></tr>
+    <tr><td class="paramname">data</td><td>The original C array.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An <code>array</code> (the callers are responsible to deallocate it). </dd></dl>
 
 </div>
 </div>
