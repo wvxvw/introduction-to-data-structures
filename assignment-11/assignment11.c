@@ -1,19 +1,16 @@
 #include <stdio.h>
 
 #include "array.h"
+#include "int_array.h"
 
 bool is_sparse(const array sorted) {
     return sorted.elements[sorted.length] - sorted.elements[0] > sorted.length;
 }
 
-int compare_ints(const void* a, const void* b) {
-  const int* da = (const int*) a;
-  const int* db = (const int*) b;
-
-  return (*da > *db) - (*da < *db);
-}
-
 int main() {
-    printf("Assignemtn 1.1\n");
+    printf("Assignment 1.1\n");
+    array* randoms = make_random_array(27);
+    printf("Created array: %s\n",
+           ((printable*)randoms)->to_string((printable*)randoms));
     return 1;
 }

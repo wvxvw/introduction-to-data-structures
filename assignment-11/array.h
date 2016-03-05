@@ -23,7 +23,7 @@ typedef int comparison_fn_t(const void*, const void*);
 
 const array* sorted(const array* unsorted, comparison_fn_t cmp);
 
-array* make_array(size_t size, printable** const data);
+array* make_array(const size_t size, printable** data);
 
 printable* make_printable(size_t size, void* data);
 

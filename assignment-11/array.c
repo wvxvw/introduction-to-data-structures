@@ -11,23 +11,29 @@ const char* to_string_default(const printable* p) {
 }
 
 const char* to_string_array(const array* p) {
-    const char** parts = malloc(p->length * sizeof(char*));
+    char* parts[p->length * 2];
+    int lenghts[p->length * 2];
     char* result;
-    int lenghts[p->length];
     size_t i, copied, total = 0;
-    
+
     for (i = 0; i < p->length; i++) {
         printable* elt = p->elements[i];
-        const char* chunk = elt->to_string(elt);
-        parts[i] = chunk;
-        lenghts[i] = strlen(chunk);
-        total += lenghts[i];
+        char* chunk = (char*)elt->to_string(elt);
+        parts[i * 2] = chunk;
+        parts[i * 2 + 1] = ", ";
+        lenghts[i * 2] = strlen(chunk);
+        lenghts[i * 2 + 1] = 2;
+        total += lenghts[i * 2] + 2;
     }
-    result = malloc(total + 1);
-    for (i = 0; i < p->length; i++) {
+    result = malloc(total * sizeof(char));
+    result[0] = '[';
+    copied = 1;
+    
+    for (i = 0; i < p->length * 2 - 1; i++) {
         strcpy(result + copied, parts[i]);
         copied += lenghts[i];
     }
+    result[copied] = ']';
     return result;
 }
 
@@ -38,14 +44,16 @@ printable* make_printable(size_t size, void* data) {
     return result;
 }
 
-array* make_array(size_t size, printable** const data) {
+array* make_array(const size_t size, printable** data) {
     array* result = malloc(sizeof(array));
+    size_t i = 0;
     result->length = size;
     result->elements = malloc(size * sizeof(printable));
+    result->printable.to_string = (printer)to_string_array;
     
-    while (size > 0) {
-        result->elements[size] = data[size];
-        size--;
+    while (i < size) {
+        result->elements[i] = data[i];
+        i++;
     }
     return result;
 }
