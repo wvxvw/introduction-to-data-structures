@@ -2,6 +2,7 @@ CC := gcc
 SOURCES := $(wildcard ./*.c)
 OBJECTS := $(SOURCES:.c=.o)
 CFLAGS := -Wall
+DOXYGEN := doxygen
 
 default: program
 
@@ -17,3 +18,6 @@ clean:
 
 check-syntax:
 	$(CC) -o nul -S ${SOURCES}
+
+doc:
+	$(DOXYGEN)
