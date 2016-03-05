@@ -82,7 +82,7 @@ array* make_sparse_sorted_array(const size_t size, const size_t from, const size
         elt->to_string = (printer)to_string_int;
         elt->val = malloc(sizeof(int));
         elt->size = sizeof(printable_int*);
-        next += rand() % deviation;
+        next += 1 + rand() % (deviation - 1);
         *(int*)elt->val = (int)next;
         ints[i] = pint;
         i++;
@@ -105,4 +105,21 @@ array* make_random_unique_array(const size_t size, const size_t from) {
         i++;
     }
     return shuffled(make_array(size, (printable**)ints));
+}
+
+array* make_array_from_pointer(const int* data, const size_t size) {
+    printable_int** ints = malloc(size * sizeof(printable_int*));
+    size_t i = 0;
+    
+    while (i < size) {
+        printable_int* pint = malloc(sizeof(printable_int));
+        printable* elt = ((printable*)pint);
+        elt->to_string = (printer)to_string_int;
+        elt->val = malloc(sizeof(int));
+        elt->size = sizeof(printable_int*);
+        *(int*)elt->val = data[i];
+        ints[i] = pint;
+        i++;
+    }
+    return make_array(size, (printable**)ints);
 }

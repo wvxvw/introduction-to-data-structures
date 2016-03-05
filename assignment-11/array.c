@@ -26,7 +26,7 @@ const char* to_string_array(const array* p) {
         lenghts[i * 2 + 1] = 2;
         total += lenghts[i * 2] + 2;
     }
-    result = malloc(total * sizeof(char));
+    result = malloc(total * sizeof(char) + 1);
     result[0] = '[';
     copied = 1;
     
@@ -35,6 +35,7 @@ const char* to_string_array(const array* p) {
         copied += lenghts[i];
     }
     result[copied] = ']';
+    result[copied + 1] = '\0';
     return result;
 }
 
@@ -59,6 +60,10 @@ array* make_array(const size_t size, printable** data) {
     return result;
 }
 
+void free_array(array* freed) {
+    free(freed);
+}
+
 array* sorted(array* unsorted, comparison_fn_t cmp) {
     qsort(unsorted->elements, unsorted->length, unsorted->elements[0]->size, cmp);
     return unsorted;
@@ -77,4 +82,10 @@ array* shuffled(array* sorted) {
         sorted->elements[i] = elt;
     }
     return sorted;
+}
+
+array* slice(const array* input, const size_t from, const size_t to) {
+    printable** elts = input->elements;
+    printable** offset = &elts[from];
+    return make_array(to - from, offset);
 }

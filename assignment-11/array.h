@@ -94,6 +94,16 @@ array* shuffled(array* sorted);
  */
 array* make_array(const size_t size, printable** data);
 
+/** \brief Frees the array (you must first free the elements if you want
+ *         them being freed too.
+ */
+void free_array(array* freed);
+
+/** \brief Creates an array that shares data with \c input, but
+ *         starts from \c from and up to \c to.
+ */
+array* slice(const array* input, const size_t from, const size_t to);
+
 /** \brief Creates new \c printable wrapping \c data and returns it.
  */
 printable* make_printable(size_t size, void* data);

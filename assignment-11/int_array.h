@@ -95,3 +95,12 @@ array* make_random_unique_array(const size_t size, const size_t from);
  *  \return An \c array (the callers are responsible to deallocate it).
  */
 array* make_random_array(const size_t size, const size_t low, const size_t high);
+
+/** \brief Generate an array from a simile C array of ints.
+ *
+ *  \param size How many elements to generate.
+ *  \param data The original C array.
+ *
+ *  \return An \c array (the callers are responsible to deallocate it).
+ */
+array* make_array_from_pointer(const int* data, const size_t size);
