@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #include "array.h"
 
@@ -58,7 +59,22 @@ array* make_array(const size_t size, printable** data) {
     return result;
 }
 
-const array* sorted(const array* unsorted, comparison_fn_t cmp) {
+array* sorted(array* unsorted, comparison_fn_t cmp) {
     qsort(unsorted->elements, unsorted->length, unsorted->elements[0]->size, cmp);
     return unsorted;
+}
+
+array* shuffled(array* sorted) {
+    size_t i;
+    time_t t;
+
+    srand((unsigned)time(&t));
+    
+    for (i = 0; i < sorted->length; i++) {
+        size_t j = i + rand() / (RAND_MAX / (sorted->length - i) + 1);
+        printable* elt = sorted->elements[j];
+        sorted->elements[j] = sorted->elements[i];
+        sorted->elements[i] = elt;
+    }
+    return sorted;
 }

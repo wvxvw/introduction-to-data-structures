@@ -21,7 +21,9 @@ typedef struct {
 
 typedef int comparison_fn_t(const void*, const void*);
 
-const array* sorted(const array* unsorted, comparison_fn_t cmp);
+array* sorted(array* unsorted, comparison_fn_t cmp);
+
+array* shuffled(array* sorted);
 
 array* make_array(const size_t size, printable** data);
 
