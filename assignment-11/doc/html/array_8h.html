@@ -392,7 +392,8 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">size</td><td>How many elements to generate. </td></tr>
-    <tr><td class="paramname">from</td><td>The value of the first element.</td></tr>
+    <tr><td class="paramname">from</td><td>The value of the first element. </td></tr>
+    <tr><td class="paramname">generator</td><td>The function to generate array elements.</td></tr>
   </table>
   </dd>
 </dl>
@@ -448,7 +449,8 @@ Functions</h2></td></tr>
     <tr><td class="paramname">size</td><td>How many elements to generate. </td></tr>
     <tr><td class="paramname">low</td><td>The elements in array are at least this big. </td></tr>
     <tr><td class="paramname">high</td><td>The elements in array are at no larger than this. </td></tr>
-    <tr><td class="paramname">generator</td><td>A function to generate an element given a pointer to the generated value.</td></tr>
+    <tr><td class="paramname">cmp</td><td>A function to compare two array elements. </td></tr>
+    <tr><td class="paramname">generator</td><td>The function to generate array elements.</td></tr>
   </table>
   </dd>
 </dl>

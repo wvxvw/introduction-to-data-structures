@@ -105,6 +105,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:a5cc1798027cf0362fc0e3972afc0e8d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the index of the first element after the ``gap''.  <a href="#a5cc1798027cf0362fc0e3972afc0e8d2">More...</a><br /></td></tr>
 <tr class="separator:a5cc1798027cf0362fc0e3972afc0e8d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe88c6d85639a738ce8340966659e749"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structpair.html">pair</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assignment11_8c.html#abe88c6d85639a738ce8340966659e749">summands_of</a> (const <a class="el" href="structarray.html">array</a> *a, const <a class="el" href="structarray.html">array</a> *b, const float z, <a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="memdesc:abe88c6d85639a738ce8340966659e749"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given <code>z</code> find such <code>a</code>[i] and <code>b</code>[i] that <code>z</code> = <code>a</code>[i] + <code>b</code>[i].  <a href="#abe88c6d85639a738ce8340966659e749">More...</a><br /></td></tr>
 <tr class="separator:abe88c6d85639a738ce8340966659e749"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3d00ffe668fbb98c4f0063dcf05faa9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assignment11_8c.html#ab3d00ffe668fbb98c4f0063dcf05faa9">report</a> (<a class="el" href="structarray.html">array</a> *tested, char *message)</td></tr>
 <tr class="separator:ab3d00ffe668fbb98c4f0063dcf05faa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -239,6 +240,18 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Given <code>z</code> find such <code>a</code>[i] and <code>b</code>[i] that <code>z</code> = <code>a</code>[i] + <code>b</code>[i]. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>Array of floats (potential summands). </td></tr>
+    <tr><td class="paramname">b</td><td>Array of floats (potential summands). </td></tr>
+    <tr><td class="paramname">z</td><td>The sum whose summands we search for. </td></tr>
+    <tr><td class="paramname">cmp</td><td>The comparision function suitable for <code>qsort</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The <code>pair</code> whose <code>first</code> and <code>last</code> elements are the summands of <code>z</code>. </dd></dl>
 
 </div>
 </div>

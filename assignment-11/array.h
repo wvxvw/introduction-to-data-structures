@@ -105,6 +105,7 @@ size_t binsearch(const array* input, const printable* elt, comparison_fn_t cmp);
  *
  *  \param size How many elements to generate.
  *  \param from The value of the first element.
+ *  \param generator The function to generate array elements.
  *
  *  \return An \c array (the callers are responsible to deallocate it).
  */
@@ -151,8 +152,8 @@ array* make_random_unique_array(const size_t size,
  *  \param size How many elements to generate.
  *  \param low The elements in array are at least this big.
  *  \param high The elements in array are at no larger than this.
- *  \param generator A function to generate an element given a pointer to the
- *         generated value.
+ *  \param cmp A function to compare two array elements.
+ *  \param generator The function to generate array elements.
  *
  *  \return An \c array (the callers are responsible to deallocate it).
  */

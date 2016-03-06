@@ -49,6 +49,16 @@ size_t binsearch_missing(const array* sparse) {
     return end + 1;
 }
 
+/** \brief Given \c z find such \c a[i] and \c b[i] that
+ *        \c z = \c a[i] + \c b[i].
+ *
+ *  \param a Array of floats (potential summands).
+ *  \param b Array of floats (potential summands).
+ *  \param z The sum whose summands we search for.
+ *  \param cmp The comparision function suitable for \c qsort.
+ *  \return The \c pair whose \c first and \c last elements
+ *          are the summands of \c z.
+ */
 pair* summands_of(const array* a, const array* b, const float z, comparison_fn_t cmp) {
     pair* result = make_pair();
     array* shortest;
