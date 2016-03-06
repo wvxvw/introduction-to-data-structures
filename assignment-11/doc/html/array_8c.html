@@ -93,18 +93,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;time.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="array_8h_source.html">array.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="printable_8h_source.html">printable.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a6d3a81ba2f9b682ac757b77d94232e6f"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8c.html#a6d3a81ba2f9b682ac757b77d94232e6f">to_string_default</a> (const <a class="el" href="structprintable.html">printable</a> *p)</td></tr>
-<tr class="memdesc:a6d3a81ba2f9b682ac757b77d94232e6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a string representing the default <code>printable</code>.  <a href="#a6d3a81ba2f9b682ac757b77d94232e6f">More...</a><br /></td></tr>
-<tr class="separator:a6d3a81ba2f9b682ac757b77d94232e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad2d8124f3b1adb8c181629681ab10950"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8c.html#ad2d8124f3b1adb8c181629681ab10950">to_string_array</a> (const <a class="el" href="structarray.html">array</a> *p)</td></tr>
 <tr class="memdesc:ad2d8124f3b1adb8c181629681ab10950"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a string representing the given <code>array</code>.  <a href="#ad2d8124f3b1adb8c181629681ab10950">More...</a><br /></td></tr>
 <tr class="separator:ad2d8124f3b1adb8c181629681ab10950"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a562d539650b6a5247baf17e56aaae58a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8c.html#a562d539650b6a5247baf17e56aaae58a">make_printable</a> (size_t size, void *data)</td></tr>
-<tr class="memdesc:a562d539650b6a5247baf17e56aaae58a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates new <code>printable</code> wrapping <code>data</code> and returns it.  <a href="#a562d539650b6a5247baf17e56aaae58a">More...</a><br /></td></tr>
-<tr class="separator:a562d539650b6a5247baf17e56aaae58a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5c161f80dd5d7765b13fc73a3a85f2f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structarray.html">array</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8c.html#ab5c161f80dd5d7765b13fc73a3a85f2f">make_array</a> (const size_t size, <a class="el" href="structprintable.html">printable</a> **data)</td></tr>
 <tr class="memdesc:ab5c161f80dd5d7765b13fc73a3a85f2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates new <code>array</code> using <code>data</code> elements as input and returns it.  <a href="#ab5c161f80dd5d7765b13fc73a3a85f2f">More...</a><br /></td></tr>
 <tr class="separator:ab5c161f80dd5d7765b13fc73a3a85f2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -120,8 +115,64 @@ Functions</h2></td></tr>
 <tr class="memitem:a3340550f4a0f549ef9ba8ce4b776294b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structarray.html">array</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8c.html#a3340550f4a0f549ef9ba8ce4b776294b">slice</a> (const <a class="el" href="structarray.html">array</a> *input, const size_t from, const size_t to)</td></tr>
 <tr class="memdesc:a3340550f4a0f549ef9ba8ce4b776294b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an array that shares data with <code>input</code>, but starts from <code>from</code> and up to <code>to</code>.  <a href="#a3340550f4a0f549ef9ba8ce4b776294b">More...</a><br /></td></tr>
 <tr class="separator:a3340550f4a0f549ef9ba8ce4b776294b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23d6716654d07bac395af9cbcc015138"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8c.html#a23d6716654d07bac395af9cbcc015138">linsearch</a> (const <a class="el" href="structarray.html">array</a> *input, const void *elt, size_t from, <a class="el" href="array_8h.html#ab96854060e950fff987e7e8bbbfead06">search_direction</a> dir, <a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="separator:a23d6716654d07bac395af9cbcc015138"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00e511e3f42b5aed3444a5df6e425c36"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8c.html#a00e511e3f42b5aed3444a5df6e425c36">binsearch</a> (const <a class="el" href="structarray.html">array</a> *input, const <a class="el" href="structprintable.html">printable</a> *elt, <a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="memdesc:a00e511e3f42b5aed3444a5df6e425c36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs binary search on <code>input</code> for <code>elt</code>. The comparison is carried out using <code>cmp</code> callback.  <a href="#a00e511e3f42b5aed3444a5df6e425c36">More...</a><br /></td></tr>
+<tr class="separator:a00e511e3f42b5aed3444a5df6e425c36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50c30d9f6587dea443a22ed41d3140c7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structarray.html">array</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8c.html#a50c30d9f6587dea443a22ed41d3140c7">make_random_array</a> (const size_t size, const size_t low, const size_t high, <a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp, <a class="el" href="array_8h.html#aec14133636951af4cfefa8eba04b1a8b">element_generator</a> generator)</td></tr>
+<tr class="memdesc:a50c30d9f6587dea443a22ed41d3140c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate an array where all elements are between <code>low</code> and <code>high</code> of size size. Elements may be repeated and appear in no particular order.  <a href="#a50c30d9f6587dea443a22ed41d3140c7">More...</a><br /></td></tr>
+<tr class="separator:a50c30d9f6587dea443a22ed41d3140c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8be4fdf9f7c10b44986b559db65b05b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structarray.html">array</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8c.html#a8be4fdf9f7c10b44986b559db65b05b5">make_dense_sorted_array</a> (const size_t size, const size_t from, <a class="el" href="array_8h.html#aec14133636951af4cfefa8eba04b1a8b">element_generator</a> generator)</td></tr>
+<tr class="memdesc:a8be4fdf9f7c10b44986b559db65b05b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate dense sorted <code>array</code> with element values starting from <code>from</code>.  <a href="#a8be4fdf9f7c10b44986b559db65b05b5">More...</a><br /></td></tr>
+<tr class="separator:a8be4fdf9f7c10b44986b559db65b05b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0000fe5d9ed6e57bda69eea34a07c205"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structarray.html">array</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8c.html#a0000fe5d9ed6e57bda69eea34a07c205">make_sparse_sorted_array</a> (const size_t size, const size_t from, const size_t deviation, <a class="el" href="array_8h.html#aec14133636951af4cfefa8eba04b1a8b">element_generator</a> generator)</td></tr>
+<tr class="memdesc:a0000fe5d9ed6e57bda69eea34a07c205"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate sparse sorted array with element values starting from <code>from</code> and increasing by at most <code>deviation</code>, where the increase is decided using uniform random distribution.  <a href="#a0000fe5d9ed6e57bda69eea34a07c205">More...</a><br /></td></tr>
+<tr class="separator:a0000fe5d9ed6e57bda69eea34a07c205"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82f610f167ab4a8994de4e99e1179bdf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structarray.html">array</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8c.html#a82f610f167ab4a8994de4e99e1179bdf">make_random_unique_array</a> (const size_t size, const size_t from, <a class="el" href="array_8h.html#aec14133636951af4cfefa8eba04b1a8b">element_generator</a> generator)</td></tr>
+<tr class="memdesc:a82f610f167ab4a8994de4e99e1179bdf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate an array where all elements are between <code>from</code> and <code>from+size</code> of size size, however elements aren't ordered.  <a href="#a82f610f167ab4a8994de4e99e1179bdf">More...</a><br /></td></tr>
+<tr class="separator:a82f610f167ab4a8994de4e99e1179bdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bc70c805867c3ae5fc882a1d16897c2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structarray.html">array</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8c.html#a7bc70c805867c3ae5fc882a1d16897c2">make_array_from_pointer</a> (const int *data, const size_t size, <a class="el" href="array_8h.html#aec14133636951af4cfefa8eba04b1a8b">element_generator</a> generator)</td></tr>
+<tr class="memdesc:a7bc70c805867c3ae5fc882a1d16897c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate an array from a simile C array of ints.  <a href="#a7bc70c805867c3ae5fc882a1d16897c2">More...</a><br /></td></tr>
+<tr class="separator:a7bc70c805867c3ae5fc882a1d16897c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a00e511e3f42b5aed3444a5df6e425c36"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t binsearch </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structarray.html">array</a> *&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structprintable.html">printable</a> *&#160;</td>
+          <td class="paramname"><em>elt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramname"><em>cmp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Performs binary search on <code>input</code> for <code>elt</code>. The comparison is carried out using <code>cmp</code> callback. </p>
+<dl class="section return"><dt>Returns</dt><dd>The index of the searched element in the array.</dd></dl>
+<p>When the element is not found in the array, the value returned is the array's length. Note that the array is assumed to be sorted, however duplicate items are OK. </p>
+
+</div>
+</div>
 <a class="anchor" id="a72b4095ac333bcd08004fdaa9fa14e08"></a>
 <div class="memitem">
 <div class="memproto">
@@ -137,6 +188,50 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Frees the array (you must first free the elements if you want them being freed too. </p>
+
+</div>
+</div>
+<a class="anchor" id="a23d6716654d07bac395af9cbcc015138"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t linsearch </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structarray.html">array</a> *&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>elt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>from</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="array_8h.html#ab96854060e950fff987e7e8bbbfead06">search_direction</a>&#160;</td>
+          <td class="paramname"><em>dir</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramname"><em>cmp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -168,21 +263,27 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a562d539650b6a5247baf17e56aaae58a"></a>
+<a class="anchor" id="a7bc70c805867c3ae5fc882a1d16897c2"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structprintable.html">printable</a>* make_printable </td>
+          <td class="memname"><a class="el" href="structarray.html">array</a>* make_array_from_pointer </td>
           <td>(</td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype">const int *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const size_t&#160;</td>
           <td class="paramname"><em>size</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>data</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="array_8h.html#aec14133636951af4cfefa8eba04b1a8b">element_generator</a>&#160;</td>
+          <td class="paramname"><em>generator</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -192,7 +293,207 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Creates new <code>printable</code> wrapping <code>data</code> and returns it. </p>
+<p>Generate an array from a simile C array of ints. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>How many elements to generate. </td></tr>
+    <tr><td class="paramname">data</td><td>The original C array. </td></tr>
+    <tr><td class="paramname">generator</td><td>A function to generate an element given a pointer to the generated value.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An <code>array</code> (the callers are responsible to deallocate it). </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a8be4fdf9f7c10b44986b559db65b05b5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structarray.html">array</a>* make_dense_sorted_array </td>
+          <td>(</td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>from</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="array_8h.html#aec14133636951af4cfefa8eba04b1a8b">element_generator</a>&#160;</td>
+          <td class="paramname"><em>generator</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generate dense sorted <code>array</code> with element values starting from <code>from</code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>How many elements to generate. </td></tr>
+    <tr><td class="paramname">from</td><td>The value of the first element.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An <code>array</code> (the callers are responsible to deallocate it). </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a50c30d9f6587dea443a22ed41d3140c7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structarray.html">array</a>* make_random_array </td>
+          <td>(</td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>low</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>high</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramname"><em>cmp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="array_8h.html#aec14133636951af4cfefa8eba04b1a8b">element_generator</a>&#160;</td>
+          <td class="paramname"><em>generator</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generate an array where all elements are between <code>low</code> and <code>high</code> of size size. Elements may be repeated and appear in no particular order. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>How many elements to generate. </td></tr>
+    <tr><td class="paramname">low</td><td>The elements in array are at least this big. </td></tr>
+    <tr><td class="paramname">high</td><td>The elements in array are at no larger than this. </td></tr>
+    <tr><td class="paramname">generator</td><td>A function to generate an element given a pointer to the generated value.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An <code>array</code> (the callers are responsible to deallocate it). </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a82f610f167ab4a8994de4e99e1179bdf"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structarray.html">array</a>* make_random_unique_array </td>
+          <td>(</td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>from</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="array_8h.html#aec14133636951af4cfefa8eba04b1a8b">element_generator</a>&#160;</td>
+          <td class="paramname"><em>generator</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generate an array where all elements are between <code>from</code> and <code>from+size</code> of size size, however elements aren't ordered. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>How many elements to generate. </td></tr>
+    <tr><td class="paramname">from</td><td>The value of the first element. </td></tr>
+    <tr><td class="paramname">generator</td><td>A function to generate an element given a pointer to the generated value.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An <code>array</code> (the callers are responsible to deallocate it). </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0000fe5d9ed6e57bda69eea34a07c205"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structarray.html">array</a>* make_sparse_sorted_array </td>
+          <td>(</td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>from</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>deviation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="array_8h.html#aec14133636951af4cfefa8eba04b1a8b">element_generator</a>&#160;</td>
+          <td class="paramname"><em>generator</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generate sparse sorted array with element values starting from <code>from</code> and increasing by at most <code>deviation</code>, where the increase is decided using uniform random distribution. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>How many elements to generate. </td></tr>
+    <tr><td class="paramname">from</td><td>The value of the first element. </td></tr>
+    <tr><td class="paramname">deviation</td><td>How much the elements could differ (must be positive). </td></tr>
+    <tr><td class="paramname">generator</td><td>A function to generate an element given a pointer to the generated value.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An <code>array</code> (the callers are responsible to deallocate it). </dd></dl>
 
 </div>
 </div>
@@ -294,30 +595,6 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">p</td><td>The <code>array</code> to print. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a6d3a81ba2f9b682ac757b77d94232e6f"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char* to_string_default </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structprintable.html">printable</a> *&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Generates a string representing the default <code>printable</code>. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <code>printable</code> to print. </td></tr>
   </table>
   </dd>
 </dl>

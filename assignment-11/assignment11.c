@@ -1,7 +1,11 @@
 #include <stdio.h>
+#include <float.h>
 
+#include "printable.h"
 #include "array.h"
+#include "pair.h"
 #include "int_array.h"
+#include "float_array.h"
 
 /** \brief Find out whether the give \c array is sparce, i.e.
  *         whether it has all of its elements in increasing order
@@ -45,6 +49,35 @@ size_t binsearch_missing(const array* sparse) {
     return end + 1;
 }
 
+pair* summands_of(const array* a, const array* b, const float z, comparison_fn_t cmp) {
+    pair* result = make_pair();
+    array* shortest;
+    array* longest;
+    size_t i;
+
+    if (a->length < b->length) {
+        shortest = sorted((array*)a, cmp);
+        longest = (array*)b;
+    } else {
+        shortest = sorted((array*)b, cmp);
+        longest = (array*)a;
+    }
+    for (i = 0; i < longest->length; i++) {
+        float* val = longest->elements[i]->val;
+        printable_float* diff = make_printable_float(z - *val);
+        size_t pos = binsearch(shortest, (printable*)diff, cmp);
+        if (pos >= shortest->length) continue;
+        float* other = shortest->elements[pos]->val;
+        
+        if (pos < shortest->length) {
+            result->first = (printable*)make_printable_float((float)*val);
+            result->last = (printable*)make_printable_float((float)*other);
+            break;
+        }
+    }
+    return result;
+}
+
 void report(array* tested, char* message) {
     printf(message, ((printable*)tested)->to_string((printable*)tested));
     if (!is_sparse(tested)) {
@@ -59,28 +92,34 @@ void report(array* tested, char* message) {
 int main() {
     printf("Assignment 1.1\n");
     
-    report(make_random_array(27, 13, 67),
+    report(make_random_array(27, 13, 67, compare_ints, int_element_generator),
            "Created random array: %s.\n");
     
-    report(make_random_unique_array(27, 13),
+    report(make_random_unique_array(27, 13, int_element_generator),
            "Created random unique array: %s.\n");
 
-    report(make_dense_sorted_array(27, 13),
+    report(make_dense_sorted_array(27, 13, int_element_generator),
            "Created dense array: %s.\n");
 
-    report(make_sparse_sorted_array(27, 13, 7),
+    report(make_sparse_sorted_array(27, 13, 7, int_element_generator),
            "Created sparse array: %s.\n");
 
     int ints[11] = {1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13};
-    report(make_array_from_pointer(ints, 11),
-           "Created special array: %s.\n");
+    array* test = make_array_from_pointer(ints, 11, int_element_generator);
+    report(test, "Created special array: %s.\n");
 
     int ints1[11] = {1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12};
-    report(make_array_from_pointer(ints1, 11),
-           "Created another special array: %s.\n");
+    array* test1 = make_array_from_pointer(ints1, 11, int_element_generator);
+    report(test1, "Created another special array: %s.\n");
 
     int ints2[12] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13};
-    report(make_array_from_pointer(ints2, 12),
-           "Created last special array: %s.\n");
+    array* test2 = make_array_from_pointer(ints2, 12, int_element_generator);
+    report(test2, "Created last special array: %s.\n");
+
+    array* test3 = make_array_from_pointer(ints2, 12, float_element_generator);
+
+    printf("Floats: %s\n", ((printable*)test3)->to_string((printable*)test3));
+    pair* summands = summands_of(test3, test3, 21, compare_floats);
+    printf("21 = %f + %f\n", *(float*)summands->first->val, *(float*)summands->last->val);
     return 1;
 }

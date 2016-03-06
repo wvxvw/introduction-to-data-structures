@@ -4,12 +4,7 @@
 #include <time.h>
 
 #include "array.h"
-
-const char* to_string_default(const printable* p) {
-    char* buffer = malloc(9 * sizeof(char));
-    sprintf(buffer, "%p", p->val);
-    return buffer;
-}
+#include "printable.h"
 
 const char* to_string_array(const array* p) {
     char* parts[p->length * 2];
@@ -36,13 +31,6 @@ const char* to_string_array(const array* p) {
     }
     result[copied] = ']';
     result[copied + 1] = '\0';
-    return result;
-}
-
-printable* make_printable(size_t size, void* data) {
-    printable* result = malloc(sizeof(printable));
-    result->size = size;
-    result->val = data;
     return result;
 }
 
@@ -88,4 +76,124 @@ array* slice(const array* input, const size_t from, const size_t to) {
     printable** elts = input->elements;
     printable** offset = &elts[from];
     return make_array(to - from, offset);
+}
+
+size_t linsearch(const array* input,
+                 const void* elt,
+                 size_t from,
+                 search_direction dir,
+                 comparison_fn_t cmp) {
+    int i;
+    if (dir == FORWARD) {
+        for (i = from; i < input->length; i++) {
+            if (cmp(&input->elements[i], &elt) == 0) {
+                break;
+            }
+        }
+    } else {
+        printf("linsearch back\n");
+        for (i = from; i >= 0; i--) {
+            if (cmp(&input->elements[i], &elt) == 0) {
+                break;
+            }
+        }
+    }
+    return i;
+}
+
+size_t binsearch(const array* input, const printable* elt, comparison_fn_t cmp) {
+    size_t start = 0;
+    size_t end = input->length / 2;
+
+    while (end - start > 1) {
+        switch (cmp(&elt, &input->elements[end])) {
+            case 0:
+                return linsearch(input, elt, end, BACK, cmp);
+            case -1:
+                end -= (end - start) / 2;
+                break;
+            case 1:
+                start = end;
+                end += (input->length - end) / 2;
+                break;
+        }
+    }
+    return input->length;
+}
+
+array* make_random_array(const size_t size,
+                         const size_t low,
+                         const size_t high,
+                         comparison_fn_t cmp,
+                         element_generator generator) {
+    printable** elts = malloc(size * sizeof(printable*));
+    size_t i = 0;
+    time_t t;
+
+    srand((unsigned)time(&t));
+    while (i < size) {
+        int val = (int)(low + rand() % (high - low));
+        elts[i] = generator(&val);
+        i++;
+    }
+    return sorted(make_array(size, elts), cmp);
+}
+
+array* make_dense_sorted_array(const size_t size,
+                               const size_t from,
+                               element_generator generator) {
+    printable** elts = malloc(size * sizeof(printable*));
+    size_t i = 0;
+    
+    while (i < size) {
+        int val = (int)(i + from);
+        elts[i] = generator(&val);
+        i++;
+    }
+    return make_array(size, elts);
+}
+array* make_sparse_sorted_array(const size_t size,
+                                const size_t from,
+                                const size_t deviation,
+                                element_generator generator) {
+    printable** elts = malloc(size * sizeof(printable*));
+    size_t next = from, i = 0;
+    time_t t;
+
+    srand((unsigned)time(&t));
+    while (i < size) {
+        int val = (int)next;
+        next += 1 + rand() % (deviation - 1);
+        elts[i] = generator(&val);
+        i++;
+    }
+    return make_array(size, elts);
+}
+
+array* make_random_unique_array(const size_t size,
+                                const size_t from,
+                                element_generator generator) {
+    printable** elts = malloc(size * sizeof(printable*));
+    size_t i = 0;
+    
+    while (i < size) {
+        int val = (int)(i + from);
+        elts[i] = generator(&val);
+        i++;
+    }
+    return shuffled(make_array(size, elts));
+}
+
+array* make_array_from_pointer(const int* data,
+                               const size_t size,
+                               element_generator generator) {
+    printable** elts = malloc(size * sizeof(printable*));
+    size_t i = 0;
+    
+    while (i < size) {
+        int val = data[i];
+        elts[i] = generator(&val);
+        i++;
+    }
+    return make_array(size, elts);
 }

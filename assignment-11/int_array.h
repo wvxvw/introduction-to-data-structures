@@ -15,6 +15,9 @@
  *
  * Contact: olegsivokon@gmail.com
  */
+#ifndef INT_ARRAY_H_
+#define INT_ARRAY_H_
+
 #include <stdlib.h>
 
 #include "array.h"
@@ -50,57 +53,12 @@ typedef struct printable_int {
  */
 const char* to_string_int(const printable_int* p);
 
-/** \brief Generate dense sorted \c array with element values starting
- *         from \c from.
+/** \brief Generate \c printable_int from given value.
  *
- *  \param size How many elements to generate.
- *  \param from The value of the first element.
+ *  \param elt The pointer to the original value.
  *
- *  \return An \c array (the callers are responsible to deallocate it).
+ *  \return A \c printable_int wrapping the original value.
  */
-array* make_dense_sorted_array(const size_t size, const size_t from);
+printable* int_element_generator(void* elt);
 
-/** \brief Generate sparse sorted array with element values starting
- *         from \c from and increasing by at most \c deviation, where
- *         the increase is decided using uniform random distribution.
- *
- *  \param size How many elements to generate.
- *  \param from The value of the first element.
- *  \param deviation How much the elements could differ (must be positive).
- *
- *  \return An \c array (the callers are responsible to deallocate it).
- */
-array* make_sparse_sorted_array(
-    const size_t size, const size_t from, const size_t deviation);
-
-/** \brief Generate an array where all elements are between \c from
- *         and \c from+size of size size, however elements aren't
- *         ordered.
- *
- *  \param size How many elements to generate.
- *  \param from The value of the first element.
- *
- *  \return An \c array (the callers are responsible to deallocate it).
- */
-array* make_random_unique_array(const size_t size, const size_t from);
-
-/** \brief Generate an array where all elements are between \c low and
- *         \c high of size size.  Elements may be repeated and appear
- *         in no particular order.
- *
- *  \param size How many elements to generate.
- *  \param low The elements in array are at least this big.
- *  \param high The elements in array are at no larger than this.
- *
- *  \return An \c array (the callers are responsible to deallocate it).
- */
-array* make_random_array(const size_t size, const size_t low, const size_t high);
-
-/** \brief Generate an array from a simile C array of ints.
- *
- *  \param size How many elements to generate.
- *  \param data The original C array.
- *
- *  \return An \c array (the callers are responsible to deallocate it).
- */
-array* make_array_from_pointer(const int* data, const size_t size);
+#endif // INT_ARRAY_H_

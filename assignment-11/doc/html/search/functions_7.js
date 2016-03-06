@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['to_5fstring_5farray',['to_string_array',['../array_8c.html#ad2d8124f3b1adb8c181629681ab10950',1,'to_string_array(const array *p):&#160;array.c'],['../array_8h.html#ad2d8124f3b1adb8c181629681ab10950',1,'to_string_array(const array *p):&#160;array.c']]],
-  ['to_5fstring_5fdefault',['to_string_default',['../array_8c.html#a6d3a81ba2f9b682ac757b77d94232e6f',1,'to_string_default(const printable *p):&#160;array.c'],['../array_8h.html#a6d3a81ba2f9b682ac757b77d94232e6f',1,'to_string_default(const printable *p):&#160;array.c']]],
-  ['to_5fstring_5fint',['to_string_int',['../int__array_8c.html#aa6ebde217d820b151791ebfd9daf5a3e',1,'to_string_int(const printable_int *p):&#160;int_array.c'],['../int__array_8h.html#aa6ebde217d820b151791ebfd9daf5a3e',1,'to_string_int(const printable_int *p):&#160;int_array.c']]]
+  ['shuffled',['shuffled',['../array_8c.html#a1ec40a632dae64dc79f10a402c1300fb',1,'shuffled(array *sorted):&#160;array.c'],['../array_8h.html#a1ec40a632dae64dc79f10a402c1300fb',1,'shuffled(array *sorted):&#160;array.c']]],
+  ['slice',['slice',['../array_8c.html#a3340550f4a0f549ef9ba8ce4b776294b',1,'slice(const array *input, const size_t from, const size_t to):&#160;array.c'],['../array_8h.html#a3340550f4a0f549ef9ba8ce4b776294b',1,'slice(const array *input, const size_t from, const size_t to):&#160;array.c']]],
+  ['sorted',['sorted',['../array_8c.html#a60d65c817587296555101f8b50591151',1,'sorted(array *unsorted, comparison_fn_t cmp):&#160;array.c'],['../array_8h.html#a60d65c817587296555101f8b50591151',1,'sorted(array *unsorted, comparison_fn_t cmp):&#160;array.c']]],
+  ['summands_5fof',['summands_of',['../assignment11_8c.html#abe88c6d85639a738ce8340966659e749',1,'assignment11.c']]]
 ];

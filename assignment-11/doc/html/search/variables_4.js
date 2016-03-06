@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['to_5fstring',['to_string',['../structprintable.html#a6cd5632121e612b561d44cbd6c002931',1,'printable']]]
+  ['size',['size',['../structprintable.html#ae2bbd15647aa6cb9d25c28e1b959c26e',1,'printable']]]
 ];

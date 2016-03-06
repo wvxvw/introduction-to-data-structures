@@ -21,36 +21,17 @@
 
 #include <stdbool.h>
 
-/** \struct printable
- *  \brief This struct provides the backbone for anything that can
- *         go inside a printable array.
- */
-typedef struct printable printable;
+#include "printable.h"
 
-/** \fn printer
- *  \brief Anything \c printable must have an implementation of this
- *         function (it will be called by the code using \c printable
- *         to print it).
+/** \fn element_generator
+ *  \brief The functions of this kind are used when generating all
+ *          sorts of arrays (typically an array will implement a
+ *          generator corresponding to its type).
  *
- * \param p The pointer to the \c printable object which will be printed.
+ *  \param elt The pointer to the value to wrap in \c printable.
+ *  \return Boxed value of the element.
  */
-typedef const char* (*printer)(const printable* p);
-
-typedef struct printable {
-    
-    /** \brief The printing function.
-     */
-    printer to_string;
-    
-    /** \brief How much data is stored in this element (must be
-     *         suitable for \c sizeof call).
-     */
-    size_t size;
-
-    /** \brief The actual value stored inside.
-     */
-    void* val;
-} printable;
+typedef printable* element_generator(void* elt);
 
 /** \struct array
  *  \brief This struct is the backbone for all printable arrays.
@@ -80,6 +61,11 @@ typedef struct {
  */
 typedef int comparison_fn_t(const void* a, const void* b);
 
+/** \enum search_direction
+ *  \brief Defines search direction.
+ */
+typedef enum { BACK, FORWARD } search_direction;
+
 /** \brief Sorts the \c array in-place using \c cmp function and
  *         returns it.
  */
@@ -104,14 +90,90 @@ void free_array(array* freed);
  */
 array* slice(const array* input, const size_t from, const size_t to);
 
-/** \brief Creates new \c printable wrapping \c data and returns it.
+/** \brief Performs binary search on \c input for \c elt.
+ *         The comparison is carried out using \c cmp callback.
+ *  \return The index of the searched element in the array.
+ * 
+ * When the element is not found in the array, the value returned is the
+ * array's length.  Note that the array is assumed to be sorted, however
+ * duplicate items are OK.
  */
-printable* make_printable(size_t size, void* data);
+size_t binsearch(const array* input, const printable* elt, comparison_fn_t cmp);
 
-/** \brief Generates a string representing the default \c printable.
- *  \param p The \c printable to print.
+/** \brief Generate dense sorted \c array with element values starting
+ *         from \c from.
+ *
+ *  \param size How many elements to generate.
+ *  \param from The value of the first element.
+ *
+ *  \return An \c array (the callers are responsible to deallocate it).
  */
-const char* to_string_default(const printable* p);
+array* make_dense_sorted_array(const size_t size,
+                               const size_t from,
+                               element_generator generator);
+
+/** \brief Generate sparse sorted array with element values starting
+ *         from \c from and increasing by at most \c deviation, where
+ *         the increase is decided using uniform random distribution.
+ *
+ *  \param size How many elements to generate.
+ *  \param from The value of the first element.
+ *  \param deviation How much the elements could differ (must be positive).
+ *  \param generator A function to generate an element given a pointer to the
+ *         generated value.
+ *
+ *  \return An \c array (the callers are responsible to deallocate it).
+ */
+array* make_sparse_sorted_array(const size_t size,
+                                const size_t from,
+                                const size_t deviation,
+                                element_generator generator);
+
+/** \brief Generate an array where all elements are between \c from
+ *         and \c from+size of size size, however elements aren't
+ *         ordered.
+ *
+ *  \param size How many elements to generate.
+ *  \param from The value of the first element.
+ *  \param generator A function to generate an element given a pointer to the
+ *         generated value.
+ *
+ *  \return An \c array (the callers are responsible to deallocate it).
+ */
+array* make_random_unique_array(const size_t size,
+                                const size_t from,
+                                element_generator generator);
+
+/** \brief Generate an array where all elements are between \c low and
+ *         \c high of size size.  Elements may be repeated and appear
+ *         in no particular order.
+ *
+ *  \param size How many elements to generate.
+ *  \param low The elements in array are at least this big.
+ *  \param high The elements in array are at no larger than this.
+ *  \param generator A function to generate an element given a pointer to the
+ *         generated value.
+ *
+ *  \return An \c array (the callers are responsible to deallocate it).
+ */
+array* make_random_array(const size_t size,
+                         const size_t low,
+                         const size_t high,
+                         comparison_fn_t cmp,
+                         element_generator generator);
+
+/** \brief Generate an array from a simile C array of ints.
+ *
+ *  \param size How many elements to generate.
+ *  \param data The original C array.
+ *  \param generator A function to generate an element given a pointer to the
+ *         generated value.
+ *
+ *  \return An \c array (the callers are responsible to deallocate it).
+ */
+array* make_array_from_pointer(const int* data,
+                               const size_t size,
+                               element_generator generator);
 
 /** \brief Generates a string representing the given \c array.
  *  \param p The \c array to print.

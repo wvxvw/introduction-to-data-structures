@@ -1,2 +1,2 @@
-/** \defgroup assignment11
+/** \defgroup assignment11 Support code for data-structures course
  */

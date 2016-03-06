@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['assignment11',['Assignment11',['../group__assignment11.html',1,'']]]
+  ['support_20code_20for_20data_2dstructures_20course',['Support code for data-structures course',['../group__assignment11.html',1,'']]]
 ];

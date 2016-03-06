@@ -33,93 +33,17 @@ const char* to_string_int(const printable_int* p) {
     return buffer;
 }
 
-array* make_random_array(const size_t size, const size_t low, const size_t high) {
-    printable_int** ints = malloc(size * sizeof(printable_int*));
-    size_t i = 0;
-    time_t t;
-
-    srand((unsigned)time(&t));
+printable_int* make_printable_int(const int val) {
+    printable_int* result = malloc(sizeof(printable_int));
+    printable* p = (printable*)result;
     
-    while (i < size) {
-        printable_int* pint = malloc(sizeof(printable_int));
-        printable* elt = ((printable*)pint);
-        elt->to_string = (printer)to_string_int;
-        elt->size = sizeof(printable_int*);
-        elt->val = malloc(sizeof(int));
-        *(int*)elt->val = (int)(low + rand() % (high - low));
-        ints[i] = pint;
-        i++;
-    }
-    return sorted(make_array(size, (printable**)ints), compare_ints);
+    p->to_string = (printer)to_string_int;
+    p->size = sizeof(printable_int*);
+    p->val = malloc(sizeof(int));
+    *(int*)p->val = val;
+    return result;
 }
 
-array* make_dense_sorted_array(const size_t size, const size_t from) {
-    printable_int** ints = malloc(size * sizeof(printable_int*));
-    size_t i = 0;
-    
-    while (i < size) {
-        printable_int* pint = malloc(sizeof(printable_int));
-        printable* elt = ((printable*)pint);
-        elt->to_string = (printer)to_string_int;
-        elt->val = malloc(sizeof(int));
-        elt->size = sizeof(printable_int*);
-        *(int*)elt->val = (int)(i + from);
-        ints[i] = pint;
-        i++;
-    }
-    return make_array(size, (printable**)ints);
-}
-array* make_sparse_sorted_array(const size_t size, const size_t from, const size_t deviation) {
-    printable_int** ints = malloc(size * sizeof(printable_int*));
-    size_t next = from, i = 0;
-    time_t t;
-
-    srand((unsigned)time(&t));
-    
-    while (i < size) {
-        printable_int* pint = malloc(sizeof(printable_int));
-        printable* elt = ((printable*)pint);
-        elt->to_string = (printer)to_string_int;
-        elt->val = malloc(sizeof(int));
-        elt->size = sizeof(printable_int*);
-        next += 1 + rand() % (deviation - 1);
-        *(int*)elt->val = (int)next;
-        ints[i] = pint;
-        i++;
-    }
-    return make_array(size, (printable**)ints);
-}
-
-array* make_random_unique_array(const size_t size, const size_t from) {
-    printable_int** ints = malloc(size * sizeof(printable_int*));
-    size_t i = 0;
-    
-    while (i < size) {
-        printable_int* pint = malloc(sizeof(printable_int));
-        printable* elt = ((printable*)pint);
-        elt->to_string = (printer)to_string_int;
-        elt->val = malloc(sizeof(int));
-        elt->size = sizeof(printable_int*);
-        *(int*)elt->val = (int)(i + from);
-        ints[i] = pint;
-        i++;
-    }
-    return shuffled(make_array(size, (printable**)ints));
-}
-
-array* make_array_from_pointer(const int* data, const size_t size) {
-    printable_int** ints = malloc(size * sizeof(printable_int*));
-    size_t i = 0;
-    
-    while (i < size) {
-        printable_int* pint = malloc(sizeof(printable_int));
-        printable* elt = ((printable*)pint);
-        elt->to_string = (printer)to_string_int;
-        elt->val = malloc(sizeof(int));
-        elt->size = sizeof(printable_int*);
-        *(int*)elt->val = data[i];
-        ints[i] = pint;
-        i++;
-    }
-    return make_array(size, (printable**)ints);
+printable* int_element_generator(void* elt) {
+    return (printable*)make_printable_int(*(int*)elt);
 }

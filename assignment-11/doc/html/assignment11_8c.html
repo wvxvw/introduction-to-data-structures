@@ -89,8 +89,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;float.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="printable_8h_source.html">printable.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="array_8h_source.html">array.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="pair_8h_source.html">pair.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="int__array_8h_source.html">int_array.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="float__array_8h_source.html">float_array.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -100,6 +104,8 @@ Functions</h2></td></tr>
 <tr class="memitem:a5cc1798027cf0362fc0e3972afc0e8d2"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assignment11_8c.html#a5cc1798027cf0362fc0e3972afc0e8d2">binsearch_missing</a> (const <a class="el" href="structarray.html">array</a> *sparse)</td></tr>
 <tr class="memdesc:a5cc1798027cf0362fc0e3972afc0e8d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the index of the first element after the ``gap''.  <a href="#a5cc1798027cf0362fc0e3972afc0e8d2">More...</a><br /></td></tr>
 <tr class="separator:a5cc1798027cf0362fc0e3972afc0e8d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe88c6d85639a738ce8340966659e749"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structpair.html">pair</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assignment11_8c.html#abe88c6d85639a738ce8340966659e749">summands_of</a> (const <a class="el" href="structarray.html">array</a> *a, const <a class="el" href="structarray.html">array</a> *b, const float z, <a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="separator:abe88c6d85639a738ce8340966659e749"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3d00ffe668fbb98c4f0063dcf05faa9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assignment11_8c.html#ab3d00ffe668fbb98c4f0063dcf05faa9">report</a> (<a class="el" href="structarray.html">array</a> *tested, char *message)</td></tr>
 <tr class="separator:ab3d00ffe668fbb98c4f0063dcf05faa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assignment11_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
@@ -187,6 +193,44 @@ Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>message</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="abe88c6d85639a738ce8340966659e749"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structpair.html">pair</a>* summands_of </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structarray.html">array</a> *&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structarray.html">array</a> *&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>z</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramname"><em>cmp</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
