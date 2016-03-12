@@ -1,4 +1,4 @@
-% Created 2016-03-12 Sat 00:55
+% Created 2016-03-12 Sat 18:07
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -28,11 +28,8 @@
 \usepackage{algpseudocode}
 \usepackage{algorithm}
 \usepackage{mathtools}
-\usetikzlibrary{arrows,automata}
 \setlength{\parskip}{16pt plus 2pt minus 2pt}
 \renewcommand{\arraystretch}{1.6}
-\DeclareMathOperator{\Neg}{Neg}
-\newcommand{\for}{\text{for }}
 \author{Oleg Sivokon}
 \date{\textit{<2016-03-06 Sun>}}
 \title{Assignment 11, Data-Structures}
@@ -89,7 +86,7 @@
 \clearpage
 
 \section{Problems}
-\label{sec:orgheadline10}
+\label{sec:orgheadline11}
 
 \subsection{Problem 1}
 \label{sec:orgheadline3}
@@ -161,8 +158,7 @@ i.e. \(O(n^2)\).
 
 \subsection{Problem 2}
 \label{sec:orgheadline5}
-Given a sorted array \(A[1\dots n]\) where all elements are unique natural
-numbers:
+Given a sorted array \(A[1\dots n]\) where all elements are unique integers:
 \begin{enumerate}
 \item Write a predicate that asserts whether the given array is dense
 (has no gaps) in time \(\Theta(1)\).
@@ -173,6 +169,38 @@ and is greater than its smallest element.
 
 \subsubsection{Answer 3}
 \label{sec:orgheadline4}
+\begin{algorithm}
+  \caption{Assert $S$ is a sparse array}
+  \begin{algorithmic}
+    \Procedure {$\textit{is-sparse}$}{$S$}
+    \State \Call {$x \leftarrow first$}{$S$}
+    \State \Call {$y \leftarrow last$}{$S$}
+    \State \Call {$len \leftarrow length$}{$S$}
+    \State \Return {$y - x > len$}
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+  \caption{Finds the first gap in sparse array $S$}
+  \begin{algorithmic}
+    \Procedure {$\textit{binsearch-missing}$}{$S$}
+    \State \Call {$len \leftarrow  length$}{$S$}
+    \State {$start \leftarrow 0$} {$end \leftarrow len / 2$}
+    \State \Call {$cut \leftarrow slice$}{$S, start, end$}
+    \While {$end - start > 1$}
+    \If {$\textit{is-sparse}(cut)$} \Then
+    \State {$end \leftarrow end - (end - start) / 2$}
+    \Else
+    \State {$start \leftarrow end - 1$}
+    \State {$end \leftarrow end + (len - end) / 2$}
+    \EndIf
+    \EndWhile
+    \State \Return {$end + 1$}
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+
 Real code (compiled in C99):
 
 \emph{Note that you will need the support code located in this derictory}
@@ -215,29 +243,151 @@ void report(array* tested, char* message) {
 }
 
 int main() {
-    report(make_sparse_sorted_array(10, 13, 7, int_element_generator),
+    report(make_sparse_sorted_array(
+        10, 13, 7, int_element_generator),
            "Created sparse array: %s.\n");
     return 0;
 }
 \end{lstlisting}
 
 \begin{verbatim}
-Created sparse array: [13, 19, 22, 28, 34, 40, 43, 47, 49, 52].
+Created sparse array: [13, 18, 24, 25, 28, 32, 36, 40, 44, 45].
 Array is sparse.
 The first gap is at: 2
 \end{verbatim}
 
 \subsection{Problem 3}
 \label{sec:orgheadline7}
+Given a list of \(m\) real numbers \(S\), a similar list of \(n\) real numbers \(T\)
+and a real number \(z\), write an algorithm that finds a pair of elements in
+\(x \in S\) and \(t \in T\) s.t. \(s + t = z\).
 
-\subsubsection{Answer 3}
+\subsubsection{Answer 4}
 \label{sec:orgheadline6}
+\begin{algorithm}
+  \caption{Find $s \in S$ and $t \in T$ s.t. $s + t = z$}
+  \begin{algorithmic}
+    \Procedure {$\textit{summands-of}$}{$S, T, z$}
+    \If {$length(S) < length(T)$} \Then
+    \State \Call {$shortest \leftarrow sorted$}{$S$}
+    \State {$longest \leftarrow T$}
+    \Else
+    \State \Call {$shortest \leftarrow sorted$}{$T$}
+    \State {$longest \leftarrow S$}
+    \EndIf
+    \For {$val \in longest$}
+    \State {$diff \leftarrow z - val$}
+    \State \Call {$(pos, found) \leftarrow binsearch$}{$shortest, diff$}
+    \If {$found$} \Then
+    \State \Call {$other \leftarrow elt$}{$shortest, pos$}
+    \State \Return {$(val, other)$}
+    \EndIf
+    \EndFor
+    \State \Return {$failure$}
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+
+Real code compiled in C99:
+
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+pair* summands_of(const array* a,
+                  const array* b,
+                  const float z,
+                  comparison_fn_t cmp) {
+    pair* result = make_pair();
+    array* shortest;
+    array* longest;
+    size_t i;
+
+    if (a->length < b->length) {
+        shortest = sorted((array*)a, cmp);
+        longest = (array*)b;
+    } else {
+        shortest = sorted((array*)b, cmp);
+        longest = (array*)a;
+    }
+    for (i = 0; i < longest->length; i++) {
+        float* val = longest->elements[i]->val;
+        printable_float* diff = make_printable_float(z - *val);
+        size_t pos = binsearch(shortest, (printable*)diff, cmp);
+        if (pos >= shortest->length) continue;
+        float* other = shortest->elements[pos]->val;
+        result->first =
+            (printable*)make_printable_float((float)*val);
+        result->last =
+            (printable*)make_printable_float((float)*other);
+            break;
+    }
+    return result;
+}
+
+int main() {
+    int ints[7] = {1, 2, 3, 4, 5, 6, 7};
+    float sum = 13.0;
+    array* test = make_array_from_pointer(
+        ints, 7, float_element_generator);
+
+    printf("Floats: %s\n", to_string((printable*)test));
+    pair* summands = summands_of(test, test, sum, compare_floats);
+    printf("%f = %s + %s\n",
+           sum,
+           to_string(summands->first),
+           to_string(summands->last));
+    return 0;
+}
+\end{lstlisting}
+
+\begin{verbatim}
+Floats: [1.000000, 2.000000, 3.000000, 4.000000, 5.000000, 6.000000, 7.000000]
+13.000000 = 7.000000 + 6.000000
+\end{verbatim}
+
 
 \subsection{Problem 4}
 \label{sec:orgheadline9}
 Show example of a function \(f\) satisfying \(f(n) \neq \Omega(n)\) and
-\(f(n) \neq \O(n)\).
+\(f(n) \neq O(n)\).
 
 \subsubsection{Anwser 4}
 \label{sec:orgheadline8}
+Recall the definition of \(O(n)\): \(f(n) = O(f(n))\) as \(n \to \infty\)
+precisely when \(\forall (x \geq x_0): \abs{f(n)} \leq M \abs{f(n)}\), where
+\(M\) and \(x_0\) are some real numbers.  The definition of \(\Omega\) is similar,
+but asking to find a real constant \(M\) s.t. starting with \(x_0\) all values
+of \(\abs{f(n)}\) are less than \(M\abs{f(n)}\).
+
+One way to come up with the function which isn't its own upper or lower bound
+is to take an oscilating function, for example:
+
+\begin{align*}
+  f(n) &= \begin{cases}
+    1, &\textbf{if}\; n \equiv 0 \mod 2 \\
+    0, &\textbf{if}\; n \equiv 1 \mod 2
+  \end{cases}
+\end{align*}
+
+Clearly there is no such \(n_0\) for which all values of \(f(n)\) are greater
+than \(f(n_0)\), similarly, there are no such \(n_0\) that all values of \(f(n)\)
+for \(n > n_0\) are smaller than any multiple of \(\abs{f(n)}\).
+
+\subsection{Problem 5}
+\label{sec:orgheadline10}
+Given following functions:
+
+\begin{align*}
+  f_1(n) &= max\left(\sqrt{n^3} \times \lg n, \sqrt[3]{n^4} \times \lg^5 n\right) \\
+  f_2(n) &= \begin{cases}
+    n \times \lg^3 n, &\textbf{if}\; n = 2k \\
+    n^3 \times \lg^3 n, &\textbf{if}\; n = 2k + 1
+  \end{cases} \\
+  f_3(n) &= n^{\lg\lg n} + n^{1000000} \times \lg^{100000} n \\
+  f_4(n) &= \begin{cases}
+    n^n \times 2^{n!}, &\textbf{if}\; n \leq 2^{1000000} \\
+    \sqrt{n^{\lg n}}, &\textbf{if}\; n > 2^{1000000}
+  \end{cases}
+\end{align*}
+
+for each pair of them assert \(O\), \(o\), \(\Omega\), \(\omega\) and \(\Theta\).
 \end{document}

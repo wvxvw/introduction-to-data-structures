@@ -78,12 +78,9 @@ pair* summands_of(const array* a, const array* b, const float z, comparison_fn_t
         size_t pos = binsearch(shortest, (printable*)diff, cmp);
         if (pos >= shortest->length) continue;
         float* other = shortest->elements[pos]->val;
-        
-        if (pos < shortest->length) {
-            result->first = (printable*)make_printable_float((float)*val);
-            result->last = (printable*)make_printable_float((float)*other);
-            break;
-        }
+        result->first = (printable*)make_printable_float((float)*val);
+        result->last = (printable*)make_printable_float((float)*other);
+        break;
     }
     return result;
 }
@@ -97,6 +94,18 @@ void report(array* tested, char* message) {
         size_t missing = binsearch_missing(tested);
         printf("The first gap is at: %d\n", (int)missing);
     }
+}
+
+void test_question_3() {
+    int ints[8] = {1, 2, 3, 4, 5, 6, 7, 8};
+    array* test = make_array_from_pointer(
+        ints, 8, float_element_generator);
+
+    printf("Floats: %s\n", to_string((printable*)test));
+    pair* summands = summands_of(test, test, 15, compare_floats);
+    printf("15 = %s + %s\n",
+           to_string(summands->first),
+           to_string(summands->last));
 }
 
 int main() {
@@ -126,6 +135,8 @@ int main() {
     array* test2 = make_array_from_pointer(ints2, 12, int_element_generator);
     report(test2, "Created last special array: %s.\n");
 
+    test_question_3();
+    
     array* test3 = make_array_from_pointer(ints2, 12, float_element_generator);
 
     printf("Floats: %s\n", to_string((printable*)test3));

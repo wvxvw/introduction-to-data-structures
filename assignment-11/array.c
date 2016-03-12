@@ -88,7 +88,6 @@ size_t linsearch(const array* input,
         for (i = from; i < input->length; i++)
             if (cmp(&input->elements[i], &elt) == 0) break;
     } else {
-        printf("linsearch back\n");
         for (i = from; i >= 0; i--)
             if (cmp(&input->elements[i], &elt) == 0) break;
     }

@@ -18,12 +18,8 @@
 #+LATEX_HEADER: \usepackage{algpseudocode}
 #+LATEX_HEADER: \usepackage{algorithm}
 #+LATEX_HEADER: \usepackage{mathtools}
-#+LATEX_HEADER: \usetikzlibrary{arrows,automata}
 #+LATEX_HEADER: \setlength{\parskip}{16pt plus 2pt minus 2pt}
 #+LATEX_HEADER: \renewcommand{\arraystretch}{1.6}
-#+LATEX_HEADER: \DeclareMathOperator{\Neg}{Neg}
-#+LATEX_HEADER: \newcommand{\for}{\text{for }}
-
 
 #+BEGIN_SRC emacs-lisp :exports none
   (setq org-latex-pdf-process
@@ -161,8 +157,7 @@
     i.e. $O(n^2)$.
 
 ** Problem 2
-   Given a sorted array $A[1\dots n]$ where all elements are unique natural
-   numbers:
+   Given a sorted array $A[1\dots n]$ where all elements are unique integers:
    1. Write a predicate that asserts whether the given array is dense
       (has no gaps) in time $\Theta(1)$.
    2. Write a predicate that given that $A$ is sparse finds the element $v$
@@ -170,6 +165,46 @@
       and is greater than its smallest element.
       
 *** Answer 3
+    #+HEADER: :exports results
+    #+HEADER: :results (by-backend (pdf "latex") (t "raw"))
+    #+BEGIN_SRC latex
+      \begin{algorithm}
+        \caption{Assert $S$ is a sparse array}
+        \begin{algorithmic}
+          \Procedure {$\textit{is-sparse}$}{$S$}
+          \State \Call {$x \leftarrow first$}{$S$}
+          \State \Call {$y \leftarrow last$}{$S$}
+          \State \Call {$len \leftarrow length$}{$S$}
+          \State \Return {$y - x > len$}
+          \EndProcedure
+        \end{algorithmic}
+      \end{algorithm}
+    #+END_SRC
+
+    #+HEADER: :exports results
+    #+HEADER: :results (by-backend (pdf "latex") (t "raw"))
+    #+BEGIN_SRC latex
+      \begin{algorithm}
+        \caption{Finds the first gap in sparse array $S$}
+        \begin{algorithmic}
+          \Procedure {$\textit{binsearch-missing}$}{$S$}
+          \State \Call {$len \leftarrow  length$}{$S$}
+          \State {$start \leftarrow 0$} {$end \leftarrow len / 2$}
+          \State \Call {$cut \leftarrow slice$}{$S, start, end$}
+          \While {$end - start > 1$}
+          \If {$\textit{is-sparse}(cut)$} \Then
+          \State {$end \leftarrow end - (end - start) / 2$}
+          \Else
+          \State {$start \leftarrow end - 1$}
+          \State {$end \leftarrow end + (len - end) / 2$}
+          \EndIf
+          \EndWhile
+          \State \Return {$end + 1$}
+          \EndProcedure
+        \end{algorithmic}
+      \end{algorithm}
+    #+END_SRC
+
     Real code (compiled in C99):
 
     /Note that you will need the support code located in this derictory/
@@ -227,11 +262,144 @@
     : The first gap is at: 2
 
 ** Problem 3
+   Given a list of $m$ real numbers $S$, a similar list of $n$ real numbers $T$
+   and a real number $z$, write an algorithm that finds a pair of elements in
+   $x \in S$ and $t \in T$ s.t. $s + t = z$.
+   
+*** Answer 4
+    #+HEADER: :exports results
+    #+HEADER: :results (by-backend (pdf "latex") (t "raw"))
+    #+BEGIN_SRC latex
+      \begin{algorithm}
+        \caption{Find $s \in S$ and $t \in T$ s.t. $s + t = z$}
+        \begin{algorithmic}
+          \Procedure {$\textit{summands-of}$}{$S, T, z$}
+          \If {$length(S) < length(T)$} \Then
+          \State \Call {$shortest \leftarrow sorted$}{$S$}
+          \State {$longest \leftarrow T$}
+          \Else
+          \State \Call {$shortest \leftarrow sorted$}{$T$}
+          \State {$longest \leftarrow S$}
+          \EndIf
+          \For {$val \in longest$}
+          \State {$diff \leftarrow z - val$}
+          \State \Call {$(pos, found) \leftarrow binsearch$}{$shortest, diff$}
+          \If {$found$} \Then
+          \State \Call {$other \leftarrow elt$}{$shortest, pos$}
+          \State \Return {$(val, other)$}
+          \EndIf
+          \EndFor
+          \State \Return {$failure$}
+          \EndProcedure
+        \end{algorithmic}
+      \end{algorithm}
+    #+END_SRC
 
-*** Answer 3
+    Real code compiled in C99:
+
+    #+HEADER: :exports both
+    #+HEADER: :results verbatim
+    #+HEADER: :flags -I/home/wvxvw/Documents/uni/data-structures/assignment-11 -L/home/wvxvw/Documents/uni/data-structures/assignment-11 -ldsassignments
+    #+BEGIN_SRC C :includes <stdio.h> "printable.h" "array.h" "float_array.h" "pair.h"
+      pair* summands_of(const array* a,
+                        const array* b,
+                        const float z,
+                        comparison_fn_t cmp) {
+          pair* result = make_pair();
+          array* shortest;
+          array* longest;
+          size_t i;
+
+          if (a->length < b->length) {
+              shortest = sorted((array*)a, cmp);
+              longest = (array*)b;
+          } else {
+              shortest = sorted((array*)b, cmp);
+              longest = (array*)a;
+          }
+          for (i = 0; i < longest->length; i++) {
+              float* val = longest->elements[i]->val;
+              printable_float* diff = make_printable_float(z - *val);
+              size_t pos = binsearch(shortest, (printable*)diff, cmp);
+              if (pos >= shortest->length) continue;
+              float* other = shortest->elements[pos]->val;
+              result->first =
+                  (printable*)make_printable_float((float)*val);
+              result->last =
+                  (printable*)make_printable_float((float)*other);
+                  break;
+          }
+          return result;
+      }
+
+      int main() {
+          int ints[7] = {1, 2, 3, 4, 5, 6, 7};
+          float sum = 13.0;
+          array* test = make_array_from_pointer(
+              ints, 7, float_element_generator);
+
+          printf("Floats: %s\n", to_string((printable*)test));
+          pair* summands = summands_of(test, test, sum, compare_floats);
+          printf("%f = %s + %s\n",
+                 sum,
+                 to_string(summands->first),
+                 to_string(summands->last));
+          return 0;
+      }
+    #+END_SRC
+
+    #+RESULTS:
+    : Floats: [1.000000, 2.000000, 3.000000, 4.000000, 5.000000, 6.000000, 7.000000]
+    : 13.000000 = 7.000000 + 6.000000
+
     
 ** Problem 4
    Show example of a function $f$ satisfying $f(n) \neq \Omega(n)$ and
-   $f(n) \neq \O(n)$.
+   $f(n) \neq O(n)$.
 
 *** Anwser 4
+    Recall the definition of $O(n)$: $f(n) = O(f(n))$ as $n \to \infty$
+    precisely when $\forall (x \geq x_0): \abs{f(n)} \leq M \abs{f(n)}$, where
+    $M$ and $x_0$ are some real numbers.  The definition of $\Omega$ is similar,
+    but asking to find a real constant $M$ s.t. starting with $x_0$ all values
+    of $\abs{f(n)}$ are less than $M\abs{f(n)}$.
+
+    One way to come up with the function which isn't its own upper or lower bound
+    is to take an oscilating function, for example:
+
+    #+HEADER: :exports results
+    #+HEADER: :results (by-backend (pdf "latex") (t "raw"))
+    #+BEGIN_SRC latex
+      \begin{align*}
+        f(n) &= \begin{cases}
+          1, &\textbf{if}\; n \equiv 0 \mod 2 \\
+          0, &\textbf{if}\; n \equiv 1 \mod 2
+        \end{cases}
+      \end{align*}
+    #+END_SRC
+
+    Clearly there is no such $n_0$ for which all values of $f(n)$ are greater
+    than $f(n_0)$, similarly, there are no such $n_0$ that all values of $f(n)$
+    for $n > n_0$ are smaller than any multiple of $\abs{f(n)}$.
+
+** Problem 5
+   Given following functions:
+   
+   #+HEADER: :exports results
+   #+HEADER: :results (by-backend (pdf "latex") (t "raw"))
+   #+BEGIN_SRC latex
+     \begin{align*}
+       f_1(n) &= max\left(\sqrt{n^3} \times \lg n, \sqrt[3]{n^4} \times \lg^5 n\right) \\
+       f_2(n) &= \begin{cases}
+         n \times \lg^3 n, &\textbf{if}\; n = 2k \\
+         n^3 \times \lg^3 n, &\textbf{if}\; n = 2k + 1
+       \end{cases} \\
+       f_3(n) &= n^{\lg\lg n} + n^{1000000} \times \lg^{100000} n \\
+       f_4(n) &= \begin{cases}
+         n^n \times 2^{n!}, &\textbf{if}\; n \leq 2^{1000000} \\
+         \sqrt{n^{\lg n}}, &\textbf{if}\; n > 2^{1000000}
+       \end{cases}
+     \end{align*}
+   #+END_SRC
+
+   for each pair of them assert $O$, $o$, $\Omega$, $\omega$ and $\Theta$.
