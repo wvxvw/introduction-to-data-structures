@@ -85,18 +85,12 @@ size_t linsearch(const array* input,
                  comparison_fn_t cmp) {
     int i;
     if (dir == FORWARD) {
-        for (i = from; i < input->length; i++) {
-            if (cmp(&input->elements[i], &elt) == 0) {
-                break;
-            }
-        }
+        for (i = from; i < input->length; i++)
+            if (cmp(&input->elements[i], &elt) == 0) break;
     } else {
         printf("linsearch back\n");
-        for (i = from; i >= 0; i--) {
-            if (cmp(&input->elements[i], &elt) == 0) {
-                break;
-            }
-        }
+        for (i = from; i >= 0; i--)
+            if (cmp(&input->elements[i], &elt) == 0) break;
     }
     return i;
 }
@@ -124,7 +118,6 @@ size_t binsearch(const array* input, const printable* elt, comparison_fn_t cmp) 
 array* make_random_array(const size_t size,
                          const size_t low,
                          const size_t high,
-                         comparison_fn_t cmp,
                          element_generator generator) {
     printable** elts = malloc(size * sizeof(printable*));
     size_t i = 0;
@@ -136,7 +129,15 @@ array* make_random_array(const size_t size,
         elts[i] = generator(&val);
         i++;
     }
-    return sorted(make_array(size, elts), cmp);
+    return make_array(size, elts);
+}
+
+array* make_random_sorted_array(const size_t size,
+                                const size_t low,
+                                const size_t high,
+                                comparison_fn_t cmp,
+                                element_generator generator) {
+    return sorted(make_random_array(size, low, high, generator), cmp);
 }
 
 array* make_dense_sorted_array(const size_t size,
@@ -196,4 +197,66 @@ array* make_array_from_pointer(const int* data,
         i++;
     }
     return make_array(size, elts);
+}
+
+array* make_increasing_decreasing_array(const size_t half_size,
+                                        element_generator generator) {
+    printable** elts = malloc(half_size * 2 * sizeof(printable*));
+    size_t i;
+    for (i = 0; i < half_size; i++) {
+        int odd = half_size * 2 - i;
+        int even = (int)(i + 1);
+        elts[i * 2] = generator(&odd);
+        elts[i * 2 + 1] = generator(&even);
+    }
+    return make_array(half_size * 2, elts);
+}
+
+array* make_vedge_array(const size_t half_size,
+                        element_generator generator) {
+    printable** elts = malloc(half_size * 2 * sizeof(printable*));
+    size_t i;
+    for (i = 0; i < half_size; i++) {
+        int odd = half_size - i;
+        int even = (int)(half_size * 2 - i);
+        elts[i] = generator(&odd);
+        elts[half_size + i] = generator(&even);
+    }
+    return make_array(half_size * 2, elts);
+}
+
+static long swap_count;
+
+void start_swap_count() { swap_count = 0; }
+
+long get_swap_count() { return swap_count; }
+
+void swap(array* input, size_t a, size_t b) {
+    printable* temp = input->elements[a];
+    input->elements[a] = input->elements[b];
+    input->elements[b] = temp;
+    swap_count++;
+}
+
+void insert(array* input, comparison_fn_t cmp, size_t pos) {
+    size_t i = pos;
+    while (i > 0) {
+        printable* candidate = input->elements[i];
+        printable* previous = input->elements[i - 1];
+        if (cmp(&previous, &candidate) > 0)
+            swap(input, i, i - 1);
+        else return;
+        i--;
+    }
+}
+
+array* insertion_sort(array* unsorted, comparison_fn_t cmp) {
+    size_t i;
+    for (i = 1; i < unsorted->length; i++) {
+        printable* previous = unsorted->elements[i - 1];
+        printable* candidate = unsorted->elements[i];
+        if (cmp(&previous, &candidate) > 0)
+            insert(unsorted, cmp, i);
+    }
+    return unsorted;
 }

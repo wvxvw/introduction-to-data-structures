@@ -89,7 +89,7 @@ pair* summands_of(const array* a, const array* b, const float z, comparison_fn_t
 }
 
 void report(array* tested, char* message) {
-    printf(message, ((printable*)tested)->to_string((printable*)tested));
+    printf(message, to_string((printable*)tested));
     if (!is_sparse(tested)) {
         printf("Array is dense.\n");
     } else {
@@ -102,7 +102,7 @@ void report(array* tested, char* message) {
 int main() {
     printf("Assignment 1.1\n");
     
-    report(make_random_array(27, 13, 67, compare_ints, int_element_generator),
+    report(make_random_sorted_array(27, 13, 67, compare_ints, int_element_generator),
            "Created random array: %s.\n");
     
     report(make_random_unique_array(27, 13, int_element_generator),
@@ -128,8 +128,33 @@ int main() {
 
     array* test3 = make_array_from_pointer(ints2, 12, float_element_generator);
 
-    printf("Floats: %s\n", ((printable*)test3)->to_string((printable*)test3));
+    printf("Floats: %s\n", to_string((printable*)test3));
     pair* summands = summands_of(test3, test3, 21, compare_floats);
     printf("21 = %f + %f\n", *(float*)summands->first->val, *(float*)summands->last->val);
+
+    array* isorted = make_random_array(27, 13, 67, int_element_generator);
+    printf("Before sorted: %s\n", to_string((printable*)isorted));
+    isorted = insertion_sort(isorted, compare_ints);
+    printf("Insetion sorted: %s\n", to_string((printable*)isorted));
+
+    size_t i;
+    for (i = 1; i < 6; i++) {
+        array* decinc = make_increasing_decreasing_array(i, int_element_generator);
+        printf("Prepare Q1 sequence: %s\n", to_string((printable*)decinc));
+        start_swap_count();
+        decinc = insertion_sort(decinc, compare_ints);
+        printf("Sorted Q1 sequence: %s, swaps performed: %d\n",
+               to_string((printable*)decinc),
+               (int)get_swap_count());
+    }
+    for (i = 1; i < 10; i++) {
+        array* decinc = make_vedge_array(i, int_element_generator);
+        printf("Prepare Q2 sequence: %s\n", to_string((printable*)decinc));
+        start_swap_count();
+        decinc = insertion_sort(decinc, compare_ints);
+        printf("Sorted Q2 sequence: %s, swaps performed: %d\n",
+               to_string((printable*)decinc),
+               (int)get_swap_count());
+    }
     return 1;
 }

@@ -59,4 +59,9 @@ printable* make_printable(size_t size, void* data);
  */
 const char* to_string_default(const printable* p);
 
+/** \brief Translates the \c to_string call to \c p
+ *  \param p The \c printable to print.
+ */
+const char* to_string(const printable* p);
+
 #endif // PRINTABLE_H_

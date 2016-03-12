@@ -160,8 +160,24 @@ array* make_random_unique_array(const size_t size,
 array* make_random_array(const size_t size,
                          const size_t low,
                          const size_t high,
-                         comparison_fn_t cmp,
                          element_generator generator);
+
+/** \brief Same as \c make_random_array, except the elements are already
+ *         sorted
+ *
+ *  \param size How many elements to generate.
+ *  \param low The elements in array are at least this big.
+ *  \param high The elements in array are at no larger than this.
+ *  \param cmp A function to compare two array elements.
+ *  \param generator The function to generate array elements.
+ *
+ *  \return An \c array (the callers are responsible to deallocate it).
+ */
+array* make_random_sorted_array(const size_t size,
+                                const size_t low,
+                                const size_t high,
+                                comparison_fn_t cmp,
+                                element_generator generator);
 
 /** \brief Generate an array from a simile C array of ints.
  *
@@ -175,6 +191,51 @@ array* make_random_array(const size_t size,
 array* make_array_from_pointer(const int* data,
                                const size_t size,
                                element_generator generator);
+
+/** \brief Generate an array where elements in odd places decrease by one
+ *         while the elements in even places increase by one until they
+ *         are equal.
+ *
+ *  \param half_size The largest element in this array.
+ *  \param generator A function to generate an element given a pointer to the
+ *         generated value.
+ *
+ *  \return An \c array (the callers are responsible to deallocate it).
+ */
+array* make_increasing_decreasing_array(const size_t half_size,
+                                        element_generator generator);
+
+/** \brief Generate an array where elements in in its first half decrease
+ *         by one starting with half the size of the array, while the elements
+ *         in its second half increase by one as well, but starting from
+ *         the element of the size of the array.
+ *
+ *  \param half_size The largest element in this array.
+ *  \param generator A function to generate an element given a pointer to the
+ *         generated value.
+ *
+ *  \return An \c array (the callers are responsible to deallocate it).
+ */
+array* make_vedge_array(const size_t half_size,
+                        element_generator generator);
+
+/** \brief Sorts the array using given comparison function
+ *
+ *  \param unsorted The array to sort (modified in place)
+ *  \param cmp The function to compare two elements of the given array.
+ *
+ *  \return An \c array (no new allocations are made).
+ */
+array* insertion_sort(array* unsorted, comparison_fn_t cmp);
+
+/** \brief Restets the swap operation counter
+ */
+void start_swap_count();
+
+/** \brief Returns the number of \c swap operations performed since
+ *         swap conter was last reset.
+ */
+long get_swap_count();
 
 /** \brief Generates a string representing the given \c array.
  *  \param p The \c array to print.

@@ -1,0 +1,243 @@
+% Created 2016-03-12 Sat 00:55
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage[hidelinks]{hyperref}
+\tolerance=1000
+\usepackage[utf8]{inputenc}
+\usepackage{commath}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{shapes,backgrounds}
+\usepackage{marginnote}
+\usepackage{listings}
+\usepackage{enumerate}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{mathtools}
+\usetikzlibrary{arrows,automata}
+\setlength{\parskip}{16pt plus 2pt minus 2pt}
+\renewcommand{\arraystretch}{1.6}
+\DeclareMathOperator{\Neg}{Neg}
+\newcommand{\for}{\text{for }}
+\author{Oleg Sivokon}
+\date{\textit{<2016-03-06 Sun>}}
+\title{Assignment 11, Data-Structures}
+\hypersetup{
+ pdfauthor={Oleg Sivokon},
+ pdftitle={Assignment 11, Data-Structures},
+ pdfkeywords={Data-Structures, Algorithms, Assignment},
+ pdfsubject={First assignment in the course Data-Structures},
+ pdfcreator={Emacs 25.0.50.1 (Org mode 8.3beta)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\definecolor{codebg}{rgb}{0.96,0.99,0.8}
+\definecolor{codestr}{rgb}{0.46,0.09,0.2}
+\lstset{%
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\scriptsize,
+  breakatwhitespace=false,
+  breaklines=false,
+  captionpos=b,
+  framexleftmargin=10pt,
+  xleftmargin=10pt,
+  framerule=0pt,
+  frame=tb,
+  keepspaces=true,
+  keywordstyle=\color{blue},
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{codestr},
+  tabsize=2
+}
+\lstnewenvironment{maxima}{%
+  \lstset{%
+    backgroundcolor=\color{codebg},
+    escapeinside={(*@}{@*)},
+    aboveskip=20pt,
+    captionpos=b,
+    label=,
+    caption=,
+    showstringspaces=false,
+    frame=single,
+    framerule=0pt,
+    basicstyle=\ttfamily\scriptsize,
+    columns=fixed}}{}
+}
+\makeatletter
+\newcommand{\verbatimfont}[1]{\renewcommand{\verbatim@font}{\ttfamily#1}}
+\makeatother
+\verbatimfont{\small}%
+\clearpage
+
+\section{Problems}
+\label{sec:orgheadline10}
+
+\subsection{Problem 1}
+\label{sec:orgheadline3}
+Count the number of compare and copy operations required to sort the two
+sequences given below using insertion sort:
+
+\begin{enumerate}
+\item \(\frac{n}{2}, \frac{n}{2}-1, \dots, 2, 1, n, n-1, \dots, \frac{n}{2},
+      \frac{n}{2}-1\).
+\item \(n, 1, n-1, 2, \dots, \frac{n}{2}+2, \frac{n}{2}-1, \frac{n}{2}+1,
+      \frac{n}{2}\).
+\end{enumerate}
+
+\subsubsection{Answer 1}
+\label{sec:orgheadline1}
+Assuming we sort in ascending order, observe that the our task is to repeat
+the same operation twice (viz. to reverse two sorted arrays of the size
+exactly half of \(n\).)  Reversing individual arrays will require in case of
+one-length array 0 \texttt{swap} operations, in case of two-length array, 1 \texttt{swap}
+operation, and when we go further, we would need to do the same amount of
+work we did in the case of \(n-1\), and then need to do \(n-1\) more swaps to
+bring the first element of the original input to the back.
+
+This gives the recurrence (for reversing the array):
+
+\begin{align*}
+  R(1) &= 0 \\
+  R(2) &= 1 \\
+  R(3) &= R(2) + (3 - 1) = 3 \\
+  R(4) &= R(3) + (4 - 1) = 6 \\
+  \dots \\
+  R(n) &= R(n-1) + n - 1 = \sum_{i=0}^ni = \frac{n(n+1)}{2}\;.
+\end{align*}
+
+Hence the total amount of \texttt{swap} operations needed to sort the given array
+is \(T(n) = 2R(\frac{n}{2}) = n(n+1)\).
+
+It is easy to see that the asymptotic complexity of \(T(n)\) is \(O(n^2)\) since
+it is definitely bounded below by \(n^2\) (since \(n \times n < n \times (n +
+    1)\).)
+
+\subsubsection{Answer 2}
+\label{sec:orgheadline2}
+Assuming we sort in ascending order, in the first step we make one
+comparison and swap.  In the next step the first element will stand in its
+place, while the second element will need to move two positions to the end.
+The one before last element will need to move one position back.
+
+The same will happen once we increment further.  I.e. now two elements will
+stand in their place, but now the largest element will need to move two
+positions to the end, and so will the second largest element.  The third
+smalles element will need to move one position to the front.
+
+Let now \(T(n)\) denote the number of \texttt{swap} operations we perform for any
+given \(n\), then:
+
+\begin{align*}
+  T(2) &= 1 \\
+  T(4) &= T(2) + 2 + 1 \\
+  T(6) &= T(4) + 2 + 2 + 1 \\
+  T(8) &= T(6) + 2 + 2 + 2 + 1 \\
+  \dots \\
+  T(n) &= T(n-2) + n - 1\;.
+\end{align*}
+
+This recurrence is easily recognizable as being just \((n-1)^2\).  Hence, as
+expected, insertion sort requires roughly quadratic number of swaps,
+i.e. \(O(n^2)\).
+
+\subsection{Problem 2}
+\label{sec:orgheadline5}
+Given a sorted array \(A[1\dots n]\) where all elements are unique natural
+numbers:
+\begin{enumerate}
+\item Write a predicate that asserts whether the given array is dense
+(has no gaps) in time \(\Theta(1)\).
+\item Write a predicate that given that \(A\) is sparse finds the element \(v\)
+which doesn't apear in \(A\) but is smaller than its largest element
+and is greater than its smallest element.
+\end{enumerate}
+
+\subsubsection{Answer 3}
+\label{sec:orgheadline4}
+Real code (compiled in C99):
+
+\emph{Note that you will need the support code located in this derictory}
+
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+bool is_sparse(const array* sorted) {
+    int* first = (int*)sorted->elements[0]->val;
+    int* last = (int*)sorted->elements[sorted->length - 1]->val;
+
+    return (int)*last - (int)*first >= sorted->length;
+}
+
+size_t binsearch_missing(const array* sparse) {
+    size_t start = 0, end = sparse->length / 2;
+    array* cut = slice(sparse, start, end);
+
+    while (end - start > 1) {
+        if (is_sparse(cut)) {
+            end -= (end - start) / 2;
+        } else {
+            start = end - 1;
+            end += (sparse->length - end) / 2;
+        }
+        free_array(cut);
+        cut = slice(sparse, start, end);
+    }
+    return end + 1;
+}
+
+void report(array* tested, char* message) {
+    printf(message, to_string((printable*)tested));
+    if (!is_sparse(tested)) {
+        printf("Array is dense.\n");
+    } else {
+        printf("Array is sparse.\n");
+        size_t missing = binsearch_missing(tested);
+        printf("The first gap is at: %d\n", (int)missing);
+    }
+}
+
+int main() {
+    report(make_sparse_sorted_array(10, 13, 7, int_element_generator),
+           "Created sparse array: %s.\n");
+    return 0;
+}
+\end{lstlisting}
+
+\begin{verbatim}
+Created sparse array: [13, 19, 22, 28, 34, 40, 43, 47, 49, 52].
+Array is sparse.
+The first gap is at: 2
+\end{verbatim}
+
+\subsection{Problem 3}
+\label{sec:orgheadline7}
+
+\subsubsection{Answer 3}
+\label{sec:orgheadline6}
+
+\subsection{Problem 4}
+\label{sec:orgheadline9}
+Show example of a function \(f\) satisfying \(f(n) \neq \Omega(n)\) and
+\(f(n) \neq \O(n)\).
+
+\subsubsection{Anwser 4}
+\label{sec:orgheadline8}
+\end{document}

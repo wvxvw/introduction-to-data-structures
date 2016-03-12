@@ -33,3 +33,5 @@ const char* to_string_default(const printable* p) {
     sprintf(buffer, "%p", p->val);
     return buffer;
 }
+
+const char* to_string(const printable* p) { return p->to_string(p); }
