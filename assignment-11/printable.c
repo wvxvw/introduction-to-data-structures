@@ -1,21 +1,3 @@
-/**
- * \file printable.h
- *
- * \ingroup assignment11
- *
- * \brief This file defines basic functions for working with printable
- *        objects.
- *
- * This file contains declarations for basic data-structures needed to
- * work with differently-typed arrays and being able to pretty-print
- * them.
- *
- * \author Oleg Sivokon
- *
- * \date $Date: 2016/03/05 $
- *
- * Contact: olegsivokon@gmail.com
- */
 #include <stdio.h>
 #include <stdlib.h>
 
