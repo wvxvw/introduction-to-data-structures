@@ -152,7 +152,6 @@ array* make_random_unique_array(const size_t size,
  *  \param size How many elements to generate.
  *  \param low The elements in array are at least this big.
  *  \param high The elements in array are at no larger than this.
- *  \param cmp A function to compare two array elements.
  *  \param generator The function to generate array elements.
  *
  *  \return An \c array (the callers are responsible to deallocate it).
@@ -242,4 +241,44 @@ long get_swap_count();
  */
 const char* to_string_array(const array* p);
 
+typedef struct iterator_impl iterator_impl;
+
+/** \brief The function to advance the iterator one position
+ *  \param it The iterator being acted on.
+ */
+typedef bool (*iterator_func)(iterator_impl* it);
+
+/** \brief The iterator information storage cell.
+ */
+typedef struct iterator_impl {
+
+    /** \brief The iterator function (the one which actually does the iteration).
+     */
+    iterator_func it;
+
+    /** \brief The current position of iterator.
+     */
+    size_t pos;
+
+    /** \brief The array being iterated.
+     */
+    array* iterated;
+
+    /** \brief The current value of the iterator.
+     */
+    printable* value;
+} iterator_impl;
+
+/** \brief The interface to iterating the array.
+ *
+ *  \param impl The iterator aced on.
+ */
+bool next(iterator_impl* impl);
+
+/** \brief The concrete iterator implementation.
+ *
+ *  \param iterated The array to create an iterator for.
+ */
+iterator_impl* iterator(array* iterated);
+    
 #endif // ARRAY_H_

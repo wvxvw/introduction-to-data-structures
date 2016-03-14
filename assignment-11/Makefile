@@ -1,7 +1,7 @@
 CC := gcc
 SOURCES := $(wildcard ./*.c)
 OBJECTS := $(SOURCES:.c=.o)
-CFLAGS := -Wall -fPIC
+CFLAGS := -Wall -fPIC -ggdb
 DOXYGEN := doxygen
 
 default: program
@@ -13,7 +13,7 @@ program: $(OBJECTS)
 	$(CC) $(OBJECTS) -o assignment_11
 
 library: $(OBJECTS)
-	$(CC) -shared -Wl,-soname,libdsassignments.so -o libdsassignments.so $(OBJECTS)
+	$(CC) $(CFLAGS) -shared -Wl,-soname,libdsassignments.so -o libdsassignments.so $(OBJECTS)
 
 clean:
 	-rm -f $(OBJECTS)

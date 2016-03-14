@@ -259,3 +259,22 @@ array* insertion_sort(array* unsorted, comparison_fn_t cmp) {
     }
     return unsorted;
 }
+
+bool next(iterator_impl* impl) { return impl->it(impl); }
+
+bool next_it(iterator_impl* impl) {
+    if (impl->iterated->length > impl->pos) {
+        impl->value = impl->iterated->elements[impl->pos];
+        impl->pos++;
+        return true;
+    }
+    return false;
+}
+
+iterator_impl* iterator(array* iterated) {
+    iterator_impl *iter = malloc(sizeof(iterator_impl));
+    iter->iterated = iterated;
+    iter->pos = 0;
+    iter->it = next_it;
+    return iter;
+}

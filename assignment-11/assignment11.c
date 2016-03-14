@@ -108,6 +108,18 @@ void test_question_3() {
            to_string(summands->last));
 }
 
+void test_iterator() {
+    int ints[8] = {1, 2, 3, 4, 5, 6, 7, 8};
+    array* test = make_array_from_pointer(
+        ints, 8, float_element_generator);
+    iterator_impl* it = iterator(test);
+    printf("Going to iterate\n");
+    while (next(it)) {
+        printf("Value: %s\n", to_string(it->value));
+    }
+    printf("Finished to iterate\n");
+}
+
 int main() {
     printf("Assignment 1.1\n");
     
@@ -167,5 +179,6 @@ int main() {
                to_string((printable*)decinc),
                (int)get_swap_count());
     }
+    test_iterator();
     return 1;
 }

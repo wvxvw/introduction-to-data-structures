@@ -118,6 +118,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a6d3a81ba2f9b682ac757b77d94232e6f"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable_8h.html#a6d3a81ba2f9b682ac757b77d94232e6f">to_string_default</a> (const <a class="el" href="structprintable.html">printable</a> *p)</td></tr>
 <tr class="memdesc:a6d3a81ba2f9b682ac757b77d94232e6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a string representing the default <code>printable</code>.  <a href="#a6d3a81ba2f9b682ac757b77d94232e6f">More...</a><br /></td></tr>
 <tr class="separator:a6d3a81ba2f9b682ac757b77d94232e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c51242d8de7329201335fcb0ea530c2"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable_8h.html#a6c51242d8de7329201335fcb0ea530c2">to_string</a> (const <a class="el" href="structprintable.html">printable</a> *p)</td></tr>
+<tr class="memdesc:a6c51242d8de7329201335fcb0ea530c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translates the <code>to_string</code> call to <code>p</code>.  <a href="#a6c51242d8de7329201335fcb0ea530c2">More...</a><br /></td></tr>
+<tr class="separator:a6c51242d8de7329201335fcb0ea530c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file defines basic functions for working with printable objects. </p>
@@ -186,6 +189,30 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Creates new <code>printable</code> wrapping <code>data</code> and returns it. </p>
+
+</div>
+</div>
+<a class="anchor" id="a6c51242d8de7329201335fcb0ea530c2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* to_string </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structprintable.html">printable</a> *&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Translates the <code>to_string</code> call to <code>p</code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <code>printable</code> to print. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
