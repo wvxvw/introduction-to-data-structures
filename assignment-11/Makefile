@@ -3,7 +3,7 @@ SOURCES := $(wildcard ./*.c)
 LIB := $(abspath ../lib)
 OBJECTS := $(SOURCES:.c=.o)
 CFLAGS := -Wall -fPIC -ggdb -I$(LIB)
-SHARED :=  -L$(LIB) -ldsassignments
+SHARED :=  -L$(LIB) -lassignments -lgc
 PROGRAM := assignment-1.1
 
 default: program

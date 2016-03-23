@@ -9,7 +9,7 @@ default: library
 	$(CC) $(CFLAGS) -c $< -o $@
 
 library: $(OBJECTS)
-	$(CC) $(CFLAGS) -shared -Wl,-soname,libdsassignments.so -o libdsassignments.so $(OBJECTS)
+	$(CC) $(CFLAGS) -shared -Wl,-soname,libassignments.so -o libassignments.so $(OBJECTS)
 
 clean:
 	-rm -f $(OBJECTS)

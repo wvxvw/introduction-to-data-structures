@@ -6,7 +6,7 @@
 #include "array.h"
 #include "printable.h"
 
-const char* to_string_array(const array* p) {
+char* to_string_array(array* p) {
     char* parts[p->length * 2];
     int lenghts[p->length * 2];
     char* result;
@@ -14,14 +14,14 @@ const char* to_string_array(const array* p) {
 
     for (i = 0; i < p->length; i++) {
         printable* elt = p->elements[i];
-        char* chunk = (char*)elt->to_string(elt);
+        char* chunk = (char*)to_string(elt);
         parts[i * 2] = chunk;
         parts[i * 2 + 1] = ", ";
         lenghts[i * 2] = strlen(chunk);
         lenghts[i * 2 + 1] = 2;
         total += lenghts[i * 2] + 2;
     }
-    result = malloc(total * sizeof(char) + 1);
+    result = ALLOCATE(total * sizeof(char) + 1);
     result[0] = '[';
     copied = 1;
     
@@ -34,11 +34,11 @@ const char* to_string_array(const array* p) {
     return result;
 }
 
-array* make_array(const size_t size, printable** data) {
-    array* result = malloc(sizeof(array));
+array* make_array(size_t size, printable** data) {
+    array* result = ALLOCATE(sizeof(array));
     size_t i = 0;
     result->length = size;
-    result->elements = malloc(size * sizeof(printable));
+    result->elements = ALLOCATE(size * sizeof(printable));
     result->printable.to_string = (printer)to_string_array;
     
     while (i < size) {
@@ -46,10 +46,6 @@ array* make_array(const size_t size, printable** data) {
         i++;
     }
     return result;
-}
-
-void free_array(array* freed) {
-    free(freed);
 }
 
 array* sorted(array* unsorted, comparison_fn_t cmp) {
@@ -118,7 +114,7 @@ array* make_random_array(const size_t size,
                          const size_t low,
                          const size_t high,
                          element_generator generator) {
-    printable** elts = malloc(size * sizeof(printable*));
+    printable** elts = ALLOCATE(size * sizeof(printable*));
     size_t i = 0;
     time_t t;
 
@@ -142,7 +138,7 @@ array* make_random_sorted_array(const size_t size,
 array* make_dense_sorted_array(const size_t size,
                                const size_t from,
                                element_generator generator) {
-    printable** elts = malloc(size * sizeof(printable*));
+    printable** elts = ALLOCATE(size * sizeof(printable*));
     size_t i = 0;
     
     while (i < size) {
@@ -156,7 +152,7 @@ array* make_sparse_sorted_array(const size_t size,
                                 const size_t from,
                                 const size_t deviation,
                                 element_generator generator) {
-    printable** elts = malloc(size * sizeof(printable*));
+    printable** elts = ALLOCATE(size * sizeof(printable*));
     size_t next = from, i = 0;
     time_t t;
 
@@ -173,7 +169,7 @@ array* make_sparse_sorted_array(const size_t size,
 array* make_random_unique_array(const size_t size,
                                 const size_t from,
                                 element_generator generator) {
-    printable** elts = malloc(size * sizeof(printable*));
+    printable** elts = ALLOCATE(size * sizeof(printable*));
     size_t i = 0;
     
     while (i < size) {
@@ -187,7 +183,7 @@ array* make_random_unique_array(const size_t size,
 array* make_array_from_pointer(const int* data,
                                const size_t size,
                                element_generator generator) {
-    printable** elts = malloc(size * sizeof(printable*));
+    printable** elts = ALLOCATE(size * sizeof(printable*));
     size_t i = 0;
     
     while (i < size) {
@@ -200,7 +196,7 @@ array* make_array_from_pointer(const int* data,
 
 array* make_increasing_decreasing_array(const size_t half_size,
                                         element_generator generator) {
-    printable** elts = malloc(half_size * 2 * sizeof(printable*));
+    printable** elts = ALLOCATE(half_size * 2 * sizeof(printable*));
     size_t i;
     for (i = 0; i < half_size; i++) {
         int odd = half_size * 2 - i;
@@ -213,7 +209,7 @@ array* make_increasing_decreasing_array(const size_t half_size,
 
 array* make_vedge_array(const size_t half_size,
                         element_generator generator) {
-    printable** elts = malloc(half_size * 2 * sizeof(printable*));
+    printable** elts = ALLOCATE(half_size * 2 * sizeof(printable*));
     size_t i;
     for (i = 0; i < half_size; i++) {
         int odd = half_size - i;
@@ -272,7 +268,7 @@ bool next_it(iterator_impl* impl) {
 }
 
 iterator_impl* iterator(array* iterated) {
-    iterator_impl *iter = malloc(sizeof(iterator_impl));
+    iterator_impl *iter = ALLOCATE(sizeof(iterator_impl));
     iter->iterated = iterated;
     iter->pos = 0;
     iter->it = next_it;

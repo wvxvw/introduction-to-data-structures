@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <float.h>
+#include <gc.h>
 
 #include "printable.h"
 #include "array.h"
@@ -43,7 +44,6 @@ size_t binsearch_missing(const array* sparse) {
             start = end - 1;
             end += (sparse->length - end) / 2;
         }
-        free_array(cut);
         cut = slice(sparse, start, end);
     }
     return end + 1;
@@ -121,6 +121,7 @@ void test_iterator() {
 }
 
 int main() {
+    GC_INIT();
     printf("Assignment 1.1\n");
     
     report(make_random_sorted_array(27, 13, 67, compare_ints, int_element_generator),

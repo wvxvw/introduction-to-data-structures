@@ -2,6 +2,7 @@
 #include <time.h>
 #include <stdio.h>
 #include <float.h>
+#include <gc.h>
 
 #include "array.h"
 #include "float_array.h"
@@ -25,7 +26,7 @@ int compare_floats(const void* a, const void* b) {
 }
 
 const char* to_string_float(const printable_float* p) {
-    char* buffer = malloc(9 * sizeof(char));
+    char* buffer = ALLOCATE(9 * sizeof(char));
     printable* base = (printable*)p;
     
     if (base->val == NULL) {
@@ -37,12 +38,12 @@ const char* to_string_float(const printable_float* p) {
 }
 
 printable_float* make_printable_float(const float val) {
-    printable_float* result = malloc(sizeof(printable_float));
+    printable_float* result = ALLOCATE(sizeof(printable_float));
     printable* p = (printable*)result;
     
     p->to_string = (printer)to_string_float;
     p->size = sizeof(printable_float*);
-    p->val = malloc(sizeof(float));
+    p->val = ALLOCATE(sizeof(float));
     *(float*)p->val = val;
     return result;
 }

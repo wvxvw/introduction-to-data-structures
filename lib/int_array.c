@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
+#include <gc.h>
 
 #include "array.h"
 #include "int_array.h"
@@ -22,7 +23,7 @@ int compare_ints(const void* a, const void* b) {
 }
 
 const char* to_string_int(const printable_int* p) {
-    char* buffer = malloc(9 * sizeof(char));
+    char* buffer = ALLOCATE(9 * sizeof(char));
     printable* base = (printable*)p;
     
     if (base->val == NULL) {
@@ -34,12 +35,12 @@ const char* to_string_int(const printable_int* p) {
 }
 
 printable_int* make_printable_int(const int val) {
-    printable_int* result = malloc(sizeof(printable_int));
+    printable_int* result = ALLOCATE(sizeof(printable_int));
     printable* p = (printable*)result;
     
     p->to_string = (printer)to_string_int;
     p->size = sizeof(printable_int*);
-    p->val = malloc(sizeof(int));
+    p->val = ALLOCATE(sizeof(int));
     *(int*)p->val = val;
     return result;
 }

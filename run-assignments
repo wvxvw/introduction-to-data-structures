@@ -1,0 +1,23 @@
+# -*- mode: sh -*-
+
+usage() {
+    echo -e "\
+  -# What assignment to run (substitute # with the number)
+  -h Print this message"
+}
+
+run() {
+    LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./lib ./"assignment-1$1/assignment-1.$1"
+}
+
+while [[ $# > 0 ]]
+do
+    opt="$1"
+    case $opt in
+        -h) usage; exit 0              ;;
+        -1[0123456789]) run ${opt:2:3} ;;
+        -[0123456789]) run ${opt:1:2}  ;;
+        *) usage; exit 0               ;;
+    esac
+    shift
+done

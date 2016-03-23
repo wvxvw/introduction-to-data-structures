@@ -19,6 +19,10 @@
 #ifndef PRINTABLE_H_
 #define PRINTABLE_H_
 
+#include <gc.h>
+
+#define ALLOCATE(X) GC_MALLOC(X)
+
 /** \struct printable
  *  \brief This struct provides the backbone for anything that can
  *         go inside a printable array.
@@ -32,7 +36,7 @@ typedef struct printable printable;
  *
  * \param p The pointer to the \c printable object which will be printed.
  */
-typedef const char* (*printer)(const printable* p);
+typedef char* (*printer)(printable* p);
 
 typedef struct printable {
     
@@ -57,11 +61,11 @@ printable* make_printable(size_t size, void* data);
 /** \brief Generates a string representing the default \c printable.
  *  \param p The \c printable to print.
  */
-const char* to_string_default(const printable* p);
+char* to_string_default(printable* p);
 
 /** \brief Translates the \c to_string call to \c p
  *  \param p The \c printable to print.
  */
-const char* to_string(const printable* p);
+char* to_string(printable* p);
 
 #endif // PRINTABLE_H_
