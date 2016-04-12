@@ -1,0 +1,456 @@
+% Created 2016-04-04 Mon 23:54
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage[hidelinks]{hyperref}
+\tolerance=1000
+\usepackage[utf8]{inputenc}
+\usepackage{commath}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{shapes,backgrounds}
+\usepackage{marginnote}
+\usepackage{listings}
+\usepackage{enumerate}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{mathtools}
+\setlength{\parskip}{16pt plus 2pt minus 2pt}
+\renewcommand{\arraystretch}{1.6}
+\author{Oleg Sivokon}
+\date{\textit{<2016-03-28 Mon>}}
+\title{Assignment 12, Data-Structures}
+\hypersetup{
+ pdfauthor={Oleg Sivokon},
+ pdftitle={Assignment 12, Data-Structures},
+ pdfkeywords={Data-Structures, Algorithms, Assignment},
+ pdfsubject={First assignment in the course Data-Structures},
+ pdfcreator={Emacs 25.0.50.1 (Org mode 8.3beta)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\definecolor{codebg}{rgb}{0.96,0.99,0.8}
+\definecolor{codestr}{rgb}{0.46,0.09,0.2}
+\lstset{%
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\scriptsize,
+  breakatwhitespace=false,
+  breaklines=false,
+  captionpos=b,
+  framexleftmargin=10pt,
+  xleftmargin=10pt,
+  framerule=0pt,
+  frame=tb,
+  keepspaces=true,
+  keywordstyle=\color{blue},
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{codestr},
+  tabsize=2
+}
+\lstnewenvironment{maxima}{%
+  \lstset{%
+    backgroundcolor=\color{codebg},
+    escapeinside={(*@}{@*)},
+    aboveskip=20pt,
+    captionpos=b,
+    label=,
+    caption=,
+    showstringspaces=false,
+    frame=single,
+    framerule=0pt,
+    basicstyle=\ttfamily\scriptsize,
+    columns=fixed}}{}
+}
+\makeatletter
+\newcommand{\verbatimfont}[1]{\renewcommand{\verbatim@font}{\ttfamily#1}}
+\makeatother
+\verbatimfont{\small}%
+\clearpage
+
+\section{Problems}
+\label{sec:orgheadline16}
+
+\subsection{Problem 1}
+\label{sec:orgheadline6}
+Find tight bounds on the given recurrences.  Assume \(T(n)\) is constant for \(n
+   = 1\).
+
+\begin{align*}
+  T(n) &= 8T\left(\frac{n}{2}\right) + n + n^3 \\
+  T(n) &= kT\left(\frac{n}{2}\right) + (k - 2)n^3 \\
+  &\textit{where}\; k \in \mathbb{Z}: k \geq 2 \\
+  T(n) &= 2T\left(\frac{n}{4}\right) + \sqrt{n} \times \lg n \\
+  T(n) &= T\left(n - 1\right) + n \lg n + n \\
+  T(n) &= n^2 \sqrt{n} \times T\left(\sqrt{n}\right) + n^5 \lg^3 n + \lg^5 n
+\end{align*}
+
+\subsubsection{Answer 1}
+\label{sec:orgheadline1}
+Using conclusion from master method theorem:
+
+\begin{align*}
+  T(n) &= 8T\left(\frac{n}{2}\right) + n + n^3 \iff \\
+  f(n) &= n + n^3 \\
+  a &= 8 \\
+  b &= 2 \\
+  n^{\log_b a} = n^{\log_2 8} &= n^3 < n + n^3\;.
+\end{align*}
+
+However, asymptotically, only the \(n^3\) term matters, thus \(T(n) =
+    \Theta(n^3)\), viz. second case of master method.
+
+\subsubsection{Answer 2}
+\label{sec:orgheadline2}
+
+\begin{align*}
+  T(n) &= kT\left(\frac{n}{2}\right) + (k - 2)n^3 \\
+       &\textit{where}\; k \in \mathbb{Z}: k \geq 2 \\
+       &= k\left(kT\left(\frac{n}{4}\right) + \frac{(k - 2)n^3}{2}\right) + (k - 2)n^3 \\
+       &= k^2T\left(\frac{n}{4}\right) + \frac{(k + 2)(k - 2)n^3}{2} \\
+       &= k^2\left(kT\left(\frac{n}{8}\right) + \frac{(k + 2)(k - 2)n^3}{8}\right) + \frac{(k + 2)(k - 2)n^3}{2} \\
+       &= k^3T\left(\frac{n}{8}\right) + \frac{(k^2 + 4)(k + 2)(k - 2)n^3}{8} \\
+       &= k^3T\left(\frac{n}{8}\right) + \frac{(k^2 + 4)(k^2 - 4)n^3}{8} \\
+       &\dots \\
+       &= k^iT\left(\frac{n}{2^i}\right) + \frac{(k^i - 2^i)n^3}{2^i}
+\end{align*}
+
+The recursion ends when \(i = \lg n\), and at this point the \(T(1)\) vanishes,
+and we are left with:
+
+\begin{align*}
+   \frac{(k^i - 2^i)n^3}{2^i} &= \left(\frac{k}{2}\right)^in^3 - n^3 \\
+   &\approx \left(\frac{k}{2}\right)^in^3 \\
+   &= \left(\frac{k}{2}\right)^{\lg n}n^3 \\
+   &\textit{Using}\; 2^{\lg n} = n \\
+   &\approx n^4\;.
+\end{align*}
+
+Thus \(T(n) = O(n^4)\).
+
+\subsubsection{Answer 3}
+\label{sec:orgheadline3}
+Using conclusion from master method theorem:
+
+\begin{align*}
+  T(n) &= 2T\left(\frac{n}{4}\right) + \sqrt{n} \lg n \iff \\
+  f(n) &= \sqrt{n} \lg n \\
+  a &= 2 \\
+  b &= 4 \\
+  n^{\log_b a} = n^{\log_4 2} &= \sqrt{n} < \sqrt{n} \lg n\;.
+\end{align*}
+
+This is the first case of master method, i.e. most work is done at the root
+(at each step we look at two of the four sub-problems).  The amount of work
+done at each recursion step is \(\sqrt{n}\times \lg n\) which is roughly the
+same as just \(n\) since \(\lg n = O(\sqrt{n})\).  Hence \(T(n) = O(n)\).
+
+\subsubsection{Answer 4}
+\label{sec:orgheadline4}
+
+\begin{align*}
+  T(n) &= T(n - 1) + n \lg n + n \\
+       &= \sum_{i = 1}^n(i + i \lg i) \\
+       &= \sum_{i = 1}^ni(1 + \lg i) \\
+       &= \frac{n(n + 1)}{2} \times \sum_{i = 1}^n(1 + \lg i) \\
+       &= \frac{n(n + 1)}{2} \times \left(n + \sum_{i = 1}^n \lg i \right) \\
+       &= \frac{n(n + 1)(n + \lg n!)}{2} \\
+       &\textit{using Stirling approximation} \\
+       &\approx \frac{n(n + 1)(n + n \lg n - n)}{2} \\
+       &= \frac{n^2 \lg n(n + 1)}{2} \\
+       &\approx \frac{n^3 \lg n}{2} \;.
+\end{align*}
+
+Since constant factors are of no interest to us, we conclude \(T(n) = O(n^3
+    \lg n)\).
+
+\subsubsection{Answer 5}
+\label{sec:orgheadline5}
+
+\begin{align*}
+  T(n) &= n^2 \sqrt{n} T\left(\sqrt{n}\right) + n^5 \lg^3 n + \lg^5 n \\
+       &= n^{\frac{5}{2}} T\left(n^{\frac{1}{2}}\right) + n^5 \lg^3 n + \lg^5 n \\
+       &= n^{i\frac{5}{2}} T\left(n^{\frac{1}{i2}}\right) + \sum_{j=1}^i(n^5 \lg^3 n + \lg^5 n)^{\frac{1}{j}} \\
+       &\textit{Recursion terminates when}\; n^{\frac{1}{i2}} = 1\;.
+\end{align*}
+
+\subsection{Problem 2}
+\label{sec:orgheadline8}
+Find upper and lower bounds on:
+
+\begin{align*}
+  T(n) &= 2T(\frac{n}{2}) + n^3 \\
+  T(n) &= T(\frac{9n}{10}) + n \\
+  T(n) &= 16T(\frac{n}{4}) + n^2 \\
+  T(n) &= 7T(\frac{n}{3}) + n^2 \\
+  T(n) &= 7T(\frac{n}{2}) + n^2 \\
+  T(n) &= 2T(\frac{n}{4}) + \sqrt{n} \\
+  T(n) &= T(n - 1) + n \\
+  T(n) &= T(\sqrt{n}) + 1
+\end{align*}
+
+\subsubsection{Answer 6}
+\label{sec:orgheadline7}
+\begin{align*}
+  T(n) &= 2T(\frac{n}{2}) + n^3 \\
+  &\textit{Using master method} \\
+  a &= 2 \\
+  b &= 2 \\
+  f(n) &= n^3 \\
+  n^{\log_2 2} &= n < n^3 \\
+  &\textit{Third case of master method, hence} \\
+  T(n) &= \Theta(f(n)) = \Theta(n^3)
+\end{align*}
+
+\begin{align*}
+  T(n) &= T(\frac{9n}{10}) + n \\
+  T(n) &= 9T(\frac{n}{10}) + n \\
+  &\textit{Using master method} \\
+  a &= 9 \\
+  b &= 10 \\
+  f(n) &= n \\
+  n^{\log_9 10} &\approx n^{1.05} \approx n \\
+  &\textit{Second case of master method, hence} \\
+  T(n) &= \Theta(n^{1.05}\lg n) \approx \Theta(n\lg n)
+\end{align*}
+
+\begin{align*}
+  T(n) &= 16T(\frac{n}{4}) + n^2 \\
+  &\textit{Using master method} \\
+  a &= 16 \\
+  b &= 4 \\
+  f(n) &= n^2 \\
+  n^{\log_4 16} &= n^2 = n^2 \\
+  &\textit{Second case of master method, hence} \\
+  T(n) &= \Theta(n^2\lg n)
+\end{align*}
+
+\begin{align*}
+  T(n) &= 7T(\frac{n}{3}) + n^2 \\
+  &\textit{Using master method} \\
+  a &= 7 \\
+  b &= 3 \\
+  f(n) &= n^2 \\
+  n^{\log_3 7} &\approx n^{1.8} \approx n^2 \\
+  &\textit{Second case of master method, hence} \\
+  T(n) &= \Theta(n^2\lg n)
+\end{align*}
+
+\begin{align*}
+  T(n) &= 7T(\frac{n}{2}) + n^2 \\
+  &\textit{Using master method} \\
+  a &= 7 \\
+  b &= 2 \\
+  f(n) &= n^2 \\
+  n^{\log_2 7} &\approx n^{2.8} > n^2 \\
+  &\textit{First case of master method, hence} \\
+  T(n) &= \Theta(n^{2.8}) \approx \Theta(n^3)
+\end{align*}
+
+\begin{align*}
+  T(n) &= 2T(\frac{n}{4}) + \sqrt{n} \\
+  T(n) &= 2T(\frac{n}{4}) + n^{\frac{1}{2}} \\
+  &\textit{Using master method} \\
+  a &= 2 \\
+  b &= 4 \\
+  f(n) &= n^{\frac{1}{2}} \\
+  n^{\log_4 2} &= n^{\frac{1}{2}} = n^{\frac{1}{2}} \\
+  &\textit{Second case of master method, hence} \\
+  T(n) &= \Theta(\sqrt{n} \lg n)
+\end{align*}
+
+
+\begin{align*}
+  T(n) &= T(n - 1) + n \\
+  &\textit{Suppose} \\
+  T(1) &= 1 \\
+  &\textit{Then} \\
+  T(n) &= T(1) + 2 + 3 + \dots + n = \frac{n(n + 1)}{2} \approx n^2 \\
+  T(n) &= \Theta(n^2)
+\end{align*}
+
+
+\begin{align*}
+  T(n) &= T(\sqrt{n}) + 1 \\
+  T(n) &= T(n^{\frac{1}{2}}) + 1 \\
+       &= T(n^{\frac{1}{4}}) + 1 + 1 \\
+       &= T(n^{\frac{1}{8}}) + 1 + 1 + 1 \\
+       &= T(n^{\frac{1}{\lg i}}) + i \\
+       &= \lg n \\
+       &= \Theta(\lg n)
+\end{align*}
+
+\subsection{Problem 3}
+\label{sec:orgheadline10}
+Suggest a data-structure with the following properties:
+\begin{enumerate}
+\item Populate in \(O(n)\) time.
+\item Insert in \(O(n \lg n)\) time.
+\item Extract minimal element in \(O(\lg n)\) time.
+\item Extract median element in \(O(\lg n)\) time.
+\item Extract maximal element in \(O(\lg n)\) time.
+\end{enumerate}
+
+\subsubsection{Answer 6}
+\label{sec:orgheadline9}
+There is a simple, but impractical way of doing this---have four heaps:
+\begin{itemize}
+\item \(A\) is a \texttt{min-heap} containing elements greater than median.
+\item \(B\) is a \texttt{max-heap} containing elments smaller than median.
+\item \(C\) is a \texttt{max-heap} tracking the heap \(A\).
+\item \(D\) is a \texttt{min-heap} tracking the heap \(B\).
+\end{itemize}
+
+Creation and insertion are essentially the same as they are in the regular
+\texttt{max-heap} and \texttt{mean-heap}.  Median element is either the root of \(A\) or the
+root of \(B\), depending on which heap has more elements.  Maximum element is
+the root of \(C\) and minimal element is the root of \(D\), so their extraction
+is just the glorified \texttt{extract-max} and \texttt{extract-min} correspondingly.
+
+Tracking is achieved using the following mechanism: Each node in each heap
+has an additional field that has a position of the tracked node in the other
+heap in it.  Once the position of the node is modified, in addition to
+\texttt{heapify-min} or \texttt{heapify-max}, the procedure also updates the index in the
+tracking node (this takes only constant time).
+
+Whenever a node is deleted, it also needs to be deleted from the tracking
+heap.  In this case, the rightmost element in the heap is placed in the cell
+previously occupied by the node being deleted.  Then \texttt{heapify-min} or
+\texttt{heapify-max} is performed, depending on the kind of heap it was.
+
+Note that this solution is impractical since it requires saving a lot of
+additional information, but if we were to relax the requirement of \(O(n)\)
+allowing \(O(n \lg n)\) for population, then we could use something like
+order-statistic tree.
+
+\subsection{Problem 4}
+\label{sec:orgheadline15}
+\begin{enumerate}
+\item Given binary heap \(A\) of size \(n\) prove that \texttt{extract-max} requires
+roughly \(2\lg n\) comparisons.
+\item Write an alternative \texttt{extract-max} which only uses \(\lg n + \lg \lg n +
+      O(1)\) comparisons.
+\item Improve the previous \texttt{extrac-max} s.t. its running time is \(\lg n + \lg
+      \lg \lg n + O(1)\) wrt. comparisons.
+\item Is it possible to improve this procedure further?  Is it worth it wrt. the
+amount of code that it requires?
+\end{enumerate}
+
+\subsubsection{Answer 7}
+\label{sec:orgheadline11}
+First, recall what \texttt{extract-max} looks like:
+
+\begin{algorithm}
+  \caption{Running time of extract-max}
+  \begin{algorithmic}
+    \Procedure {$\textit{extract-max}$}{$heap$}
+    \State {$max \leftarrow $}{$heap_0$}
+    \State \Call {$size \leftarrow \textit{size}$}{$heap$}
+    \State {$last \leftarrow $}{$heap_{size - 1}$}
+    \State {$heap_{size - 1} \leftarrow $}{$nil$}
+    \State \Call {$\textit{heapify-max}$}{$heap, size - 1$}
+    \State \Return {$max$}
+    \EndProcedure
+
+    \Procedure {$\textit{heapify-max}$}{$heap, child$}
+    \State {$left \leftarrow $}{$child * 2 - 1$}
+    \State {$right \leftarrow $}{$child * 2$}
+    \State {$parent \leftarrow $}{$child$}
+    \State \Call {$size \leftarrow \textit{size}$}{$heap$}
+    \If {$left < size \land heap_{left} > heap_{parent}$} \Then
+    \State {$parent \leftarrow $}{$left$}
+    \EndIf
+    \If {$right < size \land heap_{right} > heap_{parent}$} \Then
+    \State {$parent \leftarrow $}{$right$}
+    \EndIf
+    \If {$parent \neq child$} \Then
+    \State {$heap_{i},heap_{parent} \leftarrow $}{$heap_{parent},heap_{i}$}
+    \State \Call {$\textit{heapify-max}$}{$heap, parent$}
+    \EndIf
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+
+The comparisons all happen inside the \texttt{heapify-max}, notice that it is
+called recursively on the problem of size \(n\), splitting it into two
+equally-sized portions, and only working on the selected subtree.  It will
+only look once at a node at the \(h^s\) level \(h\) being the heights of the
+heap.  At each such level it will do five comparisons: two to ensure that
+all reads fall within the valid range, two more to find the maximal element
+of the parent and its two sibling nodes, and the last one to figure out
+whether an additional \texttt{heapify-max} call is required.
+
+Thus, somewhat contrary to conjectured, the number of comparisons required
+is actually \(5\lg n\), but only \(2\lg n\) of them are between the members of
+the heap (the rest is borders checking).
+
+\subsubsection{Answer 8}
+\label{sec:orgheadline12}
+The idea is borrowed from Gonnet and Munro:
+
+\begin{quote}
+Observe that the elements on the path from any node to the root must be in
+sorted order.  Our idea is simply to insert the new element by performing
+the binary search on the path from location \(n+1\) to 1.  As this path
+contains \(\lceil \log(n + 1) \rceil\) old elements the algorithm will require
+\(\lceil \log(\lceil 1 + \log(n + 1)\rceil)\rceil = \lceil \log(\log(2 + 1))
+    \rceil\) comparisons in the worst case.  We note that the number of moves
+will be the same as those required in carefully coded standard algorithm.
+\end{quote}
+
+\subsubsection{Answer 9}
+\label{sec:orgheadline13}
+Again, quoting Gonnet and Munro:
+
+\begin{quote}
+This bound can, however, be improved as follows.  For simplicity assume we
+are removing the maximum and simultaneously inserting a new element.
+\end{quote}
+
+\begin{verbatim}
+Remove the maximum, creating a "hole" at the top of the heap.
+
+Find the path of the maximum sons down r levels to some location, say A(i)
+
+If New element > A(i) Then
+  Perform perform a binary search with the new element along the path of
+  length r
+Else
+  Promote each element on the path to the location of its father and
+  recursively apply the method starting at the location A(i).
+\end{verbatim}
+
+\subsubsection{Answer 10}
+\label{sec:orgheadline14}
+The questions of ``practical usefulness'' are very subjective.  The answer
+will depend on multiple factors and the ability to predict the future in
+minor details.  However, it has been shown many times since Williams, Gonnet
+and Munro, Carlsson and many others who worked on optimizing priority
+queues, that binary heaps aren't the best choice of the data-structure for
+this purpose.  Typical requirement for a binary queue is that it perform an
+\texttt{insert} in constant time, this already disqualifies binary heaps, where one
+can only hope for amortized constant time.
+
+The reality of working with large datasets are such that continuous arrays
+are difficult to allocate and access.  Persistency becomes increasingly
+important and so does concurrency.  Binary heaps implemented as arrays don't
+fare very well in this emerging market, so the question of this specific
+optimization is rather pointless.
+\end{document}
