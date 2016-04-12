@@ -1,0 +1,239 @@
+% Created 2016-04-09 Sat 18:44
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage[hidelinks]{hyperref}
+\tolerance=1000
+\usepackage[utf8]{inputenc}
+\usepackage{commath}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{shapes,backgrounds}
+\usepackage{marginnote}
+\usepackage{listings}
+\usepackage{enumerate}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{mathtools}
+\setlength{\parskip}{16pt plus 2pt minus 2pt}
+\renewcommand{\arraystretch}{1.6}
+\author{Oleg Sivokon}
+\date{\textit{<2016-04-09 Sat>}}
+\title{Assignment 13, Data-Structures}
+\hypersetup{
+ pdfauthor={Oleg Sivokon},
+ pdftitle={Assignment 13, Data-Structures},
+ pdfkeywords={Data-Structures, Algorithms, Assignment},
+ pdfsubject={Third assignment in the course Data-Structures},
+ pdfcreator={Emacs 25.0.50.1 (Org mode 8.3beta)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\definecolor{codebg}{rgb}{0.96,0.99,0.8}
+\definecolor{codestr}{rgb}{0.46,0.09,0.2}
+\lstset{%
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\scriptsize,
+  breakatwhitespace=false,
+  breaklines=false,
+  captionpos=b,
+  framexleftmargin=10pt,
+  xleftmargin=10pt,
+  framerule=0pt,
+  frame=tb,
+  keepspaces=true,
+  keywordstyle=\color{blue},
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{codestr},
+  tabsize=2
+}
+\lstnewenvironment{maxima}{%
+  \lstset{%
+    backgroundcolor=\color{codebg},
+    escapeinside={(*@}{@*)},
+    aboveskip=20pt,
+    captionpos=b,
+    label=,
+    caption=,
+    showstringspaces=false,
+    frame=single,
+    framerule=0pt,
+    basicstyle=\ttfamily\scriptsize,
+    columns=fixed}}{}
+}
+\makeatletter
+\newcommand{\verbatimfont}[1]{\renewcommand{\verbatim@font}{\ttfamily#1}}
+\makeatother
+\verbatimfont{\small}%
+\clearpage
+
+\section{Problems}
+\label{sec:orgheadline9}
+
+\subsection{Problem 1}
+\label{sec:orgheadline1}
+Find tight bounds on the given recurrences.  Assume \(T(n)\) is constant for \(n
+   = 1\).
+
+\begin{align*}
+  T(n) &= 8T\left(\frac{n}{2}\right) + n + n^3 \\
+  T(n) &= kT\left(\frac{n}{2}\right) + (k - 2)n^3 \\
+  &\textit{where}\; k \in \mathbb{Z}: k \geq 2 \\
+  T(n) &= 2T\left(\frac{n}{4}\right) + \sqrt{n} \times \lg n \\
+  T(n) &= T\left(n - 1\right) + n \lg n + n \\
+  T(n) &= n^2 \sqrt{n} \times T\left(\sqrt{n}\right) + n^5 \lg^3 n + \lg^5 n
+\end{align*}
+
+\subsection{Problem 2}
+\label{sec:orgheadline2}
+Find upper and lower bounds on:
+
+\begin{align*}
+  T(n) &= 2T(\frac{n}{2}) + n^3 \\
+  T(n) &= T(\frac{9n}{10}) + n \\
+  T(n) &= 16T(\frac{n}{4}) + n^2 \\
+  T(n) &= 7T(\frac{n}{3}) + n^2 \\
+  T(n) &= 7T(\frac{n}{2}) + n^2 \\
+  T(n) &= 2T(\frac{n}{4}) + \sqrt{n} \\
+  T(n) &= T(n - 1) + n \\
+  T(n) &= T(\sqrt{n}) + 1
+\end{align*}
+
+\subsection{Problem 3}
+\label{sec:orgheadline4}
+Suggest a data-structure with the following properties:
+\begin{enumerate}
+\item Populate in \(O(n)\) time.
+\item Insert in \(O(n \lg n)\) time.
+\item Extract minimal element in \(O(\lg n)\) time.
+\item Extract median element in \(O(\lg n)\) time.
+\item Extract maximal element in \(O(\lg n)\) time.
+\end{enumerate}
+
+\subsubsection{Answer 6}
+\label{sec:orgheadline3}
+There is a simple, but impractical way of doing this---have four heaps:
+\begin{itemize}
+\item \(A\) is a \texttt{min-heap} containing elements greater than median.
+\item \(B\) is a \texttt{max-heap} containing elments smaller than median.
+\item \(C\) is a \texttt{max-heap} tracking the heap \(A\).
+\item \(D\) is a \texttt{min-heap} tracking the heap \(B\).
+\end{itemize}
+
+Creation and insertion are essentially the same as they are in the regular
+\texttt{max-heap} and \texttt{mean-heap}.  Median element is either the root of \(A\) or the
+root of \(B\), depending on which heap has more elements.  Maximum element is
+the root of \(C\) and minimal element is the root of \(D\), so their extraction
+is just the glorified \texttt{extract-max} and \texttt{extract-min} correspondingly.
+
+Tracking is achieved using the following mechanism: Each node in each heap
+has an additional field that has a position of the tracked node in the other
+heap in it.  Once the position of the node is modified, in addition to
+\texttt{heapify-min} or \texttt{heapify-max}, the procedure also updates the index in the
+tracking node (this takes only constant time).
+
+Whenever a node is deleted, it also needs to be deleted from the tracking
+heap.  In this case, the rightmost element in the heap is placed in the cell
+previously occupied by the node being deleted.  Then \texttt{heapify-min} or
+\texttt{heapify-max} is performed, depending on the kind of heap it was.
+
+Note that this solution is impractical since it requires saving a lot of
+additional information, but if we were to relax the requirement of \(O(n)\)
+allowing \(O(n \lg n)\) for population, then we could use something like
+order-statistic tree.
+
+\subsection{Problem 4}
+\label{sec:orgheadline5}
+\begin{enumerate}
+\item Given binary heap \(A\) of size \(n\) prove that \texttt{extract-max} requires
+roughly \(2\lg n\) comparisons.
+\item Write an alternative \texttt{extract-max} which only uses \(\lg n + \lg \lg n +
+      O(1)\) comparisons.
+\item Improve the previous \texttt{extrac-max} s.t. its running time is \(\lg n + \lg
+      \lg \lg n + O(1)\) wrt. comparisons.
+\item Is it possible to improve this procedure further?  Is it worth it wrt. the
+amount of code that it requires?
+\end{enumerate}
+
+\subsection{Problem 5}
+\label{sec:orgheadline8}
+\begin{enumerate}
+\item Given a sequence of real numbers: \((a_0, a_1, a_2, \dots, a_n)\) define:
+\begin{align*}
+  m &= \min\{a_i\;|\; 0 \leq i \leq n\} \\
+  M &= \max\{a_i\;|\; 0 \leq i \leq n\}
+\end{align*}
+
+Show that there exist \(a_i, a_j\) s.t.:
+\begin{align*}
+  \abs{a_i - a_j} &\leq \frac{M - m}{n}
+\end{align*}
+
+\item Write the algorithm for finding the \(a_i, a_j\) from the question above.
+\end{enumerate}
+
+\subsubsection{Answer 5}
+\label{sec:orgheadline6}
+Note that the sequence with the given \(M\) and \(m\) will have \(M - m = k \geq
+    n\) elements.  Suppose now we arrange the elements in increasing order.
+Suppose, for contradiction, that none of the elements of the sequence
+satisfies \(\abs{a_i - a_j} \leq \frac{M - m}{n}\), then it also means that
+the difference between every two adjacent elements must be at least
+\(\frac{M - m + \epsilon}{n}\) for some positive \(\epsilon\).  since there are
+k pairs of adjoint elements, we get that:
+
+\begin{align*}
+  \sum_{i=1}^k\left(a_i - a_{i-1}\right) &= \sum_{i=1}^k\left(\frac{M - m + \epsilon}{n}\right) \\
+  &= \frac{k}{n}\left(M - m\right) + k \epsilon \geq M - m
+\end{align*}
+
+contrary to assumed.  Hence, by contradiction, there must be at least one
+pair \(a_i, a_j\) s.t. \(\abs{a_i - a_j} \leq \frac{M - m}{n}\).
+
+\subsubsection{Answer 6}
+\label{sec:orgheadline7}
+The general idea for the algorithm is to normalize all members of the given
+sequence by subtracting the minimum and mutliplying by the ratio of one less
+than the length of the sequence and the difference between the maximum and
+the minumum.  Once done, do the insertion sort: two elements which fall in
+the same cell will have a distance between them less than the one between
+the minimum and the maximum divided into one less than the number of elements.
+
+\begin{algorithm}
+  \caption{Find $x, y \in Elts$ s.t. $\abs{x - y} \leq \frac{\max(Elts) - \min(Elts)}{\abs{Elts} - 1}$}
+  \begin{algorithmic}
+    \Procedure {$\textit{min-pair}$}{$elements$}
+    \State \Call {$max \leftarrow \texit{max}$}{$elements$}
+    \State \Call {$min \leftarrow \texit{min}$}{$elements$}
+    \State \Call {$size \leftarrow \texit{size}$}{$elements$}
+    \State \Call {$copy \leftarrow \textit{make-vector}$}{$size, nil$}
+    \For {$element \in elements$} \Do
+    \State {$index \leftarrow \lfloor \frac{(elt - min) \times (size - 1)}{max - min} \rfloor$}
+    \If {$copy_{index} = nil$} \Then
+    \State {$copy_{index} = element$}
+    \Else
+    \Return {$element, copy_{index}$}
+    \EndIf
+    \EndFor
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+\end{document}
