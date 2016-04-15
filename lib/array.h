@@ -1,7 +1,7 @@
 /**
  * \file array.h
  *
- * \ingroup assignment11
+ * \ingroup libassignment
  *
  * \brief This file defines basic functions for working with printable
  *        arrays.
@@ -50,7 +50,9 @@ typedef struct {
     /** \brief The actual members.
      */
     printable** elements;
-} array;
+} printable_array;
+
+typedef printable_array* array;
 
 /** \fn comparison_fn_t
  *  \brief The definition is copied from GCC extension, this is
@@ -69,21 +71,21 @@ typedef enum { BACK, FORWARD } search_direction;
 /** \brief Sorts the \c array in-place using \c cmp function and
  *         returns it.
  */
-array* sorted(array* unsorted, comparison_fn_t cmp);
+array sorted(array unsorted, comparison_fn_t cmp);
 
 /** \brief Shuffles the \c array in-place and returns it.
  */
-array* shuffled(array* sorted);
+array shuffled(array sorted);
 
 /** \brief Creates new \c array using \c data elements as input and
  *         returns it.
  */
-array* make_array(const size_t size, printable** data);
+array make_array(const size_t size, printable** data);
 
 /** \brief Creates an array that shares data with \c input, but
  *         starts from \c from and up to \c to.
  */
-array* slice(const array* input, const size_t from, const size_t to);
+array slice(const array input, const size_t from, const size_t to);
 
 /** \brief Performs binary search on \c input for \c elt.
  *         The comparison is carried out using \c cmp callback.
@@ -93,7 +95,7 @@ array* slice(const array* input, const size_t from, const size_t to);
  * array's length.  Note that the array is assumed to be sorted, however
  * duplicate items are OK.
  */
-size_t binsearch(const array* input, const printable* elt, comparison_fn_t cmp);
+size_t binsearch(const array input, const printable* elt, comparison_fn_t cmp);
 
 /** \brief Generate dense sorted \c array with element values starting
  *         from \c from.
@@ -104,7 +106,7 @@ size_t binsearch(const array* input, const printable* elt, comparison_fn_t cmp);
  *
  *  \return An \c array (the callers are responsible to deallocate it).
  */
-array* make_dense_sorted_array(const size_t size,
+array make_dense_sorted_array(const size_t size,
                                const size_t from,
                                element_generator generator);
 
@@ -120,7 +122,7 @@ array* make_dense_sorted_array(const size_t size,
  *
  *  \return An \c array (the callers are responsible to deallocate it).
  */
-array* make_sparse_sorted_array(const size_t size,
+array make_sparse_sorted_array(const size_t size,
                                 const size_t from,
                                 const size_t deviation,
                                 element_generator generator);
@@ -136,7 +138,7 @@ array* make_sparse_sorted_array(const size_t size,
  *
  *  \return An \c array (the callers are responsible to deallocate it).
  */
-array* make_random_unique_array(const size_t size,
+array make_random_unique_array(const size_t size,
                                 const size_t from,
                                 element_generator generator);
 
@@ -151,7 +153,7 @@ array* make_random_unique_array(const size_t size,
  *
  *  \return An \c array (the callers are responsible to deallocate it).
  */
-array* make_random_array(const size_t size,
+array make_random_array(const size_t size,
                          const size_t low,
                          const size_t high,
                          element_generator generator);
@@ -167,7 +169,7 @@ array* make_random_array(const size_t size,
  *
  *  \return An \c array (the callers are responsible to deallocate it).
  */
-array* make_random_sorted_array(const size_t size,
+array make_random_sorted_array(const size_t size,
                                 const size_t low,
                                 const size_t high,
                                 comparison_fn_t cmp,
@@ -182,7 +184,7 @@ array* make_random_sorted_array(const size_t size,
  *
  *  \return An \c array (the callers are responsible to deallocate it).
  */
-array* make_array_from_pointer(const int* data,
+array make_array_from_pointer(const int* data,
                                const size_t size,
                                element_generator generator);
 
@@ -196,7 +198,7 @@ array* make_array_from_pointer(const int* data,
  *
  *  \return An \c array (the callers are responsible to deallocate it).
  */
-array* make_increasing_decreasing_array(const size_t half_size,
+array make_increasing_decreasing_array(const size_t half_size,
                                         element_generator generator);
 
 /** \brief Generate an array where elements in in its first half decrease
@@ -210,7 +212,7 @@ array* make_increasing_decreasing_array(const size_t half_size,
  *
  *  \return An \c array (the callers are responsible to deallocate it).
  */
-array* make_vedge_array(const size_t half_size,
+array make_vedge_array(const size_t half_size,
                         element_generator generator);
 
 /** \brief Sorts the array using given comparison function
@@ -220,7 +222,7 @@ array* make_vedge_array(const size_t half_size,
  *
  *  \return An \c array (no new allocations are made).
  */
-array* insertion_sort(array* unsorted, comparison_fn_t cmp);
+array insertion_sort(array unsorted, comparison_fn_t cmp);
 
 /** \brief Restets the swap operation counter
  */
@@ -234,7 +236,7 @@ long get_swap_count();
 /** \brief Generates a string representing the given \c array.
  *  \param p The \c array to print.
  */
-char* to_string_array(array* p);
+char* to_string_array(array p);
 
 typedef struct iterator_impl iterator_impl;
 
@@ -257,7 +259,7 @@ typedef struct iterator_impl {
 
     /** \brief The array being iterated.
      */
-    array* iterated;
+    array iterated;
 
     /** \brief The current value of the iterator.
      */
@@ -274,6 +276,8 @@ bool next(iterator_impl* impl);
  *
  *  \param iterated The array to create an iterator for.
  */
-iterator_impl* iterator(array* iterated);
+iterator_impl* iterator(array iterated);
+
+size_t partition(array partitioned);
     
 #endif // ARRAY_H_

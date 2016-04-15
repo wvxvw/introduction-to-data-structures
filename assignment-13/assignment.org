@@ -86,76 +86,41 @@
 * Problems
 
 ** Problem 1
-   Find tight bounds on the given recurrences.  Assume $T(n)$ is constant for $n
-   = 1$.
-
-   #+HEADER: :exports results
-   #+HEADER: :results (by-backend (pdf "latex") (t "raw"))
-   #+BEGIN_SRC latex
-     \begin{align*}
-       T(n) &= 8T\left(\frac{n}{2}\right) + n + n^3 \\
-       T(n) &= kT\left(\frac{n}{2}\right) + (k - 2)n^3 \\
-       &\textit{where}\; k \in \mathbb{Z}: k \geq 2 \\
-       T(n) &= 2T\left(\frac{n}{4}\right) + \sqrt{n} \times \lg n \\
-       T(n) &= T\left(n - 1\right) + n \lg n + n \\
-       T(n) &= n^2 \sqrt{n} \times T\left(\sqrt{n}\right) + n^5 \lg^3 n + \lg^5 n
-     \end{align*}
-   #+END_SRC
+   1. How many comparisons does the =partition= algorithm have to make before it
+      completes on an input of size $n$, provides the input is sorted in
+      ascending order?
+   2. What if the input is sorted in descending order?
 
 ** Problem 2
-   Find upper and lower bounds on:
+   Array is said to be almost sorted with error of size $k$ when for any two
+   elements it holds that if there is more than $k$ elements between them,
+   then they are in correct order.
 
-   #+HEADER: :exports results
-   #+HEADER: :results (by-backend (pdf "latex") (t "raw"))
-   #+BEGIN_SRC latex
-     \begin{align*}
-       T(n) &= 2T(\frac{n}{2}) + n^3 \\
-       T(n) &= T(\frac{9n}{10}) + n \\
-       T(n) &= 16T(\frac{n}{4}) + n^2 \\
-       T(n) &= 7T(\frac{n}{3}) + n^2 \\
-       T(n) &= 7T(\frac{n}{2}) + n^2 \\
-       T(n) &= 2T(\frac{n}{4}) + \sqrt{n} \\
-       T(n) &= T(n - 1) + n \\
-       T(n) &= T(\sqrt{n}) + 1
-     \end{align*}
-   #+END_SRC
+   1. Modify =quicksort= algorithm to produce almost sorted arrays.
+   2. What is the running time of this new algorithm?
 
 ** Problem 3
-   Suggest a data-structure with the following properties:
-   1. Populate in $O(n)$ time.
-   2. Insert in $O(n \lg n)$ time.
-   3. Extract minimal element in $O(\lg n)$ time.
-   4. Extract median element in $O(\lg n)$ time.
-   5. Extract maximal element in $O(\lg n)$ time.
+   Show the steps taken by the algorithm =randomized-select= on the sequence
+   $S = (60, 70, 80, 90, 100, 1, 5, 9, 11, 15, 19, 21, 25, 29, 30)$ for $k = 5$.
 
-*** Answer 6
-    There is a simple, but impractical way of doing this---have four heaps:
-    - $A$ is a =min-heap= containing elements greater than median.
-    - $B$ is a =max-heap= containing elments smaller than median.
-    - $C$ is a =max-heap= tracking the heap $A$.
-    - $D$ is a =min-heap= tracking the heap $B$.
-
-    Creation and insertion are essentially the same as they are in the regular
-    =max-heap= and =mean-heap=.  Median element is either the root of $A$ or the
-    root of $B$, depending on which heap has more elements.  Maximum element is
-    the root of $C$ and minimal element is the root of $D$, so their extraction
-    is just the glorified =extract-max= and =extract-min= correspondingly.
-
-    Tracking is achieved using the following mechanism: Each node in each heap
-    has an additional field that has a position of the tracked node in the other
-    heap in it.  Once the position of the node is modified, in addition to
-    =heapify-min= or =heapify-max=, the procedure also updates the index in the
-    tracking node (this takes only constant time).
-
-    Whenever a node is deleted, it also needs to be deleted from the tracking
-    heap.  In this case, the rightmost element in the heap is placed in the cell
-    previously occupied by the node being deleted.  Then =heapify-min= or
-    =heapify-max= is performed, depending on the kind of heap it was.
-
-    Note that this solution is impractical since it requires saving a lot of
-    additional information, but if we were to relax the requirement of $O(n)$
-    allowing $O(n \lg n)$ for population, then we could use something like
-    order-statistic tree.
+*** Answer 3
+    This algorithm will use the same =random-partition= procedure used in
+    =quicksort=:
+    1. $\textit{random-partition}(S, S_1, S_2)$, randomly selected 19, hence:
+       $S_1 = (1, 5, 9, 11, 15, 19)$ and 
+       $S_2 = (60, 70, 80, 90, 100, 21, 25, 29, 30)$.
+    2. Since $\abs{S_1} = 6 > k$ the $k^{th}$ element must be in $S_1$, recure
+       on it.
+    3. $\textit{random-partition}(S_1, S_3, S_4)$, randomly select 5, hence:
+       $S_3 = (1, 5)$ and
+       $S_4 = (9, 11, 15, 19)$.
+    4. Since $\abs{S_3} = 2 < k$, decrease $k$ by 2 and recurse on $S_4$:
+    5. $k = k - 2$.
+    6. $\textit{random-partition}(S_4, S_5, S_6)$, randomly select 11, hence:
+       $S_5 = (9, 11)$ and
+       $S_6 = (15, 19)$.
+    7. Since $\abs{S_5} = 2 = k$ we are done, the $k^{th}$ element therefore
+       is 11.
 
 ** Problem 4
    1. Prove that a sequence $S$ of length $n$ has at most three elements that

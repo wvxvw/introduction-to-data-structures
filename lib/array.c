@@ -6,7 +6,7 @@
 #include "array.h"
 #include "printable.h"
 
-char* to_string_array(array* p) {
+char* to_string_array(array p) {
     char* parts[p->length * 2];
     int lenghts[p->length * 2];
     char* result;
@@ -34,8 +34,8 @@ char* to_string_array(array* p) {
     return result;
 }
 
-array* make_array(size_t size, printable** data) {
-    array* result = ALLOCATE(sizeof(array));
+array make_array(size_t size, printable** data) {
+    array result = ALLOCATE(sizeof(array));
     size_t i = 0;
     result->length = size;
     result->elements = ALLOCATE(size * sizeof(printable));
@@ -48,12 +48,12 @@ array* make_array(size_t size, printable** data) {
     return result;
 }
 
-array* sorted(array* unsorted, comparison_fn_t cmp) {
+array sorted(array unsorted, comparison_fn_t cmp) {
     qsort(unsorted->elements, unsorted->length, unsorted->elements[0]->size, cmp);
     return unsorted;
 }
 
-array* shuffled(array* sorted) {
+array shuffled(array sorted) {
     size_t i;
     time_t t;
 
@@ -68,13 +68,13 @@ array* shuffled(array* sorted) {
     return sorted;
 }
 
-array* slice(const array* input, const size_t from, const size_t to) {
+array slice(const array input, const size_t from, const size_t to) {
     printable** elts = input->elements;
     printable** offset = &elts[from];
     return make_array(to - from, offset);
 }
 
-size_t linsearch(const array* input,
+size_t linsearch(const array input,
                  const void* elt,
                  size_t from,
                  search_direction dir,
@@ -90,7 +90,7 @@ size_t linsearch(const array* input,
     return i;
 }
 
-size_t binsearch(const array* input, const printable* elt, comparison_fn_t cmp) {
+size_t binsearch(const array input, const printable* elt, comparison_fn_t cmp) {
     size_t start = 0;
     size_t end = input->length / 2;
 
@@ -110,7 +110,7 @@ size_t binsearch(const array* input, const printable* elt, comparison_fn_t cmp) 
     return input->length;
 }
 
-array* make_random_array(const size_t size,
+array make_random_array(const size_t size,
                          const size_t low,
                          const size_t high,
                          element_generator generator) {
@@ -127,7 +127,7 @@ array* make_random_array(const size_t size,
     return make_array(size, elts);
 }
 
-array* make_random_sorted_array(const size_t size,
+array make_random_sorted_array(const size_t size,
                                 const size_t low,
                                 const size_t high,
                                 comparison_fn_t cmp,
@@ -135,7 +135,7 @@ array* make_random_sorted_array(const size_t size,
     return sorted(make_random_array(size, low, high, generator), cmp);
 }
 
-array* make_dense_sorted_array(const size_t size,
+array make_dense_sorted_array(const size_t size,
                                const size_t from,
                                element_generator generator) {
     printable** elts = ALLOCATE(size * sizeof(printable*));
@@ -148,7 +148,7 @@ array* make_dense_sorted_array(const size_t size,
     }
     return make_array(size, elts);
 }
-array* make_sparse_sorted_array(const size_t size,
+array make_sparse_sorted_array(const size_t size,
                                 const size_t from,
                                 const size_t deviation,
                                 element_generator generator) {
@@ -166,7 +166,7 @@ array* make_sparse_sorted_array(const size_t size,
     return make_array(size, elts);
 }
 
-array* make_random_unique_array(const size_t size,
+array make_random_unique_array(const size_t size,
                                 const size_t from,
                                 element_generator generator) {
     printable** elts = ALLOCATE(size * sizeof(printable*));
@@ -180,7 +180,7 @@ array* make_random_unique_array(const size_t size,
     return shuffled(make_array(size, elts));
 }
 
-array* make_array_from_pointer(const int* data,
+array make_array_from_pointer(const int* data,
                                const size_t size,
                                element_generator generator) {
     printable** elts = ALLOCATE(size * sizeof(printable*));
@@ -194,7 +194,7 @@ array* make_array_from_pointer(const int* data,
     return make_array(size, elts);
 }
 
-array* make_increasing_decreasing_array(const size_t half_size,
+array make_increasing_decreasing_array(const size_t half_size,
                                         element_generator generator) {
     printable** elts = ALLOCATE(half_size * 2 * sizeof(printable*));
     size_t i;
@@ -207,7 +207,7 @@ array* make_increasing_decreasing_array(const size_t half_size,
     return make_array(half_size * 2, elts);
 }
 
-array* make_vedge_array(const size_t half_size,
+array make_vedge_array(const size_t half_size,
                         element_generator generator) {
     printable** elts = ALLOCATE(half_size * 2 * sizeof(printable*));
     size_t i;
@@ -226,14 +226,14 @@ void start_swap_count() { swap_count = 0; }
 
 long get_swap_count() { return swap_count; }
 
-void swap(array* input, size_t a, size_t b) {
+void swap(array input, size_t a, size_t b) {
     printable* temp = input->elements[a];
     input->elements[a] = input->elements[b];
     input->elements[b] = temp;
     swap_count++;
 }
 
-void insert(array* input, comparison_fn_t cmp, size_t pos) {
+void insert(array input, comparison_fn_t cmp, size_t pos) {
     size_t i = pos;
     while (i > 0) {
         printable* candidate = input->elements[i];
@@ -245,7 +245,7 @@ void insert(array* input, comparison_fn_t cmp, size_t pos) {
     }
 }
 
-array* insertion_sort(array* unsorted, comparison_fn_t cmp) {
+array insertion_sort(array unsorted, comparison_fn_t cmp) {
     size_t i;
     for (i = 1; i < unsorted->length; i++) {
         printable* previous = unsorted->elements[i - 1];
@@ -267,7 +267,7 @@ bool next_it(iterator_impl* impl) {
     return false;
 }
 
-iterator_impl* iterator(array* iterated) {
+iterator_impl* iterator(array iterated) {
     iterator_impl *iter = ALLOCATE(sizeof(iterator_impl));
     iter->iterated = iterated;
     iter->pos = 0;

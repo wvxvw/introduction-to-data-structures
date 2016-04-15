@@ -11,7 +11,7 @@
 #include "strings.h"
 
 void test_lheap() {
-    array* arr = make_random_unique_array(27, 13, int_element_generator);
+    array arr = make_random_unique_array(27, 13, int_element_generator);
     printf("Generated source array: %s\n", to_string((printable*)arr));
     lheap heap = lheapify(arr->elements, arr->length, compare_ints);
     
@@ -19,7 +19,7 @@ void test_lheap() {
 }
 
 void test_aheap() {
-    array* arr = make_random_unique_array(27, 13, int_element_generator);
+    array arr = make_random_unique_array(27, 13, int_element_generator);
     printf("Generated source array: %s\n", to_string((printable*)arr));
     aheap heap = aheapify(arr->elements, arr->length, compare_ints);
     

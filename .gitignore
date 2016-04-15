@@ -9,3 +9,8 @@ assignment-11/assignment_11
 /.sconsign.dblite
 *.os
 *.a
+*_latexmk
+*.fls
+/assignment-11/assignment11
+/assignment-12/assignment12
+/assignment-13/assignment13

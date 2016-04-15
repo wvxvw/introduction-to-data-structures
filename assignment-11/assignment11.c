@@ -15,7 +15,7 @@
  *  \param sorted The array to check
  *  \return true iff there are ``gaps'' in the array.
  */
-bool is_sparse(const array* sorted) {
+bool is_sparse(const array sorted) {
     int* first = (int*)sorted->elements[0]->val;
     int* last = (int*)sorted->elements[sorted->length - 1]->val;
     
@@ -33,9 +33,9 @@ bool is_sparse(const array* sorted) {
  *  N1, N2 and N3 s.t. N1 > N2 > N3 and N2 is not a member of the
  *  given array, but N1 and N3 are.
  */
-size_t binsearch_missing(const array* sparse) {
+size_t binsearch_missing(const array sparse) {
     size_t start = 0, end = sparse->length / 2;
-    array* cut = slice(sparse, start, end);
+    array cut = slice(sparse, start, end);
     
     while (end - start > 1) {
         if (is_sparse(cut)) {
@@ -59,18 +59,18 @@ size_t binsearch_missing(const array* sparse) {
  *  \return The \c pair whose \c first and \c last elements
  *          are the summands of \c z.
  */
-pair* summands_of(const array* a, const array* b, const float z, comparison_fn_t cmp) {
+pair* summands_of(const array a, const array b, const float z, comparison_fn_t cmp) {
     pair* result = make_pair();
-    array* shortest;
-    array* longest;
+    array shortest;
+    array longest;
     size_t i;
 
     if (a->length < b->length) {
-        shortest = sorted((array*)a, cmp);
-        longest = (array*)b;
+        shortest = sorted((array)a, cmp);
+        longest = (array)b;
     } else {
-        shortest = sorted((array*)b, cmp);
-        longest = (array*)a;
+        shortest = sorted((array)b, cmp);
+        longest = (array)a;
     }
     for (i = 0; i < longest->length; i++) {
         float* val = longest->elements[i]->val;
@@ -85,7 +85,7 @@ pair* summands_of(const array* a, const array* b, const float z, comparison_fn_t
     return result;
 }
 
-void report(array* tested, char* message) {
+void report(array tested, char* message) {
     printf(message, to_string((printable*)tested));
     if (!is_sparse(tested)) {
         printf("Array is dense.\n");
@@ -98,7 +98,7 @@ void report(array* tested, char* message) {
 
 void test_question_3() {
     int ints[8] = {1, 2, 3, 4, 5, 6, 7, 8};
-    array* test = make_array_from_pointer(
+    array test = make_array_from_pointer(
         ints, 8, float_element_generator);
 
     printf("Floats: %s\n", to_string((printable*)test));
@@ -110,7 +110,7 @@ void test_question_3() {
 
 void test_iterator() {
     int ints[8] = {1, 2, 3, 4, 5, 6, 7, 8};
-    array* test = make_array_from_pointer(
+    array test = make_array_from_pointer(
         ints, 8, float_element_generator);
     iterator_impl* it = iterator(test);
     printf("Going to iterate\n");
@@ -137,33 +137,33 @@ int main() {
            "Created sparse array: %s.\n");
 
     int ints[11] = {1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13};
-    array* test = make_array_from_pointer(ints, 11, int_element_generator);
+    array test = make_array_from_pointer(ints, 11, int_element_generator);
     report(test, "Created special array: %s.\n");
 
     int ints1[11] = {1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12};
-    array* test1 = make_array_from_pointer(ints1, 11, int_element_generator);
+    array test1 = make_array_from_pointer(ints1, 11, int_element_generator);
     report(test1, "Created another special array: %s.\n");
 
     int ints2[12] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13};
-    array* test2 = make_array_from_pointer(ints2, 12, int_element_generator);
+    array test2 = make_array_from_pointer(ints2, 12, int_element_generator);
     report(test2, "Created last special array: %s.\n");
 
     test_question_3();
     
-    array* test3 = make_array_from_pointer(ints2, 12, float_element_generator);
+    array test3 = make_array_from_pointer(ints2, 12, float_element_generator);
 
     printf("Floats: %s\n", to_string((printable*)test3));
     pair* summands = summands_of(test3, test3, 21, compare_floats);
     printf("21 = %f + %f\n", *(float*)summands->first->val, *(float*)summands->last->val);
 
-    array* isorted = make_random_array(27, 13, 67, int_element_generator);
+    array isorted = make_random_array(27, 13, 67, int_element_generator);
     printf("Before sorted: %s\n", to_string((printable*)isorted));
     isorted = insertion_sort(isorted, compare_ints);
     printf("Insetion sorted: %s\n", to_string((printable*)isorted));
 
     size_t i;
     for (i = 1; i < 6; i++) {
-        array* decinc = make_increasing_decreasing_array(i, int_element_generator);
+        array decinc = make_increasing_decreasing_array(i, int_element_generator);
         printf("Prepare Q1 sequence: %s\n", to_string((printable*)decinc));
         start_swap_count();
         decinc = insertion_sort(decinc, compare_ints);
@@ -172,7 +172,7 @@ int main() {
                (int)get_swap_count());
     }
     for (i = 1; i < 10; i++) {
-        array* decinc = make_vedge_array(i, int_element_generator);
+        array decinc = make_vedge_array(i, int_element_generator);
         printf("Prepare Q2 sequence: %s\n", to_string((printable*)decinc));
         start_swap_count();
         decinc = insertion_sort(decinc, compare_ints);
