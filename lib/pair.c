@@ -5,7 +5,7 @@
 #include "printable.h"
 #include "pair.h"
 
-const char* to_string_pair(const pair* p) {
+const char* to_string_pair(const pair p) {
     char* buffer = ALLOCATE(9 * sizeof(char));
     if (p == NULL) {
         sprintf(buffer, "%p", p);
@@ -19,8 +19,8 @@ const char* to_string_pair(const pair* p) {
     return buffer;
 }
 
-pair* make_pair() {
-    pair* result = ALLOCATE(sizeof(pair));
+pair make_pair() {
+    pair result = ALLOCATE(sizeof(printable_pair));
     ((printable*)result)->to_string = (printer)to_string_pair;
     return result;
 }

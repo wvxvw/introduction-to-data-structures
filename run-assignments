@@ -7,7 +7,7 @@ usage() {
 }
 
 run() {
-    LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./lib ./"assignment-1$1/assignment-1.$1"
+    LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./lib ./"assignment-1$1/assignment1$1"
 }
 
 while [[ $# > 0 ]]

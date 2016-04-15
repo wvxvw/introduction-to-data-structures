@@ -1,4 +1,4 @@
-% Created 2016-04-14 Thu 20:52
+% Created 2016-04-15 Fri 23:20
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -90,10 +90,17 @@
 \label{sec-1-1}
 \begin{enumerate}
 \item How many comparisons does the \texttt{partition} algorithm have to make before it
-completes on an input of size $n$, provides the input is sorted in
+completes on an input of size $n$, provided the input is sorted in
 ascending order?
 \item What if the input is sorted in descending order?
 \end{enumerate}
+
+\subsubsection{Answer 1}
+\label{sec-1-1-1}
+It doesn't matter if input is sorted, or that it has duplicates.
+\texttt{partition} will do $n-1$ comparisons (provided it selects the first element
+to be the pivot element).  This is so because it has to compare each element
+to the pivot element, but there is no need to compare them more than once.
 
 \subsection{Problem 2}
 \label{sec-1-2}
@@ -105,6 +112,100 @@ then they are in correct order.
 \item Modify \texttt{quicksort} algorithm to produce almost sorted arrays.
 \item What is the running time of this new algorithm?
 \end{enumerate}
+
+\subsubsection{Answer 2}
+\label{sec-1-2-1}
+\begin{enumerate}
+\item The modification is as follows: before we proceed to partition a slice of
+array we check that its length is greater than $k$.  This gives us the
+running time of $O(\lg(n-k)n)$.  Partitioning of larger slices of
+array ensures that $\forall e \in A[x\dots x+k]: e \leq A[x+k+1\dots]$,
+but this is exactly our requirement.
+\item As suggested above, the running time is $O(\lg(n-k)n)$ since we skip
+the processing of the subtrees at the depth greater than $n-k$.
+\end{enumerate}
+
+Reference implementation is given below:
+
+\lstset{language=C,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+pair three_way_partition(array partitioned, comparison_fn_t cmp) {
+    time_t t;
+    size_t lidx, ridx, i, mid = 1;
+    printable* left;
+    printable* right;
+    pair result = make_pair();
+    int default_val = 0;
+
+    if (partitioned->length <= 1) {
+        result->first = int_element_generator(&default_val);
+        result->last = int_element_generator(&default_val);
+        return result;
+    }
+    srand((unsigned)time(&t));
+    lidx = rand() % (partitioned->length / 2);
+    ridx = (partitioned->length / 2) +
+           rand() % (partitioned->length / 2);
+    left = partitioned->elements[lidx];
+    right = partitioned->elements[ridx];
+    if (cmp(&left, &right) > 0) {
+        swap(partitioned, lidx, ridx);
+        left = partitioned->elements[lidx];
+        right = partitioned->elements[ridx];
+    }
+    swap(partitioned, 0, lidx);
+    swap(partitioned, partitioned->length - 1, ridx);
+    lidx = 1;
+    ridx = partitioned->length - 1;
+    for (i = 0; i < partitioned->length - 2; i++) {
+        if (cmp(&partitioned->elements[mid], &left) < 0) {
+            swap(partitioned, lidx, mid);
+            lidx++;
+            mid++;
+        } else if ((cmp(&partitioned->elements[mid], &right) < 0)) {
+            mid++;
+        } else {
+            swap(partitioned, ridx - 1, mid);
+            ridx--;
+        }
+    }
+    int lidx_int = (int)lidx;
+    int ridx_int = (int)ridx;
+    result->first = int_element_generator(&lidx_int);
+    result->last = int_element_generator(&ridx_int);
+    return result;
+}
+\end{lstlisting}
+
+\lstset{language=C,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+void quicksort(array unsorted, comparison_fn_t cmp, size_t error) {
+    if (unsorted->length <= error) return;
+    switch (unsorted->length) {
+        case 1: break;
+        case 2:
+            if (cmp(&unsorted->elements[0],
+                    &unsorted->elements[1]) > 0)
+                swap(unsorted, 0, 1);
+            break;
+        default: {
+            pair walls = three_way_partition(unsorted, cmp);
+            int low = *(int*)walls->first->val;
+            int high = *(int*)walls->last->val;
+            if (low > 1)
+                quicksort(slice(unsorted, 0, (size_t)low),
+                          cmp, error);
+            if (low + 1 < high)
+                quicksort(
+                    slice(unsorted, (size_t)low, (size_t)high),
+                    cmp, error);
+            if (high + 1 < unsorted->length)
+                quicksort(slice(unsorted, (size_t)high,
+                                unsorted->length), cmp, error);
+        }
+    }
+}
+\end{lstlisting}
 
 \subsection{Problem 3}
 \label{sec-1-3}
@@ -137,17 +238,17 @@ is 11.
 \label{sec-1-4}
 \begin{enumerate}
 \item Prove that a sequence $S$ of length $n$ has at most three elements that
-repeat more than $\lfoor\frac{n}{4}\rfloor$ times.
+repeat more than $\lfloor\frac{n}{4}\rfloor$ times.
 \item Write an algorithm finding all elements which repeat more than
-$\lfoor\frac{n}{4}\rfloor$ times.  Running time $O(n)$.
+$\lfloor\frac{n}{4}\rfloor$ times.  Running time $O(n)$.
 \end{enumerate}
 
 \subsubsection{Answer 4}
 \label{sec-1-4-1}
 Assume for contradiction that there are four elements in $S$ that repeat
-$\lfoor\frac{n}{4}\rfloor$ times.  That is exist an element in the sequence
-that repeats $\lfoor\frac{n}{4} + 1\rfloor$ times.  Note that
-$3\lfoor\frac{n}{4}\rfloor + \lfoor\frac{n}{4} + 1\rfloor > n$ contrary to
+$\lfloor\frac{n}{4}\rfloor$ times.  That is exist fourth element in the
+sequence that repeats $\lfloor\frac{n}{4} + 1\rfloor$ times.  Note that
+$3\lfloor\frac{n}{4}\rfloor + \lfloor\frac{n}{4} + 1\rfloor > n$ contrary to
 assumed.  Hence, by contracition, there are at most three such elements.
 
 \subsubsection{Answer 5}
@@ -157,7 +258,7 @@ elements as keys in the hash-table.  Increment the key whenever you
 encounter the element.  Finally, loop over the hash-table to collect all
 those for which the condition holds.
 
-This can be improved by using $\lfoor\frac{n}{4}\rfloor$ hash-tables, first
+This can be improved by using $\lfloor\frac{n}{4}\rfloor$ hash-tables, first
 for the elements which have been seen just once, second---for the elements
 seen twice and so on.  Thus, instead of icnrementing the counter, the
 elements would be promoted to the last hash-table.  This removes the
@@ -169,7 +270,7 @@ following:
 \begin{enumerate}
 \item Partition in three parts using the same partition procedure used in
 \texttt{quick-sort} algorithm.  If a partition is smaller than
-$\lfoor\frac{n}{4}\rfloor$, throw it away and repeat.
+$\lfloor\frac{n}{4}\rfloor$, throw it away and repeat.
 \item At this point, the following could happen:
 \begin{itemize}
 \item You have three partitions each containing the same element---you are
@@ -230,9 +331,9 @@ the minimum and the maximum divided into one less than the number of elements.
   \caption{Find $x, y \in Elts$ s.t. $\abs{x - y} \leq \frac{\max(Elts) - \min(Elts)}{\abs{Elts} - 1}$}
   \begin{algorithmic}
     \Procedure {$\textit{min-pair}$}{$elements$}
-    \State \Call {$max \leftarrow \texit{max}$}{$elements$}
-    \State \Call {$min \leftarrow \texit{min}$}{$elements$}
-    \State \Call {$size \leftarrow \texit{size}$}{$elements$}
+    \State \Call {$max \leftarrow \textit{max}$}{$elements$}
+    \State \Call {$min \leftarrow \textit{min}$}{$elements$}
+    \State \Call {$size \leftarrow \textit{size}$}{$elements$}
     \State \Call {$copy \leftarrow \textit{make-vector}$}{$size, nil$}
     \For {$element \in elements$} \Do
     \State {$index \leftarrow \lfloor \frac{(elt - min) \times (size - 1)}{max - min} \rfloor$}

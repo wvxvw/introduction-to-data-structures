@@ -1,7 +1,7 @@
 /**
- * \file int_array.h
+ * \file printable_int.h
  *
- * \ingroup assignment11
+ * \ingroup libassignments
  *
  * \brief This is an implementation of \c array which has all integer
  *        members.
@@ -15,8 +15,8 @@
  *
  * Contact: olegsivokon@gmail.com
  */
-#ifndef INT_ARRAY_H_
-#define INT_ARRAY_H_
+#ifndef PRINTABLE_INT_H_
+#define PRINTABLE_INT_H_
 
 #include <stdlib.h>
 
@@ -61,4 +61,11 @@ const char* to_string_int(const printable_int* p);
  */
 printable* int_element_generator(void* elt);
 
-#endif // INT_ARRAY_H_
+
+void start_int_cmp_count();
+
+size_t get_int_cmp_count();
+
+int compare_ints_reverse(const void* a, const void* b);
+
+#endif // PRINTABLE_INT_H_

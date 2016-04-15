@@ -22,6 +22,7 @@
 #include <stdbool.h>
 
 #include "printable.h"
+#include "pair.h"
 
 /** \fn element_generator
  *  \brief The functions of this kind are used when generating all
@@ -278,6 +279,10 @@ bool next(iterator_impl* impl);
  */
 iterator_impl* iterator(array iterated);
 
-size_t partition(array partitioned);
-    
+size_t partition(array partitioned, comparison_fn_t cmp);
+
+pair three_way_partition(array partitioned, comparison_fn_t cmp);
+
+void three_way_quicksort(array unsorted, comparison_fn_t cmp, size_t error);
+
 #endif // ARRAY_H_

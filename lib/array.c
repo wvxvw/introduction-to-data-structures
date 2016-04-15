@@ -3,8 +3,10 @@
 #include <string.h>
 #include <time.h>
 
-#include "array.h"
 #include "printable.h"
+#include "printable_int.h"
+#include "array.h"
+#include "pair.h"
 
 char* to_string_array(array p) {
     char* parts[p->length * 2];
@@ -35,10 +37,10 @@ char* to_string_array(array p) {
 }
 
 array make_array(size_t size, printable** data) {
-    array result = ALLOCATE(sizeof(array));
+    array result = ALLOCATE(sizeof(printable_array));
     size_t i = 0;
     result->length = size;
-    result->elements = ALLOCATE(size * sizeof(printable));
+    result->elements = ALLOCATE(size * sizeof(printable*));
     result->printable.to_string = (printer)to_string_array;
     
     while (i < size) {
@@ -69,9 +71,11 @@ array shuffled(array sorted) {
 }
 
 array slice(const array input, const size_t from, const size_t to) {
-    printable** elts = input->elements;
-    printable** offset = &elts[from];
-    return make_array(to - from, offset);
+    array result = ALLOCATE(sizeof(printable_array));
+    result->length = to - from;
+    result->elements = &input->elements[from];
+    result->printable.to_string = (printer)input->printable.to_string;
+    return result;
 }
 
 size_t linsearch(const array input,
@@ -273,4 +277,98 @@ iterator_impl* iterator(array iterated) {
     iter->pos = 0;
     iter->it = next_it;
     return iter;
+}
+
+size_t partition(array partitioned, comparison_fn_t cmp) {
+    if (partitioned->length == 0) return 0;
+    printable* pivot = partitioned->elements[0];
+    size_t i, wall = 1;
+
+    for (i = 0; i < partitioned->length; i++) {
+        if (cmp(&partitioned->elements[i], &pivot) < 0) {
+            swap(partitioned, i, wall);
+            wall++;
+        }
+    }
+    return wall;
+}
+
+pair three_way_partition(array partitioned, comparison_fn_t cmp) {
+    time_t t;
+    size_t lidx, ridx, i, mid = 1;
+    printable* left;
+    printable* right;
+    pair result = make_pair();
+    int default_val = 0;
+
+    if (partitioned->length <= 1) {
+        result->first = int_element_generator(&default_val);
+        result->last = int_element_generator(&default_val);
+        return result;
+    }
+    srand((unsigned)time(&t));
+    lidx = rand() % (partitioned->length / 2);
+    ridx = (partitioned->length / 2) + rand() % (partitioned->length / 2);
+    left = partitioned->elements[lidx];
+    right = partitioned->elements[ridx];
+    if (cmp(&left, &right) > 0) {
+        swap(partitioned, lidx, ridx);
+        left = partitioned->elements[lidx];
+        right = partitioned->elements[ridx];
+    }
+    swap(partitioned, 0, lidx);
+    swap(partitioned, partitioned->length - 1, ridx);
+    lidx = 1;
+    mid = 1;
+    ridx = partitioned->length - 1;
+    for (i = 0; i < partitioned->length - 2; i++) {
+        if (cmp(&partitioned->elements[mid], &left) < 0) {
+            swap(partitioned, lidx, mid);
+            lidx++;
+            mid++;
+        } else if ((cmp(&partitioned->elements[mid], &right) < 0)) {
+            mid++;
+        } else {
+            swap(partitioned, ridx - 1, mid);
+            ridx--;
+        }
+    }
+    // TODO: Need printable_size
+    int lidx_int = (int)lidx;
+    int ridx_int = (int)ridx;
+    /*
+     * This can happen when we don't have anything in the middle.
+     * We generate right index s.t. it is useful for indexing the
+     * array afterwards, so it can eventually get less then the
+     * left index.
+     **/
+    if (ridx_int < lidx_int) {
+        ridx_int = lidx_int;
+    }
+    result->first = int_element_generator(&lidx_int);
+    result->last = int_element_generator(&ridx_int);
+    return result;
+}
+
+void three_way_quicksort(array unsorted, comparison_fn_t cmp, size_t error) {
+    if (unsorted->length <= error) return;
+    switch (unsorted->length) {
+        case 1: break;
+        case 2:
+            if (cmp(&unsorted->elements[0],
+                    &unsorted->elements[1]) > 0)
+                swap(unsorted, 0, 1);
+            break;
+        default: {
+            pair walls = three_way_partition(unsorted, cmp);
+            int low = *(int*)walls->first->val;
+            int high = *(int*)walls->last->val;
+            if (low > 1)
+                three_way_quicksort(slice(unsorted, 0, (size_t)low), cmp, error);
+            if (low + 1 < high)
+                three_way_quicksort(slice(unsorted, (size_t)low, (size_t)high), cmp, error);
+            if (high + 1 < unsorted->length)
+                three_way_quicksort(slice(unsorted, (size_t)high, unsorted->length), cmp, error);
+        }
+    }
 }

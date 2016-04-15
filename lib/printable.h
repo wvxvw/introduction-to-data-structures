@@ -20,8 +20,13 @@
 #define PRINTABLE_H_
 
 #include <gc.h>
+#include <stdlib.h>
 
+#ifdef ALLOCATE
 #define ALLOCATE(X) GC_MALLOC(X)
+#else
+#define ALLOCATE(X) malloc(X)
+#endif
 
 /** \struct printable
  *  \brief This struct provides the backbone for anything that can

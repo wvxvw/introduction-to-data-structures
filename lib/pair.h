@@ -1,7 +1,7 @@
 /**
  * \file pair.h
  *
- * \ingroup assignment11
+ * \ingroup libassignments
  *
  * \brief This file defines basic functions for working with printable
  *        arrays.
@@ -27,10 +27,12 @@ typedef struct pair {
     printable printable;
     printable* first;
     printable* last;
-} pair;
+} printable_pair;
 
-pair* make_pair();
+typedef printable_pair* pair;
 
-const char* to_string_pair(const pair* p);
+pair make_pair();
+
+const char* to_string_pair(const pair p);
 
 #endif // PAIR_H_

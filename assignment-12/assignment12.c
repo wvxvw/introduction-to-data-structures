@@ -6,7 +6,7 @@
 #include "printable.h"
 #include "list.h"
 #include "array.h"
-#include "int_array.h"
+#include "printable_int.h"
 #include "heap.h"
 #include "strings.h"
 

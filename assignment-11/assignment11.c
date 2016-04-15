@@ -5,8 +5,8 @@
 #include "printable.h"
 #include "array.h"
 #include "pair.h"
-#include "int_array.h"
-#include "float_array.h"
+#include "printable_int.h"
+#include "printable_float.h"
 
 /** \brief Find out whether the give \c array is sparce, i.e.
  *         whether it has all of its elements in increasing order
@@ -59,8 +59,8 @@ size_t binsearch_missing(const array sparse) {
  *  \return The \c pair whose \c first and \c last elements
  *          are the summands of \c z.
  */
-pair* summands_of(const array a, const array b, const float z, comparison_fn_t cmp) {
-    pair* result = make_pair();
+pair summands_of(const array a, const array b, const float z, comparison_fn_t cmp) {
+    pair result = make_pair();
     array shortest;
     array longest;
     size_t i;
@@ -102,7 +102,7 @@ void test_question_3() {
         ints, 8, float_element_generator);
 
     printf("Floats: %s\n", to_string((printable*)test));
-    pair* summands = summands_of(test, test, 15, compare_floats);
+    pair summands = summands_of(test, test, 15, compare_floats);
     printf("15 = %s + %s\n",
            to_string(summands->first),
            to_string(summands->last));
@@ -153,7 +153,7 @@ int main() {
     array test3 = make_array_from_pointer(ints2, 12, float_element_generator);
 
     printf("Floats: %s\n", to_string((printable*)test3));
-    pair* summands = summands_of(test3, test3, 21, compare_floats);
+    pair summands = summands_of(test3, test3, 21, compare_floats);
     printf("21 = %f + %f\n", *(float*)summands->first->val, *(float*)summands->last->val);
 
     array isorted = make_random_array(27, 13, 67, int_element_generator);

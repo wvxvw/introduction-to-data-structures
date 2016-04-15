@@ -1,7 +1,7 @@
 /**
- * \file float_array.h
+ * \file printable_float.h
  *
- * \ingroup assignment11
+ * \ingroup libassignments
  *
  * \brief This file defines basic functions for working with printable
  *        floats.
@@ -15,8 +15,8 @@
  *
  * Contact: olegsivokon@gmail.com
  */
-#ifndef FLOAT_ARRAY_H_
-#define FLOAT_ARRAY_H_
+#ifndef PRINTABLE_FLOAT_H_
+#define PRINTABLE_FLOAT_H_
 
 #include <float.h>
 #include "printable.h"
@@ -40,4 +40,4 @@ printable_float* make_printable_float(const float val);
  */
 printable* float_element_generator(void* elt);
 
-#endif // FLOAT_ARRAY_H_
+#endif // PRINTABLE_FLOAT_H_

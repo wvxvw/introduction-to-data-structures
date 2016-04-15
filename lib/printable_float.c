@@ -5,7 +5,7 @@
 #include <gc.h>
 
 #include "array.h"
-#include "float_array.h"
+#include "printable_float.h"
 
 int compare_floats(const void* a, const void* b) {
     const printable* pa = *(printable* const *)a;
