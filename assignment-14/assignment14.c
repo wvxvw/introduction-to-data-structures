@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <float.h>
+
+#ifdef WITH_GC
 #include <gc.h>
+#endif
 
 #include "printable.h"
 #include "list.h"
@@ -37,8 +40,11 @@ size_t test_performance(size_t array_length, size_t order) {
 
 int main() {
     size_t array_length, order, result;
-
+    
+#ifdef WITH_GC
     GC_INIT();
+#endif
+    
     for (array_length = 100; array_length <= 400; array_length *= 2) {
         for (order = 1; order <= 8; order *= 2) {
             result = test_performance(array_length, (100 * order) / 8);

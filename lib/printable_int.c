@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
-#include <gc.h>
 
 #include "array.h"
 #include "printable_int.h"

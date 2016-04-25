@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <float.h>
+#ifdef WITH_GC
 #include <gc.h>
+#endif
+
 
 #include "printable.h"
 #include "array.h"
@@ -121,7 +124,9 @@ void test_iterator() {
 }
 
 int main() {
-    GC_INIT();
+#ifdef WITH_GC
+  GC_INIT();
+#endif
     printf("Assignment 1.1\n");
     
     report(make_random_sorted_array(27, 13, 67, compare_ints, int_element_generator),

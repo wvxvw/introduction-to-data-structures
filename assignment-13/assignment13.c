@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <float.h>
+
+#ifdef WITH_GC
 #include <gc.h>
+#endif
 
 #include "printable.h"
 #include "list.h"
@@ -61,7 +64,9 @@ void test_three_way_partition_1() {
 }
 
 int main() {
-    GC_INIT();
+#ifdef WITH_GC
+  GC_INIT();
+#endif
     test_partition();
     test_exercise_1();
     test_three_way_partition();

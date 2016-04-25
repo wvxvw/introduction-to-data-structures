@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <gc.h>
 
 #include "printable.h"
 #include "pair.h"

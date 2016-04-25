@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <float.h>
+
+#ifdef WITH_GC
 #include <gc.h>
+#endif
 
 #include "printable.h"
 #include "list.h"
@@ -51,7 +54,9 @@ void test_join() {
 }
 
 int main() {
-    GC_INIT();
+#ifdef WITH_GC
+  GC_INIT();
+#endif
     test_list();
     test_lheap();
     test_join();

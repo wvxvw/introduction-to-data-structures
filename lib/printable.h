@@ -19,7 +19,10 @@
 #ifndef PRINTABLE_H_
 #define PRINTABLE_H_
 
+#ifdef WITH_GC
 #include <gc.h>
+#endif
+
 #include <stdlib.h>
 
 #ifdef WITH_GC

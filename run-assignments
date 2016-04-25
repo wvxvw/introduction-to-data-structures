@@ -7,7 +7,12 @@ usage() {
 }
 
 run() {
-    LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./lib ./"assignment-1$1/assignment1$1"
+    os=$(uname -o)
+    if [ "$os" = "Cygwin" ]; then
+	PATH=$PATH:./lib ./"assignment-1$1/assignment1$1"
+    else
+	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./lib ./"assignment-1$1/assignment1$1"
+    fi
 }
 
 while [[ $# > 0 ]]

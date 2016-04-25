@@ -2,7 +2,6 @@
 #include <time.h>
 #include <stdio.h>
 #include <float.h>
-#include <gc.h>
 
 #include "array.h"
 #include "printable_float.h"

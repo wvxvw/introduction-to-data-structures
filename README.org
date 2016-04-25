@@ -43,7 +43,9 @@
   Or whatever other package manager you use.
 
   MS Windows users, please follow instructions here:
-  http://scons.org/doc/HTML/scons-user.html#idp1399079060
+  http://scons.org/pages/download.html (download the
+  http://prdownloads.sourceforge.net/scons/scons-2.5.0-setup.exe )
+  Windows installer.
 
   To build the project using SCons, change into project's direcory
   and run:
