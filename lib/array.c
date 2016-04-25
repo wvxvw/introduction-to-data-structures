@@ -284,13 +284,57 @@ size_t partition(array partitioned, comparison_fn_t cmp) {
     printable* pivot = partitioned->elements[0];
     size_t i, wall = 1;
 
-    for (i = 0; i < partitioned->length; i++) {
+    if (partitioned->length < 3) {
+        printf("2 searched: %s\n", to_string((printable*)partitioned));
+    }
+    for (i = 2; i < partitioned->length; i++) {
         if (cmp(&partitioned->elements[i], &pivot) < 0) {
             swap(partitioned, i, wall);
             wall++;
+            if (partitioned->length < 3) {
+                printf("3 searched: %s\n", to_string((printable*)partitioned));
+            }
         }
     }
     return wall;
+}
+
+size_t partition_at(array searched, size_t position, comparison_fn_t cmp) {
+    if (searched->length < 3) {
+        printf("1 searched: %s\n", to_string((printable*)searched));
+    }
+    swap(searched, 0, position);
+    return partition(searched, cmp);
+}
+
+size_t index_of(array searched, printable* elt) {
+    size_t i;
+    for (i = 0; i < searched->length; i++)
+        if (searched->elements[i] == elt) break;
+    return i;
+}
+
+printable* nth_order_statistic(array searched, size_t order, comparison_fn_t cmp) {
+    printf("nth_order_statistic: %d / %d\n", (int)searched->length, (int)order);
+    time_t t;
+    size_t position, wall;
+    size_t part = searched->length * order / 100;
+
+    printf("nth_order_statistic: %d\n", (int)part);
+    
+    srand((unsigned)time(&t));
+    while (part > 0) {
+        position = rand() % searched->length;
+        wall = partition_at(searched, position, cmp);
+        if (wall == part) break;
+        if (wall < part) {
+            searched = slice(searched, wall, searched->length);
+            part -= wall;
+        } else {
+            searched = slice(searched, 0, wall);
+        }
+    }
+    return searched->elements[part];
 }
 
 pair three_way_partition(array partitioned, comparison_fn_t cmp) {

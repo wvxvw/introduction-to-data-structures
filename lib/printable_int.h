@@ -1,7 +1,7 @@
 /**
  * \file printable_int.h
  *
- * \ingroup libassignments
+ * \ingroup libassignment
  *
  * \brief This is an implementation of \c array which has all integer
  *        members.
@@ -11,7 +11,7 @@
  *
  * \author Oleg Sivokon
  *
- * \date $Date: 2016/03/05 $
+ * \date 2016/03/05
  *
  * Contact: olegsivokon@gmail.com
  */

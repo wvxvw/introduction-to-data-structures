@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['it',['it',['../structiterator__impl.html#a8ae4a3ddff18fbb8864e488210527a2b',1,'iterator_impl']]],
-  ['iterated',['iterated',['../structiterator__impl.html#aea571e9d19b5b5780cf625adec0d7a7f',1,'iterator_impl']]]
+  ['elements',['elements',['../structprintable__array.html#a6c61ef6fefcf07e029b1c7dad17cd693',1,'printable_array::elements()'],['../structarray__heap.html#a867785d84081439b69d336ab6b6ca5a7',1,'array_heap::elements()']]]
 ];

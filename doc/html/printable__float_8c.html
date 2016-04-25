@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.10"/>
-<title>Assignment 1.1: int_array.c File Reference</title>
+<title>Data-Structures Assignments: lib/printable_float.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,7 +23,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Assignment 1.1
+   <div id="projectname">Data-Structures Assignments
    </div>
    <div id="projectbrief">My homework for the class in data-structures</div>
   </td>
@@ -80,41 +80,45 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_97aefd0d527b934f1d99a682da8fe6a9.html">lib</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">int_array.c File Reference</div>  </div>
+<div class="title">printable_float.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;time.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;float.h&gt;</code><br />
+<code>#include &lt;gc.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="array_8h_source.html">array.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="int__array_8h_source.html">int_array.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="printable__float_8h_source.html">printable_float.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aad8fa8fff44682a1e11768fcd30326a4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="int__array_8c.html#aad8fa8fff44682a1e11768fcd30326a4">compare_ints</a> (const void *a, const void *b)</td></tr>
-<tr class="memdesc:aad8fa8fff44682a1e11768fcd30326a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of <code>comparison_fn_t</code> which operates on <code><a class="el" href="structprintable__int.html" title="This struct is used to box a bare int pointer. It also embeds printable, so it can be pretty-printed...">printable_int</a></code>.  <a href="#aad8fa8fff44682a1e11768fcd30326a4">More...</a><br /></td></tr>
-<tr class="separator:aad8fa8fff44682a1e11768fcd30326a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6ebde217d820b151791ebfd9daf5a3e"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="int__array_8c.html#aa6ebde217d820b151791ebfd9daf5a3e">to_string_int</a> (const <a class="el" href="structprintable__int.html">printable_int</a> *p)</td></tr>
-<tr class="memdesc:aa6ebde217d820b151791ebfd9daf5a3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate printable representation of a <code><a class="el" href="structprintable__int.html" title="This struct is used to box a bare int pointer. It also embeds printable, so it can be pretty-printed...">printable_int</a></code>.  <a href="#aa6ebde217d820b151791ebfd9daf5a3e">More...</a><br /></td></tr>
-<tr class="separator:aa6ebde217d820b151791ebfd9daf5a3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adee72a8f59faf0e1d1b5922fe122c7eb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprintable__int.html">printable_int</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="int__array_8c.html#adee72a8f59faf0e1d1b5922fe122c7eb">make_printable_int</a> (const int val)</td></tr>
-<tr class="separator:adee72a8f59faf0e1d1b5922fe122c7eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a755e14d3834993c619266017ac54859d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="int__array_8c.html#a755e14d3834993c619266017ac54859d">int_element_generator</a> (void *elt)</td></tr>
-<tr class="memdesc:a755e14d3834993c619266017ac54859d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate <code><a class="el" href="structprintable__int.html" title="This struct is used to box a bare int pointer. It also embeds printable, so it can be pretty-printed...">printable_int</a></code> from given value.  <a href="#a755e14d3834993c619266017ac54859d">More...</a><br /></td></tr>
-<tr class="separator:a755e14d3834993c619266017ac54859d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa07a5813b40d74ff5eab533bda9e7508"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable__float_8c.html#aa07a5813b40d74ff5eab533bda9e7508">compare_floats</a> (const void *a, const void *b)</td></tr>
+<tr class="separator:aa07a5813b40d74ff5eab533bda9e7508"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2f2e47b4c6bd84016436044325466f6"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable__float_8c.html#ae2f2e47b4c6bd84016436044325466f6">to_string_float</a> (const <a class="el" href="structprintable__float.html">printable_float</a> *p)</td></tr>
+<tr class="separator:ae2f2e47b4c6bd84016436044325466f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71ec619f6e6e33e25c584e1d80406a85"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprintable__float.html">printable_float</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable__float_8c.html#a71ec619f6e6e33e25c584e1d80406a85">make_printable_float</a> (const float val)</td></tr>
+<tr class="separator:a71ec619f6e6e33e25c584e1d80406a85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a506a37dda8c35c55bb32d1d0fd95e1a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable__float_8c.html#a506a37dda8c35c55bb32d1d0fd95e1a4">float_element_generator</a> (void *elt)</td></tr>
+<tr class="memdesc:a506a37dda8c35c55bb32d1d0fd95e1a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate <code><a class="el" href="structprintable__int.html" title="This struct is used to box a bare int pointer. It also embeds printable, so it can be pretty-printed...">printable_int</a></code> from given value.  <a href="#a506a37dda8c35c55bb32d1d0fd95e1a4">More...</a><br /></td></tr>
+<tr class="separator:a506a37dda8c35c55bb32d1d0fd95e1a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="aad8fa8fff44682a1e11768fcd30326a4"></a>
+<a class="anchor" id="aa07a5813b40d74ff5eab533bda9e7508"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int compare_ints </td>
+          <td class="memname">int compare_floats </td>
           <td>(</td>
           <td class="paramtype">const void *&#160;</td>
           <td class="paramname"><em>a</em>, </td>
@@ -133,24 +137,14 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Implementation of <code>comparison_fn_t</code> which operates on <code><a class="el" href="structprintable__int.html" title="This struct is used to box a bare int pointer. It also embeds printable, so it can be pretty-printed...">printable_int</a></code>. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">a</td><td>This should be a <code><a class="el" href="structprintable__int.html" title="This struct is used to box a bare int pointer. It also embeds printable, so it can be pretty-printed...">printable_int</a></code> pointer. </td></tr>
-    <tr><td class="paramname">b</td><td>This should be a <code><a class="el" href="structprintable__int.html" title="This struct is used to box a bare int pointer. It also embeds printable, so it can be pretty-printed...">printable_int</a></code> pointer.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>0 if the value of a is the same as the value of b. 1 if a is smaller than b and -1 otherwise. </dd></dl>
-
 </div>
 </div>
-<a class="anchor" id="a755e14d3834993c619266017ac54859d"></a>
+<a class="anchor" id="a506a37dda8c35c55bb32d1d0fd95e1a4"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structprintable.html">printable</a>* int_element_generator </td>
+          <td class="memname"><a class="el" href="structprintable.html">printable</a>* float_element_generator </td>
           <td>(</td>
           <td class="paramtype">void *&#160;</td>
           <td class="paramname"><em>elt</em></td><td>)</td>
@@ -170,14 +164,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="adee72a8f59faf0e1d1b5922fe122c7eb"></a>
+<a class="anchor" id="a71ec619f6e6e33e25c584e1d80406a85"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structprintable__int.html">printable_int</a>* make_printable_int </td>
+          <td class="memname"><a class="el" href="structprintable__float.html">printable_float</a>* make_printable_float </td>
           <td>(</td>
-          <td class="paramtype">const int&#160;</td>
+          <td class="paramtype">const float&#160;</td>
           <td class="paramname"><em>val</em></td><td>)</td>
           <td></td>
         </tr>
@@ -186,28 +180,19 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aa6ebde217d820b151791ebfd9daf5a3e"></a>
+<a class="anchor" id="ae2f2e47b4c6bd84016436044325466f6"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char* to_string_int </td>
+          <td class="memname">const char* to_string_float </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structprintable__int.html">printable_int</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structprintable__float.html">printable_float</a> *&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Generate printable representation of a <code><a class="el" href="structprintable__int.html" title="This struct is used to box a bare int pointer. It also embeds printable, so it can be pretty-printed...">printable_int</a></code>. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The element to be printed.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A string (the callers are responsible to deallocate it). </dd></dl>
 
 </div>
 </div>

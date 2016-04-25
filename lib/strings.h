@@ -1,13 +1,13 @@
 /**
  * \file strings.h
  *
- * \ingroup lib
+ * \ingroup libassignment
  *
  * \brief This file defines some utility functions to work on strings.
  *
  * \author Oleg Sivokon
  *
- * \date $Date: 2016/03/05 $
+ * \date 2016/03/05
  *
  * Contact: olegsivokon@gmail.com
  */
@@ -18,6 +18,15 @@
 #include <string.h>
 #include "printable.h"
 
+/** \fn join
+ *  \brief Concatenates \c len number of strings.
+ *
+ *  \param chunks Zero-delimited strings to concatenate.
+ *  \param len Number of chunks to concatenate.
+ *  \param separator A string to insert between concatenated strings.
+ *  
+ *  \return Concatenated string ending in zero character.
+ */
 char* join(char** chunks, size_t len, char* separator);
 
 #endif // STRINGS_H_

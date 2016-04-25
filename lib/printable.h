@@ -1,7 +1,7 @@
 /**
  * \file printable.h
  *
- * \ingroup assignment11
+ * \ingroup libassignment
  *
  * \brief This file defines basic functions for working with printable
  *        arrays.
@@ -12,7 +12,7 @@
  *
  * \author Oleg Sivokon
  *
- * \date $Date: 2016/03/05 $
+ * \date 2016/03/05
  *
  * Contact: olegsivokon@gmail.com
  */
@@ -22,7 +22,7 @@
 #include <gc.h>
 #include <stdlib.h>
 
-#ifdef ALLOCATE
+#ifdef WITH_GC
 #define ALLOCATE(X) GC_MALLOC(X)
 #else
 #define ALLOCATE(X) malloc(X)

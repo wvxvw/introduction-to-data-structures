@@ -12,7 +12,7 @@
  *
  * \author Oleg Sivokon
  *
- * \date $Date: 2016/03/05 $
+ * \date 2016/03/05
  *
  * Contact: olegsivokon@gmail.com
  */
@@ -279,10 +279,77 @@ bool next(iterator_impl* impl);
  */
 iterator_impl* iterator(array iterated);
 
+/** \brief Given ordering function \c cmp, arrange the \c paritioned
+ *         array in the way such that all elements less than its first
+ *         original elment are on the left of it and the remaining elements
+ *         are on the right.
+ *
+ *  \param partitioned The array being paritioned (modified in place).
+ *  \param cmp The comparison function, must return at least 3 values
+ *             -1, 0 and 1 meaning that two of its arguments are <, =
+ *             or > correspondingly.
+ */
 size_t partition(array partitioned, comparison_fn_t cmp);
 
+/** \brief A more sophisticated \c partition() function.  Will chose
+ *         two walls at random, put all elements smaller than the
+ *         first wall into first part of the array, all those greater
+ *         than the second wall in the last part of the array, and the
+ *         rest---inbetween.
+ *
+ *  \param partitioned The array being partitioned
+ *  \param cmp The comparison function (\see partition).
+ *
+ *  \return Pair of elements, first is the left wall second is the right
+ *          wall.
+ */
 pair three_way_partition(array partitioned, comparison_fn_t cmp);
 
+/** \brief Quicksort implementation using \c three_way_partition.
+ *
+ *  \param unsorted The array being sorted (modified in place).
+ *  \param cmp The ordering function (\see partition).
+ *  \param error The maximum error allowed.  Error is defined to be
+ *               the distance between i^th and j^th elements of
+ *               array A, s.t. i < j and A[i] > A[j] (while the array
+ *               is sorted in ascending order.  To get a completely
+ *               sorted array, thus, you need to set this parameter
+ *               to zero.
+ */
 void three_way_quicksort(array unsorted, comparison_fn_t cmp, size_t error);
+
+/** \brief Same as \c partition, except will use the element at \c position
+ *         rather than the first element.
+ *
+ *  \param searched The array being paritioned.
+ *  \param position The position of the pivot element.
+ *  \param cmp The comparison function (\see partition).
+ *
+ *  \return The number of elements less than the element at \c position.
+ */
+size_t partition_at(array searched, size_t position, comparison_fn_t cmp);
+
+/** \brief Given \c order percentile, find the element in \c searched s.t.
+ *         there are at most \c order % of elements in this array smaller
+ *         than it.
+ *
+ *  \param searched The array to search for statistic (modified in place).
+ *  \param order The percentile of elements less than the searched element.
+ *  \param cmp The comparison function (\see partition).
+ *
+ *  \return The element s.t. there are at most \c order % of elements of
+ *          \c searched smaller than it.
+ */
+printable* nth_order_statistic(array searched, size_t order, comparison_fn_t cmp);
+
+/** \brief Returns the position of the \c elt in the \c searched.
+ *
+ *  \param searched The array being paritioned.
+ *  \param elt The element to search for.
+ *
+ *  \return The position of the searched element (or \c searched->length)
+ *          if the element wasn't found.
+ */
+size_t index_of(array searched, printable* elt);
 
 #endif // ARRAY_H_

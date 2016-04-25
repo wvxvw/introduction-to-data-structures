@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['next',['next',['../array_8c.html#a91e444ddb2e14381a45aab7d6c342ec6',1,'next(iterator_impl *impl):&#160;array.c'],['../array_8h.html#a91e444ddb2e14381a45aab7d6c342ec6',1,'next(iterator_impl *impl):&#160;array.c']]],
-  ['next_5fit',['next_it',['../array_8c.html#a44ca12fe5a67ef3dc7c44ab630a025d3',1,'array.c']]]
+  ['join',['join',['../strings_8c.html#aeceee5d855c332cdaf1429d857362d10',1,'join(char **chunks, size_t len, char *separator):&#160;strings.c'],['../strings_8h.html#aeceee5d855c332cdaf1429d857362d10',1,'join(char **chunks, size_t len, char *separator):&#160;strings.c']]]
 ];

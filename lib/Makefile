@@ -1,7 +1,7 @@
 CC := gcc
 SOURCES := $(wildcard ./*.c)
 OBJECTS := $(SOURCES:.c=.o)
-CFLAGS := -Wall -fPIC -ggdb
+CFLAGS := -Wall -fPIC -ggdb -DWITH_GC
 
 default: library
 

@@ -14,3 +14,8 @@ assignment-11/assignment_11
 /assignment-11/assignment11
 /assignment-12/assignment12
 /assignment-13/assignment13
+.sconf_temp
+/config.log
+.hg
+/site_scons/site_tools/doxygen/.hgignore
+/assignment-14/assignment14

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.10"/>
-<title>Assignment 1.1: printable.c File Reference</title>
+<title>Data-Structures Assignments: lib/printable.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,7 +23,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Assignment 1.1
+   <div id="projectname">Data-Structures Assignments
    </div>
    <div id="projectbrief">My homework for the class in data-structures</div>
   </td>
@@ -80,6 +80,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_97aefd0d527b934f1d99a682da8fe6a9.html">lib</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
@@ -90,6 +94,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;gc.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="printable_8h_source.html">printable.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -97,12 +102,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a562d539650b6a5247baf17e56aaae58a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable_8c.html#a562d539650b6a5247baf17e56aaae58a">make_printable</a> (size_t size, void *data)</td></tr>
 <tr class="memdesc:a562d539650b6a5247baf17e56aaae58a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates new <code>printable</code> wrapping <code>data</code> and returns it.  <a href="#a562d539650b6a5247baf17e56aaae58a">More...</a><br /></td></tr>
 <tr class="separator:a562d539650b6a5247baf17e56aaae58a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d3a81ba2f9b682ac757b77d94232e6f"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable_8c.html#a6d3a81ba2f9b682ac757b77d94232e6f">to_string_default</a> (const <a class="el" href="structprintable.html">printable</a> *p)</td></tr>
-<tr class="memdesc:a6d3a81ba2f9b682ac757b77d94232e6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a string representing the default <code>printable</code>.  <a href="#a6d3a81ba2f9b682ac757b77d94232e6f">More...</a><br /></td></tr>
-<tr class="separator:a6d3a81ba2f9b682ac757b77d94232e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c51242d8de7329201335fcb0ea530c2"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable_8c.html#a6c51242d8de7329201335fcb0ea530c2">to_string</a> (const <a class="el" href="structprintable.html">printable</a> *p)</td></tr>
-<tr class="memdesc:a6c51242d8de7329201335fcb0ea530c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translates the <code>to_string</code> call to <code>p</code>.  <a href="#a6c51242d8de7329201335fcb0ea530c2">More...</a><br /></td></tr>
-<tr class="separator:a6c51242d8de7329201335fcb0ea530c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a483945f165a627e834c24e3327dfbe14"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable_8c.html#a483945f165a627e834c24e3327dfbe14">to_string_default</a> (<a class="el" href="structprintable.html">printable</a> *p)</td></tr>
+<tr class="memdesc:a483945f165a627e834c24e3327dfbe14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a string representing the default <code>printable</code>.  <a href="#a483945f165a627e834c24e3327dfbe14">More...</a><br /></td></tr>
+<tr class="separator:a483945f165a627e834c24e3327dfbe14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00442d787c7a58aa6e07ebe567936391"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable_8c.html#a00442d787c7a58aa6e07ebe567936391">to_string</a> (<a class="el" href="structprintable.html">printable</a> *p)</td></tr>
+<tr class="memdesc:a00442d787c7a58aa6e07ebe567936391"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translates the <code>to_string</code> call to <code>p</code>.  <a href="#a00442d787c7a58aa6e07ebe567936391">More...</a><br /></td></tr>
+<tr class="separator:a00442d787c7a58aa6e07ebe567936391"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="a562d539650b6a5247baf17e56aaae58a"></a>
@@ -133,14 +138,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a6c51242d8de7329201335fcb0ea530c2"></a>
+<a class="anchor" id="a00442d787c7a58aa6e07ebe567936391"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char* to_string </td>
+          <td class="memname">char* to_string </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structprintable.html">printable</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structprintable.html">printable</a> *&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
         </tr>
@@ -157,14 +162,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a6d3a81ba2f9b682ac757b77d94232e6f"></a>
+<a class="anchor" id="a483945f165a627e834c24e3327dfbe14"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char* to_string_default </td>
+          <td class="memname">char* to_string_default </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structprintable.html">printable</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structprintable.html">printable</a> *&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
         </tr>

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.10"/>
-<title>Assignment 1.1: printable.h File Reference</title>
+<title>Data-Structures Assignments: lib/printable.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,7 +23,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Assignment 1.1
+   <div id="projectname">Data-Structures Assignments
    </div>
    <div id="projectbrief">My homework for the class in data-structures</div>
   </td>
@@ -80,20 +80,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_97aefd0d527b934f1d99a682da8fe6a9.html">lib</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">printable.h File Reference<div class="ingroups"><a class="el" href="group__assignment11.html">Support code for data-structures course</a></div></div>  </div>
+<div class="title">printable.h File Reference<div class="ingroups"><a class="el" href="group__libassignment.html">Support code for data-structures course</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>This file defines basic functions for working with printable arrays.  
 <a href="#details">More...</a></p>
-
+<div class="textblock"><code>#include &lt;gc.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+</div>
 <p><a href="printable_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -102,34 +109,55 @@ Data Structures</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This struct provides the backbone for anything that can go inside a printable array.  <a href="structprintable.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:aa651fc9b36c778872834b423e58b5fdf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable_8h.html#aa651fc9b36c778872834b423e58b5fdf">ALLOCATE</a>(X)&#160;&#160;&#160;malloc(X)</td></tr>
+<tr class="separator:aa651fc9b36c778872834b423e58b5fdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:a6c9e898e21545740dc46d3923dbafa51"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structprintable.html">printable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable_8h.html#a6c9e898e21545740dc46d3923dbafa51">printable</a></td></tr>
 <tr class="separator:a6c9e898e21545740dc46d3923dbafa51"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a38ddac39d81c275646dc0c1e0614bcaa"><td class="memItemLeft" align="right" valign="top">typedef const char *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable_8h.html#a38ddac39d81c275646dc0c1e0614bcaa">printer</a>) (const <a class="el" href="structprintable.html">printable</a> *p)</td></tr>
-<tr class="memdesc:a38ddac39d81c275646dc0c1e0614bcaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Anything <code>printable</code> must have an implementation of this function (it will be called by the code using <code>printable</code> to print it).  <a href="#a38ddac39d81c275646dc0c1e0614bcaa">More...</a><br /></td></tr>
-<tr class="separator:a38ddac39d81c275646dc0c1e0614bcaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8eea93577ac9f39111366c4b5fee186c"><td class="memItemLeft" align="right" valign="top">typedef char *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable_8h.html#a8eea93577ac9f39111366c4b5fee186c">printer</a>) (<a class="el" href="structprintable.html">printable</a> *p)</td></tr>
+<tr class="memdesc:a8eea93577ac9f39111366c4b5fee186c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Anything <code>printable</code> must have an implementation of this function (it will be called by the code using <code>printable</code> to print it).  <a href="#a8eea93577ac9f39111366c4b5fee186c">More...</a><br /></td></tr>
+<tr class="separator:a8eea93577ac9f39111366c4b5fee186c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a562d539650b6a5247baf17e56aaae58a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable_8h.html#a562d539650b6a5247baf17e56aaae58a">make_printable</a> (size_t size, void *data)</td></tr>
 <tr class="memdesc:a562d539650b6a5247baf17e56aaae58a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates new <code>printable</code> wrapping <code>data</code> and returns it.  <a href="#a562d539650b6a5247baf17e56aaae58a">More...</a><br /></td></tr>
 <tr class="separator:a562d539650b6a5247baf17e56aaae58a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d3a81ba2f9b682ac757b77d94232e6f"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable_8h.html#a6d3a81ba2f9b682ac757b77d94232e6f">to_string_default</a> (const <a class="el" href="structprintable.html">printable</a> *p)</td></tr>
-<tr class="memdesc:a6d3a81ba2f9b682ac757b77d94232e6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a string representing the default <code>printable</code>.  <a href="#a6d3a81ba2f9b682ac757b77d94232e6f">More...</a><br /></td></tr>
-<tr class="separator:a6d3a81ba2f9b682ac757b77d94232e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c51242d8de7329201335fcb0ea530c2"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable_8h.html#a6c51242d8de7329201335fcb0ea530c2">to_string</a> (const <a class="el" href="structprintable.html">printable</a> *p)</td></tr>
-<tr class="memdesc:a6c51242d8de7329201335fcb0ea530c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translates the <code>to_string</code> call to <code>p</code>.  <a href="#a6c51242d8de7329201335fcb0ea530c2">More...</a><br /></td></tr>
-<tr class="separator:a6c51242d8de7329201335fcb0ea530c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a483945f165a627e834c24e3327dfbe14"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable_8h.html#a483945f165a627e834c24e3327dfbe14">to_string_default</a> (<a class="el" href="structprintable.html">printable</a> *p)</td></tr>
+<tr class="memdesc:a483945f165a627e834c24e3327dfbe14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a string representing the default <code>printable</code>.  <a href="#a483945f165a627e834c24e3327dfbe14">More...</a><br /></td></tr>
+<tr class="separator:a483945f165a627e834c24e3327dfbe14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00442d787c7a58aa6e07ebe567936391"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable_8h.html#a00442d787c7a58aa6e07ebe567936391">to_string</a> (<a class="el" href="structprintable.html">printable</a> *p)</td></tr>
+<tr class="memdesc:a00442d787c7a58aa6e07ebe567936391"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translates the <code>to_string</code> call to <code>p</code>.  <a href="#a00442d787c7a58aa6e07ebe567936391">More...</a><br /></td></tr>
+<tr class="separator:a00442d787c7a58aa6e07ebe567936391"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file defines basic functions for working with printable arrays. </p>
 <p>This file contains declarations for basic data-structures needed to work with differently-typed arrays and being able to pretty-print them.</p>
 <dl class="section author"><dt>Author</dt><dd>Oleg Sivokon</dd></dl>
-<dl class="section date"><dt>Date</dt><dd></dd></dl>
-<dl class="section rcs"><dt>Date</dt><dd>2016/03/05 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2016/03/05</dd></dl>
 <p>Contact: <a href="#" onclick="location.href='mai'+'lto:'+'ole'+'gs'+'ivo'+'ko'+'n@g'+'ma'+'il.'+'co'+'m'; return false;">olegs<span style="display: none;">.nosp@m.</span>ivok<span style="display: none;">.nosp@m.</span>on@gm<span style="display: none;">.nosp@m.</span>ail.<span style="display: none;">.nosp@m.</span>com</a> </p>
-</div><h2 class="groupheader">Typedef Documentation</h2>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a class="anchor" id="aa651fc9b36c778872834b423e58b5fdf"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ALLOCATE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">X</td><td>)</td>
+          <td>&#160;&#160;&#160;malloc(X)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Typedef Documentation</h2>
 <a class="anchor" id="a6c9e898e21545740dc46d3923dbafa51"></a>
 <div class="memitem">
 <div class="memproto">
@@ -142,7 +170,7 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a38ddac39d81c275646dc0c1e0614bcaa"></a>
+<a class="anchor" id="a8eea93577ac9f39111366c4b5fee186c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -191,14 +219,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a6c51242d8de7329201335fcb0ea530c2"></a>
+<a class="anchor" id="a00442d787c7a58aa6e07ebe567936391"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char* to_string </td>
+          <td class="memname">char* to_string </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structprintable.html">printable</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structprintable.html">printable</a> *&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
         </tr>
@@ -215,14 +243,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a6d3a81ba2f9b682ac757b77d94232e6f"></a>
+<a class="anchor" id="a483945f165a627e834c24e3327dfbe14"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char* to_string_default </td>
+          <td class="memname">char* to_string_default </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structprintable.html">printable</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structprintable.html">printable</a> *&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
         </tr>

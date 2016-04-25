@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['elements',['elements',['../structarray.html#a10c5ec5bb118ff6793c5a57763f5fe47',1,'array']]]
+  ['allocated',['allocated',['../structarray__heap.html#a30a7a98742084bc29834fe93f4f93634',1,'array_heap']]]
 ];
