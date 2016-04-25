@@ -5,14 +5,51 @@
     git clone https://github.com/wvxvw/introduction-to-data-structures.git
   #+END_SRC
 
+  Or download Zip archive
+
+  #+BEGIN_SRC sh
+    curl -Lk https://github.com/wvxvw/introduction-to-data-structures/archive/master.zip \
+         -o /tmp/master.zip
+    unzip -d ./datastructures /tmp/master.zip
+  #+END_SRC
+
 * Compiling
   The exercises contain some C code.  To compile it, you would need to
   have a C compiler on your system (I used GCC 5.3.1).  The code inside should
-  be just the standard C99.  The project comes with a [[./assignment-11/Makefile][Makefile]].  You can use
+  be just the standard C99.  The project comes with a [[./Makefile][Makefile]].  You can use
   it to build the project by running:
 
   #+BEGIN_SRC sh
     make
+  #+END_SRC
+
+  Alternatively, you can use [[http://scons.org/][Scons]] to build this project.  Follow
+  installation instructions found here:
+  http://scons.org/doc/0.98.4/HTML/scons-user/x166.html.  Note that you
+  will also need Python installed on your system.  On most Linuxes
+  Scons is available through the package manager, so, all you need to do
+  to install it is:
+
+  #+BEGIN_SRC sh
+    apt-get install scons
+  #+END_SRC
+
+  or
+
+  #+BEGIN_SRC sh
+    dnf install scons
+  #+END_SRC
+
+  Or whatever other package manager you use.
+
+  MS Windows users, please follow instructions here:
+  http://scons.org/doc/HTML/scons-user.html#idp1399079060
+
+  To build the project using SCons, change into project's direcory
+  and run:
+
+  #+BEGIN_SRC sh
+    scons
   #+END_SRC
 
 * Documentation
@@ -26,5 +63,6 @@
   Once compiled, you should be able to run the code by:
 
   #+BEGIN_SRC sh
-    cd ./assignment-11 && ./assignment11
+    # Run fourth assignment
+    ./run-assignments 4
   #+END_SRC
