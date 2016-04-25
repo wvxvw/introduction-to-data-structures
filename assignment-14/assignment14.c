@@ -10,28 +10,19 @@
 #include "strings.h"
 
 size_t bogus_quicksort(array unsorted, size_t order) {
-    printf("1\n");
     printable* elt =  nth_order_statistic(unsorted, order, compare_ints);
-    printf("2\n");
     size_t position = index_of(unsorted, elt);
-    printf("3\n");
     size_t wall = partition_at(unsorted, position, compare_ints);
-    printf("4\n");
     array left;
     array right;
     size_t ldepth = 0, rdepth = 0;
 
-    printf("input: %s\n", to_string((printable*)unsorted));
-    printf("bogus_quicksort: %d, wall: %d, position: %d, elt: %s\n",
-           (int)unsorted->length, (int)wall, (int)position, to_string(elt));
     if (wall > 1) {
         left = slice(unsorted, 0, wall);
-        printf("left: %d\n", (int)left->length);
         ldepth = bogus_quicksort(left, order);
     }
     if (wall < unsorted->length - 2) {
         right = slice(unsorted, wall, unsorted->length - 1);
-        printf("right: %d\n", (int)right->length);
         rdepth = bogus_quicksort(right, order);
     }
     return 1 + (ldepth > rdepth ? ldepth : rdepth);

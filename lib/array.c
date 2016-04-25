@@ -284,25 +284,16 @@ size_t partition(array partitioned, comparison_fn_t cmp) {
     printable* pivot = partitioned->elements[0];
     size_t i, wall = 1;
 
-    if (partitioned->length < 3) {
-        printf("2 searched: %s\n", to_string((printable*)partitioned));
-    }
     for (i = 2; i < partitioned->length; i++) {
         if (cmp(&partitioned->elements[i], &pivot) < 0) {
             swap(partitioned, i, wall);
             wall++;
-            if (partitioned->length < 3) {
-                printf("3 searched: %s\n", to_string((printable*)partitioned));
-            }
         }
     }
     return wall;
 }
 
 size_t partition_at(array searched, size_t position, comparison_fn_t cmp) {
-    if (searched->length < 3) {
-        printf("1 searched: %s\n", to_string((printable*)searched));
-    }
     swap(searched, 0, position);
     return partition(searched, cmp);
 }
@@ -315,13 +306,11 @@ size_t index_of(array searched, printable* elt) {
 }
 
 printable* nth_order_statistic(array searched, size_t order, comparison_fn_t cmp) {
-    printf("nth_order_statistic: %d / %d\n", (int)searched->length, (int)order);
+    printable* result = NULL;
     time_t t;
     size_t position, wall;
     size_t part = searched->length * order / 100;
 
-    printf("nth_order_statistic: %d\n", (int)part);
-    
     srand((unsigned)time(&t));
     while (part > 0) {
         position = rand() % searched->length;
@@ -334,7 +323,15 @@ printable* nth_order_statistic(array searched, size_t order, comparison_fn_t cmp
             searched = slice(searched, 0, wall);
         }
     }
-    return searched->elements[part];
+    /*
+     * This may happen when we asked for 100% or more of the array elements,
+     * in which case, we will just return the maximum.
+     */
+    if (searched->length > 0)
+        result = (part >= searched->length) ?
+                 searched->elements[searched->length - 1]:
+                 searched->elements[part];
+    return result;
 }
 
 pair three_way_partition(array partitioned, comparison_fn_t cmp) {
