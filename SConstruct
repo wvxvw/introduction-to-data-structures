@@ -3,13 +3,26 @@
 from glob import glob
 from sys import stdout
 from os import path
+from subprocess import call
+
+generate_documentation = False
 
 SharedLibrary('./lib/assignments', glob('./lib/*.c'))
 env = Environment(tools = ["default", "doxygen"],
                   CPPPATH = './lib',
                   LIBPATH = './lib')
 
-conf = Configure(env)
+def CheckDoxygen(context):
+    context.Message('Checking for Doxygen... ')
+    result = 1
+    try:
+        call(['doxygen', '--version'])
+    except:
+        result = 0
+    context.Result(result)
+    return result
+
+conf = Configure(env, custom_tests = {'CheckDoxygen' : CheckDoxygen})
 if not conf.CheckLibWithHeader('m', 'math.h', 'c'):
     print '''
     Did not find libm.a or m.lib, exiting!
@@ -46,10 +59,24 @@ else:
     Look here: <http://hboehm.info/gc/> for instructions
     on how to download a version compatible with your compiler.
     '''
+if conf.CheckDoxygen():
+    print 'Will generate documentation'
+    generate_documentation = False
+else:
+    print '''
+    This project can generate documentation, but Doxygen,
+    the program needed to do so cannot be found.  If you
+    want documentation generated, install this program
+    following the instructions here: 
+    <https://www.stack.nl/~dimitri/doxygen/manual/install.html>
+    and re-run the build.
+    '''
+
 env = conf.Finish()
 env.Append(LIBS = 'assignments')
 
 for assignment in glob('./assignment*/'):
     env.Program(glob(path.join(assignment, '*.c')))
 
-env.Doxygen("Doxyfile")
+if generate_documentation:
+    env.Doxygen('Doxyfile')
