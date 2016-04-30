@@ -27,6 +27,7 @@
  *  
  *  \return Concatenated string ending in zero character.
  */
+ASSIGNMENTLIB_API 
 char* join(char** chunks, size_t len, char* separator);
 
 #endif // STRINGS_H_

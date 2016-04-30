@@ -31,8 +31,10 @@ typedef struct pair {
 
 typedef printable_pair* pair;
 
+ASSIGNMENTLIB_API 
 pair make_pair();
 
+ASSIGNMENTLIB_API 
 const char* to_string_pair(const pair p);
 
 #endif // PAIR_H_

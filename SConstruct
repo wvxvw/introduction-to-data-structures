@@ -7,10 +7,24 @@ from subprocess import call
 
 generate_documentation = False
 
-SharedLibrary('./lib/assignments', glob('./lib/*.c'))
+dll = SharedLibrary('./lib/assignments', glob('./lib/*.c'))
 env = Environment(tools = ["default", "doxygen"],
                   CPPPATH = './lib',
                   LIBPATH = './lib')
+
+# barincs = ['bar.h'],
+# barlocalincs = ['StdAfx.h']
+# barresources = ['bar.rc','resource.h']
+# barmisc = ['bar_readme.txt']
+
+env.MSVSProject(target = 'assignment14' + env['MSVSPROJECTSUFFIX'],
+                srcs = glob('./lib/*.c'),
+                # incs = barincs,
+                # localincs = barlocalincs,
+                # resources = barresources,
+                # misc = barmisc,
+                buildtarget = dll,
+                variant = 'Release')
 
 def CheckDoxygen(context):
     context.Message('Checking for Doxygen... ')
@@ -45,7 +59,7 @@ if not conf.CheckLibWithHeader('m', 'math.h', 'c'):
     your include path properly.  See this answer for how to locate it:
     <http://stackoverflow.com/a/24186973/5691066>
     '''
-    Exit(1)
+    # Exit(1)
 if conf.CheckLibWithHeader('gc', 'gc.h', 'c'):
     print 'Found garbage collector, compiling with gc enabled.'
     env.Append(CFLAGS = '-DWITH_GC')

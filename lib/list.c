@@ -46,8 +46,8 @@ char* to_string_list(list p) {
     size_t i = 0;
     size_t total = 0;
     size_t copied = 0;
-    char* parts[len * 2];
-    size_t lengths[len * 2];
+    char** parts = malloc(len * 2);
+    size_t* lengths = malloc(len * 2);
     char* result;
 
     while (it != NULL) {
@@ -70,5 +70,7 @@ char* to_string_list(list p) {
     }
     result[copied - 2] = ')';
     result[copied - 1] = '\0';
+    free(parts);
+    free(lengths);
     return result;
 }

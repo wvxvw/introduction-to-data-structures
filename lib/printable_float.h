@@ -26,10 +26,13 @@ typedef struct printable_float {
     float* val;
 } printable_float;
 
+ASSIGNMENTLIB_API 
 int compare_floats(const void* a, const void* b);
 
+ASSIGNMENTLIB_API 
 const char* to_string_float(const printable_float* p);
 
+ASSIGNMENTLIB_API 
 printable_float* make_printable_float(const float val);
 
 /** \brief Generate \c printable_int from given value.
@@ -38,6 +41,7 @@ printable_float* make_printable_float(const float val);
  *
  *  \return A \c printable_int wrapping the original value.
  */
+ASSIGNMENTLIB_API 
 printable* float_element_generator(void* elt);
 
 #endif // PRINTABLE_FLOAT_H_

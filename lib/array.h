@@ -72,20 +72,24 @@ typedef enum { BACK, FORWARD } search_direction;
 /** \brief Sorts the \c array in-place using \c cmp function and
  *         returns it.
  */
+ASSIGNMENTLIB_API
 array sorted(array unsorted, comparison_fn_t cmp);
 
 /** \brief Shuffles the \c array in-place and returns it.
  */
+ASSIGNMENTLIB_API
 array shuffled(array sorted);
 
 /** \brief Creates new \c array using \c data elements as input and
  *         returns it.
  */
+ASSIGNMENTLIB_API
 array make_array(const size_t size, printable** data);
 
 /** \brief Creates an array that shares data with \c input, but
  *         starts from \c from and up to \c to.
  */
+ASSIGNMENTLIB_API
 array slice(const array input, const size_t from, const size_t to);
 
 /** \brief Performs binary search on \c input for \c elt.
@@ -96,6 +100,7 @@ array slice(const array input, const size_t from, const size_t to);
  * array's length.  Note that the array is assumed to be sorted, however
  * duplicate items are OK.
  */
+ASSIGNMENTLIB_API
 size_t binsearch(const array input, const printable* elt, comparison_fn_t cmp);
 
 /** \brief Generate dense sorted \c array with element values starting
@@ -107,6 +112,7 @@ size_t binsearch(const array input, const printable* elt, comparison_fn_t cmp);
  *
  *  \return An \c array (the callers are responsible to deallocate it).
  */
+ASSIGNMENTLIB_API
 array make_dense_sorted_array(const size_t size,
                                const size_t from,
                                element_generator generator);
@@ -123,6 +129,7 @@ array make_dense_sorted_array(const size_t size,
  *
  *  \return An \c array (the callers are responsible to deallocate it).
  */
+ASSIGNMENTLIB_API
 array make_sparse_sorted_array(const size_t size,
                                 const size_t from,
                                 const size_t deviation,
@@ -139,6 +146,7 @@ array make_sparse_sorted_array(const size_t size,
  *
  *  \return An \c array (the callers are responsible to deallocate it).
  */
+ASSIGNMENTLIB_API
 array make_random_unique_array(const size_t size,
                                 const size_t from,
                                 element_generator generator);
@@ -154,6 +162,7 @@ array make_random_unique_array(const size_t size,
  *
  *  \return An \c array (the callers are responsible to deallocate it).
  */
+ASSIGNMENTLIB_API
 array make_random_array(const size_t size,
                          const size_t low,
                          const size_t high,
@@ -170,6 +179,7 @@ array make_random_array(const size_t size,
  *
  *  \return An \c array (the callers are responsible to deallocate it).
  */
+ASSIGNMENTLIB_API
 array make_random_sorted_array(const size_t size,
                                 const size_t low,
                                 const size_t high,
@@ -185,6 +195,7 @@ array make_random_sorted_array(const size_t size,
  *
  *  \return An \c array (the callers are responsible to deallocate it).
  */
+ASSIGNMENTLIB_API
 array make_array_from_pointer(const int* data,
                                const size_t size,
                                element_generator generator);
@@ -199,6 +210,7 @@ array make_array_from_pointer(const int* data,
  *
  *  \return An \c array (the callers are responsible to deallocate it).
  */
+ASSIGNMENTLIB_API
 array make_increasing_decreasing_array(const size_t half_size,
                                         element_generator generator);
 
@@ -213,6 +225,7 @@ array make_increasing_decreasing_array(const size_t half_size,
  *
  *  \return An \c array (the callers are responsible to deallocate it).
  */
+ASSIGNMENTLIB_API 
 array make_vedge_array(const size_t half_size,
                         element_generator generator);
 
@@ -223,20 +236,24 @@ array make_vedge_array(const size_t half_size,
  *
  *  \return An \c array (no new allocations are made).
  */
+ASSIGNMENTLIB_API 
 array insertion_sort(array unsorted, comparison_fn_t cmp);
 
 /** \brief Restets the swap operation counter
  */
+ASSIGNMENTLIB_API 
 void start_swap_count();
 
 /** \brief Returns the number of \c swap operations performed since
  *         swap conter was last reset.
  */
+ASSIGNMENTLIB_API 
 long get_swap_count();
 
 /** \brief Generates a string representing the given \c array.
  *  \param p The \c array to print.
  */
+ASSIGNMENTLIB_API 
 char* to_string_array(array p);
 
 typedef struct iterator_impl iterator_impl;
@@ -271,12 +288,14 @@ typedef struct iterator_impl {
  *
  *  \param impl The iterator aced on.
  */
+ASSIGNMENTLIB_API 
 bool next(iterator_impl* impl);
 
 /** \brief The concrete iterator implementation.
  *
  *  \param iterated The array to create an iterator for.
  */
+ASSIGNMENTLIB_API 
 iterator_impl* iterator(array iterated);
 
 /** \brief Given ordering function \c cmp, arrange the \c paritioned
@@ -289,6 +308,7 @@ iterator_impl* iterator(array iterated);
  *             -1, 0 and 1 meaning that two of its arguments are <, =
  *             or > correspondingly.
  */
+ASSIGNMENTLIB_API 
 size_t partition(array partitioned, comparison_fn_t cmp);
 
 /** \brief A more sophisticated \c partition() function.  Will chose
@@ -303,6 +323,7 @@ size_t partition(array partitioned, comparison_fn_t cmp);
  *  \return Pair of elements, first is the left wall second is the right
  *          wall.
  */
+ASSIGNMENTLIB_API 
 pair three_way_partition(array partitioned, comparison_fn_t cmp);
 
 /** \brief Quicksort implementation using \c three_way_partition.
@@ -316,6 +337,7 @@ pair three_way_partition(array partitioned, comparison_fn_t cmp);
  *               sorted array, thus, you need to set this parameter
  *               to zero.
  */
+ASSIGNMENTLIB_API 
 void three_way_quicksort(array unsorted, comparison_fn_t cmp, size_t error);
 
 /** \brief Same as \c partition, except will use the element at \c position
@@ -327,6 +349,7 @@ void three_way_quicksort(array unsorted, comparison_fn_t cmp, size_t error);
  *
  *  \return The number of elements less than the element at \c position.
  */
+ASSIGNMENTLIB_API 
 size_t partition_at(array searched, size_t position, comparison_fn_t cmp);
 
 /** \brief Given \c order percentile, find the element in \c searched s.t.
@@ -340,6 +363,7 @@ size_t partition_at(array searched, size_t position, comparison_fn_t cmp);
  *  \return The element s.t. there are at most \c order % of elements of
  *          \c searched smaller than it.
  */
+ASSIGNMENTLIB_API 
 printable* nth_order_statistic(array searched, size_t order, comparison_fn_t cmp);
 
 /** \brief Returns the position of the \c elt in the \c searched.
@@ -350,6 +374,7 @@ printable* nth_order_statistic(array searched, size_t order, comparison_fn_t cmp
  *  \return The position of the searched element (or \c searched->length)
  *          if the element wasn't found.
  */
+ASSIGNMENTLIB_API 
 size_t index_of(array searched, printable* elt);
 
 #endif // ARRAY_H_

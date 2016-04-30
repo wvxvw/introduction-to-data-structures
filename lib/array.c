@@ -9,8 +9,8 @@
 #include "pair.h"
 
 char* to_string_array(array p) {
-    char* parts[p->length * 2];
-    int lenghts[p->length * 2];
+    char** parts = malloc(p->length * 2);
+    int* lenghts = malloc(p->length * 2);
     char* result;
     size_t i, copied, total = 0;
 
@@ -33,6 +33,8 @@ char* to_string_array(array p) {
     }
     result[copied] = ']';
     result[copied + 1] = '\0';
+    free(parts);
+    free(lenghts);
     return result;
 }
 

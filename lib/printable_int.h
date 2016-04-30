@@ -31,6 +31,7 @@
  *  \return 0 if the value of a is the same as the value of b.
  *          1 if a is smaller than b and -1 otherwise.
  */
+ASSIGNMENTLIB_API 
 int compare_ints(const void* a, const void* b);
 
 /** \struct printable_int
@@ -51,6 +52,7 @@ typedef struct printable_int {
  *
  *  \return A string (the callers are responsible to deallocate it).
  */
+ASSIGNMENTLIB_API 
 const char* to_string_int(const printable_int* p);
 
 /** \brief Generate \c printable_int from given value.
@@ -59,13 +61,16 @@ const char* to_string_int(const printable_int* p);
  *
  *  \return A \c printable_int wrapping the original value.
  */
+ASSIGNMENTLIB_API 
 printable* int_element_generator(void* elt);
 
-
+ASSIGNMENTLIB_API 
 void start_int_cmp_count();
 
+ASSIGNMENTLIB_API 
 size_t get_int_cmp_count();
 
+ASSIGNMENTLIB_API 
 int compare_ints_reverse(const void* a, const void* b);
 
 #endif // PRINTABLE_INT_H_

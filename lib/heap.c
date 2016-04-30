@@ -126,7 +126,7 @@ aheap aheapify(printable** raw, size_t size, comparison_fn_t cmp) {
     aheap result = ALLOCATE(sizeof(array_heap));
     size_t i;
 
-    result->allocated = pow(2.0d, 1.0d + (double)(size_t)log2((double)size));
+    result->allocated = pow(2.0, 1.0 + (double)(size_t)log2((double)size));
     result->elements = ALLOCATE(sizeof(printable*) * result->allocated);
     result->size = size;
     result->cmp = cmp;
@@ -162,12 +162,12 @@ printable* aput(aheap heap, printable* val) {
 char* to_string_aheap(aheap heap) {
     size_t i = heap->allocated;
     size_t tier = 0;
-    char* levels[(size_t)log2((double)i) + 1];
+    char** levels = malloc((size_t)log2((double)i) + 1);
 
     while (i > 1) {
         size_t j = i >> 1;
         size_t k = j;
-        char* level[j];
+        char** level = malloc(j);
 
         while (k < i) {
             if (k < heap->size) {
@@ -181,6 +181,9 @@ char* to_string_aheap(aheap heap) {
         levels[tier] = join(level, j, " ");
         tier++;
         i = j;
+	free(level);
     }
-    return join(levels, tier, "\n");
+    char* result = join(levels, tier, "\n");
+    free(levels);
+    return result;
 }

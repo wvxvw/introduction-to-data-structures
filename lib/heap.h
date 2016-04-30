@@ -55,14 +55,19 @@ typedef list_heap* lheap;
 
 typedef lheap_cell* lcell;
 
+ASSIGNMENTLIB_API 
 lheap lheapify(printable** raw, size_t size, comparison_fn_t cmp);
 
+ASSIGNMENTLIB_API 
 printable* lpeak(lheap heap);
 
+ASSIGNMENTLIB_API 
 printable* lpop(lheap heap);
 
+ASSIGNMENTLIB_API 
 printable* lput(lheap heap, printable* val);
 
+ASSIGNMENTLIB_API 
 char* to_string_lheap(lheap heap);
 
 typedef struct array_heap {
@@ -81,14 +86,19 @@ typedef struct array_heap {
 
 typedef array_heap* aheap;
 
+ASSIGNMENTLIB_API 
 aheap aheapify(printable** raw, size_t size, comparison_fn_t cmp);
 
+ASSIGNMENTLIB_API 
 printable* apeak(aheap heap);
 
+ASSIGNMENTLIB_API 
 printable* apop(aheap heap);
 
+ASSIGNMENTLIB_API 
 printable* aput(aheap heap, printable* val);
 
+ASSIGNMENTLIB_API 
 char* to_string_aheap(aheap heap);
 
 #endif // HEAP_H_

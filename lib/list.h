@@ -36,14 +36,19 @@ typedef struct cell {
 
 typedef cell* list;
 
+ASSIGNMENTLIB_API 
 list cons(printable* car, list cdr);
 
+ASSIGNMENTLIB_API 
 list reverse(list input);
 
+ASSIGNMENTLIB_API 
 size_t length(list input);
 
+ASSIGNMENTLIB_API 
 list make_list(printable** elements, size_t size);
 
+ASSIGNMENTLIB_API 
 char* to_string_list(list p);
 
 #endif // LIST_H_

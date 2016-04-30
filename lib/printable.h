@@ -31,6 +31,12 @@
 #define ALLOCATE(X) malloc(X)
 #endif
 
+#ifdef ASSIGNMENTLIB_EXPORTS
+#define ASSIGNMENTLIB_API __declspec(dllexport)
+#else
+#define ASSIGNMENTLIB_API __declspec(dllimport)
+#endif
+
 /** \struct printable
  *  \brief This struct provides the backbone for anything that can
  *         go inside a printable array.
@@ -64,16 +70,16 @@ typedef struct printable {
 
 /** \brief Creates new \c printable wrapping \c data and returns it.
  */
-printable* make_printable(size_t size, void* data);
+ASSIGNMENTLIB_API printable* make_printable(size_t size, void* data);
 
 /** \brief Generates a string representing the default \c printable.
  *  \param p The \c printable to print.
  */
-char* to_string_default(printable* p);
+ASSIGNMENTLIB_API char* to_string_default(printable* p);
 
 /** \brief Translates the \c to_string call to \c p
  *  \param p The \c printable to print.
  */
-char* to_string(printable* p);
+ASSIGNMENTLIB_API char* to_string(printable* p);
 
 #endif // PRINTABLE_H_
