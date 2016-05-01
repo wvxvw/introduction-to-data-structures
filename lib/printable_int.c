@@ -32,7 +32,7 @@ int compare_ints_reverse(const void* a, const void* b) {
     return -compare_ints(a, b);
 }
 
-const char* to_string_int(const printable_int* p) {
+char* to_string_int(const printable_int* p) {
     char* buffer = ALLOCATE(9 * sizeof(char));
     printable* base = (printable*)p;
     

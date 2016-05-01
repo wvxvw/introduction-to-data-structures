@@ -7,34 +7,21 @@
 #include "printable_int.h"
 #include "array.h"
 #include "pair.h"
+#include "strings.h"
 
 char* to_string_array(array p) {
-    char** parts = malloc(p->length * 2);
-    int* lenghts = malloc(p->length * 2);
-    char* result;
-    size_t i, copied, total = 0;
+    char** parts = malloc(sizeof(char*) * p->length);
+    char* contents, *result;
+    size_t i;
 
     for (i = 0; i < p->length; i++) {
         printable* elt = p->elements[i];
-        char* chunk = (char*)to_string(elt);
-        parts[i * 2] = chunk;
-        parts[i * 2 + 1] = ", ";
-        lenghts[i * 2] = strlen(chunk);
-        lenghts[i * 2 + 1] = 2;
-        total += lenghts[i * 2] + 2;
+        parts[i] = (char*)to_string(elt);
     }
-    result = ALLOCATE(total * sizeof(char) + 1);
-    result[0] = '[';
-    copied = 1;
-    
-    for (i = 0; i < p->length * 2 - 1; i++) {
-        strcpy(result + copied, parts[i]);
-        copied += lenghts[i];
-    }
-    result[copied] = ']';
-    result[copied + 1] = '\0';
+	contents = join(parts, p->length, ", ");
+	result = ALLOCATE(sizeof(char) * (strlen(contents) + 3));
+	sprintf(result, "[%s]", contents);
     free(parts);
-    free(lenghts);
     return result;
 }
 

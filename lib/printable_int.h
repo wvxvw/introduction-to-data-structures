@@ -53,7 +53,7 @@ typedef struct printable_int {
  *  \return A string (the callers are responsible to deallocate it).
  */
 ASSIGNMENTLIB_API 
-const char* to_string_int(const printable_int* p);
+char* to_string_int(const printable_int* p);
 
 /** \brief Generate \c printable_int from given value.
  *
