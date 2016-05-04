@@ -12,17 +12,9 @@ env = Environment(tools = ["default", "doxygen"],
                   CPPPATH = './lib',
                   LIBPATH = './lib')
 
-# barincs = ['bar.h'],
-# barlocalincs = ['StdAfx.h']
-# barresources = ['bar.rc','resource.h']
-# barmisc = ['bar_readme.txt']
-
-env.MSVSProject(target = 'assignment14' + env['MSVSPROJECTSUFFIX'],
+if env['PLATFORM'] != 'posix':
+    env.MSVSProject(target = 'assignment14' + env['MSVSPROJECTSUFFIX'],
                 srcs = glob('./lib/*.c'),
-                # incs = barincs,
-                # localincs = barlocalincs,
-                # resources = barresources,
-                # misc = barmisc,
                 buildtarget = dll,
                 variant = 'Release')
 
@@ -59,7 +51,7 @@ if not conf.CheckLibWithHeader('m', 'math.h', 'c'):
     your include path properly.  See this answer for how to locate it:
     <http://stackoverflow.com/a/24186973/5691066>
     '''
-    # Exit(1)
+    Exit(1)
 if conf.CheckLibWithHeader('gc', 'gc.h', 'c'):
     print 'Found garbage collector, compiling with gc enabled.'
     env.Append(CFLAGS = '-DWITH_GC')

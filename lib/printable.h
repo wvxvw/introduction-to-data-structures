@@ -31,10 +31,14 @@
 #define ALLOCATE(X) malloc(X)
 #endif
 
+#ifdef _WIN32
 #ifdef ASSIGNMENTLIB_EXPORTS
 #define ASSIGNMENTLIB_API __declspec(dllexport)
 #else
 #define ASSIGNMENTLIB_API __declspec(dllimport)
+#endif
+#else
+#define ASSIGNMENTLIB_API
 #endif
 
 /** \struct printable
