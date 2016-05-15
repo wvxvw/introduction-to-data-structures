@@ -413,14 +413,25 @@ int compare_bucket_floats(const void* a, const void* b) {
     return compare_floats(&pa->first, &pb->first);
 }
 
-void bucket_sort(array unsorted, to_rat_fn f) {
+printable* array_max(array in, comparison_fn_t cmp) {
+    if (in->length == 0) return NULL;
+    size_t i;
+    printable* result = in->elements[0];
+    for (i = 1; i < in->length; i++)
+        if (cmp(&in->elements[i], &result) > 0)
+            result = in->elements[i];
+    return result;
+}
+
+void bucket_sort(array unsorted, to_rat_fn f, comparison_fn_t cmp) {
     size_t i, j, len = unsorted->length;
     array buckets = make_empy_array(len);
+    printable* m = array_max(unsorted, cmp);
     for (i = 0; i < len; i++) unsorted->elements[i] = NULL;
     for (i = 0; i < len; i++) {
-        pair p = f(unsorted->elements[i], len);
-        buckets->elements[i] = (printable*)cons(
-            (printable*)p->last, (list)buckets->elements[i]);
+        j = f(unsorted->elements[i], m, len);
+        buckets->elements[j] = (printable*)cons(
+            unsorted->elements[i], (list)buckets->elements[j]);
     }
     j = 0;
     for (i = 0; i < len; i++) {

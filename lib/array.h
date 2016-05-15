@@ -377,7 +377,9 @@ printable* nth_order_statistic(array searched, size_t order, comparison_fn_t cmp
 ASSIGNMENTLIB_API 
 size_t index_of(array searched, printable* elt);
 
-typedef pair to_rat_fn(printable* elt, size_t range);
+typedef size_t to_rat_fn(printable* elt, printable* max, size_t range);
 
+ASSIGNMENTLIB_API 
+void bucket_sort(array unsorted, to_rat_fn f, comparison_fn_t cmp);
 
 #endif // ARRAY_H_

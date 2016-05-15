@@ -57,6 +57,13 @@ void test_merge_sort() {
     printf("sorted: %s\n", to_string((printable*)test));
 }
 
+void test_bucket_sort() {
+    array test = make_random_array(13, 3, 97, int_element_generator);
+    printf("unsorted: %s\n", to_string((printable*)test));
+    bucket_sort(test, int_element_normalizer, compare_ints);
+    printf("sorted: %s\n", to_string((printable*)test));
+}
+
 int main() {
 #ifdef WITH_GC
   GC_INIT();
@@ -64,5 +71,6 @@ int main() {
     test_queue();
     test_append();
     test_merge_sort();
+    test_bucket_sort();
     return 0;
 }

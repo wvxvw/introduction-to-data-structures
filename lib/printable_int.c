@@ -36,11 +36,8 @@ char* to_string_int(const printable_int* p) {
     char* buffer = ALLOCATE(9 * sizeof(char));
     printable* base = (printable*)p;
     
-    if (base->val == NULL) {
-        sprintf(buffer, "%p", base->val);
-    } else {
-        sprintf(buffer, "%d", *(int*)base->val);
-    }
+    if (base->val == NULL) sprintf(buffer, "%p", base->val);
+    else sprintf(buffer, "%d", *(int*)base->val);
     return buffer;
 }
 
@@ -57,4 +54,10 @@ printable_int* make_printable_int(const int val) {
 
 printable* int_element_generator(void* elt) {
     return (printable*)make_printable_int(*(int*)elt);
+}
+
+size_t int_element_normalizer(printable* elt, printable* max, size_t range) {
+    int e = *(int*)elt->val;
+    int m = *(int*)max->val;
+    return (size_t)(range * e / m);
 }
