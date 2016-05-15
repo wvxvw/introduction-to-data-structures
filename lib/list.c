@@ -56,6 +56,11 @@ list append(list a, list b) {
 
 list merge(list odds, list evens, comparison_fn_t cmp) {
     list result = NULL;
+    odds = merge_sort(odds, cmp);
+    evens = merge_sort(evens, cmp);
+    printf("merging\n");
+    printf("odds: %s\n", to_string((printable*)odds));
+    printf("evens: %s\n", to_string((printable*)evens));
     while (true) {
         if (odds == NULL) return append(reverse(result), evens);
         if (evens == NULL) return append(reverse(result), odds);
@@ -66,17 +71,22 @@ list merge(list odds, list evens, comparison_fn_t cmp) {
             result = cons(evens->car, result);
             evens = evens->cdr;
         }
-        return NULL;
     }
+    return NULL;
 }
 
 list merge_sort(list in, comparison_fn_t cmp) {
+    if (in == NULL) return NULL;
+    if (in->cdr == NULL) return in;
+    
     list odds = NULL, evens = NULL, it = in;
     size_t i = 0;
     
     while (it != NULL) {
-        if (i & 1 == 1) odds = cons(it->car, odds);
+        if ((i & 1) == 1) odds = cons(it->car, odds);
         else evens = cons(it->car, evens);
+        it = it->cdr;
+        i++;
     }
     return merge(reverse(odds), reverse(evens), cmp);
 }

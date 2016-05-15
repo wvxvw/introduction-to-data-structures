@@ -16,4 +16,7 @@ char* to_string_default(printable* p) {
     return buffer;
 }
 
-char* to_string(printable* p) { return p->to_string(p); }
+char* to_string(printable* p) {
+    if (p == NULL) return "NULL";
+    return p->to_string(p);
+}
