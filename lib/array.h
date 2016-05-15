@@ -377,4 +377,7 @@ printable* nth_order_statistic(array searched, size_t order, comparison_fn_t cmp
 ASSIGNMENTLIB_API 
 size_t index_of(array searched, printable* elt);
 
+typedef pair to_rat_fn(printable* elt, size_t range);
+
+
 #endif // ARRAY_H_

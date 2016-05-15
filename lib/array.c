@@ -5,8 +5,10 @@
 
 #include "printable.h"
 #include "printable_int.h"
+#include "printable_float.h"
 #include "array.h"
 #include "pair.h"
+#include "list.h"
 #include "strings.h"
 
 char* to_string_array(array p) {
@@ -25,13 +27,17 @@ char* to_string_array(array p) {
     return result;
 }
 
-array make_array(size_t size, printable** data) {
+array make_empy_array(size_t size) {
     array result = ALLOCATE(sizeof(printable_array));
-    size_t i = 0;
     result->length = size;
     result->elements = ALLOCATE(size * sizeof(printable*));
     result->printable.to_string = (printer)to_string_array;
-    
+    return result;
+}
+
+array make_array(size_t size, printable** data) {
+    array result = make_empy_array(size);
+    size_t i = 0;
     while (i < size) {
         result->elements[i] = data[i];
         i++;
@@ -385,8 +391,7 @@ void three_way_quicksort(array unsorted, comparison_fn_t cmp, size_t error) {
     switch (unsorted->length) {
         case 1: break;
         case 2:
-            if (cmp(&unsorted->elements[0],
-                    &unsorted->elements[1]) > 0)
+            if (cmp(&unsorted->elements[0], &unsorted->elements[1]) > 0)
                 swap(unsorted, 0, 1);
             break;
         default: {
@@ -399,6 +404,32 @@ void three_way_quicksort(array unsorted, comparison_fn_t cmp, size_t error) {
                 three_way_quicksort(slice(unsorted, (size_t)low, (size_t)high), cmp, error);
             if (high + 1 < unsorted->length)
                 three_way_quicksort(slice(unsorted, (size_t)high, unsorted->length), cmp, error);
+        }
+    }
+}
+int compare_bucket_floats(const void* a, const void* b) {
+    const pair pa = *(pair const *)a;
+    const pair pb = *(pair const *)b;
+    return compare_floats(&pa->first, &pb->first);
+}
+
+void bucket_sort(array unsorted, to_rat_fn f) {
+    size_t i, j, len = unsorted->length;
+    array buckets = make_empy_array(len);
+    for (i = 0; i < len; i++) unsorted->elements[i] = NULL;
+    for (i = 0; i < len; i++) {
+        pair p = f(unsorted->elements[i], len);
+        buckets->elements[i] = (printable*)cons(
+            (printable*)p->last, (list)buckets->elements[i]);
+    }
+    j = 0;
+    for (i = 0; i < len; i++) {
+        list bucket = (list)buckets->elements[i];
+        bucket = merge_sort(bucket, compare_bucket_floats);
+        while (bucket != NULL) {
+            unsorted->elements[j] = bucket->car;
+            j++;
+            bucket = bucket->cdr;
         }
     }
 }

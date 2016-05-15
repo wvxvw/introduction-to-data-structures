@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "list.h"
+#include "strings.h"
 
 list cons(printable* car, list cdr) {
     list result = ALLOCATE(sizeof(cell));
@@ -40,37 +41,61 @@ size_t length(list input) {
     return i;
 }
 
+list append(list a, list b) {
+    list result = NULL;
+    while (a != NULL) {
+        result = cons(a->car, result);
+        a = a->cdr;
+    }
+    while (b != NULL) {
+        result = cons(b->car, result);
+        b = b->cdr;
+    }
+    return reverse(result);
+}
+
+list merge(list odds, list evens, comparison_fn_t cmp) {
+    list result = NULL;
+    while (true) {
+        if (odds == NULL) return append(reverse(result), evens);
+        if (evens == NULL) return append(reverse(result), odds);
+        if (cmp(&odds->car, &evens->car) <= 0) {
+            result = cons(odds->car, result);
+            odds = odds->cdr;
+        } else {
+            result = cons(evens->car, result);
+            evens = evens->cdr;
+        }
+        return NULL;
+    }
+}
+
+list merge_sort(list in, comparison_fn_t cmp) {
+    list odds = NULL, evens = NULL, it = in;
+    size_t i = 0;
+    
+    while (it != NULL) {
+        if (i & 1 == 1) odds = cons(it->car, odds);
+        else evens = cons(it->car, evens);
+    }
+    return merge(reverse(odds), reverse(evens), cmp);
+}
+
 char* to_string_list(list p) {
     list it = p;
-    size_t len = length(p);
-    size_t i = 0;
-    size_t total = 0;
-    size_t copied = 0;
-    char** parts = malloc(len * 2);
-    size_t* lengths = malloc(len * 2);
-    char* result;
+    size_t i = 0, len = length(p);
+    char** parts = malloc(len * sizeof(char*));
+    char* contents, *result;
 
     while (it != NULL) {
         char* chunk = (char*)to_string(it->car);
-        parts[i * 2] = chunk;
-        parts[i * 2 + 1] = ", ";
-        lengths[i * 2] = strlen(chunk);
-        lengths[i * 2 + 1] = 2;
-        total += lengths[i * 2] + 2;
+        parts[i] = chunk;
         it = it->cdr;
         i++;
     }
-    result = ALLOCATE(total * sizeof(char) + 1);
-    result[0] = '(';
-    copied = 1;
-
-    for (i = 0; i < len * 2; i++) {
-        strcpy(result + copied, parts[i]);
-        copied += lengths[i];
-    }
-    result[copied - 2] = ')';
-    result[copied - 1] = '\0';
+    contents = join(parts, len, ", ");
+	result = ALLOCATE(sizeof(char) * (strlen(contents) + 3));
+	sprintf(result, "(%s)", contents);
     free(parts);
-    free(lengths);
     return result;
 }

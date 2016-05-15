@@ -1,6 +1,7 @@
 #include "strings.h"
 
 char* join(char** chunks, size_t len, char* separator) {
+    if (len == 0) return "";
     size_t i, copied = 0, total = 0, sep_len = strlen(separator);
     
     for (i = 0; i < len; i++) total += strlen(chunks[i]);

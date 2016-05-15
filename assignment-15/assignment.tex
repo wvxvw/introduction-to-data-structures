@@ -1,0 +1,238 @@
+% Created 2016-05-14 Sat 22:51
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage[hidelinks]{hyperref}
+\tolerance=1000
+\usepackage[utf8]{inputenc}
+\usepackage{commath}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows}
+\usepackage{marginnote}
+\usepackage{listings}
+\usepackage{enumerate}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{mathtools}
+\setlength{\parskip}{16pt plus 2pt minus 2pt}
+\renewcommand{\arraystretch}{1.6}
+\author{Oleg Sivokon}
+\date{\textit{<2016-05-14 Sat>}}
+\title{Assignment 15, Data-Structures}
+\hypersetup{
+  pdfkeywords={Data-Structures, Algorithms, Assignment},
+  pdfsubject={Third assignment in the course Data-Structures},
+  pdfcreator={Emacs 25.1.50.2 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\definecolor{codebg}{rgb}{0.96,0.99,0.8}
+\definecolor{codestr}{rgb}{0.46,0.09,0.2}
+\lstset{%
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\scriptsize,
+  breakatwhitespace=false,
+  breaklines=false,
+  captionpos=b,
+  framexleftmargin=10pt,
+  xleftmargin=10pt,
+  framerule=0pt,
+  frame=tb,
+  keepspaces=true,
+  keywordstyle=\color{blue},
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{codestr},
+  tabsize=2
+}
+\lstnewenvironment{maxima}{%
+  \lstset{%
+    backgroundcolor=\color{codebg},
+    escapeinside={(*@}{@*)},
+    aboveskip=20pt,
+    captionpos=b,
+    label=,
+    caption=,
+    showstringspaces=false,
+    frame=single,
+    framerule=0pt,
+    basicstyle=\ttfamily\scriptsize,
+    columns=fixed}}{}
+}
+\makeatletter
+\newcommand{\verbatimfont}[1]{\renewcommand{\verbatim@font}{\ttfamily#1}}
+\makeatother
+\verbatimfont{\small}%
+\clearpage
+
+\section{Problems}
+\label{sec-1}
+
+\subsection{Problem 1}
+\label{sec-1-1}
+\begin{enumerate}
+\item How many comparisons does the \texttt{quicksort} algorithm do on the input of
+size 3 in the best, worst and average cases?
+\item Graph the decision tree for the above question, comment on how it
+represent the answers to the previous question.
+\item How many comparisions does the \texttt{heapsort} do on the input of size 4
+in the best, worst and average cases?
+\item Show that for the input size 4, \texttt{heapsort} is sub-optimal.  Explain why
+this doesn't contradict general optimality claims.
+\end{enumerate}
+
+\subsubsection{Answer 1}
+\label{sec-1-1-1}
+\tikzstyle{decision} = [diamond, draw, text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, text centered]
+
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm, semithick]
+  % Place nodes
+  \node [block]                     (init)   {input array: $(a,b,c)$};
+  \node [decision, below of=init]   (part11) {$a < c$};
+  \node [decision, left of=part11]    (part21) {$b < c$};
+  \node [decision, right of=part11]    (part22) {$b < c$};
+  \node [block, below of=part21] (b11) {$(a,c,b)$};
+  \node [block, below of=part22] (b12) {$(a,c,b)$};
+  \node [decision, left of=b11] (part31) {$a < b$};
+  \node [decision, left of=b12] (part32) {$b < a$};
+  \node [block, below of=part31] (b21) {$(a,b,c)$};
+  \node [block, right of=b21] (b22) {$(b,a,c)$};
+  \node [block, below of=part32] (b23) {$(c,b,a)$};
+  \node [block, right of=b23] (b24) {$(c,a,b)$};
+
+  % Draw edges
+  \path (init)   edge node {partition around $c$} (part11)
+        (part11) edge node {$(a,b,c)$} (part21)
+        (part11) edge node {$(c,b,a)$} (part22)
+        (part21) edge node {$(a,b,c)$} (part31)
+        (part21) edge node {pivot is in the middle} (b11)
+        (part22) edge node {pivot is in the middle} (b12)
+        (part22) edge node {$(c,b,a)$} (part32)
+        (part31) edge node {} (b21)
+        (part31) edge node {} (b22)
+        (part32) edge node {} (b23)
+        (part32) edge node {} (b24);
+\end{tikzpicture}
+
+Which also answers the question of number of comparison that need to be made:
+\begin{enumerate}
+\item Best case scenario: 2 comparisons.  If we are lucky, the pivot element ends
+up in the middle of the partitioned array, thus all resulting sub-arrays
+are of size 1 and need not be partitioned further.
+\item Worst case scenario: 3 comparisons.  Ohterwise, we'll need to compare both
+other elements with the pivot and then break the tie between the remaining
+elements.
+\item As you can see above, we are ``lucky'' only 2 times out of 6.  Taking
+weighted average gives us $2 \times 2 \times \frac{1}{6} + 3 \times 4
+       \times \frac{1}{6} = \frac{8}{3}$.
+\end{enumerate}
+
+\subsection{Problem 2}
+\label{sec-1-2}
+Design data-structure containing two independent queues both using the same
+``circular array'' for storage.  Define necessary operations: \emph{insertion},
+\emph{deletion}, \emph{boundary-checking}.
+
+\subsubsection{Answer 2}
+\label{sec-1-2-1}
+The idea is exactly the same as it was for the single queue, however in this
+case the elements of the first queue will be positioned at odd indices, while
+elements of the second queue will be positioned on the even indices.  We will
+also need to keep four variables storing the position of the head and the tail
+of each of the two queues. \emph{(See figure on the next page.)}
+
+\begin{algorithm}
+  \caption{Double FIFO queue}
+  \begin{algorithmic}
+    \Procedure {$\textit{push}$}{$element, queue$}
+    \If {$\textit{can-push}(queue)$}
+    \State \Call {$size \leftarrow \textit{size}$}{$queue$}
+    \State \Call {$tail \leftarrow \textit{tail}$}{$queue$}
+    \State \Call {$head \leftarrow \textit{head}$}{$queue$}
+    \If {$\textit{is-even}(queue)$}
+    \State {$queue[tail \times 2] \leftarrow element$}
+    \Else
+    \State {$queue[tail \times 2 + 1] \leftarrow element$}
+    \EndIf
+    \State {$tail \leftarrow (tail + 1) \mod size$}
+    \EndIf
+    \EndProcedure
+
+    \Procedure {$\textit{pop}$}{$queue$}
+    \If {$\textit{can-pop}(queue)$}
+    \State \Call {$size \leftarrow \textit{size}$}{$queue$}
+    \State \Call {$tail \leftarrow \textit{tail}$}{$queue$}
+    \State \Call {$head \leftarrow \textit{head}$}{$queue$}
+    \If {$\textit{is-even}(queue)$}
+    \State {$index \leftarrow head \times 2$}
+    \Else
+    \State {$index \leftarrow head \times 2 + 1$}
+    \EndIf
+    \State {$head \leftarrow (head + 1) \mod size$}
+    \State \Return {$result$}
+    \EndIf
+    \EndProcedure
+
+    \Procedure {$\textit{can-push}$}{$queue$}
+    \State \Call {$size \leftarrow \textit{size}$}{$queue$}
+    \State \Call {$tail \leftarrow \textit{tail}$}{$queue$}
+    \State \Call {$head \leftarrow \textit{head}$}{$queue$}
+    \State \Return {$(tail + 1) \mod size \neq head$}
+    \EndProcedure
+
+    \Procedure {$\textit{can-pop}$}{$queue$}
+    \State \Call {$tail \leftarrow \textit{tail}$}{$queue$}
+    \State \Call {$head \leftarrow \textit{head}$}{$queue$}
+    \State \Return {$tail \neq head$}
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+
+\subsection{Problem 3}
+\label{sec-1-3}
+Given set $S$ s.t. $S \subset \mathbb{N}$, $\abs{S} = n$, $\max(S) = n^k-1, k
+   \geq 0$.  Also given natural number $z$.
+\begin{enumerate}
+\item Write an algorithm for finding two distinct summands of $z$ in $S$,
+s.t. its running time is $\Theta(n \times \min(k, \lg n))$.
+\item Same as above, but find three distinct summands.  Running time
+$\Theta(n^2)$.
+\item Same as above, but for four distinct summands.  Running time $\Theta(n^2
+      \times \min(k, \lg n))$.
+\item Same as above, but for five distinct summands.  Running time
+$\Theta(n^3)$.
+\end{enumerate}
+
+\subsubsection{Answer 3}
+\label{sec-1-3-1}
+
+\subsection{Problem 4}
+\label{sec-1-4}
+Given list of points $P = \{(x, y) \;|\; x^2 + y^2 \leq 0, x \geq 0\}$,
+assuming uniform random distribution of points across the semi-circle, write
+an algorithm for sorting them on $\tan \theta$, where $\theta$ is the angle
+between $x$ axis and the line through origin and the given point.
+
+\subsubsection{Answer 4}
+\label{sec-1-4-1}
+% Emacs 25.1.50.2 (Org mode 8.2.10)
+\end{document}

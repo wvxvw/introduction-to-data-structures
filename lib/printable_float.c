@@ -28,11 +28,8 @@ const char* to_string_float(const printable_float* p) {
     char* buffer = ALLOCATE(9 * sizeof(char));
     printable* base = (printable*)p;
     
-    if (base->val == NULL) {
-        sprintf(buffer, "%p", base->val);
-    } else {
-        sprintf(buffer, "%f", *(float*)base->val);
-    }
+    if (base->val == NULL) sprintf(buffer, "%p", base->val);
+    else sprintf(buffer, "%f", *(float*)base->val);
     return buffer;
 }
 
