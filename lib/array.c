@@ -467,28 +467,28 @@ pair array_min_max(array in, comparison_fn_t cmp) {
 }
 
 void bucket_sort(array unsorted, rationalization_fn_t rat, comparison_fn_t cmp) {
-    size_t i, j, len = unsorted->length;
-    array buckets = make_empy_array(len);
+    size_t i, key, len = unsorted->length;
+    list* buckets = malloc(sizeof(list) * (len + 1));
     pair minmax = array_min_max(unsorted, cmp);
     printable* min = minmax->first;
     printable* max = minmax->last;
-    
-    for (i = 0; i < len; i++) unsorted->elements[i] = NULL;
+
+    for (i = 0; i < len; i++) buckets[i] = NULL;
     for (i = 0; i < len; i++) {
-        j = rat(unsorted->elements[i], min, max, len);
-        buckets->elements[j] = (printable*)cons(
-            unsorted->elements[i], (list)buckets->elements[j]);
+        key = rat(unsorted->elements[i], min, max, len);
+        buckets[key] = cons(unsorted->elements[i], buckets[key]);
     }
-    j = 0;
+    key = 0;
     for (i = 0; i < len; i++) {
-        list bucket = (list)buckets->elements[i];
-        bucket = merge_sort(bucket, compare_floats);
+        list bucket = buckets[i];
+        bucket = merge_sort(bucket, compare_ints);
         while (bucket != NULL) {
-            unsorted->elements[j] = bucket->car;
-            j++;
+            unsorted->elements[key] = bucket->car;
+            key++;
             bucket = bucket->cdr;
         }
     }
+    free(buckets);
 }
 
 array counting_sort(array unsorted, size_t scalar, rationalization_fn_t rat, comparison_fn_t cmp) {
@@ -500,7 +500,6 @@ array counting_sort(array unsorted, size_t scalar, rationalization_fn_t rat, com
     array copy = make_empy_array(unsorted->length);
 
     for (i = 0; i < scalar; i++) counts[i] = 0;
-    for (i = 0; i < unsorted->length; i++) copy->elements[i] = NULL;
     for (i = 0; i < unsorted->length; i++) {
         size_t key = rat(unsorted->elements[i], min, max, scalar);
         counts[key]++;
