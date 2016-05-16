@@ -58,9 +58,6 @@ list merge(list odds, list evens, comparison_fn_t cmp) {
     list result = NULL;
     odds = merge_sort(odds, cmp);
     evens = merge_sort(evens, cmp);
-    printf("merging\n");
-    printf("odds: %s\n", to_string((printable*)odds));
-    printf("evens: %s\n", to_string((printable*)evens));
     while (true) {
         if (odds == NULL) return append(reverse(result), evens);
         if (evens == NULL) return append(reverse(result), odds);

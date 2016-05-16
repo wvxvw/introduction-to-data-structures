@@ -74,6 +74,7 @@ ASSIGNMENTLIB_API
 int compare_ints_reverse(const void* a, const void* b);
 
 ASSIGNMENTLIB_API 
-size_t int_element_normalizer(printable* elt, printable* max, size_t range);
+size_t int_element_normalizer(
+    printable* elt, printable* min, printable* max, size_t range);
 
 #endif // PRINTABLE_INT_H_

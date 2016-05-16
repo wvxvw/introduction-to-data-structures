@@ -57,6 +57,23 @@ void test_merge_sort() {
     printf("sorted: %s\n", to_string((printable*)test));
 }
 
+void test_minmax() {
+    array tarray = make_random_array(13, 3, 97, int_element_generator);
+    printf("unsorted: %s\n", to_string((printable*)tarray));
+    pair minmax = array_min_max(tarray, compare_ints);
+    printf("min: %s\nmax: %s\n", to_string(minmax->first), to_string(minmax->last));
+}
+
+void test_counting_sort() {
+    array tarray = make_random_array(13, 3, 97, int_element_generator);
+    printf("unsorted: %s\n", to_string((printable*)tarray));
+    pair minmax = array_min_max(tarray, compare_ints);
+    size_t min = (size_t)(*(int*)minmax->first->val);
+    size_t max = (size_t)(*(int*)minmax->last->val);
+    array result = counting_sort(tarray, max - min, int_element_normalizer, compare_ints);
+    printf("sorted: %s\n", to_string((printable*)result));
+}
+
 void test_bucket_sort() {
     array test = make_random_array(13, 3, 97, int_element_generator);
     printf("unsorted: %s\n", to_string((printable*)test));
@@ -71,6 +88,8 @@ int main() {
     test_queue();
     test_append();
     test_merge_sort();
+    test_minmax();
+    test_counting_sort();
     test_bucket_sort();
     return 0;
 }

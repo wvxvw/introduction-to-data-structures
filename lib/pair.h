@@ -23,7 +23,7 @@
 
 #include "printable.h"
 
-typedef struct pair {
+typedef struct printable_pair {
     printable printable;
     printable* first;
     printable* last;

@@ -407,11 +407,6 @@ void three_way_quicksort(array unsorted, comparison_fn_t cmp, size_t error) {
         }
     }
 }
-int compare_bucket_floats(const void* a, const void* b) {
-    const pair pa = *(pair const *)a;
-    const pair pb = *(pair const *)b;
-    return compare_floats(&pa->first, &pb->first);
-}
 
 printable* array_max(array in, comparison_fn_t cmp) {
     if (in->length == 0) return NULL;
@@ -423,24 +418,100 @@ printable* array_max(array in, comparison_fn_t cmp) {
     return result;
 }
 
-void bucket_sort(array unsorted, to_rat_fn f, comparison_fn_t cmp) {
+printable* array_min(array in, comparison_fn_t cmp) {
+    if (in->length == 0) return NULL;
+    size_t i;
+    printable* result = in->elements[0];
+    for (i = 1; i < in->length; i++)
+        if (cmp(&in->elements[i], &result) < 0)
+            result = in->elements[i];
+    return result;
+}
+
+void swap_when_greater(printable** a, printable** b, comparison_fn_t cmp) {
+    if (cmp(a, b) > 0) {
+        printable* tmp = *a;
+        *a = *b;
+        *b = tmp;
+    }
+}
+
+pair array_min_max(array in, comparison_fn_t cmp) {
+    if (in->length == 0) return NULL;
+    pair result = make_pair();
+    if (in->length == 1) {
+        result->first = in->elements[0];
+        result->last = in->elements[0];
+    } else {
+        size_t i, len = in->length >> 1 << 1;
+        printable* min = in->elements[0];
+        printable* max = in->elements[1];
+        swap_when_greater(&min, &max, cmp);
+        
+        for (i = 2; i < len; i += 2) {
+            printable* a = in->elements[i];
+            printable* b = in->elements[i + 1];
+            swap_when_greater(&a, &b, cmp);
+            swap_when_greater(&min, &a, cmp);
+            swap_when_greater(&b, &max, cmp);
+        }
+        if (len < in->length) {
+            printable* last = in->elements[len];
+            swap_when_greater(&last, &max, cmp);
+            swap_when_greater(&min, &last, cmp);
+        }
+        result->first = min;
+        result->last = max;
+    }
+    return result;
+}
+
+void bucket_sort(array unsorted, rationalization_fn_t rat, comparison_fn_t cmp) {
     size_t i, j, len = unsorted->length;
     array buckets = make_empy_array(len);
-    printable* m = array_max(unsorted, cmp);
+    pair minmax = array_min_max(unsorted, cmp);
+    printable* min = minmax->first;
+    printable* max = minmax->last;
+    
     for (i = 0; i < len; i++) unsorted->elements[i] = NULL;
     for (i = 0; i < len; i++) {
-        j = f(unsorted->elements[i], m, len);
+        j = rat(unsorted->elements[i], min, max, len);
         buckets->elements[j] = (printable*)cons(
             unsorted->elements[i], (list)buckets->elements[j]);
     }
     j = 0;
     for (i = 0; i < len; i++) {
         list bucket = (list)buckets->elements[i];
-        bucket = merge_sort(bucket, compare_bucket_floats);
+        bucket = merge_sort(bucket, compare_floats);
         while (bucket != NULL) {
             unsorted->elements[j] = bucket->car;
             j++;
             bucket = bucket->cdr;
         }
     }
+}
+
+array counting_sort(array unsorted, size_t scalar, rationalization_fn_t rat, comparison_fn_t cmp) {
+    pair minmax = array_min_max(unsorted, cmp);
+    printable* min = minmax->first;
+    printable* max = minmax->last;
+    size_t* counts = malloc(sizeof(size_t) * (scalar + 1));
+    size_t i;
+    array copy = make_empy_array(unsorted->length);
+
+    for (i = 0; i < scalar; i++) counts[i] = 0;
+    for (i = 0; i < unsorted->length; i++) copy->elements[i] = NULL;
+    for (i = 0; i < unsorted->length; i++) {
+        size_t key = rat(unsorted->elements[i], min, max, scalar);
+        counts[key]++;
+    }
+    for (i = 1; i < scalar + 1; i++) counts[i] += counts[i - 1];
+    for (i = unsorted->length; i > 0; i--) {
+        size_t j = i - 1;
+        size_t key = rat(unsorted->elements[j], min, max, scalar);
+        copy->elements[counts[key] - 1] = unsorted->elements[j];
+        counts[key]--;
+    }
+    free(counts);
+    return copy;
 }
