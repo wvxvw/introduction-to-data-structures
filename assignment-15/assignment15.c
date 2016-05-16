@@ -85,11 +85,11 @@ int main() {
 #ifdef WITH_GC
   GC_INIT();
 #endif
-    /* test_queue(); */
-    /* test_append(); */
-    /* test_merge_sort(); */
-    /* test_minmax(); */
-    /* test_counting_sort(); */
+    test_queue();
+    test_append();
+    test_merge_sort();
+    test_minmax();
+    test_counting_sort();
     test_bucket_sort();
     return 0;
 }
