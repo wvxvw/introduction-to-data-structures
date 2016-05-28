@@ -23,7 +23,6 @@
 
 typedef struct printable_float {
     printable printable;
-    float* val;
 } printable_float;
 
 ASSIGNMENTLIB_API 
@@ -43,5 +42,8 @@ printable_float* make_printable_float(const float val);
  */
 ASSIGNMENTLIB_API 
 printable* float_element_generator(void* elt);
+
+ASSIGNMENTLIB_API 
+printable_float* make_printable_float(const float val);
 
 #endif // PRINTABLE_FLOAT_H_

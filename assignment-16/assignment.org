@@ -1,9 +1,9 @@
 # -*- fill-column: 80; org-confirm-babel-evaluate: nil -*-
 
-#+TITLE:     Assignment 15, Data-Structures
+#+TITLE:     Assignment 16, Data-Structures
 #+AUTHOR:    Oleg Sivokon
 #+EMAIL:     olegsivokon@gmail.com
-#+DATE:      <2016-05-14 Sat>
+#+DATE:      <2016-05-25 Wed>
 #+DESCRIPTION: Third assignment in the course Data-Structures
 #+KEYWORDS: Data-Structures, Algorithms, Assignment
 #+LANGUAGE: en
@@ -86,146 +86,46 @@
 * Problems
 
 ** Problem 1
-   1. How many comparisons does the =quicksort= algorithm do on the input of
-      size 3 in the best, worst and average cases?
-   2. Graph the decision tree for the above question, comment on how it
-      represent the answers to the previous question.
-   3. How many comparisions does the =heapsort= do on the input of size 4
-      in the best, worst and average cases?
-   4. Show that for the input size 4, =heapsort= is sub-optimal.  Explain why
-      this doesn't contradict general optimality claims.
+   1. Given a hash-table with initial capacity $m$.  What is the probability
+      four elements inserted will end up in the same bucket?
+   2. Given an ordered hash-table and elements $k_1$, $k_2$ and $k_3$ inserted
+      in that order, what is the chance of performing three comparisons when
+      inserting the third element?
+   3. Given hash-table s.t. its density is $1-\frac{1}{\lg n}$. ... What is the
+      running time of ... search as the function of the array implementing the
+      hash-table?
 
 *** Answer 1
-    #+HEADER: :exports results
-    #+HEADER: :results (by-backend (pdf "latex") (t "raw"))
-    #+BEGIN_SRC latex
-      \tikzstyle{decision} = [diamond, draw, text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
-      \tikzstyle{block} = [rectangle, draw, text centered]
-
-      \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm, semithick]
-        % Place nodes
-        \node [block]                     (init)   {input array: $(a,b,c)$};
-        \node [decision, below of=init]   (part11) {$a < c$};
-        \node [decision, left of=part11]    (part21) {$b < c$};
-        \node [decision, right of=part11]    (part22) {$b < c$};
-        \node [block, below of=part21] (b11) {$(a,c,b)$};
-        \node [block, below of=part22] (b12) {$(a,c,b)$};
-        \node [decision, left of=b11] (part31) {$a < b$};
-        \node [decision, left of=b12] (part32) {$b < a$};
-        \node [block, below of=part31] (b21) {$(a,b,c)$};
-        \node [block, right of=b21] (b22) {$(b,a,c)$};
-        \node [block, below of=part32] (b23) {$(c,b,a)$};
-        \node [block, right of=b23] (b24) {$(c,a,b)$};
-        
-        % Draw edges
-        \path (init)   edge node {partition around $c$} (part11)
-              (part11) edge node {$(a,b,c)$} (part21)
-              (part11) edge node {$(c,b,a)$} (part22)
-              (part21) edge node {$(a,b,c)$} (part31)
-              (part21) edge node {pivot is in the middle} (b11)
-              (part22) edge node {pivot is in the middle} (b12)
-              (part22) edge node {$(c,b,a)$} (part32)
-              (part31) edge node {} (b21)
-              (part31) edge node {} (b22)
-              (part32) edge node {} (b23)
-              (part32) edge node {} (b24);
-      \end{tikzpicture}
-    #+END_SRC
-
-    Which also answers the question of number of comparison that need to be made:
-    1. Best case scenario: 2 comparisons.  If we are lucky, the pivot element ends
-       up in the middle of the partitioned array, thus all resulting sub-arrays
-       are of size 1 and need not be partitioned further.
-    2. Worst case scenario: 3 comparisons.  Ohterwise, we'll need to compare both
-       other elements with the pivot and then break the tie between the remaining
-       elements.
-    3. As you can see above, we are ``lucky'' only 2 times out of 6.  Taking
-       weighted average gives us $2 \times 2 \times \frac{1}{6} + 3 \times 4
-       \times \frac{1}{6} = \frac{8}{3}$.
-
-** Problem 2
-   Design data-structure containing two independent queues both using the same
-   ``circular array'' for storage.  Define necessary operations: /insertion/,
-   /deletion/, /boundary-checking/.
 
 *** Answer 2
-    The idea is exactly the same as it was for the single queue, however in this
-    case the elements of the first queue will be positioned at odd indices, while
-    elements of the second queue will be positioned on the even indices.  We will
-    also need to keep four variables storing the position of the head and the tail
-    of each of the two queues. /(See figure on the next page.)/
-
-    #+HEADER: :exports results
-    #+HEADER: :results (by-backend (pdf "latex") (t "raw"))
-    #+BEGIN_SRC latex
-      \begin{algorithm}
-        \caption{Double FIFO queue}
-        \begin{algorithmic}
-          \Procedure {$\textit{push}$}{$element, queue$}
-          \If {$\textit{can-push}(queue)$}
-          \State \Call {$size \leftarrow \textit{size}$}{$queue$}
-          \State \Call {$tail \leftarrow \textit{tail}$}{$queue$}
-          \State \Call {$head \leftarrow \textit{head}$}{$queue$}
-          \If {$\textit{is-even}(queue)$}
-          \State {$queue[tail \times 2] \leftarrow element$}
-          \Else
-          \State {$queue[tail \times 2 + 1] \leftarrow element$}
-          \EndIf
-          \State {$tail \leftarrow (tail + 1) \mod size$}
-          \EndIf
-          \EndProcedure
-
-          \Procedure {$\textit{pop}$}{$queue$}
-          \If {$\textit{can-pop}(queue)$}
-          \State \Call {$size \leftarrow \textit{size}$}{$queue$}
-          \State \Call {$tail \leftarrow \textit{tail}$}{$queue$}
-          \State \Call {$head \leftarrow \textit{head}$}{$queue$}
-          \If {$\textit{is-even}(queue)$}
-          \State {$index \leftarrow head \times 2$}
-          \Else
-          \State {$index \leftarrow head \times 2 + 1$}
-          \EndIf
-          \State {$head \leftarrow (head + 1) \mod size$}
-          \State \Return {$result$}
-          \EndIf
-          \EndProcedure
-
-          \Procedure {$\textit{can-push}$}{$queue$}
-          \State \Call {$size \leftarrow \textit{size}$}{$queue$}
-          \State \Call {$tail \leftarrow \textit{tail}$}{$queue$}
-          \State \Call {$head \leftarrow \textit{head}$}{$queue$}
-          \State \Return {$(tail + 1) \mod size \neq head$}
-          \EndProcedure
-
-          \Procedure {$\textit{can-pop}$}{$queue$}
-          \State \Call {$tail \leftarrow \textit{tail}$}{$queue$}
-          \State \Call {$head \leftarrow \textit{head}$}{$queue$}
-          \State \Return {$tail \neq head$}
-          \EndProcedure
-        \end{algorithmic}
-      \end{algorithm}
-      #+END_SRC
-
-** Problem 3
-   Given set $S$ s.t. $S \subset \mathbb{N}$, $\abs{S} = n$, $\max(S) = n^k-1, k
-   \geq 0$.  Also given natural number $z$.
-   1. Write an algorithm for finding two distinct summands of $z$ in $S$,
-      s.t. its running time is $\Theta(n \times \min(k, \lg n))$.
-   2. Same as above, but find three distinct summands.  Running time
-      $\Theta(n^2)$.
-   3. Same as above, but for four distinct summands.  Running time $\Theta(n^2
-      \times \min(k, \lg n))$.
-   4. Same as above, but for five distinct summands.  Running time
-      $\Theta(n^3)$.
 
 *** Answer 3
-    One way of doing this would be, knowing $k$ normalize the members of $S$ by
-    taking $k^{th}$ root.  Then, use bucket sort or radix sort.  Then use binary
-    search to find the summands.
-    For three-summands algorithm we use the first algorithm as a sub-routine 
-    while looking at each element of the sorted array.  Thus whenever we increase
-    the number of summands we want, we will only gain a logarithmic increase in
-    running time.
+
+** Problem 2
+   Given a set of rational numbers $S$ and a rational number $z$,
+   1. write an algorithm that finds two distinct summands of $z$ with running
+      time $\Theta(n)$.
+   2. Same is in (2), but for four summands and time $\Theta(n^2)$.
+
+*** Answer 4
+
+*** Answer 5
+
+** Problem 3
+   Given a directed graph with $n$ nodes there are $n + 1$ /left/ and /right/
+   nil-pointers.  After performing the following on this tree: If =left[z]= =
+   =nil=, then =left[z]= = =tree-predecessor(z)=, and if =right[z]= = =nil=,
+   then =right[z]= = =tree-cussessor(z)=.  The tree built in this way is called
+   ``frying pan'' (WTF?), and the arcs are called ``threads''.
+   1. How can one distinguish between actual arcs and ``threads''?
+   2. Write procedures for inserting and removing elements from this tree.
+   3. What is the benefit of using ``threads''?
+
+*** Answer 6
+
+*** Answer 7
+
+*** Answer 
 
 ** Problem 4
    Given list of points $P = \{(x, y) \;|\; x^2 + y^2 \leq 0, x \geq 0\}$,

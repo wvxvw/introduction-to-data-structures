@@ -2,14 +2,18 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <stdbool.h>
 
 #include "printable.h"
+#include "generic.h"
 #include "printable_int.h"
 #include "printable_float.h"
 #include "array.h"
 #include "pair.h"
 #include "list.h"
 #include "strings.h"
+
+DEFTYPE(array);
 
 char* to_string_array(array p) {
     char** parts = malloc(sizeof(char*) * p->length);
@@ -27,16 +31,18 @@ char* to_string_array(array p) {
     return result;
 }
 
-array make_empy_array(size_t size) {
+array make_empty_array(size_t size) {
     array result = ALLOCATE(sizeof(printable_array));
     result->length = size;
     result->elements = ALLOCATE(size * sizeof(printable*));
-    result->printable.to_string = (printer)to_string_array;
+    printable* presult = (printable*)result;
+    presult->type = array_type();
+    define_method(presult->type, to_string, to_string_array);
     return result;
 }
 
 array make_array(size_t size, printable** data) {
-    array result = make_empy_array(size);
+    array result = make_empty_array(size);
     size_t i = 0;
     while (i < size) {
         result->elements[i] = data[i];
@@ -69,7 +75,7 @@ array slice(const array input, const size_t from, const size_t to) {
     array result = ALLOCATE(sizeof(printable_array));
     result->length = to - from;
     result->elements = &input->elements[from];
-    result->printable.to_string = (printer)input->printable.to_string;
+    ((printable*)result)->type = ((printable*)input)->type;
     return result;
 }
 
@@ -497,7 +503,7 @@ array counting_sort(array unsorted, size_t scalar, rationalization_fn_t rat, com
     printable* max = minmax->last;
     size_t* counts = malloc(sizeof(size_t) * (scalar + 1));
     size_t i;
-    array copy = make_empy_array(unsorted->length);
+    array copy = make_empty_array(unsorted->length);
 
     for (i = 0; i < scalar; i++) counts[i] = 0;
     for (i = 0; i < unsorted->length; i++) {
@@ -512,5 +518,14 @@ array counting_sort(array unsorted, size_t scalar, rationalization_fn_t rat, com
         counts[key]--;
     }
     free(counts);
+    return copy;
+}
+
+array array_map(array in, pipe_fn_t pipe) {
+    size_t i;
+    array copy = make_empty_array(in->length);
+    for (i = 0; i < in->length; i++) {
+        copy->elements[i] = pipe(in->elements[i]);
+    }
     return copy;
 }

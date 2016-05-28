@@ -2,8 +2,11 @@
 #include <time.h>
 #include <stdio.h>
 
+#include "generic.h"
 #include "array.h"
 #include "printable_int.h"
+
+DEFTYPE(printable_int);
 
 size_t ints_comparation_count = 0;
 
@@ -44,8 +47,8 @@ char* to_string_int(const printable_int* p) {
 printable_int* make_printable_int(const int val) {
     printable_int* result = ALLOCATE(sizeof(printable_int));
     printable* p = (printable*)result;
-    
-    p->to_string = (printer)to_string_int;
+    p->type = printable_int_type();
+    define_method(p->type, to_string, to_string_int);
     p->size = sizeof(printable_int*);
     p->val = ALLOCATE(sizeof(int));
     *(int*)p->val = val;
@@ -56,7 +59,8 @@ printable* int_element_generator(void* elt) {
     return (printable*)make_printable_int(*(int*)elt);
 }
 
-size_t int_element_normalizer(printable* elt, printable* min, printable* max, size_t range) {
+size_t int_element_normalizer(
+    printable* elt, printable* min, printable* max, size_t range) {
     int e = *(int*)elt->val;
     int x = *(int*)max->val;
     int n = *(int*)min->val;

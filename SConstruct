@@ -7,7 +7,7 @@ from subprocess import call
 
 generate_documentation = False
 
-dll = SharedLibrary('./lib/assignments', glob('./lib/*.c'))
+dll = SharedLibrary('./lib/assignments', glob('./lib/*.c') + glob('./lib/*/*.c'), CPPPATH = ['./lib'])
 env = Environment(tools = ["default", "doxygen"],
                   CPPPATH = './lib',
                   LIBPATH = './lib')

@@ -4,10 +4,15 @@
 
 #include "list.h"
 #include "strings.h"
+#include "generic.h"
+
+DEFTYPE(list);
 
 list cons(printable* car, list cdr) {
     list result = ALLOCATE(sizeof(cell));
-    ((printable*)result)->to_string = (printer)to_string_list;
+    printable* presult = (printable*)result;
+    presult->type = list_type();
+    define_method(presult->type, to_string, to_string_list);
     result->car = car;
     result->cdr = cdr;
     return result;

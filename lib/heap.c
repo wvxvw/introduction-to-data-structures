@@ -2,8 +2,13 @@
 #include <stdio.h>
 #include <math.h>
 
+#include "generic.h"
 #include "heap.h"
 #include "strings.h"
+
+DEFTYPE(lheap);
+
+DEFTYPE(aheap);
 
 lcell make_lheap_cell(printable* val) {
     lcell result = ALLOCATE(sizeof(lheap_cell));
@@ -17,8 +22,10 @@ lheap lheapify(printable** raw, size_t size, comparison_fn_t cmp) {
     lcell head = make_lheap_cell(raw[0]);
     lheap result = ALLOCATE(sizeof(lheap));
     size_t i;
+    printable* presult = (printable*)result;
 
-    ((printable*)result)->to_string = (printer)to_string_lheap;
+    presult->type = lheap_type();
+    define_method(presult->type, to_string, to_string_lheap);
     result->cmp = cmp;
     result->head = head;
     for (i = 1; i < size; i++) lput(result, raw[i]);
@@ -124,16 +131,17 @@ void resize(aheap heap, size_t new_size) {
 
 aheap aheapify(printable** raw, size_t size, comparison_fn_t cmp) {
     aheap result = ALLOCATE(sizeof(array_heap));
+    printable* presult = (printable*)result;
     size_t i;
 
     result->allocated = pow(2.0, 1.0 + (double)(size_t)log2((double)size));
     result->elements = ALLOCATE(sizeof(printable*) * result->allocated);
     result->size = size;
     result->cmp = cmp;
-    ((printable*)result)->to_string = (printer)to_string_aheap;
+    presult->type = aheap_type();
+    define_method(presult->type, to_string, to_string_lheap);
     for (i = 0; i < size; i++) result->elements[i] = raw[i];
     for (i = (result->size >> 1) + 1; i > 0; i--) abubble_up(result, i);
-    printf("heapify finished: %d\n", (int)result->allocated);
     return result;
 }
 

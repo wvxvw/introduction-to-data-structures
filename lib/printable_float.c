@@ -5,6 +5,9 @@
 
 #include "array.h"
 #include "printable_float.h"
+#include "generic.h"
+
+DEFTYPE(printable_float);
 
 int compare_floats(const void* a, const void* b) {
     const printable* pa = *(printable* const *)a;
@@ -37,9 +40,10 @@ printable_float* make_printable_float(const float val) {
     printable_float* result = ALLOCATE(sizeof(printable_float));
     printable* p = (printable*)result;
     
-    p->to_string = (printer)to_string_float;
     p->size = sizeof(printable_float*);
     p->val = ALLOCATE(sizeof(float));
+    p->type = printable_float_type();
+    define_method(p->type, to_string, to_string_float);
     *(float*)p->val = val;
     return result;
 }

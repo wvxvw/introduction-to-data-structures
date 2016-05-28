@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <float.h>
+#include <time.h>
+#include <math.h>
 
 #ifdef WITH_GC
 #include <gc.h>
@@ -11,7 +13,9 @@
 #include "list.h"
 #include "queue.h"
 #include "printable_int.h"
+#include "printable_float.h"
 #include "strings.h"
+#include "geometry/point.h"
 
 void test_queue() {
     queue q = make_empty_queue(9);
@@ -81,6 +85,17 @@ void test_bucket_sort() {
     printf("sorted: %s\n", to_string((printable*)test));
 }
 
+void exercise_4() {
+    time_t t;
+    srand((unsigned)time(&t));
+    array test = make_random_array(13, 3, 97, random_point_element_generator);
+    printf("Generated points array:\n%s\n", to_string((printable*)test));
+    bucket_sort(test, rationalize_point, compare_points);
+    printf("Sorted points array:\n%s\n", to_string((printable*)test));
+    array tans = array_map(test, printable_atanxy);
+    printf("Tangents:\n%s\n", to_string((printable*)tans));
+}
+
 int main() {
 #ifdef WITH_GC
   GC_INIT();
@@ -91,5 +106,7 @@ int main() {
     test_minmax();
     test_counting_sort();
     test_bucket_sort();
+
+    exercise_4();
     return 0;
 }

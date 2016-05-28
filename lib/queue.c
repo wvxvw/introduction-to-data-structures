@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include "queue.h"
 #include "strings.h"
+#include "generic.h"
+
+DEFTYPE(queue);
 
 printable* queue_push(printable* element, queue q) {
     printable* result = NULL;
@@ -43,7 +46,7 @@ char* to_string_queue(queue q) {
 
     for (i = 0; i < len; i++) {
         printable* elt = q->elements->elements[(i + q->head) % size];
-        parts[i] = (char*)to_string(elt);
+        parts[i] = to_string(elt);
     }
 	contents = join(parts, len, ", ");
 	result = ALLOCATE(sizeof(char) * (strlen(contents) + 8));
@@ -54,7 +57,9 @@ char* to_string_queue(queue q) {
 
 queue make_queue(printable** elements, size_t size) {
     queue result = ALLOCATE(sizeof(queue_val));
-    result->printable.to_string = (printer)to_string_queue;
+    printable* presult = (printable*)result;
+    presult->type = queue_type();
+    define_method(presult->type, to_string, to_string_queue);
     result->elements = make_array(size, elements);
     result->head = result->tail = 0;
     return result;

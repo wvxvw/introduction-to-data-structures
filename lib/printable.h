@@ -60,7 +60,7 @@ typedef struct printable {
     
     /** \brief The printing function.
      */
-    printer to_string;
+    size_t type;
     
     /** \brief How much data is stored in this element (must be
      *         suitable for \c sizeof call).

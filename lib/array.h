@@ -86,6 +86,9 @@ array shuffled(array sorted);
 ASSIGNMENTLIB_API
 array make_array(const size_t size, printable** data);
 
+ASSIGNMENTLIB_API
+array make_empty_array(const size_t size);
+
 /** \brief Creates an array that shares data with \c input, but
  *         starts from \c from and up to \c to.
  */
@@ -389,5 +392,10 @@ array counting_sort(array unsorted, size_t scalar,
 
 ASSIGNMENTLIB_API 
 pair array_min_max(array in, comparison_fn_t cmp);
+
+typedef printable* pipe_fn_t(printable* elt);
+
+ASSIGNMENTLIB_API 
+array array_map(array in, pipe_fn_t pipe);
 
 #endif // ARRAY_H_
