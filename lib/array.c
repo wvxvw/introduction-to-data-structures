@@ -12,6 +12,7 @@
 #include "pair.h"
 #include "list.h"
 #include "strings.h"
+#include "sortable.h"
 
 DEFTYPE(array);
 
@@ -38,6 +39,7 @@ array make_empty_array(size_t size) {
     printable* presult = (printable*)result;
     presult->type = array_type();
     define_method(presult->type, to_string, to_string_array);
+    define_method(presult->type, insertion_sort, array_insertion_sort);
     return result;
 }
 
@@ -250,7 +252,7 @@ void insert(array input, comparison_fn_t cmp, size_t pos) {
     }
 }
 
-array insertion_sort(array unsorted, comparison_fn_t cmp) {
+array array_insertion_sort(array unsorted, comparison_fn_t cmp) {
     size_t i;
     for (i = 1; i < unsorted->length; i++) {
         printable* previous = unsorted->elements[i - 1];

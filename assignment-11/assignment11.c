@@ -6,6 +6,7 @@
 
 
 #include "printable.h"
+#include "sortable.h"
 #include "array.h"
 #include "pair.h"
 #include "printable_int.h"

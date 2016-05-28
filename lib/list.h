@@ -58,4 +58,7 @@ list append(list a, list b);
 ASSIGNMENTLIB_API 
 list merge_sort(list in, comparison_fn_t cmp);
 
+ASSIGNMENTLIB_API 
+list list_insertion_sort(list in, comparison_fn_t cmp);
+
 #endif // LIST_H_

@@ -23,6 +23,7 @@
 
 #include "printable.h"
 #include "pair.h"
+#include "sortable.h"
 
 /** \fn element_generator
  *  \brief The functions of this kind are used when generating all
@@ -54,15 +55,6 @@ typedef struct {
 } printable_array;
 
 typedef printable_array* array;
-
-/** \fn comparison_fn_t
- *  \brief The definition is copied from GCC extension, this is
- *         the comparator function suitable for \c qsort calls.
- *
- *  \param a First value to compare.
- *  \param b Second value to compare.
- */
-typedef int comparison_fn_t(const void* a, const void* b);
 
 /** \enum search_direction
  *  \brief Defines search direction.
@@ -240,7 +232,7 @@ array make_vedge_array(const size_t half_size,
  *  \return An \c array (no new allocations are made).
  */
 ASSIGNMENTLIB_API 
-array insertion_sort(array unsorted, comparison_fn_t cmp);
+array array_insertion_sort(array unsorted, comparison_fn_t cmp);
 
 /** \brief Restets the swap operation counter
  */

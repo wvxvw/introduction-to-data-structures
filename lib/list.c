@@ -5,6 +5,7 @@
 #include "list.h"
 #include "strings.h"
 #include "generic.h"
+#include "sortable.h"
 
 DEFTYPE(list);
 
@@ -13,6 +14,7 @@ list cons(printable* car, list cdr) {
     printable* presult = (printable*)result;
     presult->type = list_type();
     define_method(presult->type, to_string, to_string_list);
+    define_method(presult->type, insertion_sort, list_insertion_sort);
     result->car = car;
     result->cdr = cdr;
     return result;
@@ -93,6 +95,43 @@ list merge_sort(list in, comparison_fn_t cmp) {
     return merge(reverse(odds), reverse(evens), cmp);
 }
 
+list list_pop(list* in) {
+    if (in == NULL) return NULL;
+    list result = *in;
+    *in = (*in)->cdr;
+    return result;
+}
+
+void list_push(printable* elt, list* to) {
+    *to = cons(elt, *to);
+}
+
+list list_insertion_sort(list in, comparison_fn_t cmp) {
+    if (in == NULL) return NULL;
+    if (in->cdr == NULL) return in;
+
+    list p = in, extra = NULL, copy = NULL, current = NULL, last = NULL;
+    
+    while (p != NULL) {
+        current = list_pop(&p);
+        copy = extra;
+        last = NULL;
+        while (copy != NULL &&
+               cmp(&current->car, &copy->car) > 0) {
+            last = copy;
+            copy = copy->cdr;
+        }
+        if (last == NULL) {
+            extra = cons(current->car, extra);
+        } else {
+            list tmp = last->cdr;
+            last->cdr = current;
+            current->cdr = tmp;
+        }
+    }
+    return extra;
+}
+
 char* to_string_list(list p) {
     list it = p;
     size_t i = 0, len = length(p);
@@ -100,7 +139,7 @@ char* to_string_list(list p) {
     char* contents, *result;
 
     while (it != NULL) {
-        char* chunk = (char*)to_string(it->car);
+        char* chunk = to_string(it->car);
         parts[i] = chunk;
         it = it->cdr;
         i++;
