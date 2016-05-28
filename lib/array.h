@@ -372,8 +372,7 @@ printable* nth_order_statistic(array searched, size_t order, comparison_fn_t cmp
 ASSIGNMENTLIB_API 
 size_t index_of(array searched, printable* elt);
 
-typedef size_t rationalization_fn_t(
-    printable* elt, printable* min, printable* max, size_t range);
+array array_merge_sort(array in, comparison_fn_t cmp);
 
 ASSIGNMENTLIB_API 
 void bucket_sort(array unsorted, rationalization_fn_t rat, comparison_fn_t cmp);

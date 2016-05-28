@@ -57,7 +57,7 @@ void test_merge_sort() {
     array tarray = make_random_array(13, 3, 97, int_element_generator);
     list test = make_list(tarray->elements, tarray->length);
     printf("unsorted: %s\n", to_string((printable*)test));
-    test = merge_sort(test, compare_ints);
+    test = list_merge_sort(test, compare_ints);
     printf("sorted: %s\n", to_string((printable*)test));
 }
 

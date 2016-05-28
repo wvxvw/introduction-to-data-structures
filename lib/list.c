@@ -15,6 +15,8 @@ list cons(printable* car, list cdr) {
     presult->type = list_type();
     define_method(presult->type, to_string, to_string_list);
     define_method(presult->type, insertion_sort, list_insertion_sort);
+    define_method(presult->type, length, list_length);
+    define_method(presult->type, merge_sort, list_merge_sort);
     result->car = car;
     result->cdr = cdr;
     return result;
@@ -37,7 +39,7 @@ list make_list(printable** elements, size_t size) {
     return result;
 }
 
-size_t length(list input) {
+size_t list_length(list input) {
     size_t i = 0;
     list it = input;
 
@@ -63,8 +65,8 @@ list append(list a, list b) {
 
 list merge(list odds, list evens, comparison_fn_t cmp) {
     list result = NULL;
-    odds = merge_sort(odds, cmp);
-    evens = merge_sort(evens, cmp);
+    odds = list_merge_sort(odds, cmp);
+    evens = list_merge_sort(evens, cmp);
     while (true) {
         if (odds == NULL) return append(reverse(result), evens);
         if (evens == NULL) return append(reverse(result), odds);
@@ -79,7 +81,7 @@ list merge(list odds, list evens, comparison_fn_t cmp) {
     return NULL;
 }
 
-list merge_sort(list in, comparison_fn_t cmp) {
+list list_merge_sort(list in, comparison_fn_t cmp) {
     if (in == NULL) return NULL;
     if (in->cdr == NULL) return in;
     
@@ -134,7 +136,7 @@ list list_insertion_sort(list in, comparison_fn_t cmp) {
 
 char* to_string_list(list p) {
     list it = p;
-    size_t i = 0, len = length(p);
+    size_t i = 0, len = list_length(p);
     char** parts = malloc(len * sizeof(char*));
     char* contents, *result;
 

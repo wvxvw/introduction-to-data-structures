@@ -32,6 +32,11 @@ char* to_string_array(array p) {
     return result;
 }
 
+size_t array_length(array input) {
+    if (input == NULL) return 0;
+    return input->length;
+}
+
 array make_empty_array(size_t size) {
     array result = ALLOCATE(sizeof(printable_array));
     result->length = size;
@@ -40,6 +45,8 @@ array make_empty_array(size_t size) {
     presult->type = array_type();
     define_method(presult->type, to_string, to_string_array);
     define_method(presult->type, insertion_sort, array_insertion_sort);
+    define_method(presult->type, merge_sort, array_merge_sort);
+    define_method(presult->type, length, array_length);
     return result;
 }
 
@@ -74,6 +81,7 @@ array shuffled(array sorted) {
 }
 
 array slice(const array input, const size_t from, const size_t to) {
+    if (input->length == 0) return input;
     array result = ALLOCATE(sizeof(printable_array));
     result->length = to - from;
     result->elements = &input->elements[from];
@@ -337,6 +345,46 @@ printable* nth_order_statistic(array searched, size_t order, comparison_fn_t cmp
     return result;
 }
 
+array array_merge(array left, array right, comparison_fn_t cmp) {
+    if (left->length == 0) return right;
+    if (right->length == 0) return left;
+    if (left->length > 1) left = array_merge_sort(left, cmp);
+    if (right->length > 1) right = array_merge_sort(right, cmp);
+    array result = make_empty_array(left->length + right->length);
+    size_t i = 0, j = 0, k = 0;
+    while (i < left->length || j < right->length) {
+        if (i == left->length) {
+            while (j < right->length) {
+                result->elements[k] = right->elements[j];
+                k++;
+                j++;
+            }
+        } else if (j == right->length) {
+            while (i < left->length) {
+                result->elements[k] = left->elements[i];
+                k++;
+                i++;
+            }
+        } else if (cmp(&right->elements[j], &left->elements[i]) < 0) {
+            result->elements[k] = right->elements[j];
+            k++;
+            j++;
+        } else {
+            result->elements[k] = left->elements[i];
+            k++;
+            i++;
+        }
+    }
+    return result;
+}
+
+array array_merge_sort(array in, comparison_fn_t cmp) {
+    if (in == NULL || in->length == 1) return in;
+    array left = slice(in, 0, in->length / 2);
+    array right = slice(in, in->length / 2, in->length);
+    return array_merge(left, right, cmp);
+}
+
 pair three_way_partition(array partitioned, comparison_fn_t cmp) {
     time_t t;
     size_t lidx, ridx, i, mid = 1;
@@ -489,7 +537,7 @@ void bucket_sort(array unsorted, rationalization_fn_t rat, comparison_fn_t cmp) 
     key = 0;
     for (i = 0; i < len; i++) {
         list bucket = buckets[i];
-        bucket = merge_sort(bucket, compare_ints);
+        bucket = list_merge_sort(bucket, compare_ints);
         while (bucket != NULL) {
             unsorted->elements[key] = bucket->car;
             key++;
