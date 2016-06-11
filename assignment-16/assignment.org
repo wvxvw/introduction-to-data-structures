@@ -86,180 +86,95 @@
 * Problems
 
 ** Problem 1
-   1. Given a hash-table with initial capacity $m$.  What is the probability
-      four elements inserted will end up in the same bucket?
-   2. Given an ordered hash-table and elements $k_1$, $k_2$ and $k_3$ inserted
-      in that order, what is the chance of performing three comparisons when
-      inserting the third element?
-   3. Given hash-table s.t. its density is $1-\frac{1}{\lg n}$. ... What is the
-      running time of ... search as the function of the array implementing the
-      hash-table?
+   1. Given a hash-table with chaining of initial capacity $m$.  What is the
+      probability four elements inserted will end up in the same bucket?
+   2. Given a hash-table with open addressing and elements $k_1$, $k_2$ and
+      $k_3$ inserted in that order, what is the chance of performing three
+      checks when inserting the third element?
+   3. Given hash-table s.t. its density is $1-\frac{1}{\lg n}$.  Provided the
+      table uses open addressing, what is the expected time of failed search as
+      a function of $n$?
 
 *** Answer 1
+    Our simplifying assumption is that we draw hashing functions at random from
+    a universe of hashing functions allows us to say that a probability of a key
+    being hashed to a slot in the table of $m$ slots is $\frac{1}{m}$.  Using
+    product law we can conclude that the probability of four keys being mapped
+    to the same slot is
+    $\frac{1}{m}\times\frac{1}{m}\times\frac{1}{m}=\frac{1}{m^3}$.
 
 *** Answer 2
+    Using the same simplifying assumption as before, we see that for the element
+    $k_3$ to be places only after three checks it has to first collide with
+    $k_1$ and then with $k_2$.  Using product law gives the probability of
+    $\frac{1}{m}\times\frac{1}{m}=\frac{1}{m^2}$.
 
 *** Answer 3
+    Recall that the average time needed for failed search in a hash table with
+    open addressing is $\frac{1}{1-\alpha}$.  Substituting $1-\frac{1}{\lg n}$
+    in place of $\alpha$ obtains:
+    #+HEADER: :exports results
+    #+HEADER: :results (by-backend (pdf "latex") (t "raw"))
+    #+BEGIN_SRC latex
+      \begin{align*}
+        \frac{1}{1-\alpha} &= \frac{1}{1-\frac{1}{\lg n}} \\
+        &= \frac{\lg n}{\lg n - 1}
+      \end{align*}
+   #+END_SRC
 
 ** Problem 2
    Given a set of rational numbers $S$ and a rational number $z$,
    1. write an algorithm that finds two distinct summands of $z$ with running
       time $\Theta(n)$.
-   2. Same is in (2), but for four summands and time $\Theta(n^2)$.
+   2. Same as in (2), but for four summands and time $\Theta(n^2)$.
 
 *** Answer 4
 
 *** Answer 5
 
 ** Problem 3
-   Given a directed graph with $n$ nodes there are $n + 1$ /left/ and /right/
-   nil-pointers.  After performing the following on this tree: If =left[z]= =
-   =nil=, then =left[z]= = =tree-predecessor(z)=, and if =right[z]= = =nil=,
-   then =right[z]= = =tree-cussessor(z)=.  The tree built in this way is called
-   ``frying pan'' (WTF?), and the arcs are called ``threads''.
+   Given a binary search tree with $n$ nodes there are $n + 1$ /left/ and
+   /right/ nil-pointers.  After performing the following on this tree: If
+   =left[z]= = =nil=, then =left[z]= = =tree-predecessor(z)=, and if =right[z]=
+   = =nil=, then =right[z]= = =tree-cussessor(z)=.  The tree built in this way
+   is called ``frying pan'' (WTF?), and the arcs are called ``threads''.
    1. How can one distinguish between actual arcs and ``threads''?
    2. Write procedures for inserting and removing elements from this tree.
    3. What is the benefit of using ``threads''?
 
 *** Answer 6
+    Search tree invariant implies that left pointer must point at a node with
+    a value less than the node holding the pointer, but predecessor would have
+    a value larger than the node holding the pointer.  The situation for right
+    node is symmetrical.
 
 *** Answer 7
 
-*** Answer 
+*** Answer 8
+    None what so ever.  Whoever wrote this question is a brainless moron, who
+    has no idea of how computers work.  He seems to believe that it matters
+    whether the node stores a null pointer or a pointer to some other node in
+    terms of amount of memory used, which is absolute bullshit.
 
 ** Problem 4
-   Given list of points $P = \{(x, y) \;|\; x^2 + y^2 \leq 0, x \geq 0\}$,
-   assuming uniform random distribution of points across the semi-circle, write
-   an algorithm for sorting them on $\tan \theta$, where $\theta$ is the angle
-   between $x$ axis and the line through origin and the given point.
+   Given array $A[1\dots n]$ s.t. 
+   #+HEADER: :exports results
+   #+HEADER: :results (by-backend (pdf "latex") (t "raw"))
+   #+BEGIN_SRC latex
+     \begin{align*}
+       A[1] > \dots > A[p] \\
+       A[p + 1] > \dots > A[q] \\
+       A[q + 1] > \dots > A[n] \\
+       A[1] < A[q] \\
+       A[p + 1] < A[n]
+     \end{align*}
+   #+END_SRC
+   insert it into binary tree.
+   1. What is the height of the resulting tree?
+   2. Erase $A[p+1]$ and insert it anew: how will the height and the shape of
+      the tree change?
+   
+*** Answer 9
 
-*** Answer 4
-    The idea is to take =atan2= of $x$ and $y$ coordinates and use this value
-    to represent the point.  Then use =bucket-sort= or =counting-sort= to sort
-    points as if they were floats.  Below is the necessary code to do that:
-
-    Point structure definitions:
-    #+BEGIN_SRC C
-      typedef struct point {
-          printable printable;
-      } point;
-
-      float atanxy(point* p) {
-          pair coords = (pair)((printable*)p)->val;
-          float x = *(float*)coords->first->val;
-          float y = *(float*)coords->last->val;
-          if (x == 0.0) return 1;
-          if (y == 0.0) return 0;
-          return y / sqrt(x * x + y * y + x);
-      }
-
-      char* point_to_string(point* p) {
-          size_t size = ((printable*)p)->size;
-          char* result = ALLOCATE(sizeof(char) * size);
-          pair coords = (pair)((printable*)p)->val;
-
-          snprintf(result, size, "{x: %.4f, y: %.4f, t: %.4f}",
-                   ,*(float*)coords->first->val,
-                   ,*(float*)coords->last->val,
-                   atanxy(p));
-          return result;
-      }
-    #+END_SRC
-
-    Auxilary functions:
-    #+BEGIN_SRC C
-      printable* random_point_element_generator(void* elt) {
-          point* result = ALLOCATE(sizeof(point));
-          printable* presult = (printable*)result;
-          pair coords = make_pair();
-          float x, y;
-                
-          x = (float)rand() / (float)RAND_MAX;
-          y = (float)rand() / (float)RAND_MAX;
-          coords->first = (printable*)make_printable_float(x);
-          coords->last = (printable*)make_printable_float(y);
-          presult->val = ALLOCATE(sizeof(pair));
-          presult->val = coords;
-          presult->to_string = (printer)point_to_string;
-          presult->size = (3 + FLT_DIG) * 3 + 16;
-          return presult;
-      }
-
-      printable* printable_atanxy(printable* p) {
-          point* pt = (point*)p;
-          return (printable*)make_printable_float(atanxy(pt));
-      }
-    #+END_SRC
-
-    #+BEGIN_LaTeX
-    \pagebreak
-    #+END_LaTeX
-
-    Callbacks for sorting algorithms:
-    #+BEGIN_SRC C
-      int compare_points(const void* a, const void* b) {
-          point* pa = *(point**)a;
-          point* pb = *(point**)b;
-          if (pa == pb) return 0;
-          if (pa == NULL) return -1;
-          if (pb == NULL) return 1;
-          float fpa = atanxy(pa);
-          float fpb = atanxy(pb);
-          return (fpa > fpb) - (fpa < fpb);
-      }
-
-      size_t rationalize_point(printable* elt, printable* min,
-                               printable* max, size_t range) {
-          float n = atanxy((point*)min);
-          float x = atanxy((point*)max);
-          float e = atanxy((point*)elt);
-          if (x == n) return 0;
-          return (size_t)(range * ((e - n) / (x - n)));
-      }
-    #+END_SRC
+*** Answer 10
     
-    Finally, example usage:
-    #+BEGIN_SRC C
-      int main() {
-          time_t t;
-          srand((unsigned)time(&t));
-          array test = make_random_array(
-              13, 3, 97, random_point_element_generator);
-          printf("Generated points array:\n%s\n",
-                 to_string((printable*)test));
-          bucket_sort(test, rationalize_point, compare_points);
-          printf("Sorted points array:\n%s\n",
-                 to_string((printable*)test));
-          array tans = array_map(test, printable_atanxy);
-          printf("Tangents:\n%s\n", to_string((printable*)tans));
-          return 0;
-      }
-    #+END_SRC
-
-    For implementation of =array_map=, =make_random_array=, =bucket_sort= and
-    =to_string= please see library code.
-
-    #+BEGIN_LaTeX
-    \pagebreak
-    #+END_LaTeX
-
-    Example output:
-    #+BEGIN_EXAMPLE
-      Generated points array:
-      [{x: 0.8257, y: 0.8677, t: 0.7606}, {x: 0.1002, y: 0.3438, t: 0.2836},
-      {x: 0.9552, y: 0.9093, t: 0.8100}, {x: 0.0602, y: 0.3771, t: 0.1584},
-      {x: 0.6079, y: 0.8967, t: 0.5957}, {x: 0.2550, y: 0.9156, t: 0.2716},
-      {x: 0.6398, y: 0.0718, t: 1.4590}, {x: 0.7224, y: 0.6434, t: 0.8432},
-      {x: 0.9814, y: 0.6833, t: 0.9626}, {x: 0.7193, y: 0.7053, t: 0.7952},
-      {x: 0.3380, y: 0.5310, t: 0.5668}, {x: 0.4476, y: 0.6312, t: 0.6168},
-      {x: 0.3246, y: 0.5864, t: 0.5055}]
-
-      Sorted points array:
-      [{y: 0.3771, x: 0.0602, t: 0.1584}, {y: 0.9156, x: 0.255, t: 0.2716},
-      {y: 0.3438, x: 0.1002, t: 0.2836}, {y: 0.5864, x: 0.3246, t: 0.5055},
-      {y: 0.531, x: 0.338, t: 0.5668}, {y: 0.8967, x: 0.6079, t: 0.5957},
-      {y: 0.6312, x: 0.4476, t: 0.6168}, {y: 0.8677, x: 0.8257, t: 0.7606},
-      {y: 0.7053, x: 0.7193, t: 0.7952}, {y: 0.9093, x: 0.9552, t: 0.81},
-      {y: 0.6434, x: 0.7224, t: 0.8432}, {y: 0.6833, x: 0.9814, t: 0.9626},
-      {y: 0.0718, x: 0.6398, t: 1.459}]
-    #+END_EXAMPLE

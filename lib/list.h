@@ -37,6 +37,19 @@ typedef struct cell {
 
 typedef cell* list;
 
+typedef struct dcell dcell;
+
+typedef struct dcell {
+    
+    cell cell;
+    
+    dcell* dcdr;
+} dcell;
+
+typedef dcell* dlist;
+
+dlist dcons(printable* car, dlist cdr);
+
 /** \fn cons
  *  \brief Constructs new list by prepending \c car.
  *
@@ -59,7 +72,7 @@ list cons(printable* car, list cdr);
  *          list in reverse order.
  */
 ASSIGNMENTLIB_API 
-list reverse(list input);
+list list_reverse(list input);
 
 /** \fn list_length
  *  \brief Computes the length of the given list.
@@ -102,7 +115,7 @@ char* to_string_list(list p);
  *  \return Concatenated list (all elements are fresh).
  */
 ASSIGNMENTLIB_API 
-list append(list a, list b);
+list list_append(list a, list b);
 
 /** \fn list_merge_sort
  *  \brief Implementation of \c merge_sort.
@@ -125,5 +138,14 @@ list list_merge_sort(list in, comparison_fn_t cmp);
  */
 ASSIGNMENTLIB_API 
 list list_insertion_sort(list in, comparison_fn_t cmp);
+
+ASSIGNMENTLIB_API 
+dlist dlist_reverse(dlist input);
+
+ASSIGNMENTLIB_API 
+dlist dlist_append(dlist a, dlist b);
+
+ASSIGNMENTLIB_API 
+dlist make_dlist(printable** elements, size_t size);
 
 #endif // LIST_H_

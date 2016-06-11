@@ -10,9 +10,11 @@
 
 #include "printable.h"
 #include "printable_int.h"
+#include "printable_string.h"
 #include "array.h"
 #include "list.h"
 #include "generic.h"
+#include "hashtable.h"
 
 void test_type() {
     array test = make_empty_array(10);
@@ -43,6 +45,27 @@ void test_merge_sort() {
     printf("sorted array: %s\n", to_string((printable*)sorted));
 }
 
+void test_dlist() {
+    array unsorted = make_random_array(13, 3, 97, int_element_generator);
+    dlist test = make_dlist(unsorted->elements, unsorted->length);
+    printf("doubly-linked list: %s\n", to_string((printable*)test));
+}
+
+void test_chashtable() {
+    char* keys[4] = { "foo", "bar", "baz", "qux" };
+    array values = make_random_array(4, 17, 123, int_element_generator);
+    list data = NULL;
+    size_t i;
+
+    for (i = 0; i < values->length; i++) {
+        pair kv = make_pair();
+        kv->first = (printable*)make_printable_string(keys[i]);
+        kv->last = values->elements[i];
+    }
+    chashtable test = make_chashtable(hash, 11, data);
+    printf("created hash-table: %s\n", to_string((printable*)test));
+}
+
 int main() {
 #ifdef WITH_GC
     GC_INIT();
@@ -51,5 +74,7 @@ int main() {
     test_array_to_string();
     test_insertion_sort();
     test_merge_sort();
+    test_dlist();
+    test_chashtable();
     return 0;
 }

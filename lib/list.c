@@ -8,6 +8,7 @@
 #include "sortable.h"
 
 DEFTYPE(list);
+DEFTYPE(dlist);
 
 list cons(printable* car, list cdr) {
     list result = ALLOCATE(sizeof(cell));
@@ -17,12 +18,14 @@ list cons(printable* car, list cdr) {
     define_method(presult->type, insertion_sort, list_insertion_sort);
     define_method(presult->type, length, list_length);
     define_method(presult->type, merge_sort, list_merge_sort);
+    define_method(presult->type, reverse, list_reverse);
+    define_method(presult->type, append, list_append);
     result->car = car;
     result->cdr = cdr;
     return result;
 }
 
-list reverse(list input) {
+list list_reverse(list input) {
     list result = NULL;
     while (input != NULL) {
         result = cons(input->car, result);
@@ -50,7 +53,7 @@ size_t list_length(list input) {
     return i;
 }
 
-list append(list a, list b) {
+list list_append(list a, list b) {
     list result = NULL;
     while (a != NULL) {
         result = cons(a->car, result);
@@ -60,7 +63,7 @@ list append(list a, list b) {
         result = cons(b->car, result);
         b = b->cdr;
     }
-    return reverse(result);
+    return list_reverse(result);
 }
 
 list merge(list odds, list evens, comparison_fn_t cmp) {
@@ -150,5 +153,51 @@ char* to_string_list(list p) {
 	result = ALLOCATE(sizeof(char) * (strlen(contents) + 3));
 	sprintf(result, "(%s)", contents);
     free(parts);
+    return result;
+}
+
+dlist dcons(printable* car, dlist cdr) {
+    dlist result = ALLOCATE(sizeof(dcell));
+    printable* presult = (printable*)result;
+    presult->type = dlist_type();
+    define_method(presult->type, to_string, to_string_list);
+    define_method(presult->type, insertion_sort, list_insertion_sort);
+    define_method(presult->type, length, list_length);
+    define_method(presult->type, merge_sort, list_merge_sort);
+    define_method(presult->type, reverse, list_reverse);
+    define_method(presult->type, append, list_append);
+    ((list)result)->car = car;
+    ((list)result)->cdr = (list)cdr;
+    if (cdr != NULL) cdr->dcdr = result;
+    return result;
+}
+
+dlist dlist_reverse(dlist input) {
+    dlist result = NULL;
+    while (input != NULL) {
+        result = dcons(((list)input)->car, result);
+        input = (dlist)((list)input)->cdr;
+    }
+    return result;
+}
+
+dlist dlist_append(dlist a, dlist b) {
+    dlist result = NULL;
+    while (a != NULL) {
+        result = dcons(((list)a)->car, result);
+        a = (dlist)((list)a)->cdr;
+    }
+    while (b != NULL) {
+        result = dcons(((list)b)->car, result);
+        b = (dlist)((list)b)->cdr;
+    }
+    return dlist_reverse(result);
+}
+
+dlist make_dlist(printable** elements, size_t size) {
+    size_t i;
+    dlist result = NULL;
+    
+    for (i = size; i > 0; i--) result = dcons(elements[i - 1], result);
     return result;
 }

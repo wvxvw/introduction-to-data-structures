@@ -17,6 +17,8 @@ size_t get_int_cmp_count() { return ints_comparation_count; }
 int compare_ints(const void* a, const void* b) {
     const printable* pa = *(printable* const *)a;
     const printable* pb = *(printable* const *)b;
+
+    ints_comparation_count++;
     if (pa == pb) return 0;
     if (pa == NULL) return -1;
     if (pb == NULL) return 1;
@@ -25,7 +27,6 @@ int compare_ints(const void* a, const void* b) {
     if (pa->val == NULL) return -1;
     if (pb->val == NULL) return 1;
 
-    ints_comparation_count++;
     const int* ia = (int*)pa->val;
     const int* ib = (int*)pb->val;
     return (*ia > *ib) - (*ia < *ib);
@@ -36,7 +37,7 @@ int compare_ints_reverse(const void* a, const void* b) {
 }
 
 char* to_string_int(const printable_int* p) {
-    char* buffer = ALLOCATE(9 * sizeof(char));
+    char* buffer = ALLOCATE(11 * sizeof(char));
     printable* base = (printable*)p;
     
     if (base->val == NULL) sprintf(buffer, "%p", base->val);

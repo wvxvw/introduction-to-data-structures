@@ -78,4 +78,13 @@ sortable merge_sort(sortable unsorted, comparison_fn_t cmp);
 ASSIGNMENTLIB_API 
 size_t length(sortable input);
 
+ASSIGNMENTLIB_API 
+sortable reverse(sortable unsorted);
+
+ASSIGNMENTLIB_API 
+sortable append(sortable a, sortable b);
+
+ASSIGNMENTLIB_API 
+printable* find(sortable haystack, printable* needle);
+
 #endif // SORTABLE_H_
