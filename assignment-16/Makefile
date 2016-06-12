@@ -4,7 +4,7 @@ LIB := $(abspath ../lib)
 OBJECTS := $(SOURCES:.c=.o)
 CFLAGS := -Wall -fPIC -ggdb -I$(LIB)
 SHARED :=  -L$(LIB) -lassignments -lgc -lm
-PROGRAM := assignment-1.3
+PROGRAM := assignment-1.6
 
 default: program
 

@@ -216,7 +216,7 @@
 *** Answer 7
     It's the same procedure you would use with a regular binary search tree,
     however instead of checking for =NULL= you would check if the value pointed
-    at is larger or greater, depending on side you are inserting the child at.
+    at is less or greater, depending on side you are inserting the child at.
 
 *** Answer 8
     No difference what so ever.  It doesn't matter whether the pointer points
@@ -242,6 +242,14 @@
       the tree change?
    
 *** Answer 9
+    The height of the resulting tree is $\max(p, 1 + q - p, 2 + n - q)$.  This is
+    so because we will only insert right nodes at $A[p + 1]$ and $A[q + 1]$.  After
+    that all nodes inserted at the left side of the last right node inserted.
 
 *** Answer 10
+    After reinserting $A[p + 1]$ it will become right child of its former left
+    child.  This operation is essentially equivalent to left rotation, so it
+    will increase the height of the tree by one if $p < 1 + q - p \land q - p >
+    n - q$, it will decrease it if $p < 1 + q - p \land q - p < n - q$ and it
+    will leave it unchanged if $p > 1 + q - p \land p > 2 + n - q$.
     

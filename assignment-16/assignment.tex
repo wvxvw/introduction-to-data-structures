@@ -1,4 +1,4 @@
-% Created 2016-06-12 Sun 22:49
+% Created 2016-06-12 Sun 23:36
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -231,7 +231,7 @@ node is symmetrical.
 \label{sec-1-3-2}
 It's the same procedure you would use with a regular binary search tree,
 however instead of checking for \texttt{NULL} you would check if the value pointed
-at is larger or greater, depending on side you are inserting the child at.
+at is less or greater, depending on side you are inserting the child at.
 
 \subsubsection{Answer 8}
 \label{sec-1-3-3}
@@ -259,8 +259,16 @@ the tree change?
 
 \subsubsection{Answer 9}
 \label{sec-1-4-1}
+The height of the resulting tree is $\max(p, 1 + q - p, 2 + n - q)$.  This is
+so because we will only insert right nodes at $A[p + 1]$ and $A[q + 1]$.  After
+that all nodes inserted at the left side of the last right node inserted.
 
 \subsubsection{Answer 10}
 \label{sec-1-4-2}
+After reinserting $A[p + 1]$ it will become right child of its former left
+child.  This operation is essentially equivalent to left rotation, so it
+will increase the height of the tree by one if $p < 1 + q - p \land q - p >
+    n - q$, it will decrease it if $p < 1 + q - p \land q - p < n - q$ and it
+will leave it unchanged if $p > 1 + q - p \land p > 2 + n - q$.
 % Emacs 25.1.50.2 (Org mode 8.2.10)
 \end{document}
