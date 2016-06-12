@@ -44,10 +44,10 @@ sortable append(sortable a, sortable b) {
     return method(a, b);
 }
 
-printable* find(sortable haystack, printable* needle) {
+printable* find(sortable haystack, printable* needle, comparison_fn_t cmp) {
     if (haystack == NULL) return false;
     printable* p = haystack;
-    printable* (*fptr)(sortable, printable*) = find;
-    printable* (*method)(sortable, printable*) = find_method(p->type, fptr);
-    return method(haystack, needle);
+    printable* (*fptr)(sortable, printable*, comparison_fn_t) = find;
+    printable* (*method)(sortable, printable*, comparison_fn_t) = find_method(p->type, fptr);
+    return method(haystack, needle, cmp);
 }

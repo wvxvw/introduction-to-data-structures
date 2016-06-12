@@ -86,11 +86,33 @@ chashtable make_empty_chashtable(hash_fn_t h) {
 
 dlist chashtable_put(chashtable table, unsigned char* key, printable* val) {
     size_t skey = table->hash(key) % table->length;
-    if (find(table->values[skey], val) == NULL) {
-        table->values[skey] = dcons(val, table->values[skey]);
-        table->keys[skey] =
-                dcons((printable*)make_printable_string(key), table->keys[skey]);
+    dlist keys = table->keys[skey];
+    dlist values = table->values[skey];
+    printable_string* pkey = make_printable_string(key);
+    printable* existing = find(table->keys[skey], (printable*)pkey, compare_strings);
+    
+    if (existing == NULL) {
+        table->values[skey] = dcons(val, values);
+        table->keys[skey] = dcons((printable*)make_printable_string(key), keys);
         return table->keys[skey];
+    } else {
+        while (keys != NULL) {
+            if (existing == ((list)keys)->car) {
+                if (val == ((list)values)->car) {
+                    return keys;
+                }
+                dlist ins = dcons(val, (dlist)((list)values)->cdr);
+                if (values->dcdr != NULL) {
+                    ((list)values->dcdr)->cdr = (list)ins;
+                    ins->dcdr = values->dcdr;
+                } else {
+                    table->values[skey] = ins;
+                }
+                return ins;
+            }
+            keys = (dlist)((list)keys)->cdr;
+            values = (dlist)((list)values)->cdr;
+        }
     }
     return NULL;
 }
@@ -124,10 +146,11 @@ printable* chashtable_get(chashtable table, unsigned char* key) {
     dlist values = table->values[skey];
 
     while (keys != NULL) {
-        if (compare_strings(&((list)keys)->car->val, &ps) == 0) {
+        if (compare_strings(&((list)keys)->car, &ps) == 0) {
             return ((list)values)->car;
         }
         keys = (dlist)((list)keys)->cdr;
         values = (dlist)((list)values)->cdr;
     }
+    return NULL;
 }

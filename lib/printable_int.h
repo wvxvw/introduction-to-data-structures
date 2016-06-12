@@ -73,8 +73,11 @@ size_t get_int_cmp_count();
 ASSIGNMENTLIB_API 
 int compare_ints_reverse(const void* a, const void* b);
 
-ASSIGNMENTLIB_API 
+ASSIGNMENTLIB_API
 size_t int_element_normalizer(
     printable* elt, printable* min, printable* max, size_t range);
+
+ASSIGNMENTLIB_API
+printable_int* make_printable_int(const int val);
 
 #endif // PRINTABLE_INT_H_

@@ -26,10 +26,10 @@ list cons(printable* car, list cdr) {
     return result;
 }
 
-printable* list_find(list haystack, printable* needle) {
+printable* list_find(list haystack, printable* needle, comparison_fn_t cmp) {
     list it = haystack;
     while (it != NULL) {
-        if (it->car == needle) return it->car;
+        if (cmp(&it->car, &needle) == 0) return it->car;
         it = it->cdr;
     }
     return NULL;

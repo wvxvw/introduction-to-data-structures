@@ -68,6 +68,81 @@ void test_chashtable() {
     printf("created hash-table: %s\n", to_string((printable*)test));
 }
 
+bool is_alnum(char c) {
+    return (c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
+}
+
+list load_words() {
+#define BUFF_SIZE 255
+   FILE* fp;
+   char buff[BUFF_SIZE];
+   list result = NULL;
+   bool finished = false;
+   char* prefix = "";
+   size_t prefix_len = 0;
+
+   fp = fopen("./assignment-16/test.data", "r");
+
+   while (!finished && !feof(fp) && !ferror(fp)) {
+       memset(buff, 0, BUFF_SIZE);
+       fread(buff, sizeof(char), BUFF_SIZE, fp);
+       char current;
+       size_t start = 0, word_len, i;
+       char* word, *suffix;
+       
+       for (i = 0; i < BUFF_SIZE; i++) {
+           current = buff[i];
+           if (current == '\0') {
+               finished = true;
+               break;
+           }
+           if (!is_alnum(current)) {
+               if (start + 1 < i) {
+                   word_len = prefix_len + i - start + 1;
+                   suffix = ALLOCATE(sizeof(char) * (i - start));
+                   strncpy(suffix, buff + start, i - start);
+               } else if (prefix_len > 0) {
+                   word_len = prefix_len + 1;
+                   suffix = "";
+               }
+               if (word_len > 1) {
+                   word = ALLOCATE(sizeof(char) * word_len);
+                   sprintf(word, "%s%s", prefix, suffix);
+                   result = cons((printable*)make_printable_string(word), result);
+                   prefix_len = 0;
+                   prefix = "";
+                   word_len = 0;
+               }
+               start = i + 1;
+           }
+       }
+       if (start + 1 < i) {
+           prefix_len = i - start;
+           prefix = ALLOCATE(sizeof(char) * prefix_len + 1);
+           strncpy(prefix, buff + start, prefix_len);
+       }
+   }
+   fclose(fp);
+   return reverse(result);
+#undef BUFF_SIZE
+}
+
+void test_dictionary_ops() {
+    chashtable dic = make_empty_chashtable(hash);
+    list words = load_words();
+    printf("Loaded words: %s\n", to_string((printable*)words));
+    while (words != NULL) {
+        int count = 1;
+        unsigned char* key = (unsigned char*)words->car->val;
+        printable_int* maybe = (printable_int*)chashtable_get(dic, key);
+        if (maybe != NULL) count = *(int*)((printable*)maybe)->val + 1;
+        printable_int* pi = make_printable_int(count);
+        chashtable_put(dic, key, (printable*)pi);
+        words = words->cdr;
+    }
+    printf("Generated hash-table: %s\n", to_string((printable*)dic));
+}
+
 int main() {
 #ifdef WITH_GC
     GC_INIT();
@@ -78,5 +153,6 @@ int main() {
     test_merge_sort();
     test_dlist();
     test_chashtable();
+    test_dictionary_ops();
     return 0;
 }

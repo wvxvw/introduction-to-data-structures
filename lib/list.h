@@ -52,7 +52,7 @@ ASSIGNMENTLIB_API
 dlist dcons(printable* car, dlist cdr);
 
 ASSIGNMENTLIB_API
-printable* list_find(list haystack, printable* needle);
+printable* list_find(list haystack, printable* needle, comparison_fn_t cmp);
 
 /** \fn cons
  *  \brief Constructs new list by prepending \c car.

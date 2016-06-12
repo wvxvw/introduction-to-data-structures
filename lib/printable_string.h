@@ -66,6 +66,6 @@ char* to_string_string(const printable_string* p);
 ASSIGNMENTLIB_API 
 printable* string_element_generator(void* elt);
 
-printable_string* make_printable_string(char* val);
+printable_string* make_printable_string(unsigned char* val);
 
 #endif // PRINTABLE_STRING_H_

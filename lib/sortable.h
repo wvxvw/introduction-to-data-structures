@@ -85,6 +85,6 @@ ASSIGNMENTLIB_API
 sortable append(sortable a, sortable b);
 
 ASSIGNMENTLIB_API 
-printable* find(sortable haystack, printable* needle);
+printable* find(sortable haystack, printable* needle, comparison_fn_t cmp);
 
 #endif // SORTABLE_H_
