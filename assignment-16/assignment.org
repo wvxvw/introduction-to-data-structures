@@ -129,8 +129,73 @@
    2. Same as in (2), but for four summands and time $\Theta(n^2)$.
 
 *** Answer 4
+    See the auxilary function =two_summands_of= in the following answer for
+    illustration.
+
+    The basic idea is to put all numbers from $S$ into a hash-table.  Then loop
+    over $k_i$ the keys of the resulting hash-table and look for a key $k_j$,
+    s.t.  $k_j = z - k_i$.  This lookup can be done in constant time while loop
+    over the hash-table will take linear time.  Thus the eintire alrogrithm will
+    complete in time linear in number size of $S$.
 
 *** Answer 5
+    The idea is to compute all possible sums of two distinct elements in $S$.
+    This can be accomplished in quadratic time.  Then we run modified
+    =two_summands_of= on the resulting sums.  We modify it to allow for the same
+    sum produced in different ways.  It is again easy to see that the auxilary
+    function =two_summands_of= runs only once and in linear time in the size of
+    its input, that is quadratic in size of $S$, and the preparation step runs
+    in quadratic time as well.  Thus overall complexity of =four_summands_of= is
+    quadratic in size of $S$.
+
+    #+BEGIN_SRC C
+      list two_summands_of(int sum, chashtable summands) {
+          iterator* it = (iterator*)make_hashtable_iterator(summands);
+          do {
+              pair kv = (pair)((printable*)it)->val;
+              printable* a = kv->first;
+              int s = *(int*)a->val;
+              printable* b = (printable*)make_printable_int(sum - s);
+              printable* found = chashtable_get(summands, b);
+              if (found != NULL) {
+                  if (s * 2 == sum && ((list)kv->last)->cdr == NULL)
+                      continue;
+                  else if (s * 2 == sum)
+                      return cons(((list)kv->last)->car,
+                                  cons(((list)kv->last)->cdr->car, NULL));
+                  else return cons(kv->last, cons(found, NULL));
+              }
+          } while (next(it));
+          return NULL;
+      }
+    #+END_SRC
+
+    #+BEGIN_SRC C
+      list four_summands_of(int sum, array summands) {
+          chashtable table = make_empty_int_chashtable();
+          size_t i, j;
+          for (i = 0; i < summands->length; i++) {
+              printable* a = summands->elements[i];
+              for (j = i + 1; j < summands->length; j++) {
+                  printable* b = summands->elements[j];
+                  printable* halfsum = printable_sum(a, b);
+                  pair elts = make_pair();
+                  elts->first = a;
+                  elts->last = b;
+                  list wrapper = cons((printable*)elts, NULL);
+                  printable* found = chashtable_get(table, halfsum);
+                  if (found != NULL)
+                      wrapper = cons((printable*)found, wrapper);
+                  chashtable_put(table, halfsum, (printable*)wrapper);
+              }
+          }
+          list four = two_summands_of(sum, table);
+          if (four != NULL) four = append(four->car, four->cdr->car);
+          return four;
+      }
+    #+END_SRC
+
+    /(Look for utility functions in [[../lib]])/
 
 ** Problem 3
    Given a binary search tree with $n$ nodes there are $n + 1$ /left/ and
@@ -149,12 +214,14 @@
     node is symmetrical.
 
 *** Answer 7
+    It's the same procedure you would use with a regular binary search tree,
+    however instead of checking for =NULL= you would check if the value pointed
+    at is larger or greater, depending on side you are inserting the child at.
 
 *** Answer 8
-    None what so ever.  Whoever wrote this question is a brainless moron, who
-    has no idea of how computers work.  He seems to believe that it matters
-    whether the node stores a null pointer or a pointer to some other node in
-    terms of amount of memory used, which is absolute bullshit.
+    No difference what so ever.  It doesn't matter whether the pointer points
+    as some other node or nowhere.  It makes it more difficult to write code
+    to work with such trees, but that's about it.
 
 ** Problem 4
    Given array $A[1\dots n]$ s.t. 

@@ -121,16 +121,65 @@ void test_hashtable_iterator() {
     } while (next(it));
 }
 
-/* list four_summands_of(int sum, array summands) { */
-/*     chashtable table = make_empty_int_chashtable(); */
-/*     size_t i; */
+printable* printable_sum(printable* a, printable* b) {
+    int ia = *(int*)a->val;
+    int ib = *(int*)b->val;
+    return (printable*)make_printable_int(ia + ib);
+}
 
-/*     for (i = 0; i < array->length; i++) */
-/*         chashtable_put(table, array->elements[i], array->elements[i]); */
-/*     for (i = 0; i < table->length; i++) { */
-        
-/*     } */
-/* } */
+list two_summands_of(int sum, chashtable summands) {
+    iterator* it = (iterator*)make_hashtable_iterator(summands);
+    do {
+        pair kv = (pair)((printable*)it)->val;
+        printable* a = kv->first;
+        int summand = *(int*)a->val;
+        printable* b = (printable*)make_printable_int(sum - summand);
+        printable* found = chashtable_get(summands, b);
+        if (found != NULL) {
+            if (summand * 2 == sum && ((list)kv->last)->cdr == NULL) {
+                continue;
+            } else if (summand * 2 == sum) {
+                return cons(((list)kv->last)->car,
+                            cons(((list)kv->last)->cdr->car, NULL));
+            } else {
+                return cons(kv->last, cons(found, NULL));
+            }
+        }
+    } while (next(it));
+    return NULL;
+}
+
+list four_summands_of(int sum, array summands) {
+    chashtable table = make_empty_int_chashtable();
+    size_t i, j;
+
+    for (i = 0; i < summands->length; i++) {
+        printable* a = summands->elements[i];
+        for (j = i + 1; j < summands->length; j++) {
+            printable* b = summands->elements[j];
+            printable* halfsum = printable_sum(a, b);
+            pair elts = make_pair();
+            elts->first = a;
+            elts->last = b;
+            list wrapper = cons((printable*)elts, NULL);
+            printable* found = chashtable_get(table, halfsum);
+            if (found != NULL) wrapper = cons((printable*)found, wrapper);
+            chashtable_put(table, halfsum, (printable*)wrapper);
+        }
+    }
+    list four = two_summands_of(sum, table);
+    if (four != NULL) four = append(four->car, four->cdr->car);
+    return four;
+}
+
+void tests_summands() {
+    int ints[8] = {1, 2, 3, 4, 5, 6, 7, 8};
+    array test = make_array_from_pointer(
+        ints, 8, int_element_generator);
+    list summands = four_summands_of(17, test);
+    printf("Found decomposition of 17 = %s\n",
+           to_string((printable*)summands));
+}
 
 int main() {
 #ifdef WITH_GC
@@ -145,5 +194,6 @@ int main() {
     test_dictionary_ops();
     test_int_hash();
     test_hashtable_iterator();
+    tests_summands();
     return 0;
 }
