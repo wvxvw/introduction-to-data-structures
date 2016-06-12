@@ -251,48 +251,6 @@ long get_swap_count();
 ASSIGNMENTLIB_API 
 char* to_string_array(array p);
 
-typedef struct iterator_impl iterator_impl;
-
-/** \brief The function to advance the iterator one position
- *  \param it The iterator being acted on.
- */
-typedef bool (*iterator_func)(iterator_impl* it);
-
-/** \brief The iterator information storage cell.
- */
-typedef struct iterator_impl {
-
-    /** \brief The iterator function (the one which actually does the iteration).
-     */
-    iterator_func it;
-
-    /** \brief The current position of iterator.
-     */
-    size_t pos;
-
-    /** \brief The array being iterated.
-     */
-    array iterated;
-
-    /** \brief The current value of the iterator.
-     */
-    printable* value;
-} iterator_impl;
-
-/** \brief The interface to iterating the array.
- *
- *  \param impl The iterator aced on.
- */
-ASSIGNMENTLIB_API 
-bool next(iterator_impl* impl);
-
-/** \brief The concrete iterator implementation.
- *
- *  \param iterated The array to create an iterator for.
- */
-ASSIGNMENTLIB_API 
-iterator_impl* iterator(array iterated);
-
 /** \brief Given ordering function \c cmp, arrange the \c paritioned
  *         array in the way such that all elements less than its first
  *         original elment are on the left of it and the remaining elements

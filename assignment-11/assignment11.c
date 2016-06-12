@@ -11,6 +11,7 @@
 #include "pair.h"
 #include "printable_int.h"
 #include "printable_float.h"
+#include "iterable.h"
 
 /** \brief Find out whether the give \c array is sparce, i.e.
  *         whether it has all of its elements in increasing order
@@ -116,10 +117,10 @@ void test_iterator() {
     int ints[8] = {1, 2, 3, 4, 5, 6, 7, 8};
     array test = make_array_from_pointer(
         ints, 8, float_element_generator);
-    iterator_impl* it = iterator(test);
+    iterator* it = make_array_iterator(test);
     printf("Going to iterate\n");
     while (next(it)) {
-        printf("Value: %s\n", to_string(it->value));
+        printf("Value: %s\n", to_string((printable*)it));
     }
     printf("Finished to iterate\n");
 }

@@ -16,6 +16,7 @@
 #include "generic.h"
 #include "hashtable.h"
 #include "files.h"
+#include "iterable.h"
 
 void test_type() {
     array test = make_empty_array(10);
@@ -100,6 +101,37 @@ void test_int_hash() {
     printf("Generated int hash-table: %s\n", to_string((printable*)dic));
 }
 
+void test_hashtable_iterator() {
+    char* keys[4] = { "foo", "bar", "baz", "qux" };
+    array values = make_random_array(4, 17, 123, int_element_generator);
+    list data = NULL;
+    size_t i;
+
+    for (i = 0; i < values->length; i++) {
+        pair kv = make_pair();
+        kv->first = (printable*)make_printable_string(keys[i]);
+        kv->last = values->elements[i];
+        data = cons((printable*)kv, data);
+    }
+    chashtable test = make_string_chashtable(11, data);
+    iterator* it = make_hashtable_iterator(test);
+    do {
+        pair kv = (pair)((printable*)it)->val;
+        printf("%s => %s\n", to_string(kv->first), to_string(kv->last));
+    } while (next(it));
+}
+
+/* list four_summands_of(int sum, array summands) { */
+/*     chashtable table = make_empty_int_chashtable(); */
+/*     size_t i; */
+
+/*     for (i = 0; i < array->length; i++) */
+/*         chashtable_put(table, array->elements[i], array->elements[i]); */
+/*     for (i = 0; i < table->length; i++) { */
+        
+/*     } */
+/* } */
+
 int main() {
 #ifdef WITH_GC
     GC_INIT();
@@ -112,5 +144,6 @@ int main() {
     test_chashtable();
     test_dictionary_ops();
     test_int_hash();
+    test_hashtable_iterator();
     return 0;
 }

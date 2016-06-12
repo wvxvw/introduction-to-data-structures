@@ -42,6 +42,8 @@ void* find_method(size_t type, void* generic);
 
 char* to_string_type(vt* type);
 
+void print_methods(size_t type);
+
 #define DEFTYPE(type)                                   \
     static bool type ## _type_initialized = false;      \
     static size_t raw_ ## type ## _type;                \

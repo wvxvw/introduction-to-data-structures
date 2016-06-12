@@ -74,12 +74,23 @@ void define_method(size_t type, void* generic, void* method) {
     table->len++;
 }
 
+void print_methods(size_t type) {
+    size_t i;
+    vt* table = types[type];
+    
+    for (i = 0; i < table->len; i++) {
+        printf("%p :: method registered: %p, %p\n",
+               table, table->generics[i], table->methods[i]);
+    }
+}
+
 void* find_method(size_t type, void* generic) {
     vt* table = types[type];
     if (table == NULL || table->methods == NULL) return NULL;
     size_t i;
-    for (i = 0; i < table->len; i++)
+    for (i = 0; i < table->len; i++) {
         if (table->generics[i] == generic)
             return table->methods[i];
+    }
     return NULL;
 }
