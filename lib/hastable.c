@@ -5,6 +5,7 @@
 #include "pair.h"
 #include "list.h"
 #include "printable_string.h"
+#include "printable_int.h"
 #include "hashtable.h"
 #include "sortable.h"
 #include "strings.h"
@@ -14,13 +15,19 @@ DEFTYPE(chashtable);
 static size_t default_size = 47;
 
 // Credits: http://www.cse.yorku.ca/~oz/hash.html
-unsigned long hash(unsigned char *str) {
+unsigned long string_hash(printable* elt) {
+    unsigned char* str = to_string(elt);
     unsigned long hash = 5381;
     int c;
 
     while (c = *str++)
         hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
     return hash;
+}
+
+unsigned long int_hash(printable* elt) {
+    int val = *(int*)((printable*)elt)->val;
+    return val;
 }
 
 void upsize(chashtable table) {
@@ -32,9 +39,7 @@ void populate(chashtable table, list data) {
     while (data != NULL) {
         if (i >= table->length) upsize(table);
         pair p = (pair)data->car;
-        unsigned char* key = (unsigned char*)p->first->val;
-        printable* val = p->last;
-        chashtable_put(table, key, val);
+        chashtable_put(table, p->first, p->last);
         data = data->cdr;
     }
 }
@@ -67,7 +72,7 @@ char* to_string_chashtable(chashtable ct) {
     return result;
 }
 
-chashtable make_chashtable(hash_fn_t h, size_t size, list data) {
+chashtable make_chashtable(hash_fn_t h, size_t size, list data, comparison_fn_t cmp) {
     chashtable result = ALLOCATE(sizeof(printable_chained_hashtable));
     printable* presult = (printable*)result;
     presult->type = chashtable_type();
@@ -76,24 +81,40 @@ chashtable make_chashtable(hash_fn_t h, size_t size, list data) {
     result->keys = ALLOCATE(sizeof(size_t) * result->length);
     result->values = ALLOCATE(sizeof(dlist) * result->length);
     result->hash = h;
+    result->cmp = cmp;
     populate(result, data);
     return result;
 }
 
-chashtable make_empty_chashtable(hash_fn_t h) {
-    return make_chashtable(h, default_size, NULL);
+chashtable make_empty_chashtable(hash_fn_t h, comparison_fn_t cmp) {
+    return make_chashtable(h, default_size, NULL, cmp);
 }
 
-dlist chashtable_put(chashtable table, unsigned char* key, printable* val) {
+chashtable make_empty_string_chashtable() {
+    return make_chashtable(string_hash, default_size, NULL, compare_strings);
+}
+
+chashtable make_string_chashtable(size_t size, list data) {
+    return make_chashtable(string_hash, size, data, compare_strings);
+}
+
+chashtable make_empty_int_chashtable() {
+    return make_chashtable(int_hash, default_size, NULL, compare_ints);
+}
+
+chashtable make_int_chashtable(size_t size, list data) {
+    return make_chashtable(string_hash, size, data, compare_ints);
+}
+
+dlist chashtable_put(chashtable table, printable* key, printable* val) {
     size_t skey = table->hash(key) % table->length;
     dlist keys = table->keys[skey];
     dlist values = table->values[skey];
-    printable_string* pkey = make_printable_string(key);
-    printable* existing = find(table->keys[skey], (printable*)pkey, compare_strings);
+    printable* existing = find(table->keys[skey], key, *table->cmp);
     
     if (existing == NULL) {
         table->values[skey] = dcons(val, values);
-        table->keys[skey] = dcons((printable*)make_printable_string(key), keys);
+        table->keys[skey] = dcons(key, keys);
         return table->keys[skey];
     } else {
         while (keys != NULL) {
@@ -117,14 +138,13 @@ dlist chashtable_put(chashtable table, unsigned char* key, printable* val) {
     return NULL;
 }
 
-printable* chashtable_pop(chashtable table, unsigned char* key) {
+printable* chashtable_pop(chashtable table, printable* key) {
     size_t skey = table->hash(key) % table->length;
     dlist keys = table->keys[skey];
     dlist values = table->values[skey];
-    printable_string* ps = make_printable_string(key);
 
     while (keys != NULL) {
-        if (compare_strings(&((list)keys)->car->val, &ps) == 0) {
+        if ((*table->cmp)(&((list)keys)->car->val, &key) == 0) {
             dlist lkey = keys->dcdr;
             dlist lval = values->dcdr;
             ((list)lkey)->cdr = ((list)keys)->cdr;
@@ -139,14 +159,13 @@ printable* chashtable_pop(chashtable table, unsigned char* key) {
     return NULL;
 }
 
-printable* chashtable_get(chashtable table, unsigned char* key) {
+printable* chashtable_get(chashtable table, printable* key) {
     size_t skey = table->hash(key) % table->length;
-    printable_string* ps = make_printable_string(key);
     dlist keys = table->keys[skey];
     dlist values = table->values[skey];
 
     while (keys != NULL) {
-        if (compare_strings(&((list)keys)->car, &ps) == 0) {
+        if ((*table->cmp)(&((list)keys)->car, &key) == 0) {
             return ((list)values)->car;
         }
         keys = (dlist)((list)keys)->cdr;

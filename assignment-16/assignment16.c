@@ -15,6 +15,7 @@
 #include "list.h"
 #include "generic.h"
 #include "hashtable.h"
+#include "files.h"
 
 void test_type() {
     array test = make_empty_array(10);
@@ -63,84 +64,40 @@ void test_chashtable() {
         kv->last = values->elements[i];
         data = cons((printable*)kv, data);
     }
-    chashtable test = make_chashtable(hash, 11, data);
+    chashtable test = make_string_chashtable(11, data);
     printf("values: %s\n", to_string((printable*)values));
     printf("created hash-table: %s\n", to_string((printable*)test));
 }
 
-bool is_alnum(char c) {
-    return (c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
-}
-
-list load_words() {
-#define BUFF_SIZE 255
-   FILE* fp;
-   char buff[BUFF_SIZE];
-   list result = NULL;
-   bool finished = false;
-   char* prefix = "";
-   size_t prefix_len = 0;
-
-   fp = fopen("./assignment-16/test.data", "r");
-
-   while (!finished && !feof(fp) && !ferror(fp)) {
-       memset(buff, 0, BUFF_SIZE);
-       fread(buff, sizeof(char), BUFF_SIZE, fp);
-       char current;
-       size_t start = 0, word_len, i;
-       char* word, *suffix;
-       
-       for (i = 0; i < BUFF_SIZE; i++) {
-           current = buff[i];
-           if (current == '\0') {
-               finished = true;
-               break;
-           }
-           if (!is_alnum(current)) {
-               if (start + 1 < i) {
-                   word_len = prefix_len + i - start + 1;
-                   suffix = ALLOCATE(sizeof(char) * (i - start));
-                   strncpy(suffix, buff + start, i - start);
-               } else if (prefix_len > 0) {
-                   word_len = prefix_len + 1;
-                   suffix = "";
-               }
-               if (word_len > 1) {
-                   word = ALLOCATE(sizeof(char) * word_len);
-                   sprintf(word, "%s%s", prefix, suffix);
-                   result = cons((printable*)make_printable_string(word), result);
-                   prefix_len = 0;
-                   prefix = "";
-                   word_len = 0;
-               }
-               start = i + 1;
-           }
-       }
-       if (start + 1 < i) {
-           prefix_len = i - start;
-           prefix = ALLOCATE(sizeof(char) * prefix_len + 1);
-           strncpy(prefix, buff + start, prefix_len);
-       }
-   }
-   fclose(fp);
-   return reverse(result);
-#undef BUFF_SIZE
-}
-
 void test_dictionary_ops() {
-    chashtable dic = make_empty_chashtable(hash);
-    list words = load_words();
+    chashtable dic = make_empty_string_chashtable();
+    list words = load_words("./assignment-16/test.data");
     printf("Loaded words: %s\n", to_string((printable*)words));
     while (words != NULL) {
         int count = 1;
-        unsigned char* key = (unsigned char*)words->car->val;
-        printable_int* maybe = (printable_int*)chashtable_get(dic, key);
+        printable_int* maybe = (printable_int*)chashtable_get(dic, words->car);
         if (maybe != NULL) count = *(int*)((printable*)maybe)->val + 1;
         printable_int* pi = make_printable_int(count);
-        chashtable_put(dic, key, (printable*)pi);
+        chashtable_put(dic, words->car, (printable*)pi);
         words = words->cdr;
     }
     printf("Generated hash-table: %s\n", to_string((printable*)dic));
+}
+
+void test_int_hash() {
+    array keys = make_random_array(17, 17, 123, int_element_generator);
+    array values = make_random_array(17, 17, 123, int_element_generator);
+    list data = NULL;
+    size_t i;
+    
+    for (i = 0; i < values->length; i++) {
+        pair kv = make_pair();
+        kv->first = keys->elements[i];
+        kv->last = values->elements[i];
+        data = cons((printable*)kv, data);
+    }
+    chashtable dic = make_int_chashtable(17, data);
+    printf("Generated int hash-table: %s\n", to_string((printable*)dic));
 }
 
 int main() {
@@ -154,5 +111,6 @@ int main() {
     test_dlist();
     test_chashtable();
     test_dictionary_ops();
+    test_int_hash();
     return 0;
 }

@@ -24,7 +24,7 @@
 #include "printable.h"
 #include "list.h"
 
-typedef size_t (*hash_fn_t)(unsigned char* key);
+typedef size_t hash_fn_t(printable* key);
 
 /** \struct printable_chained_hashtable
  *  \brief This struct is the backbone for all printable arrays.
@@ -46,7 +46,9 @@ typedef struct {
 
     dlist* keys;
 
-    hash_fn_t hash;
+    hash_fn_t* hash;
+
+    comparison_fn_t* cmp;
     
 } printable_chained_hashtable;
 
@@ -56,21 +58,33 @@ typedef printable_chained_hashtable* chashtable;
  *         input and returns it.
  */
 ASSIGNMENTLIB_API
-chashtable make_chashtable(hash_fn_t h, size_t size, list data);
+chashtable make_chashtable(hash_fn_t h, size_t size, list data, comparison_fn_t cmp);
 
 ASSIGNMENTLIB_API
-chashtable make_empty_chashtable(hash_fn_t h);
+chashtable make_empty_chashtable(hash_fn_t h, comparison_fn_t cmp);
 
 ASSIGNMENTLIB_API
-dlist chashtable_put(chashtable table, unsigned char* key, printable* val);
+chashtable make_empty_string_chashtable();
 
 ASSIGNMENTLIB_API
-printable* chashtable_pop(chashtable table, unsigned char* key);
+chashtable make_string_chashtable(size_t size, list data);
 
 ASSIGNMENTLIB_API
-printable* chashtable_get(chashtable table, unsigned char* key);
+chashtable make_empty_int_chashtable();
 
 ASSIGNMENTLIB_API
-unsigned long hash(unsigned char *str);
+chashtable make_int_chashtable(size_t size, list data);
+
+ASSIGNMENTLIB_API
+dlist chashtable_put(chashtable table, printable* key, printable* val);
+
+ASSIGNMENTLIB_API
+printable* chashtable_pop(chashtable table, printable* key);
+
+ASSIGNMENTLIB_API
+printable* chashtable_get(chashtable table, printable* key);
+
+ASSIGNMENTLIB_API
+unsigned long hash(printable *str);
 
 #endif // HASHTABLE_H_
