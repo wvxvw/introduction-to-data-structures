@@ -48,7 +48,11 @@ typedef struct dcell {
 
 typedef dcell* dlist;
 
+ASSIGNMENTLIB_API
 dlist dcons(printable* car, dlist cdr);
+
+ASSIGNMENTLIB_API
+printable* list_find(list haystack, printable* needle);
 
 /** \fn cons
  *  \brief Constructs new list by prepending \c car.
@@ -58,7 +62,7 @@ dlist dcons(printable* car, dlist cdr);
  *  \return New list where the head is newly allocated and the tail
  *          reuses the elements of the given list.
  */
-ASSIGNMENTLIB_API 
+ASSIGNMENTLIB_API
 list cons(printable* car, list cdr);
 
 /** \fn reverse

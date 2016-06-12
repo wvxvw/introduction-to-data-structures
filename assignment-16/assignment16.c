@@ -61,8 +61,10 @@ void test_chashtable() {
         pair kv = make_pair();
         kv->first = (printable*)make_printable_string(keys[i]);
         kv->last = values->elements[i];
+        data = cons((printable*)kv, data);
     }
     chashtable test = make_chashtable(hash, 11, data);
+    printf("values: %s\n", to_string((printable*)values));
     printf("created hash-table: %s\n", to_string((printable*)test));
 }
 

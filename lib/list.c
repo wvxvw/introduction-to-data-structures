@@ -20,9 +20,19 @@ list cons(printable* car, list cdr) {
     define_method(presult->type, merge_sort, list_merge_sort);
     define_method(presult->type, reverse, list_reverse);
     define_method(presult->type, append, list_append);
+    define_method(presult->type, find, list_find);
     result->car = car;
     result->cdr = cdr;
     return result;
+}
+
+printable* list_find(list haystack, printable* needle) {
+    list it = haystack;
+    while (it != NULL) {
+        if (it->car == needle) return it->car;
+        it = it->cdr;
+    }
+    return NULL;
 }
 
 list list_reverse(list input) {
@@ -166,6 +176,7 @@ dlist dcons(printable* car, dlist cdr) {
     define_method(presult->type, merge_sort, list_merge_sort);
     define_method(presult->type, reverse, list_reverse);
     define_method(presult->type, append, list_append);
+    define_method(presult->type, find, list_find);
     ((list)result)->car = car;
     ((list)result)->cdr = (list)cdr;
     if (cdr != NULL) cdr->dcdr = result;

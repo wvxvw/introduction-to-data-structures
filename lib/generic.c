@@ -4,6 +4,7 @@
 #include <stdio.h>
 
 #include "generic.h"
+#include "sortable.h"
 
 static vt** types;
 static size_t types_len = 0;
@@ -64,9 +65,10 @@ void define_method(size_t type, void* generic, void* method) {
         table->methods = tmp;
         table->generics = gtmp;
     }
-    for (i = 0; i < table->len; i++)
+    for (i = 0; i < table->len; i++) {
         if (table->generics[i] == generic &&
             table->methods[i] == method) return;
+    }
     table->methods[table->len] = method;
     table->generics[table->len] = generic;
     table->len++;
@@ -76,9 +78,8 @@ void* find_method(size_t type, void* generic) {
     vt* table = types[type];
     if (table == NULL || table->methods == NULL) return NULL;
     size_t i;
-    for (i = 0; i < table->len; i++) {
+    for (i = 0; i < table->len; i++)
         if (table->generics[i] == generic)
             return table->methods[i];
-    }
     return NULL;
 }

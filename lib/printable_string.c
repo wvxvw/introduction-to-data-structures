@@ -1,6 +1,10 @@
+#include <stdio.h>
 #include <string.h>
 #include "printable.h"
+#include "generic.h"
 #include "printable_string.h"
+
+DEFTYPE(string);
 
 int compare_strings(const void* a, const void* b) {
     const printable* pa = *(printable* const *)a;
@@ -37,8 +41,10 @@ char* to_string_string(const printable_string* p) {
 printable_string* make_printable_string(char* val) {
     printable_string* result = ALLOCATE(sizeof(printable_string));
     printable* presult = (printable*)result;
+    presult->type = string_type();
     presult->val = val;
     presult->size = strlen(val);
+    define_method(presult->type, to_string, to_string_string);
     return result;
 }
 

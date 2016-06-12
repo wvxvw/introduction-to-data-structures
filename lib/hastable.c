@@ -35,6 +35,7 @@ void populate(chashtable table, list data) {
         unsigned char* key = (unsigned char*)p->first->val;
         printable* val = p->last;
         chashtable_put(table, key, val);
+        data = data->cdr;
     }
 }
 
@@ -49,12 +50,14 @@ char* to_string_chashtable(chashtable ct) {
         dlist keys = ct->keys[i];
         dlist values = ct->values[i];
         while (keys != NULL) {
-            char* skey = to_string(((list)keys)->car);
             char* sval = to_string(((list)values)->car);
+            char* skey = to_string(((list)keys)->car);
             char* kv = ALLOCATE(sizeof(char) * (strlen(skey) + strlen(sval) + 3));
             sprintf(kv, "%s: %s", skey, sval);
             parts[j] = kv;
             j++;
+            keys = (dlist)((list)keys)->cdr;
+            values = (dlist)((list)values)->cdr;
         }
     }
     contents = join(parts, len, ", ");
@@ -73,6 +76,8 @@ chashtable make_chashtable(hash_fn_t h, size_t size, list data) {
     result->keys = ALLOCATE(sizeof(size_t) * result->length);
     result->values = ALLOCATE(sizeof(dlist) * result->length);
     result->hash = h;
+    populate(result, data);
+    return result;
 }
 
 chashtable make_empty_chashtable(hash_fn_t h) {

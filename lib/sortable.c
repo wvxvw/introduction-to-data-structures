@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "sortable.h"
 #include "printable.h"
 #include "generic.h"
