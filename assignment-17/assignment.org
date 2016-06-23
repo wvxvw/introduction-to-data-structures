@@ -1,0 +1,148 @@
+# -*- fill-column: 80; org-confirm-babel-evaluate: nil -*-
+
+#+TITLE:     Assignment 17, Data-Structures
+#+AUTHOR:    Oleg Sivokon
+#+EMAIL:     olegsivokon@gmail.com
+#+DATE:      <2016-06-18 Sat>
+#+DESCRIPTION: Third assignment in the course Data-Structures
+#+KEYWORDS: Data-Structures, Algorithms, Assignment
+#+LANGUAGE: en
+#+LaTeX_CLASS: article
+#+LATEX_HEADER: \usepackage{commath}
+#+LATEX_HEADER: \usepackage{pgf}
+#+LATEX_HEADER: \usepackage{tikz}
+#+LATEX_HEADER: \usetikzlibrary{shapes, arrows}
+#+LATEX_HEADER: \usepackage{marginnote}
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \usepackage{enumerate}
+#+LATEX_HEADER: \usepackage{algpseudocode}
+#+LATEX_HEADER: \usepackage{algorithm}
+#+LATEX_HEADER: \usepackage{mathtools}
+#+LATEX_HEADER: \setlength{\parskip}{16pt plus 2pt minus 2pt}
+#+LATEX_HEADER: \renewcommand{\arraystretch}{1.6}
+
+#+BEGIN_SRC emacs-lisp :exports none
+  (setq org-latex-pdf-process
+        '("latexmk -pdflatex='pdflatex -shell-escape -interaction nonstopmode' -pdf -f %f")
+        org-latex-listings t
+        org-src-fontify-natively t
+        org-babel-latex-htlatex "htlatex")
+
+  (defmacro by-backend (&rest body)
+    `(progn
+       (cl-case org-export-current-backend ,@body)))
+
+  ;; (defmacro by-backend (&rest body)
+  ;;   `(cl-case (when (boundp 'backend)
+  ;;               (org-export-backend-name backend))
+  ;;      ,@body))
+#+END_SRC
+
+#+RESULTS:
+: by-backend
+
+#+BEGIN_LATEX
+\definecolor{codebg}{rgb}{0.96,0.99,0.8}
+\definecolor{codestr}{rgb}{0.46,0.09,0.2}
+\lstset{%
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\scriptsize,
+  breakatwhitespace=false,
+  breaklines=false,
+  captionpos=b,
+  framexleftmargin=10pt,
+  xleftmargin=10pt,
+  framerule=0pt,
+  frame=tb,
+  keepspaces=true,
+  keywordstyle=\color{blue},
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{codestr},
+  tabsize=2
+}
+\lstnewenvironment{maxima}{%
+  \lstset{%
+    backgroundcolor=\color{codebg},
+    escapeinside={(*@}{@*)},
+    aboveskip=20pt,
+    captionpos=b,
+    label=,
+    caption=,
+    showstringspaces=false,
+    frame=single,
+    framerule=0pt,
+    basicstyle=\ttfamily\scriptsize,
+    columns=fixed}}{}
+}
+\makeatletter
+\newcommand{\verbatimfont}[1]{\renewcommand{\verbatim@font}{\ttfamily#1}}
+\makeatother
+\verbatimfont{\small}%
+\clearpage
+#+END_LATEX
+
+* Problems
+
+** Problem 1
+   Given integer $n$, suggest data-structure $S$ with following properties:
+   1. =build= takes $O(n \lg n)$ time.
+   2. =insert= takes $O(\lg n + d)$ time.
+   3. =delete= takes $O(\lg n + d)$ time.
+   4. =successor= takes $O(1)$ time.
+      
+   There was a descritption of what $d$ is, but it uses some runic Hebrew, and
+   is impossible to decypher.  I'll ignore it.
+
+*** Answer 1
+
+
+** Problem 2
+   Does there exist a red-black tree s.t.:
+   1. It contains 3 black and 4 red nodes.
+   2. It contains 4 black and 3 red nodes.
+   3. It contains 5 black and 2 red nodes.
+   4. It contains 6 black and 1 red node.
+
+*** Answer 2
+    Yes, this configuration is possible.  Consider root black node with two
+    black children.  Each child of the second level has only red nodes.  In this
+    tree all simple paths have the same number of black nodes.  All red nodes
+    have black children (leafs).
+
+*** Answer 3
+    Such tree is impossible.  Since the root node must be black, we should have
+    to place 3 remaining black nodes on two paths from the root to the leafs,
+    but we cannot divide 3 evenly in two paths.  And since we cannot, we would
+    have to violate the tree property which requires the same number of black
+    nodes on all simple paths from root to be the same.
+
+*** Answer 4
+    Yes, such tree is possible: black root node with two red children and four
+    black grandchildren.  Each simple path from root has two black nodes.  No
+    red node is a parent of another red node.
+
+*** Answer 5
+    No, such tree is impossible.  The number of black nodes in a red-black tree
+    must be odd (the root and two sub-trees with equal number of black nodes).
+
+** Problem 3
+   Suggest data-structure which allows the following operations:
+   1. =insert= in time $O(\lg n)$.
+   2. =delete= in time $O(\lg n)$.
+   3. =pair-diff= /(find two numbers which differ precisely by given amount)/
+      in time $O(n)$.
+   4. =sum= /(sums all numbers within given range)/ in time $O(\lg n)$.
+
+*** Answer 6
+
+** Problem 4
+   Suggest data-structure which allows the following operations:
+   1. =search= in time $O(\lg n)$.
+   2. =insert= in time $O(\lg n)$.
+   3. =delete= in time $O(\lg n)$.
+   4. =mode= in time $O(1)$.
+   5. =mark= /(insetion time)/ in $O(\lg n)$.
+
+*** Answer 7
