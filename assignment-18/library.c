@@ -7,8 +7,8 @@
 DEFTYPE(library);
 DEFTYPE(patron);
 
-static library lib;
-static patron libpatron;
+static library lib = NULL;
+static patron libpatron = NULL;
 
 int compare_patrons(const void* a, const void* b) {
     patron pa = *(patron*)a;
@@ -61,9 +61,10 @@ char* library_add_book(library lib, query q) {
     size_t len = strlen(pattern) + BOOK_ID_LEN + 1;
     char* result = ALLOCATE(sizeof(char) * len);
     library llib = get_library();
+    patron lpatron = get_libpatron();
     list stored = (list)chashtable_get(llib->books, (printable*)book);
 
-    stored = cons((printable*)book, stored);
+    stored = cons((printable*)lpatron, stored);
     chashtable_put(llib->books, (printable*)book, (printable*)stored);
     sprintf(result, pattern, q->book_id);
     return result;
@@ -71,47 +72,56 @@ char* library_add_book(library lib, query q) {
 
 char* library_list_books(library lib, query q) {
 
-    return "< Not implemented\n";
+    return "< library_list_books: Not implemented\n";
 }
 
 char* library_join(library lib, query q) {
 
-    return "< Not implemented\n";
+    return "< library_join: Not implemented\n";
 }
 
 char* library_leave(library lib, query q) {
 
-    return "< Not implemented\n";
+    return "< library_leave: Not implemented\n";
 }
 
 char* library_borrow(library lib, query q) {
 
-    return "< Not implemented\n";
+    return "< library_borrow: Not implemented\n";
 }
 
 char* library_return(library lib, query q) {
 
-    return "< Not implemented\n";
+    return "< library_return: Not implemented\n";
 }
 
 char* library_who_borrows(library lib, query q) {
 
-    return "< Not implemented\n";
+    return "< library_who_borrows: Not implemented\n";
 }
 
 char* library_borrows_most(library lib, query q) {
 
-    return "< Not implemented\n";
+    return "< library_borrows_most: Not implemented\n";
 }
 
-char* to_string_library(library lib) {
-    char* books = to_string((printable*)lib->books);
-    char* patrons = to_string((printable*)lib->patrons);
-    const char* pattern = "library(books=%s, patrons=%s)";
-    size_t len = strlen(pattern) + strlen(books) + strlen(patrons) - 3;
+char* library_show(library lib, query q) {
+    char* slib = to_string((printable*)get_library());
+    size_t len = strlen(slib) + 4;
     char* result = ALLOCATE(sizeof(char) * len);
-    sprintf(result, pattern, books, patrons);
-    result[len] = '\0';
+    int ret = sprintf(result, "< %s\n", slib);
+    if (ret < 0) printf("Error showing library\n");
+    return result;
+}
+
+char* to_string_library(library llib) {
+    char* books = to_string((printable*)llib->books);
+    char* patrons = to_string((printable*)llib->patrons);
+    const char* pattern = "library(books=%s, patrons=%s)";
+    size_t len = strlen(pattern) + strlen(books) + strlen(patrons) + 1;
+    char* result = ALLOCATE(sizeof(char) * len);
+    int ret = sprintf(result, pattern, books, patrons);
+    if (ret < 0) printf("Error printing library\n");
     return result;
 }
 
@@ -120,7 +130,7 @@ char* to_string_patron(patron p) {
     const char* pattern = "patron(books=%s, name=%s, id=%s)";
     size_t len = strlen(pattern) + strlen(books) + strlen(p->name) + ID_LEN - 3;
     char* result = ALLOCATE(sizeof(char) * len);
-    sprintf(result, pattern, books, p->name, p->id);
-    result[len] = '\0';
+    int ret = sprintf(result, pattern, books, p->name, p->id);
+    if (ret < 0) printf("Error printing patron\n");
     return result;
 }

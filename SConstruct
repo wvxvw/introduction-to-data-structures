@@ -7,10 +7,12 @@ from subprocess import call
 
 generate_documentation = False
 
-dll = SharedLibrary('./lib/assignments', glob('./lib/*.c') + glob('./lib/*/*.c'), CPPPATH = ['./lib'])
+dll = SharedLibrary('./lib/assignments', glob('./lib/*.c') + glob('./lib/*/*.c'),
+                    CPPPATH = ['./lib'], CFLAGS = '-g ')
 env = Environment(tools = ["default", "doxygen"],
                   CPPPATH = './lib',
-                  LIBPATH = './lib')
+                  LIBPATH = './lib',
+                  CFLAGS = '-g ')
 
 if env['PLATFORM'] != 'posix':
     env.MSVSProject(target = 'assignment14' + env['MSVSPROJECTSUFFIX'],

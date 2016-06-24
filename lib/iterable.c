@@ -45,7 +45,7 @@ bool hashtable_next(iterator* impl) {
         return true;
     }
     pos++;
-    while (pos < container->length) {
+    while (pos < ((printable*)container)->size) {
         if (container->keys[pos] != NULL) {
             it->key = container->keys[pos];
             it->value = container->values[pos];
@@ -81,7 +81,7 @@ bool hashtable_has(iterator* impl) {
 
     if (key->cdr != NULL) return true;
     pos++;
-    while (pos < container->length) {
+    while (pos < ((printable*)container)->size) {
         if (container->keys[pos] != NULL)
             return true;
         pos++;
@@ -106,14 +106,16 @@ iterator* make_hashtable_iterator(chashtable iterated) {
     hashtable_iterator* result = ALLOCATE(sizeof(hashtable_iterator));
     printable* presult = (printable*)result;
     iterator* iresult = (iterator*)result;
+    printable* piterated = (printable*)iterated;
     presult->type = hiterator_type();
     define_method(presult->type, next, hashtable_next);
     define_method(presult->type, has, hashtable_has);
     iresult->iterated = (printable*)iterated;
+    
     size_t pos = 0;
-    while (iterated->keys[pos] == NULL && pos < iterated->length) pos++;
+    while (iterated->keys[pos] == NULL && pos < piterated->size) pos++;
     result->pos = pos;
-    if (pos < iterated->length) {
+    if (pos < piterated->size) {
         result->key = iterated->keys[pos];
         result->value = iterated->values[pos];
         pair kv = make_pair();

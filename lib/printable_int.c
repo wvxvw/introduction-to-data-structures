@@ -36,16 +36,19 @@ int compare_ints_reverse(const void* a, const void* b) {
     return -compare_ints(a, b);
 }
 
-char* to_string_int(const printable_int* p) {
+char* to_string_int(printable_int* p) {
     char* buffer = ALLOCATE(11 * sizeof(char));
     printable* base = (printable*)p;
     
     if (base->val == NULL) sprintf(buffer, "%p", base->val);
-    else sprintf(buffer, "%d", *(int*)base->val);
+    else {
+        int ret = sprintf(buffer, "%d", *(int*)base->val);
+        if (ret < 0) printf("Error printing printable_int\n");
+    }
     return buffer;
 }
 
-printable_int* make_printable_int(const int val) {
+printable_int* make_printable_int(int val) {
     printable_int* result = ALLOCATE(sizeof(printable_int));
     printable* p = (printable*)result;
     p->type = printable_int_type();

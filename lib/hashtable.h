@@ -36,10 +36,6 @@ typedef struct {
      */
     printable printable;
 
-    /** \brief The number of members in this array.
-     */
-    size_t length;
-
     /** \brief The lists containing table values.
      */
     dlist* values;

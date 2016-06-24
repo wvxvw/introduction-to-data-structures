@@ -44,6 +44,8 @@ char* to_string_type(vt* type);
 
 void print_methods(size_t type);
 
+void debug_vt(size_t type, void* generic);
+
 #define DEFTYPE(type)                                   \
     static bool type ## _type_initialized = false;      \
     static size_t raw_ ## type ## _type;                \
@@ -55,11 +57,5 @@ void print_methods(size_t type);
         }                                               \
         return raw_ ## type ## _type;                   \
     }
-
-
-/* #define DEFGENERIC(name, receiver, ...) name(__VA_ARGS__) {  \ */
-/*     void (*fpointer)() = &name; \ */
-/*     void* method = find_method(type_of(receiver), fpointer); \ */
-/*     } */
 
 #endif // GENERIC_H_

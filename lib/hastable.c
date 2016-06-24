@@ -37,7 +37,7 @@ void upsize(chashtable table) {
 void populate(chashtable table, list data) {
     size_t i = 0;
     while (data != NULL) {
-        if (i >= table->length) upsize(table);
+        if (i >= ((printable*)table)->size) upsize(table);
         pair p = (pair)data->car;
         chashtable_put(table, p->first, p->last);
         data = data->cdr;
@@ -47,13 +47,15 @@ void populate(chashtable table, list data) {
 char* to_string_chashtable(chashtable ct) {
     size_t len = 0, j = 0, i;
     char* result, *contents;
+    printable* pct = (printable*)ct;
 
-    for (i = 0; i < ct->length; i++) len += length(ct->keys[i]);
+    for (i = 0; i < pct->size; i++) len += length(ct->keys[i]);
     char** parts = malloc(len * sizeof(char*));
 
-    for (i = 0; i < ct->length; i++) {
+    for (i = 0; i < pct->size; i++) {
         dlist keys = ct->keys[i];
         dlist values = ct->values[i];
+        
         while (keys != NULL) {
             char* sval = to_string(((list)values)->car);
             char* skey = to_string(((list)keys)->car);
@@ -66,9 +68,12 @@ char* to_string_chashtable(chashtable ct) {
         }
     }
     contents = join(parts, len, ", ");
-    result = ALLOCATE(sizeof(char) * (strlen(contents) + 15));
-    sprintf(result, "chashtable[%d]{%s}", ct->length, contents);
+    char* pattern = "chashtable[%d]{%s}";
+    size_t slen = strlen(contents) + strlen(pattern) + 1;
+    result = ALLOCATE(sizeof(char) * slen);
+    int res = sprintf(result, pattern, pct->size, contents);
     free(parts);
+    if (res < 0) printf("Error printing hashtable\n");
     return result;
 }
 
@@ -76,10 +81,11 @@ chashtable make_chashtable(hash_fn_t h, size_t size, list data, comparison_fn_t 
     chashtable result = ALLOCATE(sizeof(printable_chained_hashtable));
     printable* presult = (printable*)result;
     presult->type = chashtable_type();
+    presult->size = size;
     define_method(presult->type, to_string, to_string_chashtable);
-    result->length = size;
-    result->keys = ALLOCATE(sizeof(size_t) * result->length);
-    result->values = ALLOCATE(sizeof(dlist) * result->length);
+    result->keys = ALLOCATE(sizeof(dlist) * size);
+    result->values = ALLOCATE(sizeof(dlist) * size);
+    presult->val = result->values;
     result->hash = h;
     result->cmp = cmp;
     populate(result, data);
@@ -107,7 +113,7 @@ chashtable make_int_chashtable(size_t size, list data) {
 }
 
 dlist chashtable_put(chashtable table, printable* key, printable* val) {
-    size_t skey = table->hash(key) % table->length;
+    size_t skey = table->hash(key) % ((printable*)table)->size;
     dlist keys = table->keys[skey];
     dlist values = table->values[skey];
     printable* existing = find(table->keys[skey], key, *table->cmp);
@@ -139,7 +145,7 @@ dlist chashtable_put(chashtable table, printable* key, printable* val) {
 }
 
 printable* chashtable_pop(chashtable table, printable* key) {
-    size_t skey = table->hash(key) % table->length;
+    size_t skey = table->hash(key) % ((printable*)table)->size;
     dlist keys = table->keys[skey];
     dlist values = table->values[skey];
 
@@ -160,14 +166,13 @@ printable* chashtable_pop(chashtable table, printable* key) {
 }
 
 printable* chashtable_get(chashtable table, printable* key) {
-    size_t skey = table->hash(key) % table->length;
+    size_t skey = table->hash(key) % ((printable*)table)->size;
     dlist keys = table->keys[skey];
     dlist values = table->values[skey];
 
     while (keys != NULL) {
-        if ((*table->cmp)(&((list)keys)->car, &key) == 0) {
+        if ((*table->cmp)(&((list)keys)->car, &key) == 0)
             return ((list)values)->car;
-        }
         keys = (dlist)((list)keys)->cdr;
         values = (dlist)((list)values)->cdr;
     }

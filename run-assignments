@@ -3,15 +3,18 @@
 usage() {
     echo -e "\
   -# What assignment to run (substitute # with the number)
-  -h Print this message"
+  -h Print this message
+  -d Run using valgrind"
 }
+
+use_valgrind=
 
 run() {
     os=$(uname -o)
     if [ "$os" = "Cygwin" ]; then
 	PATH=$PATH:./lib ./"assignment-1$1/assignment1$1"
     else
-	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./lib ./"assignment-1$1/assignment1$1"
+	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./lib $use_valgrind ./"assignment-1$1/assignment1$1"
     fi
 }
 
@@ -19,12 +22,13 @@ while [[ $# > 0 ]]
 do
     opt="$1"
     case $opt in
-        -h) usage; exit 0                         ;;
-        -1[0123456789]) run ${opt:2:3}            ;;
-        -[0123456789]) run ${opt:1:2}             ;;
-        [0123456789]) run ${opt:0:1}              ;;
-        [0123456789][0123456789]) run ${opt:0:2}  ;;
-        *) usage; exit 0                          ;;
+        -h) usage; exit 0                                                ;;
+        -d) use_valgrind="valgrind --leak-check=yes --track-origins=yes" ;;
+        -1[0123456789]) run ${opt:2:3}                                   ;;
+        -[0123456789]) run ${opt:1:2}                                    ;;
+        [0123456789]) run ${opt:0:1}                                     ;;
+        [0123456789][0123456789]) run ${opt:0:2}                         ;;
+        *) usage; exit 0                                                 ;;
     esac
     shift
 done

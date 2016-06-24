@@ -29,7 +29,11 @@ typedef struct {
 
 typedef printable_patron* patron;
 
+typedef char* (*query_handler_fn)(library, query);
+
 library make_library();
+
+library get_library();
 
 patron make_patron(char* name, char* id);
 
@@ -48,6 +52,8 @@ char* library_return(library lib, query q);
 char* library_who_borrows(library lib, query q);
 
 char* library_borrows_most(library lib, query q);
+
+char* library_show(library lib, query q);
 
 char* to_string_library(library lib);
 

@@ -180,6 +180,7 @@ dlist dcons(printable* car, dlist cdr) {
     ((list)result)->car = car;
     ((list)result)->cdr = (list)cdr;
     if (cdr != NULL) cdr->dcdr = result;
+    result->dcdr = NULL;
     return result;
 }
 

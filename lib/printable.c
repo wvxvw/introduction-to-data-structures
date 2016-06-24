@@ -16,6 +16,11 @@ char* to_string(printable* p) {
     if (p == NULL) return "NULL";
     char* (*fptr)(printable*) = to_string;
     char* (*method)(printable*) = find_method(p->type, fptr);
+    if (method == NULL) {
+        printf("to_string failed: %d\n", p->type);
+        debug_vt(p->type, fptr);
+        return "ERROR";
+    }
     return method(p);
 }
 

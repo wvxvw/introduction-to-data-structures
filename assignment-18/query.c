@@ -4,12 +4,13 @@
 #include "printable.h"
 #include "generic.h"
 #include "query.h"
+#include "library.h"
 #include "list.h"
 #include "files.h"
 #include "printable_string.h"
 
 DEFTYPE(query);
-const char* query_strings[] = {
+static const char* query_strings[] = {
     "borrow(patron=%s, id=%s, book_id=%s)",
     "return(patron=%s, id=%s, book_id=%s)",
     "join(patron=%s, id=%s)",
@@ -21,7 +22,7 @@ const char* query_strings[] = {
     "show_library()"
 };
 
-const size_t query_opts[] = {
+static const size_t query_opts[] = {
     OPATRON | OPATRON_ID | OBOOK_ID,
     OPATRON | OPATRON_ID | OBOOK_ID,
     OPATRON | OPATRON_ID,
@@ -34,12 +35,24 @@ const size_t query_opts[] = {
     0
 };
 
+static const query_handler_fn handlers[] = {
+    library_borrow,
+    library_return,
+    library_join,
+    library_leave,
+    library_list_books,
+    library_who_borrows,
+    library_add_book,
+    library_borrows_most,
+    library_show
+};
+
 void yyerror(char *text) { fprintf(stderr, "%s\n", text); }
 
 char* to_string_helper(const char* pattern, query q, size_t fields) {
     char* result, *a, *b, *c;
     size_t len = strlen(pattern) + 1;
-    
+
     switch (fields) {
         case OPATRON | OPATRON_ID | OBOOK_ID:
             len += PATRON_LEN + ID_LEN + BOOK_ID_LEN;
@@ -59,7 +72,8 @@ char* to_string_helper(const char* pattern, query q, size_t fields) {
             break;
     }
     result = ALLOCATE(sizeof(char) * len);
-    sprintf(result, pattern, a, b, c);
+    int ret = sprintf(result, pattern, a, b, c);
+    if (ret < 0) printf("Error printing query\n");
     return result;
 }
 
@@ -82,7 +96,8 @@ query make_query(query_kind kind, char* patron_name, char* patron_id, char* book
 }
 
 void process_query(query q) {
-    printf("Processing: %s\n> ", to_string((printable*)q));
+    char* result = handlers[q->kind](get_library(), q);
+    printf("Processing: %s\n%s\n> ", to_string((printable*)q), result);
 }
 
 char* str(char* in) {

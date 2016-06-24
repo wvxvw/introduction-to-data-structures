@@ -5,6 +5,7 @@
 #include "generic.h"
 #include "heap.h"
 #include "strings.h"
+#include "printable_int.h"
 
 DEFTYPE(lheap);
 
@@ -135,10 +136,10 @@ aheap make_aheap(size_t size, comparison_fn_t cmp) {
 
     result->allocated = pow(2.0, 1.0 + (double)(size_t)log2((double)size));
     result->elements = ALLOCATE(sizeof(printable*) * result->allocated);
-    result->size = size;
+    result->size = 0;
     result->cmp = cmp;
     presult->type = aheap_type();
-    define_method(presult->type, to_string, to_string_lheap);
+    define_method(presult->type, to_string, to_string_aheap);
     return result;
 }
 
@@ -151,6 +152,7 @@ aheap aheapify(printable** raw, size_t size, comparison_fn_t cmp) {
     aheap result = make_aheap(size, cmp);
     size_t i;
 
+    result->size = size;
     for (i = 0; i < size; i++) result->elements[i] = raw[i];
     for (i = (result->size >> 1) + 1; i > 0; i--) abubble_up(result, i);
     return result;
@@ -179,30 +181,46 @@ printable* aput(aheap heap, printable* val) {
 }
 
 char* to_string_aheap(aheap heap) {
-    size_t i = heap->allocated;
-    size_t tier = 0;
-    char** levels = malloc((size_t)log2((double)i) + 1);
+    printable_int* cap = make_printable_int(heap->allocated);
+    char* scap = to_string((printable*)cap);
+    char* pattern = "heap[%s/%s]{%s}";
+    char* contents;
 
-    while (i > 1) {
-        size_t j = i >> 1;
-        size_t k = j;
-        char** level = malloc(j);
+    if (heap->size > 0) {
+        size_t i = heap->allocated;
+        size_t tier = 0;
+        char** levels = malloc((size_t)log2((double)i) + 1);
 
-        while (k < i) {
-            if (k < heap->size) {
-                char* chunk = to_string(heap->elements[k]);
-                level[k - j] = chunk;
-            } else {
-                level[k - j] = " ";
+        while (i > 1) {
+            size_t j = i >> 1;
+            size_t k = j;
+            char** level = malloc(j);
+
+            while (k < i) {
+                if (k < heap->size) {
+                    char* chunk = to_string(heap->elements[k]);
+                    level[k - j] = chunk;
+                } else {
+                    level[k - j] = " ";
+                }
+                k++;
             }
-            k++;
+            levels[tier] = join(level, j, " ");
+            tier++;
+            i = j;
+            free(level);
         }
-        levels[tier] = join(level, j, " ");
-        tier++;
-        i = j;
-	free(level);
+        contents = join(levels, tier, "\n");
+        free(levels);
+    } else {
+        contents = "";
     }
-    char* result = join(levels, tier, "\n");
-    free(levels);
+    printable_int* size = make_printable_int(heap->size);
+    char* ssize = to_string((printable*)size);
+    size_t len = strlen(contents) + strlen(pattern) +
+                 strlen(scap) + strlen(ssize) + 1;
+    char* result = ALLOCATE(sizeof(char) * len);
+    int ret = sprintf(result, pattern, ssize, scap, contents);
+    if (ret < 0) printf("Error printing aheap\n");
     return result;
 }
