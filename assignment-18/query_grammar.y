@@ -7,26 +7,31 @@ void yyerror(char* s);
 %}
 
 %union { query query_t; char* str; }
-%start pquery
+%start pqueries
 %token PLUS;
 %token MINUS;
 %token QUESTION;
 %token BANG;
-%token ACTORID;
+%token PATRONID;
 %token BOOKID;
-%token ACTOR;
-%type   <query_t>       pquery;
-%type   <str>           PLUS, MINUS, QUESTION, BANG, ACTORID, BOOKID, ACTOR;
+%token PATRON;
+%type   <query_t>       rquery;
+%type   <str>           PLUS, MINUS, QUESTION, BANG, PATRONID, BOOKID, PATRON;
+%type   <void>          pquery, pqueries;
 
 %%
-pquery  :       ACTOR ACTORID BOOKID PLUS { $$ = make_query(BORROW, $1, $2, $3); }
-        |       ACTOR ACTORID BOOKID MINUS { $$ = make_query(RETURN, $1, $2, $3); }
-        |       PLUS ACTOR ACTORID { $$ = make_query(JOIN, $1, $2, NULL); }
-        |       MINUS ACTOR ACTORID { $$ = make_query(LEAVE, $1, $2, NULL); }
-        |       QUESTION ACTORID { $$ = make_query(BOOKS, NULL, $1, NULL); }
-        |       QUESTION BOOKID { $$ = make_query(BOOKS, NULL, NULL, $1); }
-        |       QUESTION BANG { $$ = make_query(BOOKS, NULL, NULL, NULL); }
+rquery  :       PATRON PATRONID BOOKID PLUS { $$ = make_query(BORROW, $1, $2, $3); }
+        |       PATRON PATRONID BOOKID MINUS { $$ = make_query(RETURN, $1, $2, $3); }
+        |       PLUS PATRON PATRONID { $$ = make_query(JOIN, $2, $3, NULL); }
+        |       MINUS PATRON PATRONID { $$ = make_query(LEAVE, $2, $3, NULL); }
+        |       QUESTION PATRONID { $$ = make_query(BOOKS, NULL, $2, NULL); }
+        |       QUESTION BOOKID { $$ = make_query(WHO_BORROWS, NULL, NULL, $2); }
+        |       QUESTION BANG { $$ = make_query(BORROWS_MOST, NULL, NULL, NULL); }
+        ;
+pquery  : rquery { process_query($1); }
+        ;
+pqueries :      pquery {;}
+        |       pquery pqueries {;}
         ;
 
 %%
-/* void yyerror(char* s) { fprintf(stderr, "%s\n", s); } */

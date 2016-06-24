@@ -69,48 +69,50 @@ extern int YYPARSE_DECL();
 #define MINUS 258
 #define QUESTION 259
 #define BANG 260
-#define ACTORID 261
+#define PATRONID 261
 #define BOOKID 262
-#define ACTOR 263
+#define PATRON 263
 #define YYERRCODE 256
 typedef short YYINT;
 static const YYINT yylhs[] = {                           -1,
-    0,    0,    0,    0,    0,    0,    0,
+    1,    1,    1,    1,    1,    1,    1,    2,    0,    0,
 };
 static const YYINT yylen[] = {                            2,
-    4,    4,    3,    3,    2,    2,    2,
+    4,    4,    3,    3,    2,    2,    2,    1,    1,    2,
 };
 static const YYINT yydefred[] = {                         0,
-    0,    0,    0,    0,    0,    0,    0,    7,    5,    6,
-    0,    3,    4,    0,    1,    2,
+    0,    0,    0,    0,    0,    8,    0,    0,    0,    7,
+    5,    6,    0,   10,    3,    4,    0,    1,    2,
 };
 static const YYINT yydgoto[] = {                          5,
+    6,    7,
 };
 static const YYINT yysindex[] = {                      -257,
- -258, -252, -253, -251,    0, -249, -248,    0,    0,    0,
- -247,    0,    0, -254,    0,    0,
+ -258, -252, -253, -251,    0,    0, -257, -249, -248,    0,
+    0,    0, -247,    0,    0,    0, -254,    0,    0,
 };
 static const YYINT yyrindex[] = {                         0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,   14,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,
 };
-static const YYINT yygindex[] = {                         0,
+static const YYINT yygindex[] = {                         9,
+    0,    0,
 };
-#define YYTABLESIZE 15
+#define YYTABLESIZE 16
 static const YYINT yytable[] = {                          1,
-    2,    3,   15,   16,    6,    4,    8,    9,   10,   11,
-    7,   12,   13,    0,   14,
+    2,    3,   18,   19,    8,    4,   10,   11,   12,   13,
+    9,   15,   16,    9,   17,   14,
 };
 static const YYINT yycheck[] = {                        257,
   258,  259,  257,  258,  263,  263,  260,  261,  262,  261,
-  263,  261,  261,   -1,  262,
+  263,  261,  261,    0,  262,    7,
 };
 #define YYFINAL 5
 #ifndef YYDEBUG
 #define YYDEBUG 0
 #endif
 #define YYMAXTOKEN 263
-#define YYUNDFTOKEN 266
+#define YYUNDFTOKEN 268
 #define YYTRANSLATE(a) ((a) > YYMAXTOKEN ? YYUNDFTOKEN : (a))
 #if YYDEBUG
 static const char *const yyname[] = {
@@ -122,17 +124,20 @@ static const char *const yyname[] = {
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"PLUS","MINUS","QUESTION","BANG",
-"ACTORID","BOOKID","ACTOR",0,0,"illegal-symbol",
+"PATRONID","BOOKID","PATRON",0,0,0,0,"illegal-symbol",
 };
 static const char *const yyrule[] = {
-"$accept : pquery",
-"pquery : ACTOR ACTORID BOOKID PLUS",
-"pquery : ACTOR ACTORID BOOKID MINUS",
-"pquery : PLUS ACTOR ACTORID",
-"pquery : MINUS ACTOR ACTORID",
-"pquery : QUESTION ACTORID",
-"pquery : QUESTION BOOKID",
-"pquery : QUESTION BANG",
+"$accept : pqueries",
+"rquery : PATRON PATRONID BOOKID PLUS",
+"rquery : PATRON PATRONID BOOKID MINUS",
+"rquery : PLUS PATRON PATRONID",
+"rquery : MINUS PATRON PATRONID",
+"rquery : QUESTION PATRONID",
+"rquery : QUESTION BOOKID",
+"rquery : QUESTION BANG",
+"pquery : rquery",
+"pqueries : pquery",
+"pqueries : pquery pqueries",
 
 };
 #endif
@@ -170,9 +175,9 @@ typedef struct {
 } YYSTACKDATA;
 /* variables for the parser stack */
 static YYSTACKDATA yystack;
-#line 32 "./query_grammar.y"
+#line 38 "./query_grammar.y"
 /* void yyerror(char* s) { fprintf(stderr, "%s\n", s); } */
-#line 176 "y.tab.c"
+#line 181 "y.tab.c"
 
 #if YYDEBUG
 #include <stdio.h>		/* needed for printf */
@@ -375,34 +380,46 @@ yyreduce:
     switch (yyn)
     {
 case 1:
-#line 22 "./query_grammar.y"
+#line 23 "./query_grammar.y"
 	{ yyval.query_t = make_query(BORROW, yystack.l_mark[-3].str, yystack.l_mark[-2].str, yystack.l_mark[-1].str); }
 break;
 case 2:
-#line 23 "./query_grammar.y"
+#line 24 "./query_grammar.y"
 	{ yyval.query_t = make_query(RETURN, yystack.l_mark[-3].str, yystack.l_mark[-2].str, yystack.l_mark[-1].str); }
 break;
 case 3:
-#line 24 "./query_grammar.y"
-	{ yyval.query_t = make_query(JOIN, yystack.l_mark[-2].str, yystack.l_mark[-1].str, NULL); }
+#line 25 "./query_grammar.y"
+	{ yyval.query_t = make_query(JOIN, yystack.l_mark[-1].str, yystack.l_mark[0].str, NULL); }
 break;
 case 4:
-#line 25 "./query_grammar.y"
-	{ yyval.query_t = make_query(LEAVE, yystack.l_mark[-2].str, yystack.l_mark[-1].str, NULL); }
+#line 26 "./query_grammar.y"
+	{ yyval.query_t = make_query(LEAVE, yystack.l_mark[-1].str, yystack.l_mark[0].str, NULL); }
 break;
 case 5:
-#line 26 "./query_grammar.y"
-	{ yyval.query_t = make_query(BOOKS, NULL, yystack.l_mark[-1].str, NULL); }
+#line 27 "./query_grammar.y"
+	{ yyval.query_t = make_query(BOOKS, NULL, yystack.l_mark[0].str, NULL); }
 break;
 case 6:
-#line 27 "./query_grammar.y"
-	{ yyval.query_t = make_query(BOOKS, NULL, NULL, yystack.l_mark[-1].str); }
+#line 28 "./query_grammar.y"
+	{ yyval.query_t = make_query(WHO_BORROWS, NULL, NULL, yystack.l_mark[0].str); }
 break;
 case 7:
-#line 28 "./query_grammar.y"
-	{ yyval.query_t = make_query(BOOKS, NULL, NULL, NULL); }
+#line 29 "./query_grammar.y"
+	{ yyval.query_t = make_query(BORROWS_MOST, NULL, NULL, NULL); }
 break;
-#line 406 "y.tab.c"
+case 8:
+#line 31 "./query_grammar.y"
+	{ process_query(yystack.l_mark[0].query_t); }
+break;
+case 9:
+#line 33 "./query_grammar.y"
+	{;}
+break;
+case 10:
+#line 34 "./query_grammar.y"
+	{;}
+break;
+#line 423 "y.tab.c"
     }
     yystack.s_mark -= yym;
     yystate = *yystack.s_mark;

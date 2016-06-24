@@ -82,7 +82,8 @@ env = conf.Finish()
 env.Append(LIBS = 'assignments')
 
 for assignment in glob('./assignment*/'):
-    env.Program(glob(path.join(assignment, '*.c')))
+    env.Program(assignment + '/' + assignment.replace('-', ''),
+                glob(path.join(assignment, '*.c')))
 
 if generate_documentation:
     env.Doxygen('Doxyfile')

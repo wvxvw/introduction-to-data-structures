@@ -2,9 +2,9 @@
 #define MINUS 258
 #define QUESTION 259
 #define BANG 260
-#define ACTORID 261
+#define PATRONID 261
 #define BOOKID 262
-#define ACTOR 263
+#define PATRON 263
 #ifdef YYSTYPE
 #undef  YYSTYPE_IS_DECLARED
 #define YYSTYPE_IS_DECLARED 1
