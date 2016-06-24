@@ -1,65 +1,72 @@
 #include <string.h>
 #include <stdio.h>
+#include <time.h>
 #include "printable.h"
 #include "generic.h"
 #include "query.h"
+#include "list.h"
+#include "files.h"
+#include "printable_string.h"
 
 DEFTYPE(query);
+const char* query_strings[] = {
+    "borrow(patron=%s, id=%s, book_id=%s)",
+    "return(patron=%s, id=%s, book_id=%s)",
+    "join(patron=%s, id=%s)",
+    "leave(patron=%s, id=%s)",
+    "books(id=%s)",
+    "who_borrows(book_id=%s)",
+    "add_book(book_id=%s)",
+    "borrows_most()",
+    "show_library()"
+};
+
+const size_t query_opts[] = {
+    OPATRON | OPATRON_ID | OBOOK_ID,
+    OPATRON | OPATRON_ID | OBOOK_ID,
+    OPATRON | OPATRON_ID,
+    OPATRON | OPATRON_ID,
+    OPATRON_ID,
+    OBOOK_ID,
+    OBOOK_ID,
+    OBOOK_ID,
+    0,
+    0
+};
 
 void yyerror(char *text) { fprintf(stderr, "%s\n", text); }
 
+char* to_string_helper(const char* pattern, query q, size_t fields) {
+    char* result, *a, *b, *c;
+    size_t len = strlen(pattern) + 1;
+    
+    switch (fields) {
+        case OPATRON | OPATRON_ID | OBOOK_ID:
+            len += PATRON_LEN + ID_LEN + BOOK_ID_LEN;
+            a = q->patron; b = q->id; c = q->book_id;
+            break;
+        case OPATRON | OPATRON_ID:
+            len += PATRON_LEN + ID_LEN;
+            a = q->patron; b = q->id;
+            break;
+        case OPATRON_ID:
+            len += ID_LEN;
+            a = q->id;
+            break;
+        case OBOOK_ID:
+            len += BOOK_ID_LEN;
+            a = q->book_id;
+            break;
+    }
+    result = ALLOCATE(sizeof(char) * len);
+    sprintf(result, pattern, a, b, c);
+    return result;
+}
+
 char* to_string_query(query q) {
     if (q == NULL) return "";
-    switch (q->kind) {
-        case BORROW: {
-            const char* pattern = "borrow(patron=%s, id=%s, book_id=%s)";
-            char* result = ALLOCATE(
-                sizeof(char) *
-                (strlen(pattern) + PATRON_LEN + ID_LEN + BOOK_ID_LEN + 1));
-            sprintf(result, pattern, q->patron, q->id, q->book_id);
-            return result;
-        }
-        case RETURN: {
-            const char* pattern = "return(patron=%s, id=%s, book_id=%s)";
-            char* result = ALLOCATE(
-                sizeof(char) *
-                (strlen(pattern) + PATRON_LEN + ID_LEN + BOOK_ID_LEN + 1));
-            sprintf(result, pattern, q->patron, q->id, q->book_id);
-            return result;
-        }
-        case JOIN: {
-            const char* pattern = "join(patron=%s, id=%s)";
-            char* result = ALLOCATE(
-                sizeof(char) *
-                (strlen(pattern) + PATRON_LEN + ID_LEN + 1));
-            sprintf(result, pattern, q->patron, q->id);
-            return result;
-        }
-        case LEAVE: {
-            const char* pattern = "leave(patron=%s, id=%s)";
-            char* result = ALLOCATE(
-                sizeof(char) *
-                (strlen(pattern) + PATRON_LEN + ID_LEN + 1));
-            sprintf(result, pattern, q->patron, q->id);
-            return result;
-        }
-        case BOOKS: {
-            const char* pattern = "books(id=%s)";
-            char* result = ALLOCATE(
-                sizeof(char) * (strlen(pattern) + ID_LEN + 1));
-            sprintf(result, pattern, q->id);
-            return result;
-        }
-        case WHO_BORROWS: {
-            const char* pattern = "who_borrows(book_id=%s)";
-            char* result = ALLOCATE(
-                sizeof(char) * (strlen(pattern) + BOOK_ID_LEN + 1));
-            sprintf(result, pattern, q->book_id);
-            return result;
-        }
-        case BORROWS_MOST: return "borrow_most()";
-    }
-    return "Invalid query";
+    if (q->kind > SHOW) return "Invalid query";
+    return to_string_helper(query_strings[q->kind], q, query_opts[q->kind]);
 }
 
 query make_query(query_kind kind, char* patron_name, char* patron_id, char* book_id) {
@@ -75,7 +82,7 @@ query make_query(query_kind kind, char* patron_name, char* patron_id, char* book
 }
 
 void process_query(query q) {
-    printf("Processing: %s\n", to_string((printable*)q));
+    printf("Processing: %s\n> ", to_string((printable*)q));
 }
 
 char* str(char* in) {
@@ -84,4 +91,45 @@ char* str(char* in) {
     strncpy(result, in, len);
     result[len] = '\0';
     return result;
+}
+
+char* quote(char* in) {
+    size_t len = strlen(in);
+    char* result = ALLOCATE(sizeof(char) * len - 1);
+    strncpy(result, in + 1, len - 2);
+    result[len] = '\0';
+    return result;
+}
+
+void populate_library_list(list in) {
+    list it = in;
+    while (it != NULL) {
+        query q = make_query(DONATE, NULL, NULL, (char*)it->car->val);
+        process_query(q);
+        it = it->cdr;
+    }
+}
+
+void populate_library_file(char* filename) {
+    populate_library_list(load_words(filename));
+}
+
+void populate_library(size_t n) {
+    size_t i;
+    time_t t;
+    list books = NULL;
+
+    srand((unsigned)time(&t));
+    
+    for (i = 0; i < n; i++) {
+        size_t id = rand() % 10000;
+        size_t a = 'a' + rand() % 25;
+        size_t b = 'a' + rand() % 25;
+        char* result = ALLOCATE(sizeof(char) * 7);
+        
+        sprintf(result, "%c%c%d", a, b, id);
+        printable* ps = (printable*)make_printable_string(result);
+        books = cons(ps, books);
+    }
+    populate_library_list(books);
 }

@@ -21,18 +21,21 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "query.h"
+#include "list.h"
+#include "printable_string.h"
 
 void yyerror(char* s);
-#line 9 "./query_grammar.y"
+int yylex();
+#line 12 "./query_grammar.y"
 #ifdef YYSTYPE
 #undef  YYSTYPE_IS_DECLARED
 #define YYSTYPE_IS_DECLARED 1
 #endif
 #ifndef YYSTYPE_IS_DECLARED
 #define YYSTYPE_IS_DECLARED 1
-typedef union { query query_t; char* str; } YYSTYPE;
+typedef union { query queryt; char* str; list strlist; size_t num; } YYSTYPE;
 #endif /* !YYSTYPE_IS_DECLARED */
-#line 36 "y.tab.c"
+#line 39 "y.tab.c"
 
 /* compatibility with bison */
 #ifdef YYPARSE_PARAM
@@ -66,53 +69,111 @@ typedef union { query query_t; char* str; } YYSTYPE;
 extern int YYPARSE_DECL();
 
 #define PLUS 257
-#define MINUS 258
-#define QUESTION 259
-#define BANG 260
-#define PATRONID 261
-#define BOOKID 262
-#define PATRON 263
+#define DOT 258
+#define QUOTED 259
+#define MINUS 260
+#define QUESTION 261
+#define BANG 262
+#define PATRONID 263
+#define BOOKID 264
+#define PATRON 265
+#define NUM 266
 #define YYERRCODE 256
 typedef short YYINT;
 static const YYINT yylhs[] = {                           -1,
-    1,    1,    1,    1,    1,    1,    1,    2,    0,    0,
+    4,    4,    1,    1,    1,    1,    1,    1,    1,    1,
+    3,    3,    3,    2,    2,    0,    0,
 };
 static const YYINT yylen[] = {                            2,
-    4,    4,    3,    3,    2,    2,    2,    1,    1,    2,
+    1,    2,    4,    4,    3,    3,    2,    2,    2,    2,
+    2,    2,    2,    1,    1,    1,    2,
 };
 static const YYINT yydefred[] = {                         0,
-    0,    0,    0,    0,    0,    8,    0,    0,    0,    7,
-    5,    6,    0,   10,    3,    4,    0,    1,    2,
+    0,    0,    0,    0,    0,    0,   14,    0,   15,    0,
+   12,    0,   13,   11,    0,   10,    9,    7,    8,    0,
+   17,    5,    2,    6,    0,    3,    4,
 };
-static const YYINT yydgoto[] = {                          5,
-    6,    7,
+static const YYINT yydgoto[] = {                          6,
+    7,    8,    9,   14,
 };
-static const YYINT yysindex[] = {                      -257,
- -258, -252, -253, -251,    0,    0, -257, -249, -248,    0,
-    0,    0, -247,    0,    0,    0, -254,    0,    0,
+static const YYINT yysindex[] = {                      -255,
+ -265, -252, -261, -246, -254,    0,    0, -255,    0, -250,
+    0, -245,    0,    0, -243,    0,    0,    0,    0, -242,
+    0,    0,    0,    0, -249,    0,    0,
 };
 static const YYINT yyrindex[] = {                         0,
-    0,    0,    0,    0,    0,    0,   14,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,   21,    0,    0,
+    0,    1,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,
 };
-static const YYINT yygindex[] = {                         9,
-    0,    0,
+static const YYINT yygindex[] = {                        15,
+    0,    0,    0,   12,
 };
-#define YYTABLESIZE 16
-static const YYINT yytable[] = {                          1,
-    2,    3,   18,   19,    8,    4,   10,   11,   12,   13,
-    9,   15,   16,    9,   17,   14,
+#define YYTABLESIZE 266
+static const YYINT yytable[] = {                         10,
+    1,    1,    2,   15,    3,    4,   11,   26,   20,    5,
+   27,   12,   22,   13,   16,   17,   18,   19,   12,   24,
+   16,   25,   21,   23,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    1,    1,    0,
+    1,    1,    0,    0,    0,    1,
 };
-static const YYINT yycheck[] = {                        257,
-  258,  259,  257,  258,  263,  263,  260,  261,  262,  261,
-  263,  261,  261,    0,  262,    7,
+static const YYINT yycheck[] = {                        265,
+    0,  257,  258,  265,  260,  261,  259,  257,  263,  265,
+  260,  264,  263,  266,  261,  262,  263,  264,  264,  263,
+    0,  264,    8,   12,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,  257,  258,   -1,
+  260,  261,   -1,   -1,   -1,  265,
 };
-#define YYFINAL 5
+#define YYFINAL 6
 #ifndef YYDEBUG
 #define YYDEBUG 0
 #endif
-#define YYMAXTOKEN 263
-#define YYUNDFTOKEN 268
+#define YYMAXTOKEN 266
+#define YYUNDFTOKEN 273
 #define YYTRANSLATE(a) ((a) > YYMAXTOKEN ? YYUNDFTOKEN : (a))
 #if YYDEBUG
 static const char *const yyname[] = {
@@ -123,11 +184,14 @@ static const char *const yyname[] = {
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"PLUS","MINUS","QUESTION","BANG",
-"PATRONID","BOOKID","PATRON",0,0,0,0,"illegal-symbol",
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"PLUS","DOT","QUOTED","MINUS",
+"QUESTION","BANG","PATRONID","BOOKID","PATRON","NUM",0,0,0,0,0,0,
+"illegal-symbol",
 };
 static const char *const yyrule[] = {
 "$accept : pqueries",
+"books : BOOKID",
+"books : BOOKID books",
 "rquery : PATRON PATRONID BOOKID PLUS",
 "rquery : PATRON PATRONID BOOKID MINUS",
 "rquery : PLUS PATRON PATRONID",
@@ -135,7 +199,12 @@ static const char *const yyrule[] = {
 "rquery : QUESTION PATRONID",
 "rquery : QUESTION BOOKID",
 "rquery : QUESTION BANG",
+"rquery : QUESTION QUESTION",
+"populate : DOT books",
+"populate : DOT QUOTED",
+"populate : DOT NUM",
 "pquery : rquery",
+"pquery : populate",
 "pqueries : pquery",
 "pqueries : pquery pqueries",
 
@@ -175,9 +244,6 @@ typedef struct {
 } YYSTACKDATA;
 /* variables for the parser stack */
 static YYSTACKDATA yystack;
-#line 38 "./query_grammar.y"
-/* void yyerror(char* s) { fprintf(stderr, "%s\n", s); } */
-#line 181 "y.tab.c"
 
 #if YYDEBUG
 #include <stdio.h>		/* needed for printf */
@@ -380,46 +446,80 @@ yyreduce:
     switch (yyn)
     {
 case 1:
-#line 23 "./query_grammar.y"
-	{ yyval.query_t = make_query(BORROW, yystack.l_mark[-3].str, yystack.l_mark[-2].str, yystack.l_mark[-1].str); }
+#line 31 "./query_grammar.y"
+	{
+                    printable* ps = (printable*)make_printable_string(yystack.l_mark[0].str);
+                    yyval.strlist = cons(ps, NULL);
+                }
 break;
 case 2:
-#line 24 "./query_grammar.y"
-	{ yyval.query_t = make_query(RETURN, yystack.l_mark[-3].str, yystack.l_mark[-2].str, yystack.l_mark[-1].str); }
+#line 35 "./query_grammar.y"
+	{
+                    printable* ps = (printable*)make_printable_string(yystack.l_mark[-1].str);
+                    yyval.strlist = cons(ps, yystack.l_mark[0].strlist);
+                }
 break;
 case 3:
-#line 25 "./query_grammar.y"
-	{ yyval.query_t = make_query(JOIN, yystack.l_mark[-1].str, yystack.l_mark[0].str, NULL); }
+#line 41 "./query_grammar.y"
+	{ yyval.queryt = make_query(BORROW, yystack.l_mark[-3].str, yystack.l_mark[-2].str, yystack.l_mark[-1].str); }
 break;
 case 4:
-#line 26 "./query_grammar.y"
-	{ yyval.query_t = make_query(LEAVE, yystack.l_mark[-1].str, yystack.l_mark[0].str, NULL); }
+#line 42 "./query_grammar.y"
+	{ yyval.queryt = make_query(RETURN, yystack.l_mark[-3].str, yystack.l_mark[-2].str, yystack.l_mark[-1].str); }
 break;
 case 5:
-#line 27 "./query_grammar.y"
-	{ yyval.query_t = make_query(BOOKS, NULL, yystack.l_mark[0].str, NULL); }
+#line 43 "./query_grammar.y"
+	{ yyval.queryt = make_query(JOIN, yystack.l_mark[-1].str, yystack.l_mark[0].str, NULL); }
 break;
 case 6:
-#line 28 "./query_grammar.y"
-	{ yyval.query_t = make_query(WHO_BORROWS, NULL, NULL, yystack.l_mark[0].str); }
+#line 44 "./query_grammar.y"
+	{ yyval.queryt = make_query(LEAVE, yystack.l_mark[-1].str, yystack.l_mark[0].str, NULL); }
 break;
 case 7:
-#line 29 "./query_grammar.y"
-	{ yyval.query_t = make_query(BORROWS_MOST, NULL, NULL, NULL); }
+#line 45 "./query_grammar.y"
+	{ yyval.queryt = make_query(BOOKS, NULL, yystack.l_mark[0].str, NULL); }
 break;
 case 8:
-#line 31 "./query_grammar.y"
-	{ process_query(yystack.l_mark[0].query_t); }
+#line 46 "./query_grammar.y"
+	{ yyval.queryt = make_query(WHO_BORROWS, NULL, NULL, yystack.l_mark[0].str); }
 break;
 case 9:
-#line 33 "./query_grammar.y"
-	{;}
+#line 47 "./query_grammar.y"
+	{ yyval.queryt = make_query(BORROWS_MOST, NULL, NULL, NULL); }
 break;
 case 10:
-#line 34 "./query_grammar.y"
+#line 48 "./query_grammar.y"
+	{ yyval.queryt = make_query(SHOW, NULL, NULL, NULL); }
+break;
+case 11:
+#line 51 "./query_grammar.y"
+	{ populate_library_list(yystack.l_mark[0].strlist); }
+break;
+case 12:
+#line 52 "./query_grammar.y"
+	{ populate_library_file(yystack.l_mark[0].str); }
+break;
+case 13:
+#line 53 "./query_grammar.y"
+	{ populate_library(yystack.l_mark[0].num); }
+break;
+case 14:
+#line 56 "./query_grammar.y"
+	{ process_query(yystack.l_mark[0].queryt); }
+break;
+case 15:
+#line 57 "./query_grammar.y"
 	{;}
 break;
-#line 423 "y.tab.c"
+case 16:
+#line 60 "./query_grammar.y"
+	{;}
+break;
+case 17:
+#line 61 "./query_grammar.y"
+	{;}
+break;
+#line 523 "y.tab.c"
     }
     yystack.s_mark -= yym;
     yystate = *yystack.s_mark;

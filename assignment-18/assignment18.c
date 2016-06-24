@@ -27,7 +27,7 @@ extern char* yytext;
 void print_usage() {
     printf("Welcome to the library!\n"
            "To use library you must follow these rules given in ABNF:\n"
-           "  add_book      := book_id+ `+` | `.` file\n"
+           "  add_book      := `.` book_id+ `+` | `.` file | `.` num\n"
            "  join_library  := `+` patron patron_id\n"
            "  leave_library := `-` patron patron_id\n"
            "  boorow_book   := patron? patron_id book_id `+`\n"
@@ -39,6 +39,13 @@ void print_usage() {
            "  patron_id     := [0-9]{9}\n"
            "  book_id       := [a-zA-Z]{2}[0-9]{4}\n"
            "  file          := [\"][^\"]+[\"]\n"
+           "  num           := #[0-9]{1,12}\n"
+           "\n"
+           "Books can be entered manually (one by one), red from a file,\n"
+           "or generated (you must type the number of books to generate).\n"
+           "If books are red from a file, the file must contain book ids\n"
+           "delimited by any number of blank elements\n"
+           "\n> "
            );
 }
 

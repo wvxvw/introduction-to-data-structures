@@ -129,10 +129,9 @@ void resize(aheap heap, size_t new_size) {
     for (i = 0; i < heap->size; i++) heap->elements[i] = old[i];
 }
 
-aheap aheapify(printable** raw, size_t size, comparison_fn_t cmp) {
+aheap make_aheap(size_t size, comparison_fn_t cmp) {
     aheap result = ALLOCATE(sizeof(array_heap));
     printable* presult = (printable*)result;
-    size_t i;
 
     result->allocated = pow(2.0, 1.0 + (double)(size_t)log2((double)size));
     result->elements = ALLOCATE(sizeof(printable*) * result->allocated);
@@ -140,6 +139,18 @@ aheap aheapify(printable** raw, size_t size, comparison_fn_t cmp) {
     result->cmp = cmp;
     presult->type = aheap_type();
     define_method(presult->type, to_string, to_string_lheap);
+    return result;
+}
+
+aheap make_empty_aheap(comparison_fn_t cmp) {
+    aheap result = make_aheap(DEFAULT_HEAP_SIZE, cmp);
+    return result;
+}
+
+aheap aheapify(printable** raw, size_t size, comparison_fn_t cmp) {
+    aheap result = make_aheap(size, cmp);
+    size_t i;
+
     for (i = 0; i < size; i++) result->elements[i] = raw[i];
     for (i = (result->size >> 1) + 1; i > 0; i--) abubble_up(result, i);
     return result;

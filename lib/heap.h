@@ -28,6 +28,8 @@
 #include "list.h"
 #include "array.h"
 
+#define DEFAULT_HEAP_SIZE 32
+
 typedef struct lheap_cell lheap_cell;
 
 typedef struct lheap_cell {
@@ -98,7 +100,10 @@ printable* apop(aheap heap);
 ASSIGNMENTLIB_API 
 printable* aput(aheap heap, printable* val);
 
-ASSIGNMENTLIB_API 
+ASSIGNMENTLIB_API
 char* to_string_aheap(aheap heap);
+
+ASSIGNMENTLIB_API
+aheap make_empty_aheap(comparison_fn_t cmp);
 
 #endif // HEAP_H_
