@@ -39,7 +39,7 @@ int compare_patron_ids(const void* a, const void* b) {
 library make_library() {
     library result = ALLOCATE(sizeof(printable_library));
     result->books = make_empty_string_chashtable();
-    result->patrons = make_empty_aheap(compare_patrons);
+    result->patrons = make_empty_string_chashtable();
     printable* presult = (printable*)result;
     presult->type = library_type();
     define_method(presult->type, to_string, to_string_library);
@@ -88,25 +88,39 @@ char* library_list_books(library lib, query q) {
 }
 
 char* library_join(library lib, query q) {
-    patron p = make_patron(q->patron, q->id);
+    patron v = make_patron(q->patron, q->id);
+    printable_string* k = make_printable_string(q->id);
     patron existing = (patron)find(
-        lib->patrons, (printable*)p, compare_patron_ids);
+        lib->patrons, (printable*)v, compare_patron_ids);
     char* result, *pattern;
     
     if (existing == NULL) {
-        aput(lib->patrons, (printable*)p);
+        put(lib->patrons, (printable*)k, (printable*)v);
         pattern = "< Registering %s\n";
     } else pattern = "< Patron %s already registered\n";
-    result = ALLOCATE(
-        sizeof(char) * (strlen(pattern) + strlen(q->id) + 1));
+    result = ALLOCATE(sizeof(char) * (strlen(pattern) + strlen(q->id) + 1));
     int ret = sprintf(result, pattern, q->id);
     if (ret < 0) printf("Error printing library_join\n");
     return result;
 }
 
 char* library_leave(library lib, query q) {
-
-    return "< library_leave: Not implemented\n";
+    patron v = make_patron(q->patron, q->id);
+    patron existing = (patron)find(
+        lib->patrons, (printable*)v, compare_patron_ids);
+    char* result, *pattern, *pat;
+    
+    if (existing == NULL) pattern = "< Patron %s is not registered\n";
+    else {
+        printable_string* k = make_printable_string(existing->id);
+        pop(lib->patrons, (printable*)k);
+        pattern = "< Patron %s was removed\n";
+    }
+    pat = to_string((printable*)v);
+    result = ALLOCATE(sizeof(char) * (strlen(pattern) + strlen(pat) + 1));
+    int ret = sprintf(result, pattern, pat);
+    if (ret < 0) printf("Error printing library_leave\n");
+    return result;
 }
 
 char* library_borrow(library lib, query q) {

@@ -21,9 +21,16 @@ list cons(printable* car, list cdr) {
     define_method(presult->type, reverse, list_reverse);
     define_method(presult->type, append, list_append);
     define_method(presult->type, find, list_find);
+    define_method(presult->type, put, list_put);
+    define_method(presult->type, first, list_first);
+    define_method(presult->type, rest, list_rest);
     result->car = car;
     result->cdr = cdr;
     return result;
+}
+
+list list_put(list orig, printable* k, printable* v) {
+    return cons(v, orig);
 }
 
 printable* list_find(list haystack, printable* needle, comparison_fn_t cmp) {
@@ -166,6 +173,10 @@ char* to_string_list(list p) {
     return result;
 }
 
+printable* list_first(list p) { return p->car; }
+
+list list_rest(list p) { return p->cdr; }
+
 dlist dcons(printable* car, dlist cdr) {
     dlist result = ALLOCATE(sizeof(dcell));
     printable* presult = (printable*)result;
@@ -177,11 +188,18 @@ dlist dcons(printable* car, dlist cdr) {
     define_method(presult->type, reverse, list_reverse);
     define_method(presult->type, append, list_append);
     define_method(presult->type, find, list_find);
+    define_method(presult->type, put, dlist_put);
+    define_method(presult->type, first, list_first);
+    define_method(presult->type, rest, list_rest);
     ((list)result)->car = car;
     ((list)result)->cdr = (list)cdr;
     if (cdr != NULL) cdr->dcdr = result;
     result->dcdr = NULL;
     return result;
+}
+
+dlist dlist_put(dlist orig, printable* k, printable* v) {
+    return dcons(v, orig);
 }
 
 dlist dlist_reverse(dlist input) {

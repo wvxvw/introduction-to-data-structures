@@ -83,4 +83,10 @@ printable* chashtable_get(chashtable table, printable* key);
 ASSIGNMENTLIB_API
 unsigned long hash(printable *str);
 
+ASSIGNMENTLIB_API
+size_t chashtable_size(chashtable table);
+
+ASSIGNMENTLIB_API
+printable* chashtable_find(chashtable table, printable* key, comparison_fn_t cmp);
+
 #endif // HASHTABLE_H_

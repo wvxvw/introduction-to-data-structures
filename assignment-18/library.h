@@ -4,7 +4,6 @@
 #include "printable.h"
 #include "printable_string.h"
 #include "hashtable.h"
-#include "heap.h"
 #include "list.h"
 #include "query.h"
 
@@ -14,7 +13,7 @@ typedef struct {
 
     chashtable books;
     
-    aheap patrons;
+    chashtable patrons;
 
 } printable_library;
 

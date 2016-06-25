@@ -140,8 +140,17 @@ list list_merge_sort(list in, comparison_fn_t cmp);
  *
  *  \return Sorted list.
  */
-ASSIGNMENTLIB_API 
+ASSIGNMENTLIB_API
 list list_insertion_sort(list in, comparison_fn_t cmp);
+
+ASSIGNMENTLIB_API
+printable* list_first(list p);
+
+ASSIGNMENTLIB_API
+list list_rest(list p);
+
+ASSIGNMENTLIB_API
+list list_put(list orig, printable* k, printable* v);
 
 ASSIGNMENTLIB_API 
 dlist dlist_reverse(dlist input);
@@ -149,7 +158,10 @@ dlist dlist_reverse(dlist input);
 ASSIGNMENTLIB_API 
 dlist dlist_append(dlist a, dlist b);
 
-ASSIGNMENTLIB_API 
+ASSIGNMENTLIB_API
 dlist make_dlist(printable** elements, size_t size);
+
+ASSIGNMENTLIB_API
+dlist dlist_put(dlist orig, printable* k, printable* v);
 
 #endif // LIST_H_

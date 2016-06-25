@@ -20,6 +20,16 @@
 
 #include "printable.h"
 
+#define CHECK_METHOD_EXISTS(method, type, fptr, defval)                 \
+    do {                                                                \
+        if ((method) == NULL) {                                         \
+            printf("find: Couldn't find method: %s, %d, %p\n",          \
+                   __FUNCTION__, (type), (fptr));                       \
+            return (defval);                                            \
+        }                                                               \
+    }                                                                   \
+    while (false)
+
 typedef void* sortable;
 
 /** \fn comparison_fn_t
@@ -75,16 +85,28 @@ sortable merge_sort(sortable unsorted, comparison_fn_t cmp);
  *
  *  \param input The collection whose length is being computed.
  */
-ASSIGNMENTLIB_API 
+ASSIGNMENTLIB_API
 size_t length(sortable input);
 
-ASSIGNMENTLIB_API 
+ASSIGNMENTLIB_API
 sortable reverse(sortable unsorted);
 
-ASSIGNMENTLIB_API 
+ASSIGNMENTLIB_API
 sortable append(sortable a, sortable b);
 
-ASSIGNMENTLIB_API 
+ASSIGNMENTLIB_API
 printable* find(sortable haystack, printable* needle, comparison_fn_t cmp);
+
+ASSIGNMENTLIB_API
+printable* put(sortable container, printable* key, printable* val);
+
+ASSIGNMENTLIB_API
+printable* pop(sortable container, printable* key);
+
+ASSIGNMENTLIB_API
+printable* first(sortable container);
+
+ASSIGNMENTLIB_API
+printable* rest(sortable container);
 
 #endif // SORTABLE_H_
