@@ -98,6 +98,9 @@ ASSIGNMENTLIB_API
 printable* find(sortable haystack, printable* needle, comparison_fn_t cmp);
 
 ASSIGNMENTLIB_API
+printable* peek(sortable container, printable* key);
+
+ASSIGNMENTLIB_API
 printable* put(sortable container, printable* key, printable* val);
 
 ASSIGNMENTLIB_API

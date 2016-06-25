@@ -58,6 +58,15 @@ printable* find(sortable haystack, printable* needle, comparison_fn_t cmp) {
     return method(haystack, needle, cmp);
 }
 
+printable* peek(sortable container, printable* key) {
+    if (container == NULL) return false;
+    printable* p = container;
+    printable* (*fptr)(sortable, printable*) = peek;
+    printable* (*method)(sortable, printable*) = find_method(p->type, fptr);
+    CHECK_METHOD_EXISTS(method, p->type, fptr, NULL);
+    return method(container, key);
+}
+
 printable* put(sortable container, printable* key, printable* val) {
     if (container == NULL) return NULL;
     printable* p = container;

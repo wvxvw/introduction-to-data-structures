@@ -87,6 +87,7 @@ chashtable make_chashtable(hash_fn_t h, size_t size, list data, comparison_fn_t 
     define_method(presult->type, pop, chashtable_pop);
     define_method(presult->type, length, chashtable_size);
     define_method(presult->type, find, chashtable_find);
+    define_method(presult->type, peek, chashtable_get);
     result->keys = ALLOCATE(sizeof(dlist) * size);
     result->values = ALLOCATE(sizeof(dlist) * size);
     presult->val = result->values;

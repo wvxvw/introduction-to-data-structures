@@ -142,7 +142,7 @@ void populate_library(size_t n) {
         size_t b = 'a' + rand() % 25;
         char* result = ALLOCATE(sizeof(char) * 7);
         
-        sprintf(result, "%c%c%d", a, b, id);
+        sprintf(result, "%c%c%04d", a, b, id);
         printable* ps = (printable*)make_printable_string(result);
         books = cons(ps, books);
     }

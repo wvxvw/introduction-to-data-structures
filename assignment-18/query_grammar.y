@@ -48,7 +48,7 @@ rquery  :       PATRON PATRONID BOOKID PLUS { $$ = make_query(BORROW, $1, $2, $3
         |       QUESTION QUESTION { $$ = make_query(SHOW, NULL, NULL, NULL); }
         ;
 
-populate :      DOT books { populate_library_list($2); }
+populate :      DOT books PLUS { populate_library_list($2); }
         |       DOT QUOTED { populate_library_file($2); }
         |       DOT NUM { populate_library($2); }
         ;

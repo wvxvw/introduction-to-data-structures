@@ -2,14 +2,18 @@
 #include "library.h"
 #include "query.h"
 #include "printable_string.h"
+#include "printable_int.h"
 #include "generic.h"
 #include "sortable.h"
+#include "pair.h"
+#include "iterable.h"
 
 DEFTYPE(library);
 DEFTYPE(patron);
 
 static library lib = NULL;
 static patron libpatron = NULL;
+static char* libid = "******";
 
 int compare_patrons(const void* a, const void* b) {
     patron pa = *(patron*)a;
@@ -63,7 +67,7 @@ library get_library() {
 }
 
 patron get_libpatron() {
-    if (libpatron == NULL) libpatron = make_patron("Library", "******");
+    if (libpatron == NULL) libpatron = make_patron("Library", libid);
     return libpatron;
 }
 
@@ -83,8 +87,23 @@ char* library_add_book(library lib, query q) {
 }
 
 char* library_list_books(library lib, query q) {
-
-    return "< library_list_books: Not implemented\n";
+    printable* key = (printable*)make_printable_string(q->id);
+    patron p = (patron)peek(lib->patrons, key);
+    char* books, *result, *pattern;
+    
+    if (p == NULL) {
+        pattern = "< Patron %s doesn't exist\n";
+        books = "";
+    }
+    else {
+        pattern = "< Patron %s holds books %s\n";
+        books = to_string((printable*)p->books);
+    }
+    size_t len = strlen(pattern) + strlen(books) + strlen(q->id) + 1;
+    result = ALLOCATE(sizeof(char) * len);
+    int ret = sprintf(result, pattern, q->id, books);
+    if (ret < 0) printf("Error printing library_list_books\n");
+    return result;
 }
 
 char* library_join(library lib, query q) {
@@ -112,9 +131,14 @@ char* library_leave(library lib, query q) {
     
     if (existing == NULL) pattern = "< Patron %s is not registered\n";
     else {
-        printable_string* k = make_printable_string(existing->id);
-        pop(lib->patrons, (printable*)k);
-        pattern = "< Patron %s was removed\n";
+        printable* k = (printable*)make_printable_string(existing->id);
+        list books = (list)peek(lib->patrons, k);
+        if (books != NULL)
+            pattern = "< Patron %s must return books before leaving\n";
+        else {
+            pop(lib->patrons, k);
+            pattern = "< Patron %s was removed\n";
+        }
     }
     pat = to_string((printable*)v);
     result = ALLOCATE(sizeof(char) * (strlen(pattern) + strlen(pat) + 1));
@@ -124,23 +148,138 @@ char* library_leave(library lib, query q) {
 }
 
 char* library_borrow(library lib, query q) {
-
-    return "< library_borrow: Not implemented\n";
+    printable* k = (printable*)make_printable_string(q->book_id);
+    printable* pk = (printable*)make_printable_string(q->id);
+    list books = (list)peek(lib->books, k);
+    char* result, *pattern, *pat, *book;
+    patron borrower = (patron)peek(lib->patrons, pk);
+    
+    if (books == NULL) pattern = "< Book %s is not in the library\n";
+    else if (borrower == NULL)
+        pattern = "< Book %s cannot be borrowed. Patron %s deosn't exist\n";
+    else {
+        list copy = NULL;
+        pattern = "< Book %s is not available\n";
+        // FIXME: This will give all books with the same id to the
+        // borrower.
+        while (books != NULL) {
+            patron p = (patron)first(books);
+            if (strcmp(p->id, libid) == 0) {
+                p = borrower;
+                borrower->books = cons(k, borrower->books);
+                pattern = "< Book %s borrowed by %s\n";
+            }
+            copy = cons((printable*)p, copy);
+            books = (list)rest(books);
+        }
+        put(lib->books, k, (printable*)copy);
+    }
+    book = to_string(k);
+    pat = to_string((printable*)borrower);
+    size_t len = strlen(pattern) + strlen(book) + strlen(pat) + 1;
+    result = ALLOCATE(sizeof(char) * len);
+    int ret = sprintf(result, pattern, book, pat);
+    if (ret < 0) printf("Error printing library_borrow\n");
+    return result;
 }
 
 char* library_return(library lib, query q) {
+    printable_string* key = make_printable_string(q->book_id);
+    printable_string* pkey = make_printable_string(q->id);
+    list books = (list)peek(lib->books, (printable*)key);
+    patron borrower = (patron)peek(lib->patrons, (printable*)pkey);
+    list copy = NULL;
+    char* result, *pattern, *pat;
 
-    return "< library_return: Not implemented\n";
+    if (books == NULL) pattern = "< %s doesn't belong to this library\n";
+    else {
+        pattern = "< %s was not borrowed\n";
+        // TODO: Add generic remove() to list.
+        while (books != NULL) {
+            patron p = (patron)first(books);
+            if (strcmp(p->id, q->id) == 0) {
+                copy = cons((printable*)get_libpatron(), copy);
+                copy = append(copy, (list)rest(books));
+                pattern = "< %s was returned by %s\n";
+                
+                list pbooks = borrower->books;
+                list pcopy = NULL;
+                
+                while (pbooks != NULL) {
+                    printable* check = (printable*)first(pbooks);
+                    if (compare_strings(&key, &check) == 0) {
+                        pcopy = append(pcopy, (list)rest(pbooks));
+                        break;
+                    }
+                }
+                borrower->books = pcopy;
+                break;
+            }
+            copy = cons((printable*)p, copy);
+            books = (list)rest(books);
+        }
+        put(lib->books, (printable*)key, (printable*)copy);
+    }
+    pat = to_string((printable*)borrower);
+    size_t len = strlen(pattern) + strlen(q->book_id) + strlen(pat) + 1;
+    result = ALLOCATE(sizeof(char) * len);
+    int ret = sprintf(result, pattern, q->book_id, pat);
+    if (ret < 0) printf("Error printing library_borrow\n");
+    return result;
 }
 
 char* library_who_borrows(library lib, query q) {
-
-    return "< library_who_borrows: Not implemented\n";
+    printable_string* key = make_printable_string(q->book_id);
+    list books = (list)peek(lib->books, (printable*)key);
+    list patrons = NULL;
+    char* result, *pattern, *pat;
+    
+    if (books == NULL)
+        pattern = "< Book %s is not registered in the library\n";
+    else {
+        pattern = "< Copies of %s book are held by %s\n";
+        while (books != NULL) {
+            patron p = (patron)first(books);
+            if (strcmp(p->id, libid) != 0)
+                patrons = cons((printable*)p, patrons);
+            books = (list)rest(books);
+        }
+        if (patrons == NULL)
+            pattern = "< The %s book is not held by anyone\n";
+    }
+    pat = to_string((printable*)patrons);
+    size_t len = strlen(pattern) + strlen(pat) + strlen(q->book_id) + 1;
+    result = ALLOCATE(sizeof(char) * len);
+    int ret = sprintf(result, pattern, q->book_id, pat);
+    if (ret < 0) printf("Error printing library_leave\n");
+    return result;
 }
 
 char* library_borrows_most(library lib, query q) {
-
-    return "< library_borrows_most: Not implemented\n";
+    iterator* it = make_hashtable_iterator(lib->patrons);
+    size_t max = 0;
+    patron p = get_libpatron();
+    char* pattern, *result, *pat, *maxs;
+    
+    do {
+        pair kv = (pair)((printable*)it)->val;
+        patron pt = (patron)kv->last;
+        size_t len = length(pt->books);
+        if (len > max) {
+            p = pt;
+            max = len;
+        }
+    } while (next(it));
+    if (p == get_libpatron()) pattern = "< Nobody borrowed any books yet\n";
+    else pattern = "< %s has most (%s) books\n";
+    
+    pat = to_string((printable*)p);
+    maxs = to_string((printable*)make_printable_int((int)max));
+    size_t len = strlen(pattern) + strlen(pat) + strlen(maxs) + 1;
+    result = ALLOCATE(sizeof(char) * len);
+    int ret = sprintf(result, pattern, pat, maxs);
+    if (ret < 0) printf("Error printing library_borrows_most\n");
+    return result;
 }
 
 char* library_show(library lib, query q) {
