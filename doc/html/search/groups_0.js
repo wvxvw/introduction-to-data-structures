@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['support_20code_20for_20data_2dstructures_20course',['Support code for data-structures course',['../group__libassignment.html',1,'']]]
+  ['programming_20exercises_20_2814_20and_2018_29',['Programming exercises (14 and 18)',['../group__exercises.html',1,'']]]
 ];

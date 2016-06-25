@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['search_5fdirection',['search_direction',['../array_8h.html#ab96854060e950fff987e7e8bbbfead06',1,'array.h']]]
+  ['query_5fkind',['query_kind',['../query_8h.html#ab4200b9e03cb31d42aefab05ca524d79',1,'query.h']]]
 ];

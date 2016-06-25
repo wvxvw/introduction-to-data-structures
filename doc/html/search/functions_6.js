@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['index_5fof',['index_of',['../array_8c.html#a3efc5126dccbd1ba308f2eaeac95d9bc',1,'index_of(array searched, printable *elt):&#160;array.c'],['../array_8h.html#a3efc5126dccbd1ba308f2eaeac95d9bc',1,'index_of(array searched, printable *elt):&#160;array.c']]],
-  ['insert',['insert',['../array_8c.html#afa7748cee76a0f926bd6321de586e763',1,'array.c']]],
-  ['insertion_5fsort',['insertion_sort',['../array_8c.html#a41254f07f4e4c5e4822451a661ec7a9d',1,'insertion_sort(array unsorted, comparison_fn_t cmp):&#160;array.c'],['../array_8h.html#a41254f07f4e4c5e4822451a661ec7a9d',1,'insertion_sort(array unsorted, comparison_fn_t cmp):&#160;array.c']]],
-  ['int_5felement_5fgenerator',['int_element_generator',['../printable__int_8c.html#a755e14d3834993c619266017ac54859d',1,'int_element_generator(void *elt):&#160;printable_int.c'],['../printable__int_8h.html#a755e14d3834993c619266017ac54859d',1,'int_element_generator(void *elt):&#160;printable_int.c']]],
-  ['iterator',['iterator',['../array_8c.html#a94d9589ccfd029a406d907381e3aff3e',1,'iterator(array iterated):&#160;array.c'],['../array_8h.html#a94d9589ccfd029a406d907381e3aff3e',1,'iterator(array iterated):&#160;array.c']]]
+  ['has',['has',['../iterable_8c.html#a225660848f90e6eaa7af1e7d799f7bad',1,'has(iterator *impl):&#160;iterable.c'],['../iterable_8h.html#a539ac98516304211e8d985da6e35bda8',1,'has(iterator *impl):&#160;iterable.c']]],
+  ['hash',['hash',['../hashtable_8h.html#a8ed25f16c920b279daafded5095c88b7',1,'hashtable.h']]],
+  ['hashtable_5fhas',['hashtable_has',['../iterable_8c.html#a6538e36ee4e181ed89d2a2bb99079609',1,'hashtable_has(iterator *impl):&#160;iterable.c'],['../iterable_8h.html#a3f89b2c91d6f6cfaeb56f88b5b154842',1,'hashtable_has(iterator *impl):&#160;iterable.c']]],
+  ['hashtable_5fnext',['hashtable_next',['../iterable_8c.html#a609aaf49ced96564e495622a9cdb9b64',1,'hashtable_next(iterator *impl):&#160;iterable.c'],['../iterable_8h.html#a53665e3f90b01f6cb15f0916c5b6ab89',1,'hashtable_next(iterator *impl):&#160;iterable.c']]],
+  ['hswap',['hswap',['../heap_8c.html#a725b1f9b186a30e746eef2e0703d3b1d',1,'heap.c']]]
 ];

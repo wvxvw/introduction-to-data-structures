@@ -96,12 +96,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;time.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
-<code>#include &lt;gc.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="generic_8h_source.html">generic.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="array_8h_source.html">array.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="printable__int_8h_source.html">printable_int.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a52e684b956f42d614aa48ecdf33331c4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable__int_8c.html#a52e684b956f42d614aa48ecdf33331c4">DEFTYPE</a> (<a class="el" href="structprintable__int.html">printable_int</a>)</td></tr>
+<tr class="separator:a52e684b956f42d614aa48ecdf33331c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc7133088bdfff8fa0879708db998305"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable__int_8c.html#adc7133088bdfff8fa0879708db998305">start_int_cmp_count</a> ()</td></tr>
 <tr class="separator:adc7133088bdfff8fa0879708db998305"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a266a53167003cb0ed10fb59ef973ed7d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable__int_8c.html#a266a53167003cb0ed10fb59ef973ed7d">get_int_cmp_count</a> ()</td></tr>
@@ -111,14 +113,16 @@ Functions</h2></td></tr>
 <tr class="separator:aad8fa8fff44682a1e11768fcd30326a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a183f63bd18e2c02b7411a009a8c4a47d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable__int_8c.html#a183f63bd18e2c02b7411a009a8c4a47d">compare_ints_reverse</a> (const void *a, const void *b)</td></tr>
 <tr class="separator:a183f63bd18e2c02b7411a009a8c4a47d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6ebde217d820b151791ebfd9daf5a3e"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable__int_8c.html#aa6ebde217d820b151791ebfd9daf5a3e">to_string_int</a> (const <a class="el" href="structprintable__int.html">printable_int</a> *p)</td></tr>
-<tr class="memdesc:aa6ebde217d820b151791ebfd9daf5a3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate printable representation of a <code><a class="el" href="structprintable__int.html" title="This struct is used to box a bare int pointer. It also embeds printable, so it can be pretty-printed...">printable_int</a></code>.  <a href="#aa6ebde217d820b151791ebfd9daf5a3e">More...</a><br /></td></tr>
-<tr class="separator:aa6ebde217d820b151791ebfd9daf5a3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adee72a8f59faf0e1d1b5922fe122c7eb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprintable__int.html">printable_int</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable__int_8c.html#adee72a8f59faf0e1d1b5922fe122c7eb">make_printable_int</a> (const int val)</td></tr>
-<tr class="separator:adee72a8f59faf0e1d1b5922fe122c7eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0aa93300ea79f0431b9b4b04a7a4e19e"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable__int_8c.html#a0aa93300ea79f0431b9b4b04a7a4e19e">to_string_int</a> (<a class="el" href="structprintable__int.html">printable_int</a> *p)</td></tr>
+<tr class="memdesc:a0aa93300ea79f0431b9b4b04a7a4e19e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate printable representation of a <code><a class="el" href="structprintable__int.html" title="This struct is used to box a bare int pointer. It also embeds printable, so it can be pretty-printed...">printable_int</a></code>.  <a href="#a0aa93300ea79f0431b9b4b04a7a4e19e">More...</a><br /></td></tr>
+<tr class="separator:a0aa93300ea79f0431b9b4b04a7a4e19e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf66d63c7990f572edbcc68edd6309a9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprintable__int.html">printable_int</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable__int_8c.html#acf66d63c7990f572edbcc68edd6309a9">make_printable_int</a> (int val)</td></tr>
+<tr class="separator:acf66d63c7990f572edbcc68edd6309a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a755e14d3834993c619266017ac54859d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable__int_8c.html#a755e14d3834993c619266017ac54859d">int_element_generator</a> (void *elt)</td></tr>
 <tr class="memdesc:a755e14d3834993c619266017ac54859d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate <code><a class="el" href="structprintable__int.html" title="This struct is used to box a bare int pointer. It also embeds printable, so it can be pretty-printed...">printable_int</a></code> from given value.  <a href="#a755e14d3834993c619266017ac54859d">More...</a><br /></td></tr>
 <tr class="separator:a755e14d3834993c619266017ac54859d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a549c4ac993c2e2fde25fc8ebaa42263e"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable__int_8c.html#a549c4ac993c2e2fde25fc8ebaa42263e">int_element_normalizer</a> (<a class="el" href="structprintable.html">printable</a> *elt, <a class="el" href="structprintable.html">printable</a> *min, <a class="el" href="structprintable.html">printable</a> *max, size_t range)</td></tr>
+<tr class="separator:a549c4ac993c2e2fde25fc8ebaa42263e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -188,6 +192,22 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a52e684b956f42d614aa48ecdf33331c4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DEFTYPE </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structprintable__int.html">printable_int</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a266a53167003cb0ed10fb59ef973ed7d"></a>
 <div class="memitem">
 <div class="memproto">
@@ -228,14 +248,52 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="adee72a8f59faf0e1d1b5922fe122c7eb"></a>
+<a class="anchor" id="a549c4ac993c2e2fde25fc8ebaa42263e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t int_element_normalizer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structprintable.html">printable</a> *&#160;</td>
+          <td class="paramname"><em>elt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structprintable.html">printable</a> *&#160;</td>
+          <td class="paramname"><em>min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structprintable.html">printable</a> *&#160;</td>
+          <td class="paramname"><em>max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>range</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="acf66d63c7990f572edbcc68edd6309a9"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structprintable__int.html">printable_int</a>* make_printable_int </td>
           <td>(</td>
-          <td class="paramtype">const int&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>val</em></td><td>)</td>
           <td></td>
         </tr>
@@ -259,14 +317,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aa6ebde217d820b151791ebfd9daf5a3e"></a>
+<a class="anchor" id="a0aa93300ea79f0431b9b4b04a7a4e19e"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char* to_string_int </td>
+          <td class="memname">char* to_string_int </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structprintable__int.html">printable_int</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structprintable__int.html">printable_int</a> *&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
         </tr>

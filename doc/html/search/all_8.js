@@ -1,13 +1,25 @@
 var searchData=
 [
-  ['index_5fof',['index_of',['../array_8c.html#a3efc5126dccbd1ba308f2eaeac95d9bc',1,'index_of(array searched, printable *elt):&#160;array.c'],['../array_8h.html#a3efc5126dccbd1ba308f2eaeac95d9bc',1,'index_of(array searched, printable *elt):&#160;array.c']]],
+  ['id',['id',['../structprintable__patron.html#ab739137b0743e285f37081dbe13874fb',1,'printable_patron::id()'],['../structprintable__query.html#a6d861521f5c948911ad7a2039a7e21c9',1,'printable_query::id()']]],
+  ['id_5flen',['ID_LEN',['../query_8h.html#ad67b99fde0615f584720d61f0fcf0937',1,'query.h']]],
+  ['if',['if',['../lex_8yy_8c.html#ad4a65b873df5c05570846b5413b41dfd',1,'lex.yy.c']]],
+  ['index_5fof',['index_of',['../array_8c.html#a3efc5126dccbd1ba308f2eaeac95d9bc',1,'index_of(array searched, printable *elt):&#160;array.c'],['../array_8h.html#a2751fc668d728f43600245dfbf600854',1,'index_of(array searched, printable *elt):&#160;array.c']]],
+  ['initial',['INITIAL',['../lex_8yy_8c.html#aa3d063564f6ab16f6d408b8369d0e9ff',1,'lex.yy.c']]],
   ['insert',['insert',['../array_8c.html#afa7748cee76a0f926bd6321de586e763',1,'array.c']]],
-  ['insertion_5fsort',['insertion_sort',['../array_8c.html#a41254f07f4e4c5e4822451a661ec7a9d',1,'insertion_sort(array unsorted, comparison_fn_t cmp):&#160;array.c'],['../array_8h.html#a41254f07f4e4c5e4822451a661ec7a9d',1,'insertion_sort(array unsorted, comparison_fn_t cmp):&#160;array.c']]],
-  ['int_5felement_5fgenerator',['int_element_generator',['../printable__int_8c.html#a755e14d3834993c619266017ac54859d',1,'int_element_generator(void *elt):&#160;printable_int.c'],['../printable__int_8h.html#a755e14d3834993c619266017ac54859d',1,'int_element_generator(void *elt):&#160;printable_int.c']]],
+  ['insertion_5fsort',['insertion_sort',['../sortable_8c.html#a51e4953cfd25d1644b1a91f5028730ec',1,'insertion_sort(sortable unsorted, comparison_fn_t cmp):&#160;sortable.c'],['../sortable_8h.html#a523dd56c3684b25f102f4b5c6ba4328c',1,'insertion_sort(sortable unsorted, comparison_fn_t cmp):&#160;sortable.c']]],
+  ['int16_5fmax',['INT16_MAX',['../lex_8yy_8c.html#ac58f2c111cc9989c86db2a7dc4fd84ca',1,'lex.yy.c']]],
+  ['int16_5fmin',['INT16_MIN',['../lex_8yy_8c.html#ad4e9955955b27624963643eac448118a',1,'lex.yy.c']]],
+  ['int32_5fmax',['INT32_MAX',['../lex_8yy_8c.html#a181807730d4a375f848ba139813ce04f',1,'lex.yy.c']]],
+  ['int32_5fmin',['INT32_MIN',['../lex_8yy_8c.html#a688eb21a22db27c2b2bd5836943cdcbe',1,'lex.yy.c']]],
+  ['int8_5fmax',['INT8_MAX',['../lex_8yy_8c.html#aaf7f29f45f1a513b4748a4e5014ddf6a',1,'lex.yy.c']]],
+  ['int8_5fmin',['INT8_MIN',['../lex_8yy_8c.html#aadcf2a81af243df333b31efa6461ab8e',1,'lex.yy.c']]],
+  ['int_5felement_5fgenerator',['int_element_generator',['../printable__int_8c.html#a755e14d3834993c619266017ac54859d',1,'int_element_generator(void *elt):&#160;printable_int.c'],['../printable__int_8h.html#a4043b68e1500a7a8be14ba17935b5424',1,'int_element_generator(void *elt):&#160;printable_int.c']]],
+  ['int_5felement_5fnormalizer',['int_element_normalizer',['../printable__int_8c.html#a549c4ac993c2e2fde25fc8ebaa42263e',1,'int_element_normalizer(printable *elt, printable *min, printable *max, size_t range):&#160;printable_int.c'],['../printable__int_8h.html#aa92baf471381cd27789fb72324f73171',1,'int_element_normalizer(printable *elt, printable *min, printable *max, size_t range):&#160;printable_int.c']]],
+  ['int_5fhash',['int_hash',['../hastable_8c.html#aebf5edddbb496e6c6f883e26b47147e6',1,'hastable.c']]],
   ['ints_5fcomparation_5fcount',['ints_comparation_count',['../printable__int_8c.html#a1ea8f88b876c250b46025fa5e48e61c4',1,'printable_int.c']]],
-  ['it',['it',['../structiterator__impl.html#a8ae4a3ddff18fbb8864e488210527a2b',1,'iterator_impl']]],
-  ['iterated',['iterated',['../structiterator__impl.html#ad64425f0e7b4b832be434bd665cc18f5',1,'iterator_impl']]],
-  ['iterator',['iterator',['../array_8c.html#a94d9589ccfd029a406d907381e3aff3e',1,'iterator(array iterated):&#160;array.c'],['../array_8h.html#a94d9589ccfd029a406d907381e3aff3e',1,'iterator(array iterated):&#160;array.c']]],
-  ['iterator_5ffunc',['iterator_func',['../array_8h.html#adff7b45af8d8e548af91b5b58d0540c7',1,'array.h']]],
-  ['iterator_5fimpl',['iterator_impl',['../structiterator__impl.html',1,'iterator_impl'],['../array_8h.html#a4532500868b8bb4cbbd053de03624c29',1,'iterator_impl():&#160;array.h']]]
+  ['is_5falnum',['is_alnum',['../files_8c.html#aae320e03f5e2d31c5f71e9cdfcbf7d22',1,'files.c']]],
+  ['iterable_2ec',['iterable.c',['../iterable_8c.html',1,'']]],
+  ['iterable_2eh',['iterable.h',['../iterable_8h.html',1,'']]],
+  ['iterated',['iterated',['../structiterator.html#aaf135d7a83ead25711a8e37b524e05af',1,'iterator']]],
+  ['iterator',['iterator',['../structiterator.html',1,'iterator'],['../structarray__iterator.html#a3421c2922d7844666e471fb45139b291',1,'array_iterator::iterator()'],['../structhashtable__iterator.html#a2ff150a303982777ce74084581c5573c',1,'hashtable_iterator::iterator()'],['../iterable_8h.html#a44a87da58310b9e87ef1aece7f173ed6',1,'iterator():&#160;iterable.h']]]
 ];

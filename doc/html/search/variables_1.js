@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['car',['car',['../structcell.html#a5030f993b8ff52a57f2603c30877d72c',1,'cell']]],
-  ['cdr',['cdr',['../structcell.html#afa1f5cb1555e2204092dfdc1e3bc710a',1,'cell']]],
-  ['cmp',['cmp',['../structlist__heap.html#a5e46f35909325ccdd8ebf6475fb326bc',1,'list_heap::cmp()'],['../structarray__heap.html#a8b3caf478f284b218482a3435947c052',1,'array_heap::cmp()']]]
+  ['book_5fid',['book_id',['../structprintable__query.html#a228abdecded3213dc00e2428a0fe8c73',1,'printable_query']]],
+  ['books',['books',['../structprintable__library.html#a9e65c529dd51cfcc7e1b782c91c8e8db',1,'printable_library::books()'],['../structprintable__patron.html#aa58e9045d3740f24724ccc21da8f469f',1,'printable_patron::books()']]]
 ];

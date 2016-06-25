@@ -95,21 +95,57 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;gc.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="list_8h_source.html">list.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="strings_8h_source.html">strings.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="generic_8h_source.html">generic.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="sortable_8h_source.html">sortable.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:aedfd9c43161d2ae29e361bf31560bab1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8c.html#aedfd9c43161d2ae29e361bf31560bab1">DEFTYPE</a> (<a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a>)</td></tr>
+<tr class="separator:aedfd9c43161d2ae29e361bf31560bab1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac77a381f5be9d8b2b21a74c6dd6c25be"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8c.html#ac77a381f5be9d8b2b21a74c6dd6c25be">DEFTYPE</a> (<a class="el" href="list_8h.html#a2c960e8dfa17dae3b5a742f878bc3ace">dlist</a>)</td></tr>
+<tr class="separator:ac77a381f5be9d8b2b21a74c6dd6c25be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9cc5b0829091471ba124fca690a78c6a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8c.html#a9cc5b0829091471ba124fca690a78c6a">cons</a> (<a class="el" href="structprintable.html">printable</a> *car, <a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> cdr)</td></tr>
 <tr class="separator:a9cc5b0829091471ba124fca690a78c6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e6b47f1023635e972d1ef7d48f95a9d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8c.html#a7e6b47f1023635e972d1ef7d48f95a9d">reverse</a> (<a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> input)</td></tr>
-<tr class="separator:a7e6b47f1023635e972d1ef7d48f95a9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc751ae366509be37d38aecf0f8ecff7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8c.html#adc751ae366509be37d38aecf0f8ecff7">list_put</a> (<a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> orig, <a class="el" href="structprintable.html">printable</a> *k, <a class="el" href="structprintable.html">printable</a> *v)</td></tr>
+<tr class="separator:adc751ae366509be37d38aecf0f8ecff7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4e137fa2b5c451f600de00c8c3201aa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8c.html#ab4e137fa2b5c451f600de00c8c3201aa">list_find</a> (<a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> haystack, <a class="el" href="structprintable.html">printable</a> *needle, <a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="separator:ab4e137fa2b5c451f600de00c8c3201aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c28f8ec11c0f8275857c8a3e131b9a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8c.html#a3c28f8ec11c0f8275857c8a3e131b9a7">list_reverse</a> (<a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> input)</td></tr>
+<tr class="separator:a3c28f8ec11c0f8275857c8a3e131b9a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed02120a11be6d5336266b3beac9643e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8c.html#aed02120a11be6d5336266b3beac9643e">make_list</a> (<a class="el" href="structprintable.html">printable</a> **elements, size_t size)</td></tr>
 <tr class="separator:aed02120a11be6d5336266b3beac9643e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2b1bf9580c3fb312e7bc0e669fa0c28"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8c.html#ae2b1bf9580c3fb312e7bc0e669fa0c28">length</a> (<a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> input)</td></tr>
-<tr class="separator:ae2b1bf9580c3fb312e7bc0e669fa0c28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ee56108b9e6eac9cf8ccc1cc890acef"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8c.html#a8ee56108b9e6eac9cf8ccc1cc890acef">list_length</a> (<a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> input)</td></tr>
+<tr class="separator:a8ee56108b9e6eac9cf8ccc1cc890acef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba22f737573fef671748bf628baea0c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8c.html#aba22f737573fef671748bf628baea0c9">list_append</a> (<a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> a, <a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> b)</td></tr>
+<tr class="separator:aba22f737573fef671748bf628baea0c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79d96057e42d480c505817004df40ac4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8c.html#a79d96057e42d480c505817004df40ac4">merge</a> (<a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> odds, <a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> evens, <a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="separator:a79d96057e42d480c505817004df40ac4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70d3ff7605b84bacb2b8f1704a4740de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8c.html#a70d3ff7605b84bacb2b8f1704a4740de">list_merge_sort</a> (<a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> in, <a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="separator:a70d3ff7605b84bacb2b8f1704a4740de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0ce981f99ba6a1411e273cf683bed3a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8c.html#af0ce981f99ba6a1411e273cf683bed3a">list_pop</a> (<a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> *in)</td></tr>
+<tr class="separator:af0ce981f99ba6a1411e273cf683bed3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fb14043ae4e82fffea9f1ca4b538441"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8c.html#a8fb14043ae4e82fffea9f1ca4b538441">list_push</a> (<a class="el" href="structprintable.html">printable</a> *elt, <a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> *to)</td></tr>
+<tr class="separator:a8fb14043ae4e82fffea9f1ca4b538441"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa198c0379fef09f1d65324fc30b5b0c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8c.html#aa198c0379fef09f1d65324fc30b5b0c9">list_insertion_sort</a> (<a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> in, <a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="separator:aa198c0379fef09f1d65324fc30b5b0c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2170e29e658537f9afe786160f9eda77"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8c.html#a2170e29e658537f9afe786160f9eda77">to_string_list</a> (<a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> p)</td></tr>
 <tr class="separator:a2170e29e658537f9afe786160f9eda77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bce7e756db57445bad0512f9aa52ae4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8c.html#a5bce7e756db57445bad0512f9aa52ae4">list_first</a> (<a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> p)</td></tr>
+<tr class="separator:a5bce7e756db57445bad0512f9aa52ae4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc4dcdc360c678ead3122be3ff4c5a71"><td class="memItemLeft" align="right" valign="top"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8c.html#adc4dcdc360c678ead3122be3ff4c5a71">list_rest</a> (<a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> p)</td></tr>
+<tr class="separator:adc4dcdc360c678ead3122be3ff4c5a71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a200d24603fdabd4a7a5fd53132d65cbf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="list_8h.html#a2c960e8dfa17dae3b5a742f878bc3ace">dlist</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8c.html#a200d24603fdabd4a7a5fd53132d65cbf">dcons</a> (<a class="el" href="structprintable.html">printable</a> *car, <a class="el" href="list_8h.html#a2c960e8dfa17dae3b5a742f878bc3ace">dlist</a> cdr)</td></tr>
+<tr class="separator:a200d24603fdabd4a7a5fd53132d65cbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a994ea6bbc1e9e8529f6bcf98b8c377e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="list_8h.html#a2c960e8dfa17dae3b5a742f878bc3ace">dlist</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8c.html#a994ea6bbc1e9e8529f6bcf98b8c377e5">dlist_put</a> (<a class="el" href="list_8h.html#a2c960e8dfa17dae3b5a742f878bc3ace">dlist</a> orig, <a class="el" href="structprintable.html">printable</a> *k, <a class="el" href="structprintable.html">printable</a> *v)</td></tr>
+<tr class="separator:a994ea6bbc1e9e8529f6bcf98b8c377e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4aa3ba557ab6a41257b1bb6bb109f0b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="list_8h.html#a2c960e8dfa17dae3b5a742f878bc3ace">dlist</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8c.html#a4aa3ba557ab6a41257b1bb6bb109f0b5">dlist_reverse</a> (<a class="el" href="list_8h.html#a2c960e8dfa17dae3b5a742f878bc3ace">dlist</a> input)</td></tr>
+<tr class="separator:a4aa3ba557ab6a41257b1bb6bb109f0b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cb36ec23839c7f0492601a4b3bc200c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="list_8h.html#a2c960e8dfa17dae3b5a742f878bc3ace">dlist</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8c.html#a3cb36ec23839c7f0492601a4b3bc200c">dlist_append</a> (<a class="el" href="list_8h.html#a2c960e8dfa17dae3b5a742f878bc3ace">dlist</a> a, <a class="el" href="list_8h.html#a2c960e8dfa17dae3b5a742f878bc3ace">dlist</a> b)</td></tr>
+<tr class="separator:a3cb36ec23839c7f0492601a4b3bc200c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c54298de822d10ed8a84427364cdbc5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="list_8h.html#a2c960e8dfa17dae3b5a742f878bc3ace">dlist</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8c.html#a1c54298de822d10ed8a84427364cdbc5">make_dlist</a> (<a class="el" href="structprintable.html">printable</a> **elements, size_t size)</td></tr>
+<tr class="separator:a1c54298de822d10ed8a84427364cdbc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="a9cc5b0829091471ba124fca690a78c6a"></a>
@@ -138,16 +174,406 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ae2b1bf9580c3fb312e7bc0e669fa0c28"></a>
+<a class="anchor" id="a200d24603fdabd4a7a5fd53132d65cbf"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t length </td>
+          <td class="memname"><a class="el" href="list_8h.html#a2c960e8dfa17dae3b5a742f878bc3ace">dlist</a> dcons </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structprintable.html">printable</a> *&#160;</td>
+          <td class="paramname"><em>car</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="list_8h.html#a2c960e8dfa17dae3b5a742f878bc3ace">dlist</a>&#160;</td>
+          <td class="paramname"><em>cdr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aedfd9c43161d2ae29e361bf31560bab1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DEFTYPE </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac77a381f5be9d8b2b21a74c6dd6c25be"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DEFTYPE </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_8h.html#a2c960e8dfa17dae3b5a742f878bc3ace">dlist</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3cb36ec23839c7f0492601a4b3bc200c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="list_8h.html#a2c960e8dfa17dae3b5a742f878bc3ace">dlist</a> dlist_append </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_8h.html#a2c960e8dfa17dae3b5a742f878bc3ace">dlist</a>&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="list_8h.html#a2c960e8dfa17dae3b5a742f878bc3ace">dlist</a>&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a994ea6bbc1e9e8529f6bcf98b8c377e5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="list_8h.html#a2c960e8dfa17dae3b5a742f878bc3ace">dlist</a> dlist_put </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_8h.html#a2c960e8dfa17dae3b5a742f878bc3ace">dlist</a>&#160;</td>
+          <td class="paramname"><em>orig</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structprintable.html">printable</a> *&#160;</td>
+          <td class="paramname"><em>k</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structprintable.html">printable</a> *&#160;</td>
+          <td class="paramname"><em>v</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4aa3ba557ab6a41257b1bb6bb109f0b5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="list_8h.html#a2c960e8dfa17dae3b5a742f878bc3ace">dlist</a> dlist_reverse </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_8h.html#a2c960e8dfa17dae3b5a742f878bc3ace">dlist</a>&#160;</td>
+          <td class="paramname"><em>input</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aba22f737573fef671748bf628baea0c9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> list_append </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a>&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a>&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab4e137fa2b5c451f600de00c8c3201aa"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structprintable.html">printable</a>* list_find </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a>&#160;</td>
+          <td class="paramname"><em>haystack</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structprintable.html">printable</a> *&#160;</td>
+          <td class="paramname"><em>needle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramname"><em>cmp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5bce7e756db57445bad0512f9aa52ae4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structprintable.html">printable</a>* list_first </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa198c0379fef09f1d65324fc30b5b0c9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> list_insertion_sort </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a>&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramname"><em>cmp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8ee56108b9e6eac9cf8ccc1cc890acef"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t list_length </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a>&#160;</td>
           <td class="paramname"><em>input</em></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a70d3ff7605b84bacb2b8f1704a4740de"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> list_merge_sort </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a>&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramname"><em>cmp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af0ce981f99ba6a1411e273cf683bed3a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> list_pop </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> *&#160;</td>
+          <td class="paramname"><em>in</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8fb14043ae4e82fffea9f1ca4b538441"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void list_push </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structprintable.html">printable</a> *&#160;</td>
+          <td class="paramname"><em>elt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> *&#160;</td>
+          <td class="paramname"><em>to</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="adc751ae366509be37d38aecf0f8ecff7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> list_put </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a>&#160;</td>
+          <td class="paramname"><em>orig</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structprintable.html">printable</a> *&#160;</td>
+          <td class="paramname"><em>k</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structprintable.html">printable</a> *&#160;</td>
+          <td class="paramname"><em>v</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="adc4dcdc360c678ead3122be3ff4c5a71"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> list_rest </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3c28f8ec11c0f8275857c8a3e131b9a7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> list_reverse </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a>&#160;</td>
+          <td class="paramname"><em>input</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1c54298de822d10ed8a84427364cdbc5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="list_8h.html#a2c960e8dfa17dae3b5a742f878bc3ace">dlist</a> make_dlist </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structprintable.html">printable</a> **&#160;</td>
+          <td class="paramname"><em>elements</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -180,16 +606,32 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a7e6b47f1023635e972d1ef7d48f95a9d"></a>
+<a class="anchor" id="a79d96057e42d480c505817004df40ac4"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> reverse </td>
+          <td class="memname"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a> merge </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a>&#160;</td>
-          <td class="paramname"><em>input</em></td><td>)</td>
+          <td class="paramname"><em>odds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="list_8h.html#a6e0575f3406c002cc47c2b7854b0f110">list</a>&#160;</td>
+          <td class="paramname"><em>evens</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramname"><em>cmp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">

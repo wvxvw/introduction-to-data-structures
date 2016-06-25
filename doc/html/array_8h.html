@@ -101,15 +101,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="printable_8h_source.html">printable.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="pair_8h_source.html">pair.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="sortable_8h_source.html">sortable.h</a>&quot;</code><br />
 </div>
 <p><a href="array_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structprintable__array.html">printable_array</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structiterator__impl.html">iterator_impl</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The iterator information storage cell.  <a href="structiterator__impl.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
@@ -119,15 +117,8 @@ Typedefs</h2></td></tr>
 <tr class="separator:aec14133636951af4cfefa8eba04b1a8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae39104746b97d1c22cb2ca3b4d5c2f61"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="structprintable__array.html">printable_array</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#ae39104746b97d1c22cb2ca3b4d5c2f61">array</a></td></tr>
 <tr class="separator:ae39104746b97d1c22cb2ca3b4d5c2f61"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a6631e162730e046df6a09afc4e6f96"><td class="memItemLeft" align="right" valign="top">typedef int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>(const void *a, const void *b)</td></tr>
-<tr class="memdesc:a1a6631e162730e046df6a09afc4e6f96"><td class="mdescLeft">&#160;</td><td class="mdescRight">The definition is copied from GCC extension, this is the comparator function suitable for <code>qsort</code> calls.  <a href="#a1a6631e162730e046df6a09afc4e6f96">More...</a><br /></td></tr>
-<tr class="separator:a1a6631e162730e046df6a09afc4e6f96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4532500868b8bb4cbbd053de03624c29"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structiterator__impl.html">iterator_impl</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a4532500868b8bb4cbbd053de03624c29">iterator_impl</a></td></tr>
-<tr class="memdesc:a4532500868b8bb4cbbd053de03624c29"><td class="mdescLeft">&#160;</td><td class="mdescRight">The iterator information storage cell.  <a href="#a4532500868b8bb4cbbd053de03624c29">More...</a><br /></td></tr>
-<tr class="separator:a4532500868b8bb4cbbd053de03624c29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adff7b45af8d8e548af91b5b58d0540c7"><td class="memItemLeft" align="right" valign="top">typedef bool(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#adff7b45af8d8e548af91b5b58d0540c7">iterator_func</a>) (<a class="el" href="structiterator__impl.html">iterator_impl</a> *it)</td></tr>
-<tr class="memdesc:adff7b45af8d8e548af91b5b58d0540c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function to advance the iterator one position.  <a href="#adff7b45af8d8e548af91b5b58d0540c7">More...</a><br /></td></tr>
-<tr class="separator:adff7b45af8d8e548af91b5b58d0540c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a952a86cfb22a150060e67ec8a93a7d"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a9a952a86cfb22a150060e67ec8a93a7d">pipe_fn_t</a>(<a class="el" href="structprintable.html">printable</a> *elt)</td></tr>
+<tr class="separator:a9a952a86cfb22a150060e67ec8a93a7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -139,81 +130,87 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a1589f86ab6d06f8f45b364c4d142d085"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a1589f86ab6d06f8f45b364c4d142d085">sorted</a> (<a class="el" href="structarray.html">array</a> unsorted, <a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
-<tr class="memdesc:a1589f86ab6d06f8f45b364c4d142d085"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sorts the <code>array</code> in-place using <code>cmp</code> function and returns it.  <a href="#a1589f86ab6d06f8f45b364c4d142d085">More...</a><br /></td></tr>
-<tr class="separator:a1589f86ab6d06f8f45b364c4d142d085"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae43c0b1c2129a0ce961984c2267e3ea9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#ae43c0b1c2129a0ce961984c2267e3ea9">shuffled</a> (<a class="el" href="structarray.html">array</a> <a class="el" href="array_8h.html#a1589f86ab6d06f8f45b364c4d142d085">sorted</a>)</td></tr>
-<tr class="memdesc:ae43c0b1c2129a0ce961984c2267e3ea9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shuffles the <code>array</code> in-place and returns it.  <a href="#ae43c0b1c2129a0ce961984c2267e3ea9">More...</a><br /></td></tr>
-<tr class="separator:ae43c0b1c2129a0ce961984c2267e3ea9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fa07e47fc8f637e21c490618d4444d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a1fa07e47fc8f637e21c490618d4444d4">make_array</a> (const size_t size, <a class="el" href="structprintable.html">printable</a> **data)</td></tr>
-<tr class="memdesc:a1fa07e47fc8f637e21c490618d4444d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates new <code>array</code> using <code>data</code> elements as input and returns it.  <a href="#a1fa07e47fc8f637e21c490618d4444d4">More...</a><br /></td></tr>
-<tr class="separator:a1fa07e47fc8f637e21c490618d4444d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7531567ad43571c10919c12112502db7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a7531567ad43571c10919c12112502db7">slice</a> (const <a class="el" href="structarray.html">array</a> input, const size_t from, const size_t to)</td></tr>
-<tr class="memdesc:a7531567ad43571c10919c12112502db7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an array that shares data with <code>input</code>, but starts from <code>from</code> and up to <code>to</code>.  <a href="#a7531567ad43571c10919c12112502db7">More...</a><br /></td></tr>
-<tr class="separator:a7531567ad43571c10919c12112502db7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5db5fb13038067a88b1ce592966f7d4d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a5db5fb13038067a88b1ce592966f7d4d">binsearch</a> (const <a class="el" href="structarray.html">array</a> input, const <a class="el" href="structprintable.html">printable</a> *elt, <a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
-<tr class="memdesc:a5db5fb13038067a88b1ce592966f7d4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs binary search on <code>input</code> for <code>elt</code>. The comparison is carried out using <code>cmp</code> callback.  <a href="#a5db5fb13038067a88b1ce592966f7d4d">More...</a><br /></td></tr>
-<tr class="separator:a5db5fb13038067a88b1ce592966f7d4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e1af38a84b6a3262649e9b30e8752d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a4e1af38a84b6a3262649e9b30e8752d0">make_dense_sorted_array</a> (const size_t size, const size_t from, <a class="el" href="array_8h.html#aec14133636951af4cfefa8eba04b1a8b">element_generator</a> generator)</td></tr>
-<tr class="memdesc:a4e1af38a84b6a3262649e9b30e8752d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate dense sorted <code>array</code> with element values starting from <code>from</code>.  <a href="#a4e1af38a84b6a3262649e9b30e8752d0">More...</a><br /></td></tr>
-<tr class="separator:a4e1af38a84b6a3262649e9b30e8752d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b76be1bd12b9eb6208cefd754a628ed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a7b76be1bd12b9eb6208cefd754a628ed">make_sparse_sorted_array</a> (const size_t size, const size_t from, const size_t deviation, <a class="el" href="array_8h.html#aec14133636951af4cfefa8eba04b1a8b">element_generator</a> generator)</td></tr>
-<tr class="memdesc:a7b76be1bd12b9eb6208cefd754a628ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate sparse sorted array with element values starting from <code>from</code> and increasing by at most <code>deviation</code>, where the increase is decided using uniform random distribution.  <a href="#a7b76be1bd12b9eb6208cefd754a628ed">More...</a><br /></td></tr>
-<tr class="separator:a7b76be1bd12b9eb6208cefd754a628ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac07d4c46006f53a8829b8cede2615ed0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#ac07d4c46006f53a8829b8cede2615ed0">make_random_unique_array</a> (const size_t size, const size_t from, <a class="el" href="array_8h.html#aec14133636951af4cfefa8eba04b1a8b">element_generator</a> generator)</td></tr>
-<tr class="memdesc:ac07d4c46006f53a8829b8cede2615ed0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate an array where all elements are between <code>from</code> and <code>from+size</code> of size size, however elements aren't ordered.  <a href="#ac07d4c46006f53a8829b8cede2615ed0">More...</a><br /></td></tr>
-<tr class="separator:ac07d4c46006f53a8829b8cede2615ed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a936889304d43767c2139313e5bf05682"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a936889304d43767c2139313e5bf05682">make_random_array</a> (const size_t size, const size_t low, const size_t high, <a class="el" href="array_8h.html#aec14133636951af4cfefa8eba04b1a8b">element_generator</a> generator)</td></tr>
-<tr class="memdesc:a936889304d43767c2139313e5bf05682"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate an array where all elements are between <code>low</code> and <code>high</code> of size size. Elements may be repeated and appear in no particular order.  <a href="#a936889304d43767c2139313e5bf05682">More...</a><br /></td></tr>
-<tr class="separator:a936889304d43767c2139313e5bf05682"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaeb51b547c41e5b6ad63b1f1cd823d4a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#aaeb51b547c41e5b6ad63b1f1cd823d4a">make_random_sorted_array</a> (const size_t size, const size_t low, const size_t high, <a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp, <a class="el" href="array_8h.html#aec14133636951af4cfefa8eba04b1a8b">element_generator</a> generator)</td></tr>
-<tr class="memdesc:aaeb51b547c41e5b6ad63b1f1cd823d4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <code>make_random_array</code>, except the elements are already sorted.  <a href="#aaeb51b547c41e5b6ad63b1f1cd823d4a">More...</a><br /></td></tr>
-<tr class="separator:aaeb51b547c41e5b6ad63b1f1cd823d4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a131a74ebdeca13603aa9c135948b47"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a4a131a74ebdeca13603aa9c135948b47">make_array_from_pointer</a> (const int *data, const size_t size, <a class="el" href="array_8h.html#aec14133636951af4cfefa8eba04b1a8b">element_generator</a> generator)</td></tr>
-<tr class="memdesc:a4a131a74ebdeca13603aa9c135948b47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate an array from a simile C array of ints.  <a href="#a4a131a74ebdeca13603aa9c135948b47">More...</a><br /></td></tr>
-<tr class="separator:a4a131a74ebdeca13603aa9c135948b47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6bdfc015937679d2ae218fed150199be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a6bdfc015937679d2ae218fed150199be">make_increasing_decreasing_array</a> (const size_t half_size, <a class="el" href="array_8h.html#aec14133636951af4cfefa8eba04b1a8b">element_generator</a> generator)</td></tr>
-<tr class="memdesc:a6bdfc015937679d2ae218fed150199be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate an array where elements in odd places decrease by one while the elements in even places increase by one until they are equal.  <a href="#a6bdfc015937679d2ae218fed150199be">More...</a><br /></td></tr>
-<tr class="separator:a6bdfc015937679d2ae218fed150199be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2bb9e1fd0b85ec55ae95eaf2836b5be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#af2bb9e1fd0b85ec55ae95eaf2836b5be">make_vedge_array</a> (const size_t half_size, <a class="el" href="array_8h.html#aec14133636951af4cfefa8eba04b1a8b">element_generator</a> generator)</td></tr>
-<tr class="memdesc:af2bb9e1fd0b85ec55ae95eaf2836b5be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate an array where elements in in its first half decrease by one starting with half the size of the array, while the elements in its second half increase by one as well, but starting from the element of the size of the array.  <a href="#af2bb9e1fd0b85ec55ae95eaf2836b5be">More...</a><br /></td></tr>
-<tr class="separator:af2bb9e1fd0b85ec55ae95eaf2836b5be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41254f07f4e4c5e4822451a661ec7a9d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a41254f07f4e4c5e4822451a661ec7a9d">insertion_sort</a> (<a class="el" href="structarray.html">array</a> unsorted, <a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
-<tr class="memdesc:a41254f07f4e4c5e4822451a661ec7a9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sorts the array using given comparison function.  <a href="#a41254f07f4e4c5e4822451a661ec7a9d">More...</a><br /></td></tr>
-<tr class="separator:a41254f07f4e4c5e4822451a661ec7a9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2ba95324821888148365ffc368f9ce6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#af2ba95324821888148365ffc368f9ce6">start_swap_count</a> ()</td></tr>
-<tr class="memdesc:af2ba95324821888148365ffc368f9ce6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restets the swap operation counter.  <a href="#af2ba95324821888148365ffc368f9ce6">More...</a><br /></td></tr>
-<tr class="separator:af2ba95324821888148365ffc368f9ce6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7e3ba025361d1bc714c94a0e92ec20d"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#ab7e3ba025361d1bc714c94a0e92ec20d">get_swap_count</a> ()</td></tr>
-<tr class="memdesc:ab7e3ba025361d1bc714c94a0e92ec20d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of <code>swap</code> operations performed since swap conter was last reset.  <a href="#ab7e3ba025361d1bc714c94a0e92ec20d">More...</a><br /></td></tr>
-<tr class="separator:ab7e3ba025361d1bc714c94a0e92ec20d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75eb6a488782df5d745569d82a6a9cad"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a75eb6a488782df5d745569d82a6a9cad">to_string_array</a> (<a class="el" href="structarray.html">array</a> p)</td></tr>
-<tr class="memdesc:a75eb6a488782df5d745569d82a6a9cad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a string representing the given <code>array</code>.  <a href="#a75eb6a488782df5d745569d82a6a9cad">More...</a><br /></td></tr>
-<tr class="separator:a75eb6a488782df5d745569d82a6a9cad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91e444ddb2e14381a45aab7d6c342ec6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a91e444ddb2e14381a45aab7d6c342ec6">next</a> (<a class="el" href="structiterator__impl.html">iterator_impl</a> *impl)</td></tr>
-<tr class="memdesc:a91e444ddb2e14381a45aab7d6c342ec6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The interface to iterating the array.  <a href="#a91e444ddb2e14381a45aab7d6c342ec6">More...</a><br /></td></tr>
-<tr class="separator:a91e444ddb2e14381a45aab7d6c342ec6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94d9589ccfd029a406d907381e3aff3e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structiterator__impl.html">iterator_impl</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a94d9589ccfd029a406d907381e3aff3e">iterator</a> (<a class="el" href="structarray.html">array</a> iterated)</td></tr>
-<tr class="memdesc:a94d9589ccfd029a406d907381e3aff3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The concrete iterator implementation.  <a href="#a94d9589ccfd029a406d907381e3aff3e">More...</a><br /></td></tr>
-<tr class="separator:a94d9589ccfd029a406d907381e3aff3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00ddb3a5fb426e2b505c9d955b03919e"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a00ddb3a5fb426e2b505c9d955b03919e">partition</a> (<a class="el" href="structarray.html">array</a> partitioned, <a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
-<tr class="memdesc:a00ddb3a5fb426e2b505c9d955b03919e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given ordering function <code>cmp</code>, arrange the <code>paritioned</code> array in the way such that all elements less than its first original elment are on the left of it and the remaining elements are on the right.  <a href="#a00ddb3a5fb426e2b505c9d955b03919e">More...</a><br /></td></tr>
-<tr class="separator:a00ddb3a5fb426e2b505c9d955b03919e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26ab9fcea12f2eb168e581529456a13c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structpair.html">pair</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a26ab9fcea12f2eb168e581529456a13c">three_way_partition</a> (<a class="el" href="structarray.html">array</a> partitioned, <a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
-<tr class="memdesc:a26ab9fcea12f2eb168e581529456a13c"><td class="mdescLeft">&#160;</td><td class="mdescRight">A more sophisticated <code><a class="el" href="array_8h.html#a00ddb3a5fb426e2b505c9d955b03919e" title="Given ordering function cmp, arrange the paritioned array in the way such that all elements less than...">partition()</a></code> function. Will chose two walls at random, put all elements smaller than the first wall into first part of the array, all those greater than the second wall in the last part of the array, and the rest&mdash;inbetween.  <a href="#a26ab9fcea12f2eb168e581529456a13c">More...</a><br /></td></tr>
-<tr class="separator:a26ab9fcea12f2eb168e581529456a13c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3464f4ed6d924beeec3d761a8dccf90c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a3464f4ed6d924beeec3d761a8dccf90c">three_way_quicksort</a> (<a class="el" href="structarray.html">array</a> unsorted, <a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp, size_t error)</td></tr>
-<tr class="memdesc:a3464f4ed6d924beeec3d761a8dccf90c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quicksort implementation using <code>three_way_partition</code>.  <a href="#a3464f4ed6d924beeec3d761a8dccf90c">More...</a><br /></td></tr>
-<tr class="separator:a3464f4ed6d924beeec3d761a8dccf90c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93a923b93d2ff3780e397acca1ba61b5"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a93a923b93d2ff3780e397acca1ba61b5">partition_at</a> (<a class="el" href="structarray.html">array</a> searched, size_t position, <a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
-<tr class="memdesc:a93a923b93d2ff3780e397acca1ba61b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <code>partition</code>, except will use the element at <code>position</code> rather than the first element.  <a href="#a93a923b93d2ff3780e397acca1ba61b5">More...</a><br /></td></tr>
-<tr class="separator:a93a923b93d2ff3780e397acca1ba61b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43840b4abbee0fdc1233091afb348e0a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a43840b4abbee0fdc1233091afb348e0a">nth_order_statistic</a> (<a class="el" href="structarray.html">array</a> searched, size_t order, <a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
-<tr class="memdesc:a43840b4abbee0fdc1233091afb348e0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given <code>order</code> percentile, find the element in <code>searched</code> s.t. there are at most <code>order</code> % of elements in this array smaller than it.  <a href="#a43840b4abbee0fdc1233091afb348e0a">More...</a><br /></td></tr>
-<tr class="separator:a43840b4abbee0fdc1233091afb348e0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3efc5126dccbd1ba308f2eaeac95d9bc"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a3efc5126dccbd1ba308f2eaeac95d9bc">index_of</a> (<a class="el" href="structarray.html">array</a> searched, <a class="el" href="structprintable.html">printable</a> *elt)</td></tr>
-<tr class="memdesc:a3efc5126dccbd1ba308f2eaeac95d9bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the position of the <code>elt</code> in the <code>searched</code>.  <a href="#a3efc5126dccbd1ba308f2eaeac95d9bc">More...</a><br /></td></tr>
-<tr class="separator:a3efc5126dccbd1ba308f2eaeac95d9bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e821efc165c1193d6bac5e195916e88"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a0e821efc165c1193d6bac5e195916e88">sorted</a> (<a class="el" href="structarray.html">array</a> unsorted, <a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="memdesc:a0e821efc165c1193d6bac5e195916e88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sorts the <code>array</code> in-place using <code>cmp</code> function and returns it.  <a href="#a0e821efc165c1193d6bac5e195916e88">More...</a><br /></td></tr>
+<tr class="separator:a0e821efc165c1193d6bac5e195916e88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a911aa853f2df3ef6002978d125828e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a8a911aa853f2df3ef6002978d125828e">shuffled</a> (<a class="el" href="structarray.html">array</a> <a class="el" href="array_8h.html#a0e821efc165c1193d6bac5e195916e88">sorted</a>)</td></tr>
+<tr class="memdesc:a8a911aa853f2df3ef6002978d125828e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shuffles the <code>array</code> in-place and returns it.  <a href="#a8a911aa853f2df3ef6002978d125828e">More...</a><br /></td></tr>
+<tr class="separator:a8a911aa853f2df3ef6002978d125828e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cd1058886ec9fa5e73b355e86100870"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a5cd1058886ec9fa5e73b355e86100870">make_array</a> (const size_t size, <a class="el" href="structprintable.html">printable</a> **data)</td></tr>
+<tr class="memdesc:a5cd1058886ec9fa5e73b355e86100870"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates new <code>array</code> using <code>data</code> elements as input and returns it.  <a href="#a5cd1058886ec9fa5e73b355e86100870">More...</a><br /></td></tr>
+<tr class="separator:a5cd1058886ec9fa5e73b355e86100870"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a990dbaed94e72c5fe42b59e69de12dc2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a990dbaed94e72c5fe42b59e69de12dc2">make_empty_array</a> (const size_t size)</td></tr>
+<tr class="separator:a990dbaed94e72c5fe42b59e69de12dc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e50c2166fc2fb1fed2cbadd09b2e900"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a6e50c2166fc2fb1fed2cbadd09b2e900">slice</a> (const <a class="el" href="structarray.html">array</a> input, const size_t from, const size_t to)</td></tr>
+<tr class="memdesc:a6e50c2166fc2fb1fed2cbadd09b2e900"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an array that shares data with <code>input</code>, but starts from <code>from</code> and up to <code>to</code>.  <a href="#a6e50c2166fc2fb1fed2cbadd09b2e900">More...</a><br /></td></tr>
+<tr class="separator:a6e50c2166fc2fb1fed2cbadd09b2e900"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcd159514158d401473aee67f65042cd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#abcd159514158d401473aee67f65042cd">binsearch</a> (const <a class="el" href="structarray.html">array</a> input, const <a class="el" href="structprintable.html">printable</a> *elt, <a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="memdesc:abcd159514158d401473aee67f65042cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs binary search on <code>input</code> for <code>elt</code>. The comparison is carried out using <code>cmp</code> callback.  <a href="#abcd159514158d401473aee67f65042cd">More...</a><br /></td></tr>
+<tr class="separator:abcd159514158d401473aee67f65042cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae421142a80bea31b97294e45ae638876"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#ae421142a80bea31b97294e45ae638876">make_dense_sorted_array</a> (const size_t size, const size_t from, <a class="el" href="array_8h.html#aec14133636951af4cfefa8eba04b1a8b">element_generator</a> generator)</td></tr>
+<tr class="memdesc:ae421142a80bea31b97294e45ae638876"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate dense sorted <code>array</code> with element values starting from <code>from</code>.  <a href="#ae421142a80bea31b97294e45ae638876">More...</a><br /></td></tr>
+<tr class="separator:ae421142a80bea31b97294e45ae638876"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f519df0d0af223e393c2059235fb9b6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a3f519df0d0af223e393c2059235fb9b6">make_sparse_sorted_array</a> (const size_t size, const size_t from, const size_t deviation, <a class="el" href="array_8h.html#aec14133636951af4cfefa8eba04b1a8b">element_generator</a> generator)</td></tr>
+<tr class="memdesc:a3f519df0d0af223e393c2059235fb9b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate sparse sorted array with element values starting from <code>from</code> and increasing by at most <code>deviation</code>, where the increase is decided using uniform random distribution.  <a href="#a3f519df0d0af223e393c2059235fb9b6">More...</a><br /></td></tr>
+<tr class="separator:a3f519df0d0af223e393c2059235fb9b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accacd96d2ad8e6f5370609e0cdbd7b18"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#accacd96d2ad8e6f5370609e0cdbd7b18">make_random_unique_array</a> (const size_t size, const size_t from, <a class="el" href="array_8h.html#aec14133636951af4cfefa8eba04b1a8b">element_generator</a> generator)</td></tr>
+<tr class="memdesc:accacd96d2ad8e6f5370609e0cdbd7b18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate an array where all elements are between <code>from</code> and <code>from+size</code> of size size, however elements aren't ordered.  <a href="#accacd96d2ad8e6f5370609e0cdbd7b18">More...</a><br /></td></tr>
+<tr class="separator:accacd96d2ad8e6f5370609e0cdbd7b18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fe28fc51e172240a4c301eab6e8c5f7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a3fe28fc51e172240a4c301eab6e8c5f7">make_random_array</a> (const size_t size, const size_t low, const size_t high, <a class="el" href="array_8h.html#aec14133636951af4cfefa8eba04b1a8b">element_generator</a> generator)</td></tr>
+<tr class="memdesc:a3fe28fc51e172240a4c301eab6e8c5f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate an array where all elements are between <code>low</code> and <code>high</code> of size size. Elements may be repeated and appear in no particular order.  <a href="#a3fe28fc51e172240a4c301eab6e8c5f7">More...</a><br /></td></tr>
+<tr class="separator:a3fe28fc51e172240a4c301eab6e8c5f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c00e357ad8abf50988f887fb2f2e545"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a5c00e357ad8abf50988f887fb2f2e545">make_random_sorted_array</a> (const size_t size, const size_t low, const size_t high, <a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp, <a class="el" href="array_8h.html#aec14133636951af4cfefa8eba04b1a8b">element_generator</a> generator)</td></tr>
+<tr class="memdesc:a5c00e357ad8abf50988f887fb2f2e545"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <code>make_random_array</code>, except the elements are already sorted.  <a href="#a5c00e357ad8abf50988f887fb2f2e545">More...</a><br /></td></tr>
+<tr class="separator:a5c00e357ad8abf50988f887fb2f2e545"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f8e2240ecae26ccc00e8f0f287754d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a6f8e2240ecae26ccc00e8f0f287754d0">make_array_from_pointer</a> (const int *data, const size_t size, <a class="el" href="array_8h.html#aec14133636951af4cfefa8eba04b1a8b">element_generator</a> generator)</td></tr>
+<tr class="memdesc:a6f8e2240ecae26ccc00e8f0f287754d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate an array from a simile C array of ints.  <a href="#a6f8e2240ecae26ccc00e8f0f287754d0">More...</a><br /></td></tr>
+<tr class="separator:a6f8e2240ecae26ccc00e8f0f287754d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61cfd8828d45d71391dc74830c90e14a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a61cfd8828d45d71391dc74830c90e14a">make_increasing_decreasing_array</a> (const size_t half_size, <a class="el" href="array_8h.html#aec14133636951af4cfefa8eba04b1a8b">element_generator</a> generator)</td></tr>
+<tr class="memdesc:a61cfd8828d45d71391dc74830c90e14a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate an array where elements in odd places decrease by one while the elements in even places increase by one until they are equal.  <a href="#a61cfd8828d45d71391dc74830c90e14a">More...</a><br /></td></tr>
+<tr class="separator:a61cfd8828d45d71391dc74830c90e14a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88b665bbc07347a88d3714e2890cd641"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a88b665bbc07347a88d3714e2890cd641">make_vedge_array</a> (const size_t half_size, <a class="el" href="array_8h.html#aec14133636951af4cfefa8eba04b1a8b">element_generator</a> generator)</td></tr>
+<tr class="memdesc:a88b665bbc07347a88d3714e2890cd641"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate an array where elements in in its first half decrease by one starting with half the size of the array, while the elements in its second half increase by one as well, but starting from the element of the size of the array.  <a href="#a88b665bbc07347a88d3714e2890cd641">More...</a><br /></td></tr>
+<tr class="separator:a88b665bbc07347a88d3714e2890cd641"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac495d775002387d4142ec19ea0e14b70"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#ac495d775002387d4142ec19ea0e14b70">array_insertion_sort</a> (<a class="el" href="structarray.html">array</a> unsorted, <a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="memdesc:ac495d775002387d4142ec19ea0e14b70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sorts the array using given comparison function.  <a href="#ac495d775002387d4142ec19ea0e14b70">More...</a><br /></td></tr>
+<tr class="separator:ac495d775002387d4142ec19ea0e14b70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a725ff5f791365206b3c2158e5f7d0cfc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a725ff5f791365206b3c2158e5f7d0cfc">start_swap_count</a> ()</td></tr>
+<tr class="memdesc:a725ff5f791365206b3c2158e5f7d0cfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restets the swap operation counter.  <a href="#a725ff5f791365206b3c2158e5f7d0cfc">More...</a><br /></td></tr>
+<tr class="separator:a725ff5f791365206b3c2158e5f7d0cfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac99caa64897f05646663fa1d33a21d09"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#ac99caa64897f05646663fa1d33a21d09">get_swap_count</a> ()</td></tr>
+<tr class="memdesc:ac99caa64897f05646663fa1d33a21d09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of <code>swap</code> operations performed since swap conter was last reset.  <a href="#ac99caa64897f05646663fa1d33a21d09">More...</a><br /></td></tr>
+<tr class="separator:ac99caa64897f05646663fa1d33a21d09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4078c4e58a8778fcf8af1d79f89ee89d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a4078c4e58a8778fcf8af1d79f89ee89d">to_string_array</a> (<a class="el" href="structarray.html">array</a> p)</td></tr>
+<tr class="memdesc:a4078c4e58a8778fcf8af1d79f89ee89d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a string representing the given <code>array</code>.  <a href="#a4078c4e58a8778fcf8af1d79f89ee89d">More...</a><br /></td></tr>
+<tr class="separator:a4078c4e58a8778fcf8af1d79f89ee89d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a354b41d2f900c9fe3c1556cd75ee22d3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a354b41d2f900c9fe3c1556cd75ee22d3">partition</a> (<a class="el" href="structarray.html">array</a> partitioned, <a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="memdesc:a354b41d2f900c9fe3c1556cd75ee22d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given ordering function <code>cmp</code>, arrange the <code>paritioned</code> array in the way such that all elements less than its first original elment are on the left of it and the remaining elements are on the right.  <a href="#a354b41d2f900c9fe3c1556cd75ee22d3">More...</a><br /></td></tr>
+<tr class="separator:a354b41d2f900c9fe3c1556cd75ee22d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2196118af830e282ea1b5fd39eb3b3ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="pair_8h.html#a3ffc85d34789120824b697994d95f906">pair</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a2196118af830e282ea1b5fd39eb3b3ea">three_way_partition</a> (<a class="el" href="structarray.html">array</a> partitioned, <a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="memdesc:a2196118af830e282ea1b5fd39eb3b3ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">A more sophisticated <code><a class="el" href="array_8h.html#a354b41d2f900c9fe3c1556cd75ee22d3" title="Given ordering function cmp, arrange the paritioned array in the way such that all elements less than...">partition()</a></code> function. Will chose two walls at random, put all elements smaller than the first wall into first part of the array, all those greater than the second wall in the last part of the array, and the rest&mdash;inbetween.  <a href="#a2196118af830e282ea1b5fd39eb3b3ea">More...</a><br /></td></tr>
+<tr class="separator:a2196118af830e282ea1b5fd39eb3b3ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4c7f4bbeb3157c7eb284a4f4b61206c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#ad4c7f4bbeb3157c7eb284a4f4b61206c">three_way_quicksort</a> (<a class="el" href="structarray.html">array</a> unsorted, <a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp, size_t error)</td></tr>
+<tr class="memdesc:ad4c7f4bbeb3157c7eb284a4f4b61206c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quicksort implementation using <code>three_way_partition</code>.  <a href="#ad4c7f4bbeb3157c7eb284a4f4b61206c">More...</a><br /></td></tr>
+<tr class="separator:ad4c7f4bbeb3157c7eb284a4f4b61206c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3e8b68bf4f1437f449d6bad9372221c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#ac3e8b68bf4f1437f449d6bad9372221c">partition_at</a> (<a class="el" href="structarray.html">array</a> searched, size_t position, <a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="memdesc:ac3e8b68bf4f1437f449d6bad9372221c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <code>partition</code>, except will use the element at <code>position</code> rather than the first element.  <a href="#ac3e8b68bf4f1437f449d6bad9372221c">More...</a><br /></td></tr>
+<tr class="separator:ac3e8b68bf4f1437f449d6bad9372221c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a899d757862532b301b1f04ea58ddcb19"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a899d757862532b301b1f04ea58ddcb19">nth_order_statistic</a> (<a class="el" href="structarray.html">array</a> searched, size_t order, <a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="memdesc:a899d757862532b301b1f04ea58ddcb19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given <code>order</code> percentile, find the element in <code>searched</code> s.t. there are at most <code>order</code> % of elements in this array smaller than it.  <a href="#a899d757862532b301b1f04ea58ddcb19">More...</a><br /></td></tr>
+<tr class="separator:a899d757862532b301b1f04ea58ddcb19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2751fc668d728f43600245dfbf600854"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a2751fc668d728f43600245dfbf600854">index_of</a> (<a class="el" href="structarray.html">array</a> searched, <a class="el" href="structprintable.html">printable</a> *elt)</td></tr>
+<tr class="memdesc:a2751fc668d728f43600245dfbf600854"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the position of the <code>elt</code> in the <code>searched</code>.  <a href="#a2751fc668d728f43600245dfbf600854">More...</a><br /></td></tr>
+<tr class="separator:a2751fc668d728f43600245dfbf600854"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fe2bfa64aea82749b2b7af8021fe560"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a3fe2bfa64aea82749b2b7af8021fe560">array_merge_sort</a> (<a class="el" href="structarray.html">array</a> in, <a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="separator:a3fe2bfa64aea82749b2b7af8021fe560"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae95237764673018f4b3ac3d7042a08d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#ae95237764673018f4b3ac3d7042a08d8">bucket_sort</a> (<a class="el" href="structarray.html">array</a> unsorted, <a class="el" href="sortable_8h.html#a6330a325a44630fde14ac690266680d3">rationalization_fn_t</a> rat, <a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="separator:ae95237764673018f4b3ac3d7042a08d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a3aded6e7039da4e11a5c35dad250d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a9a3aded6e7039da4e11a5c35dad250d4">counting_sort</a> (<a class="el" href="structarray.html">array</a> unsorted, size_t scalar, <a class="el" href="sortable_8h.html#a6330a325a44630fde14ac690266680d3">rationalization_fn_t</a> rat, <a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="separator:a9a3aded6e7039da4e11a5c35dad250d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22c26ca49fc6e8ea4fddb9c0d84bcfb3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="pair_8h.html#a3ffc85d34789120824b697994d95f906">pair</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a22c26ca49fc6e8ea4fddb9c0d84bcfb3">array_min_max</a> (<a class="el" href="structarray.html">array</a> in, <a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="separator:a22c26ca49fc6e8ea4fddb9c0d84bcfb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a746c440b60899e8f12818d012699126d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array_8h.html#a746c440b60899e8f12818d012699126d">array_map</a> (<a class="el" href="structarray.html">array</a> in, <a class="el" href="array_8h.html#a9a952a86cfb22a150060e67ec8a93a7d">pipe_fn_t</a> pipe)</td></tr>
+<tr class="separator:a746c440b60899e8f12818d012699126d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file defines basic functions for working with printable arrays. </p>
@@ -231,27 +228,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a1a6631e162730e046df6a09afc4e6f96"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">comparison_fn_t</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The definition is copied from GCC extension, this is the comparator function suitable for <code>qsort</code> calls. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">a</td><td>First value to compare. </td></tr>
-    <tr><td class="paramname">b</td><td>Second value to compare. </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -276,37 +252,15 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="adff7b45af8d8e548af91b5b58d0540c7"></a>
+<a class="anchor" id="a9a952a86cfb22a150060e67ec8a93a7d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef bool(* iterator_func) (<a class="el" href="structiterator__impl.html">iterator_impl</a> *it)</td>
+          <td class="memname">typedef <a class="el" href="structprintable.html">printable</a>* pipe_fn_t(<a class="el" href="structprintable.html">printable</a> *elt)</td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>The function to advance the iterator one position. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">it</td><td>The iterator being acted on. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a4532500868b8bb4cbbd053de03624c29"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef struct <a class="el" href="structiterator__impl.html">iterator_impl</a> <a class="el" href="structiterator__impl.html">iterator_impl</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The iterator information storage cell. </p>
 
 </div>
 </div>
@@ -332,12 +286,126 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a5db5fb13038067a88b1ce592966f7d4d"></a>
+<a class="anchor" id="ac495d775002387d4142ec19ea0e14b70"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t binsearch </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a> array_insertion_sort </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structarray.html">array</a>&#160;</td>
+          <td class="paramname"><em>unsorted</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramname"><em>cmp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sorts the array using given comparison function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unsorted</td><td>The array to sort (modified in place) </td></tr>
+    <tr><td class="paramname">cmp</td><td>The function to compare two elements of the given array.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An <code>array</code> (no new allocations are made). </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a746c440b60899e8f12818d012699126d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a> array_map </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structarray.html">array</a>&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="array_8h.html#a9a952a86cfb22a150060e67ec8a93a7d">pipe_fn_t</a>&#160;</td>
+          <td class="paramname"><em>pipe</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3fe2bfa64aea82749b2b7af8021fe560"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structarray.html">array</a> array_merge_sort </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structarray.html">array</a>&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramname"><em>cmp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a22c26ca49fc6e8ea4fddb9c0d84bcfb3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="pair_8h.html#a3ffc85d34789120824b697994d95f906">pair</a> array_min_max </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structarray.html">array</a>&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramname"><em>cmp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="abcd159514158d401473aee67f65042cd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> size_t binsearch </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structarray.html">array</a>&#160;</td>
           <td class="paramname"><em>input</em>, </td>
@@ -351,7 +419,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
           <td class="paramname"><em>cmp</em>&#160;</td>
         </tr>
         <tr>
@@ -368,12 +436,82 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ab7e3ba025361d1bc714c94a0e92ec20d"></a>
+<a class="anchor" id="ae95237764673018f4b3ac3d7042a08d8"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">long get_swap_count </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> void bucket_sort </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structarray.html">array</a>&#160;</td>
+          <td class="paramname"><em>unsorted</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a6330a325a44630fde14ac690266680d3">rationalization_fn_t</a>&#160;</td>
+          <td class="paramname"><em>rat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramname"><em>cmp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9a3aded6e7039da4e11a5c35dad250d4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a> counting_sort </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structarray.html">array</a>&#160;</td>
+          <td class="paramname"><em>unsorted</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>scalar</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a6330a325a44630fde14ac690266680d3">rationalization_fn_t</a>&#160;</td>
+          <td class="paramname"><em>rat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramname"><em>cmp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac99caa64897f05646663fa1d33a21d09"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> long get_swap_count </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -385,12 +523,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a3efc5126dccbd1ba308f2eaeac95d9bc"></a>
+<a class="anchor" id="a2751fc668d728f43600245dfbf600854"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t index_of </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> size_t index_of </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structarray.html">array</a>&#160;</td>
           <td class="paramname"><em>searched</em>, </td>
@@ -421,72 +559,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a41254f07f4e4c5e4822451a661ec7a9d"></a>
+<a class="anchor" id="a5cd1058886ec9fa5e73b355e86100870"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structarray.html">array</a> insertion_sort </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structarray.html">array</a>&#160;</td>
-          <td class="paramname"><em>unsorted</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
-          <td class="paramname"><em>cmp</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Sorts the array using given comparison function. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">unsorted</td><td>The array to sort (modified in place) </td></tr>
-    <tr><td class="paramname">cmp</td><td>The function to compare two elements of the given array.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>An <code>array</code> (no new allocations are made). </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a94d9589ccfd029a406d907381e3aff3e"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structiterator__impl.html">iterator_impl</a>* iterator </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structarray.html">array</a>&#160;</td>
-          <td class="paramname"><em>iterated</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The concrete iterator implementation. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">iterated</td><td>The array to create an iterator for. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a1fa07e47fc8f637e21c490618d4444d4"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structarray.html">array</a> make_array </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a> make_array </td>
           <td>(</td>
           <td class="paramtype">const size_t&#160;</td>
           <td class="paramname"><em>size</em>, </td>
@@ -509,12 +587,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a4a131a74ebdeca13603aa9c135948b47"></a>
+<a class="anchor" id="a6f8e2240ecae26ccc00e8f0f287754d0"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structarray.html">array</a> make_array_from_pointer </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a> make_array_from_pointer </td>
           <td>(</td>
           <td class="paramtype">const int *&#160;</td>
           <td class="paramname"><em>data</em>, </td>
@@ -552,12 +630,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a4e1af38a84b6a3262649e9b30e8752d0"></a>
+<a class="anchor" id="ae421142a80bea31b97294e45ae638876"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structarray.html">array</a> make_dense_sorted_array </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a> make_dense_sorted_array </td>
           <td>(</td>
           <td class="paramtype">const size_t&#160;</td>
           <td class="paramname"><em>size</em>, </td>
@@ -595,12 +673,28 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a6bdfc015937679d2ae218fed150199be"></a>
+<a class="anchor" id="a990dbaed94e72c5fe42b59e69de12dc2"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structarray.html">array</a> make_increasing_decreasing_array </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a> make_empty_array </td>
+          <td>(</td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a61cfd8828d45d71391dc74830c90e14a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a> make_increasing_decreasing_array </td>
           <td>(</td>
           <td class="paramtype">const size_t&#160;</td>
           <td class="paramname"><em>half_size</em>, </td>
@@ -631,12 +725,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a936889304d43767c2139313e5bf05682"></a>
+<a class="anchor" id="a3fe28fc51e172240a4c301eab6e8c5f7"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structarray.html">array</a> make_random_array </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a> make_random_array </td>
           <td>(</td>
           <td class="paramtype">const size_t&#160;</td>
           <td class="paramname"><em>size</em>, </td>
@@ -681,12 +775,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aaeb51b547c41e5b6ad63b1f1cd823d4a"></a>
+<a class="anchor" id="a5c00e357ad8abf50988f887fb2f2e545"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structarray.html">array</a> make_random_sorted_array </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a> make_random_sorted_array </td>
           <td>(</td>
           <td class="paramtype">const size_t&#160;</td>
           <td class="paramname"><em>size</em>, </td>
@@ -706,7 +800,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
           <td class="paramname"><em>cmp</em>, </td>
         </tr>
         <tr>
@@ -738,12 +832,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ac07d4c46006f53a8829b8cede2615ed0"></a>
+<a class="anchor" id="accacd96d2ad8e6f5370609e0cdbd7b18"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structarray.html">array</a> make_random_unique_array </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a> make_random_unique_array </td>
           <td>(</td>
           <td class="paramtype">const size_t&#160;</td>
           <td class="paramname"><em>size</em>, </td>
@@ -781,12 +875,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a7b76be1bd12b9eb6208cefd754a628ed"></a>
+<a class="anchor" id="a3f519df0d0af223e393c2059235fb9b6"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structarray.html">array</a> make_sparse_sorted_array </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a> make_sparse_sorted_array </td>
           <td>(</td>
           <td class="paramtype">const size_t&#160;</td>
           <td class="paramname"><em>size</em>, </td>
@@ -831,12 +925,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="af2bb9e1fd0b85ec55ae95eaf2836b5be"></a>
+<a class="anchor" id="a88b665bbc07347a88d3714e2890cd641"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structarray.html">array</a> make_vedge_array </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a> make_vedge_array </td>
           <td>(</td>
           <td class="paramtype">const size_t&#160;</td>
           <td class="paramname"><em>half_size</em>, </td>
@@ -867,36 +961,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a91e444ddb2e14381a45aab7d6c342ec6"></a>
+<a class="anchor" id="a899d757862532b301b1f04ea58ddcb19"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool next </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structiterator__impl.html">iterator_impl</a> *&#160;</td>
-          <td class="paramname"><em>impl</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The interface to iterating the array. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">impl</td><td>The iterator aced on. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a43840b4abbee0fdc1233091afb348e0a"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structprintable.html">printable</a>* nth_order_statistic </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structprintable.html">printable</a>* nth_order_statistic </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structarray.html">array</a>&#160;</td>
           <td class="paramname"><em>searched</em>, </td>
@@ -910,7 +980,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
           <td class="paramname"><em>cmp</em>&#160;</td>
         </tr>
         <tr>
@@ -930,17 +1000,17 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="array_8h.html#a00ddb3a5fb426e2b505c9d955b03919e" title="Given ordering function cmp, arrange the paritioned array in the way such that all elements less than...">partition</a>).</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="array_8h.html#a354b41d2f900c9fe3c1556cd75ee22d3" title="Given ordering function cmp, arrange the paritioned array in the way such that all elements less than...">partition</a>).</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>The element s.t. there are at most <code>order</code> % of elements of <code>searched</code> smaller than it. </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a00ddb3a5fb426e2b505c9d955b03919e"></a>
+<a class="anchor" id="a354b41d2f900c9fe3c1556cd75ee22d3"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t partition </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> size_t partition </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structarray.html">array</a>&#160;</td>
           <td class="paramname"><em>partitioned</em>, </td>
@@ -948,7 +1018,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
           <td class="paramname"><em>cmp</em>&#160;</td>
         </tr>
         <tr>
@@ -970,12 +1040,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a93a923b93d2ff3780e397acca1ba61b5"></a>
+<a class="anchor" id="ac3e8b68bf4f1437f449d6bad9372221c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t partition_at </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> size_t partition_at </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structarray.html">array</a>&#160;</td>
           <td class="paramname"><em>searched</em>, </td>
@@ -989,7 +1059,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
           <td class="paramname"><em>cmp</em>&#160;</td>
         </tr>
         <tr>
@@ -1009,17 +1079,17 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="array_8h.html#a00ddb3a5fb426e2b505c9d955b03919e" title="Given ordering function cmp, arrange the paritioned array in the way such that all elements less than...">partition</a>).</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="array_8h.html#a354b41d2f900c9fe3c1556cd75ee22d3" title="Given ordering function cmp, arrange the paritioned array in the way such that all elements less than...">partition</a>).</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>The number of elements less than the element at <code>position</code>. </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="ae43c0b1c2129a0ce961984c2267e3ea9"></a>
+<a class="anchor" id="a8a911aa853f2df3ef6002978d125828e"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structarray.html">array</a> shuffled </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a> shuffled </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structarray.html">array</a>&#160;</td>
           <td class="paramname"><em>sorted</em></td><td>)</td>
@@ -1032,12 +1102,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a7531567ad43571c10919c12112502db7"></a>
+<a class="anchor" id="a6e50c2166fc2fb1fed2cbadd09b2e900"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structarray.html">array</a> slice </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a> slice </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structarray.html">array</a>&#160;</td>
           <td class="paramname"><em>input</em>, </td>
@@ -1066,12 +1136,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a1589f86ab6d06f8f45b364c4d142d085"></a>
+<a class="anchor" id="a0e821efc165c1193d6bac5e195916e88"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structarray.html">array</a> sorted </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structarray.html">array</a> sorted </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structarray.html">array</a>&#160;</td>
           <td class="paramname"><em>unsorted</em>, </td>
@@ -1079,7 +1149,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
           <td class="paramname"><em>cmp</em>&#160;</td>
         </tr>
         <tr>
@@ -1094,12 +1164,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="af2ba95324821888148365ffc368f9ce6"></a>
+<a class="anchor" id="a725ff5f791365206b3c2158e5f7d0cfc"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void start_swap_count </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> void start_swap_count </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1111,12 +1181,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a26ab9fcea12f2eb168e581529456a13c"></a>
+<a class="anchor" id="a2196118af830e282ea1b5fd39eb3b3ea"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structpair.html">pair</a> three_way_partition </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="pair_8h.html#a3ffc85d34789120824b697994d95f906">pair</a> three_way_partition </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structarray.html">array</a>&#160;</td>
           <td class="paramname"><em>partitioned</em>, </td>
@@ -1124,7 +1194,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
           <td class="paramname"><em>cmp</em>&#160;</td>
         </tr>
         <tr>
@@ -1135,7 +1205,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>A more sophisticated <code><a class="el" href="array_8h.html#a00ddb3a5fb426e2b505c9d955b03919e" title="Given ordering function cmp, arrange the paritioned array in the way such that all elements less than...">partition()</a></code> function. Will chose two walls at random, put all elements smaller than the first wall into first part of the array, all those greater than the second wall in the last part of the array, and the rest&mdash;inbetween. </p>
+<p>A more sophisticated <code><a class="el" href="array_8h.html#a354b41d2f900c9fe3c1556cd75ee22d3" title="Given ordering function cmp, arrange the paritioned array in the way such that all elements less than...">partition()</a></code> function. Will chose two walls at random, put all elements smaller than the first wall into first part of the array, all those greater than the second wall in the last part of the array, and the rest&mdash;inbetween. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">partitioned</td><td>The array being partitioned </td></tr>
@@ -1143,17 +1213,17 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="array_8h.html#a00ddb3a5fb426e2b505c9d955b03919e" title="Given ordering function cmp, arrange the paritioned array in the way such that all elements less than...">partition</a>).</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="array_8h.html#a354b41d2f900c9fe3c1556cd75ee22d3" title="Given ordering function cmp, arrange the paritioned array in the way such that all elements less than...">partition</a>).</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Pair of elements, first is the left wall second is the right wall. </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a3464f4ed6d924beeec3d761a8dccf90c"></a>
+<a class="anchor" id="ad4c7f4bbeb3157c7eb284a4f4b61206c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void three_way_quicksort </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> void three_way_quicksort </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structarray.html">array</a>&#160;</td>
           <td class="paramname"><em>unsorted</em>, </td>
@@ -1161,7 +1231,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
           <td class="paramname"><em>cmp</em>, </td>
         </tr>
         <tr>
@@ -1186,7 +1256,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="array_8h.html#a00ddb3a5fb426e2b505c9d955b03919e" title="Given ordering function cmp, arrange the paritioned array in the way such that all elements less than...">partition</a>). </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="array_8h.html#a354b41d2f900c9fe3c1556cd75ee22d3" title="Given ordering function cmp, arrange the paritioned array in the way such that all elements less than...">partition</a>). </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">error</td><td>The maximum error allowed. Error is defined to be the distance between i^th and j^th elements of array A, s.t. i &lt; j and A[i] &gt; A[j] (while the array is sorted in ascending order. To get a completely sorted array, thus, you need to set this parameter to zero. </td></tr>
@@ -1196,12 +1266,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a75eb6a488782df5d745569d82a6a9cad"></a>
+<a class="anchor" id="a4078c4e58a8778fcf8af1d79f89ee89d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">char* to_string_array </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> char* to_string_array </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structarray.html">array</a>&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>

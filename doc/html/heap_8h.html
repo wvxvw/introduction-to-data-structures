@@ -88,6 +88,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
@@ -113,6 +114,11 @@ Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structarray__heap.html">array_heap</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ad4df4e909e0813524fd2914ffe902d53"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#ad4df4e909e0813524fd2914ffe902d53">DEFAULT_HEAP_SIZE</a>&#160;&#160;&#160;32</td></tr>
+<tr class="separator:ad4df4e909e0813524fd2914ffe902d53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:a1858c97f614186aeb646dce6e34710b9"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structlheap__cell.html">lheap_cell</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#a1858c97f614186aeb646dce6e34710b9">lheap_cell</a></td></tr>
@@ -130,26 +136,30 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a8a14c76c8043e689d891aedd8d819b86"><td class="memItemLeft" align="right" valign="top"><a class="el" href="heap_8h.html#ab95e39ee2d933c97b0a22c4f71350670">lheap</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#a8a14c76c8043e689d891aedd8d819b86">lheapify</a> (<a class="el" href="structprintable.html">printable</a> **raw, size_t size, <a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
-<tr class="separator:a8a14c76c8043e689d891aedd8d819b86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac10d64168422c760fca0dfe5f13ab29c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#ac10d64168422c760fca0dfe5f13ab29c">lpeak</a> (<a class="el" href="heap_8h.html#ab95e39ee2d933c97b0a22c4f71350670">lheap</a> heap)</td></tr>
-<tr class="separator:ac10d64168422c760fca0dfe5f13ab29c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae349f0aaf761178cc96079de84c7ad52"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#ae349f0aaf761178cc96079de84c7ad52">lpop</a> (<a class="el" href="heap_8h.html#ab95e39ee2d933c97b0a22c4f71350670">lheap</a> heap)</td></tr>
-<tr class="separator:ae349f0aaf761178cc96079de84c7ad52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6cc46ebe47f694bbbfe1ba63d3148ff7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#a6cc46ebe47f694bbbfe1ba63d3148ff7">lput</a> (<a class="el" href="heap_8h.html#ab95e39ee2d933c97b0a22c4f71350670">lheap</a> heap, <a class="el" href="structprintable.html">printable</a> *val)</td></tr>
-<tr class="separator:a6cc46ebe47f694bbbfe1ba63d3148ff7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac31fa7270313fb6dc5c05ab9b227ca3a"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#ac31fa7270313fb6dc5c05ab9b227ca3a">to_string_lheap</a> (<a class="el" href="heap_8h.html#ab95e39ee2d933c97b0a22c4f71350670">lheap</a> heap)</td></tr>
-<tr class="separator:ac31fa7270313fb6dc5c05ab9b227ca3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c207952da62f93083821157e63ee17e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#a2c207952da62f93083821157e63ee17e">aheapify</a> (<a class="el" href="structprintable.html">printable</a> **raw, size_t size, <a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
-<tr class="separator:a2c207952da62f93083821157e63ee17e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6d875a5e41222586d8f57e700344a1f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#ae6d875a5e41222586d8f57e700344a1f">apeak</a> (<a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a> heap)</td></tr>
-<tr class="separator:ae6d875a5e41222586d8f57e700344a1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6caadda202df56c468c0aeca6f1a0bad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#a6caadda202df56c468c0aeca6f1a0bad">apop</a> (<a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a> heap)</td></tr>
-<tr class="separator:a6caadda202df56c468c0aeca6f1a0bad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c9bf7c92cffecb3d297bdbf3989f13a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#a9c9bf7c92cffecb3d297bdbf3989f13a">aput</a> (<a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a> heap, <a class="el" href="structprintable.html">printable</a> *val)</td></tr>
-<tr class="separator:a9c9bf7c92cffecb3d297bdbf3989f13a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeac36ef7d16431c887037ece488cbb2b"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#aeac36ef7d16431c887037ece488cbb2b">to_string_aheap</a> (<a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a> heap)</td></tr>
-<tr class="separator:aeac36ef7d16431c887037ece488cbb2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa7d53ff05b2305f699bcc3e0a9a7d8b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="heap_8h.html#ab95e39ee2d933c97b0a22c4f71350670">lheap</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#afa7d53ff05b2305f699bcc3e0a9a7d8b">lheapify</a> (<a class="el" href="structprintable.html">printable</a> **raw, size_t size, <a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="separator:afa7d53ff05b2305f699bcc3e0a9a7d8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac61f229583e157049f7c0704661f4d40"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#ac61f229583e157049f7c0704661f4d40">lpeak</a> (<a class="el" href="heap_8h.html#ab95e39ee2d933c97b0a22c4f71350670">lheap</a> heap)</td></tr>
+<tr class="separator:ac61f229583e157049f7c0704661f4d40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ad162d78c9de653b855fbcd871cf70a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#a8ad162d78c9de653b855fbcd871cf70a">lpop</a> (<a class="el" href="heap_8h.html#ab95e39ee2d933c97b0a22c4f71350670">lheap</a> heap)</td></tr>
+<tr class="separator:a8ad162d78c9de653b855fbcd871cf70a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a739471b0f90b6f121dc6df0489705dbe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#a739471b0f90b6f121dc6df0489705dbe">lput</a> (<a class="el" href="heap_8h.html#ab95e39ee2d933c97b0a22c4f71350670">lheap</a> heap, <a class="el" href="structprintable.html">printable</a> *val)</td></tr>
+<tr class="separator:a739471b0f90b6f121dc6df0489705dbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2db148774473b0d50308bc81a49eaf9d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#a2db148774473b0d50308bc81a49eaf9d">to_string_lheap</a> (<a class="el" href="heap_8h.html#ab95e39ee2d933c97b0a22c4f71350670">lheap</a> heap)</td></tr>
+<tr class="separator:a2db148774473b0d50308bc81a49eaf9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a542f7ceb96e9359c83aea26ed562b3c1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#a542f7ceb96e9359c83aea26ed562b3c1">aheapify</a> (<a class="el" href="structprintable.html">printable</a> **raw, size_t size, <a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="separator:a542f7ceb96e9359c83aea26ed562b3c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01bb4404313cf1a14f7088236e2f756b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#a01bb4404313cf1a14f7088236e2f756b">apeak</a> (<a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a> heap)</td></tr>
+<tr class="separator:a01bb4404313cf1a14f7088236e2f756b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf3b7a076378085f14beffe72308c5b6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#acf3b7a076378085f14beffe72308c5b6">apop</a> (<a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a> heap)</td></tr>
+<tr class="separator:acf3b7a076378085f14beffe72308c5b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a43f71df304e06d0e0097fc6ee02d82"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#a7a43f71df304e06d0e0097fc6ee02d82">aput</a> (<a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a> heap, <a class="el" href="structprintable.html">printable</a> *val)</td></tr>
+<tr class="separator:a7a43f71df304e06d0e0097fc6ee02d82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeda588068ae759fb3a1817d041081dd7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#aeda588068ae759fb3a1817d041081dd7">to_string_aheap</a> (<a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a> heap)</td></tr>
+<tr class="separator:aeda588068ae759fb3a1817d041081dd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2669259773e4f21980b04e75aa947bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#ad2669259773e4f21980b04e75aa947bc">make_empty_aheap</a> (<a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="separator:ad2669259773e4f21980b04e75aa947bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a700e0d5bfe3888435f0a188839c0ddb2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#a700e0d5bfe3888435f0a188839c0ddb2">aheap_find</a> (<a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a> heap, <a class="el" href="structprintable.html">printable</a> *elt, <a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="separator:a700e0d5bfe3888435f0a188839c0ddb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file defines basic functions for working with printable heaps. </p>
@@ -157,7 +167,20 @@ Functions</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>Oleg Sivokon</dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2016/03/05</dd></dl>
 <p>Contact: <a href="#" onclick="location.href='mai'+'lto:'+'ole'+'gs'+'ivo'+'ko'+'n@g'+'ma'+'il.'+'co'+'m'; return false;">olegs<span style="display: none;">.nosp@m.</span>ivok<span style="display: none;">.nosp@m.</span>on@gm<span style="display: none;">.nosp@m.</span>ail.<span style="display: none;">.nosp@m.</span>com</a> </p>
-</div><h2 class="groupheader">Typedef Documentation</h2>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a class="anchor" id="ad4df4e909e0813524fd2914ffe902d53"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEFAULT_HEAP_SIZE&#160;&#160;&#160;32</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Typedef Documentation</h2>
 <a class="anchor" id="a0bdb4b3e811a38faf7932779ce4a1f72"></a>
 <div class="memitem">
 <div class="memproto">
@@ -231,12 +254,44 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a2c207952da62f93083821157e63ee17e"></a>
+<a class="anchor" id="a700e0d5bfe3888435f0a188839c0ddb2"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a> aheapify </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structprintable.html">printable</a>* aheap_find </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a>&#160;</td>
+          <td class="paramname"><em>heap</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structprintable.html">printable</a> *&#160;</td>
+          <td class="paramname"><em>elt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramname"><em>cmp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a542f7ceb96e9359c83aea26ed562b3c1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a> aheapify </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structprintable.html">printable</a> **&#160;</td>
           <td class="paramname"><em>raw</em>, </td>
@@ -250,7 +305,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
           <td class="paramname"><em>cmp</em>&#160;</td>
         </tr>
         <tr>
@@ -263,12 +318,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ae6d875a5e41222586d8f57e700344a1f"></a>
+<a class="anchor" id="a01bb4404313cf1a14f7088236e2f756b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structprintable.html">printable</a>* apeak </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structprintable.html">printable</a>* apeak </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a>&#160;</td>
           <td class="paramname"><em>heap</em></td><td>)</td>
@@ -279,12 +334,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a6caadda202df56c468c0aeca6f1a0bad"></a>
+<a class="anchor" id="acf3b7a076378085f14beffe72308c5b6"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structprintable.html">printable</a>* apop </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structprintable.html">printable</a>* apop </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a>&#160;</td>
           <td class="paramname"><em>heap</em></td><td>)</td>
@@ -295,12 +350,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a9c9bf7c92cffecb3d297bdbf3989f13a"></a>
+<a class="anchor" id="a7a43f71df304e06d0e0097fc6ee02d82"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structprintable.html">printable</a>* aput </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structprintable.html">printable</a>* aput </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a>&#160;</td>
           <td class="paramname"><em>heap</em>, </td>
@@ -321,12 +376,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a8a14c76c8043e689d891aedd8d819b86"></a>
+<a class="anchor" id="afa7d53ff05b2305f699bcc3e0a9a7d8b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="heap_8h.html#ab95e39ee2d933c97b0a22c4f71350670">lheap</a> lheapify </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="heap_8h.html#ab95e39ee2d933c97b0a22c4f71350670">lheap</a> lheapify </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structprintable.html">printable</a> **&#160;</td>
           <td class="paramname"><em>raw</em>, </td>
@@ -340,7 +395,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
           <td class="paramname"><em>cmp</em>&#160;</td>
         </tr>
         <tr>
@@ -353,12 +408,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ac10d64168422c760fca0dfe5f13ab29c"></a>
+<a class="anchor" id="ac61f229583e157049f7c0704661f4d40"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structprintable.html">printable</a>* lpeak </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structprintable.html">printable</a>* lpeak </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="heap_8h.html#ab95e39ee2d933c97b0a22c4f71350670">lheap</a>&#160;</td>
           <td class="paramname"><em>heap</em></td><td>)</td>
@@ -369,12 +424,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ae349f0aaf761178cc96079de84c7ad52"></a>
+<a class="anchor" id="a8ad162d78c9de653b855fbcd871cf70a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structprintable.html">printable</a>* lpop </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structprintable.html">printable</a>* lpop </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="heap_8h.html#ab95e39ee2d933c97b0a22c4f71350670">lheap</a>&#160;</td>
           <td class="paramname"><em>heap</em></td><td>)</td>
@@ -385,12 +440,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a6cc46ebe47f694bbbfe1ba63d3148ff7"></a>
+<a class="anchor" id="a739471b0f90b6f121dc6df0489705dbe"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structprintable.html">printable</a>* lput </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structprintable.html">printable</a>* lput </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="heap_8h.html#ab95e39ee2d933c97b0a22c4f71350670">lheap</a>&#160;</td>
           <td class="paramname"><em>heap</em>, </td>
@@ -411,12 +466,28 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aeac36ef7d16431c887037ece488cbb2b"></a>
+<a class="anchor" id="ad2669259773e4f21980b04e75aa947bc"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">char* to_string_aheap </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a> make_empty_aheap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramname"><em>cmp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aeda588068ae759fb3a1817d041081dd7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> char* to_string_aheap </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a>&#160;</td>
           <td class="paramname"><em>heap</em></td><td>)</td>
@@ -427,12 +498,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ac31fa7270313fb6dc5c05ab9b227ca3a"></a>
+<a class="anchor" id="a2db148774473b0d50308bc81a49eaf9d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">char* to_string_lheap </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> char* to_string_lheap </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="heap_8h.html#ab95e39ee2d933c97b0a22c4f71350670">lheap</a>&#160;</td>
           <td class="paramname"><em>heap</em></td><td>)</td>

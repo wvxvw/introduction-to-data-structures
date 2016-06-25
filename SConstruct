@@ -69,7 +69,7 @@ else:
     '''
 if conf.CheckDoxygen():
     print 'Will generate documentation'
-    generate_documentation = False
+    generate_documentation = True
 else:
     print '''
     This project can generate documentation, but Doxygen,

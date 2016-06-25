@@ -95,20 +95,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="textblock"><code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;math.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="generic_8h_source.html">generic.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="heap_8h_source.html">heap.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="strings_8h_source.html">strings.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="printable__int_8h_source.html">printable_int.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a4baa24c0b71432b279e9bd3b02452b06"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8c.html#a4baa24c0b71432b279e9bd3b02452b06">DEFTYPE</a> (<a class="el" href="heap_8h.html#ab95e39ee2d933c97b0a22c4f71350670">lheap</a>)</td></tr>
+<tr class="separator:a4baa24c0b71432b279e9bd3b02452b06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b3a9eeebba66309c366c1fcf6d0a152"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8c.html#a0b3a9eeebba66309c366c1fcf6d0a152">DEFTYPE</a> (<a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a>)</td></tr>
+<tr class="separator:a0b3a9eeebba66309c366c1fcf6d0a152"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affa85f550e8e03b14f8cfa6e52bb4312"><td class="memItemLeft" align="right" valign="top"><a class="el" href="heap_8h.html#a3d27f8cc92c4c483897205072f5cfc43">lcell</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8c.html#affa85f550e8e03b14f8cfa6e52bb4312">make_lheap_cell</a> (<a class="el" href="structprintable.html">printable</a> *val)</td></tr>
 <tr class="separator:affa85f550e8e03b14f8cfa6e52bb4312"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a14c76c8043e689d891aedd8d819b86"><td class="memItemLeft" align="right" valign="top"><a class="el" href="heap_8h.html#ab95e39ee2d933c97b0a22c4f71350670">lheap</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8c.html#a8a14c76c8043e689d891aedd8d819b86">lheapify</a> (<a class="el" href="structprintable.html">printable</a> **raw, size_t size, <a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="memitem:a8a14c76c8043e689d891aedd8d819b86"><td class="memItemLeft" align="right" valign="top"><a class="el" href="heap_8h.html#ab95e39ee2d933c97b0a22c4f71350670">lheap</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8c.html#a8a14c76c8043e689d891aedd8d819b86">lheapify</a> (<a class="el" href="structprintable.html">printable</a> **raw, size_t size, <a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
 <tr class="separator:a8a14c76c8043e689d891aedd8d819b86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac10d64168422c760fca0dfe5f13ab29c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8c.html#ac10d64168422c760fca0dfe5f13ab29c">lpeak</a> (<a class="el" href="heap_8h.html#ab95e39ee2d933c97b0a22c4f71350670">lheap</a> heap)</td></tr>
 <tr class="separator:ac10d64168422c760fca0dfe5f13ab29c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae349f0aaf761178cc96079de84c7ad52"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8c.html#ae349f0aaf761178cc96079de84c7ad52">lpop</a> (<a class="el" href="heap_8h.html#ab95e39ee2d933c97b0a22c4f71350670">lheap</a> heap)</td></tr>
 <tr class="separator:ae349f0aaf761178cc96079de84c7ad52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7c11199ed11f4335a9901b8281d5301"><td class="memItemLeft" align="right" valign="top"><a class="el" href="heap_8h.html#a3d27f8cc92c4c483897205072f5cfc43">lcell</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8c.html#ae7c11199ed11f4335a9901b8281d5301">lbubble</a> (<a class="el" href="heap_8h.html#a3d27f8cc92c4c483897205072f5cfc43">lcell</a> <a class="el" href="structcell.html">cell</a>, <a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="memitem:ae7c11199ed11f4335a9901b8281d5301"><td class="memItemLeft" align="right" valign="top"><a class="el" href="heap_8h.html#a3d27f8cc92c4c483897205072f5cfc43">lcell</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8c.html#ae7c11199ed11f4335a9901b8281d5301">lbubble</a> (<a class="el" href="heap_8h.html#a3d27f8cc92c4c483897205072f5cfc43">lcell</a> <a class="el" href="structcell.html">cell</a>, <a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
 <tr class="separator:ae7c11199ed11f4335a9901b8281d5301"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6cc46ebe47f694bbbfe1ba63d3148ff7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8c.html#a6cc46ebe47f694bbbfe1ba63d3148ff7">lput</a> (<a class="el" href="heap_8h.html#ab95e39ee2d933c97b0a22c4f71350670">lheap</a> heap, <a class="el" href="structprintable.html">printable</a> *val)</td></tr>
 <tr class="separator:a6cc46ebe47f694bbbfe1ba63d3148ff7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -124,7 +130,11 @@ Functions</h2></td></tr>
 <tr class="separator:a20ec63e5c36ead29d89b9ed38e3e8cc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad108d359a8d7c7c125485285eb18fa66"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8c.html#ad108d359a8d7c7c125485285eb18fa66">resize</a> (<a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a> heap, size_t new_size)</td></tr>
 <tr class="separator:ad108d359a8d7c7c125485285eb18fa66"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c207952da62f93083821157e63ee17e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8c.html#a2c207952da62f93083821157e63ee17e">aheapify</a> (<a class="el" href="structprintable.html">printable</a> **raw, size_t size, <a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="memitem:a84f4a5d1408366a027df412a95c91b40"><td class="memItemLeft" align="right" valign="top"><a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8c.html#a84f4a5d1408366a027df412a95c91b40">make_aheap</a> (size_t size, <a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="separator:a84f4a5d1408366a027df412a95c91b40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ec73e799a6d66c62d630ccf127d6b90"><td class="memItemLeft" align="right" valign="top"><a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8c.html#a5ec73e799a6d66c62d630ccf127d6b90">make_empty_aheap</a> (<a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="separator:a5ec73e799a6d66c62d630ccf127d6b90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c207952da62f93083821157e63ee17e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8c.html#a2c207952da62f93083821157e63ee17e">aheapify</a> (<a class="el" href="structprintable.html">printable</a> **raw, size_t size, <a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
 <tr class="separator:a2c207952da62f93083821157e63ee17e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6d875a5e41222586d8f57e700344a1f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8c.html#ae6d875a5e41222586d8f57e700344a1f">apeak</a> (<a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a> heap)</td></tr>
 <tr class="separator:ae6d875a5e41222586d8f57e700344a1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -132,6 +142,8 @@ Functions</h2></td></tr>
 <tr class="separator:a6caadda202df56c468c0aeca6f1a0bad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c9bf7c92cffecb3d297bdbf3989f13a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8c.html#a9c9bf7c92cffecb3d297bdbf3989f13a">aput</a> (<a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a> heap, <a class="el" href="structprintable.html">printable</a> *val)</td></tr>
 <tr class="separator:a9c9bf7c92cffecb3d297bdbf3989f13a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab111f6d0c2a026a975072e937585f8d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8c.html#aab111f6d0c2a026a975072e937585f8d">aheap_find</a> (<a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a> heap, <a class="el" href="structprintable.html">printable</a> *elt, <a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a> cmp)</td></tr>
+<tr class="separator:aab111f6d0c2a026a975072e937585f8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeac36ef7d16431c887037ece488cbb2b"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8c.html#aeac36ef7d16431c887037ece488cbb2b">to_string_aheap</a> (<a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a> heap)</td></tr>
 <tr class="separator:aeac36ef7d16431c887037ece488cbb2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -188,6 +200,38 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="aab111f6d0c2a026a975072e937585f8d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structprintable.html">printable</a>* aheap_find </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a>&#160;</td>
+          <td class="paramname"><em>heap</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structprintable.html">printable</a> *&#160;</td>
+          <td class="paramname"><em>elt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramname"><em>cmp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a2c207952da62f93083821157e63ee17e"></a>
 <div class="memitem">
 <div class="memproto">
@@ -207,7 +251,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
           <td class="paramname"><em>cmp</em>&#160;</td>
         </tr>
         <tr>
@@ -278,6 +322,38 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a4baa24c0b71432b279e9bd3b02452b06"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DEFTYPE </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="heap_8h.html#ab95e39ee2d933c97b0a22c4f71350670">lheap</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0b3a9eeebba66309c366c1fcf6d0a152"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DEFTYPE </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a725b1f9b186a30e746eef2e0703d3b1d"></a>
 <div class="memitem">
 <div class="memproto">
@@ -323,7 +399,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
           <td class="paramname"><em>cmp</em>&#160;</td>
         </tr>
         <tr>
@@ -355,7 +431,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="array_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
           <td class="paramname"><em>cmp</em>&#160;</td>
         </tr>
         <tr>
@@ -420,6 +496,48 @@ Functions</h2></td></tr>
           <td></td>
           <td>)</td>
           <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a84f4a5d1408366a027df412a95c91b40"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a> make_aheap </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramname"><em>cmp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5ec73e799a6d66c62d630ccf127d6b90"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="heap_8h.html#a0bdb4b3e811a38faf7932779ce4a1f72">aheap</a> make_empty_aheap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="sortable_8h.html#a1a6631e162730e046df6a09afc4e6f96">comparison_fn_t</a>&#160;</td>
+          <td class="paramname"><em>cmp</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">

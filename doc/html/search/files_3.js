@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['list_2ec',['list.c',['../list_8c.html',1,'']]],
-  ['list_2eh',['list.h',['../list_8h.html',1,'']]]
+  ['generic_2ec',['generic.c',['../generic_8c.html',1,'']]],
+  ['generic_2eh',['generic.h',['../generic_8h.html',1,'']]]
 ];

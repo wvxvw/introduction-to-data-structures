@@ -94,44 +94,57 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#ifndef PRINTABLE_H_</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define PRINTABLE_H_</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;gc.h&gt;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#ifdef WITH_GC</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#define ALLOCATE(X) GC_MALLOC(X)</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="printable_8h.html#aa651fc9b36c778872834b423e58b5fdf">   28</a></span>&#160;<span class="preprocessor">#define ALLOCATE(X) malloc(X)</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="printable_8h.html#a6c9e898e21545740dc46d3923dbafa51">   35</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structprintable.html">printable</a> <a class="code" href="structprintable.html">printable</a>;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="printable_8h.html#a8eea93577ac9f39111366c4b5fee186c">   44</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">char</span>* (*printer)(<a class="code" href="structprintable.html">printable</a>* p);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="structprintable.html">   46</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structprintable.html">printable</a> {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    </div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="structprintable.html#a6cd5632121e612b561d44cbd6c002931">   50</a></span>&#160;    <a class="code" href="printable_8h.html#a8eea93577ac9f39111366c4b5fee186c">printer</a> <a class="code" href="structprintable.html#a6cd5632121e612b561d44cbd6c002931">to_string</a>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    </div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="structprintable.html#ae2bbd15647aa6cb9d25c28e1b959c26e">   55</a></span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="structprintable.html#ae2bbd15647aa6cb9d25c28e1b959c26e">size</a>;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="structprintable.html#afad175363638b5c64b6f30ef645c467c">   59</a></span>&#160;    <span class="keywordtype">void</span>* <a class="code" href="structprintable.html#afad175363638b5c64b6f30ef645c467c">val</a>;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;} <a class="code" href="printable_8h.html#a6c9e898e21545740dc46d3923dbafa51">printable</a>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<a class="code" href="structprintable.html">printable</a>* <a class="code" href="printable_8h.html#a562d539650b6a5247baf17e56aaae58a">make_printable</a>(<span class="keywordtype">size_t</span> size, <span class="keywordtype">void</span>* data);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keywordtype">char</span>* <a class="code" href="printable_8h.html#a483945f165a627e834c24e3327dfbe14">to_string_default</a>(<a class="code" href="structprintable.html">printable</a>* p);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keywordtype">char</span>* <a class="code" href="printable_8h.html#a00442d787c7a58aa6e07ebe567936391">to_string</a>(<a class="code" href="structprintable.html">printable</a>* p);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#endif // PRINTABLE_H_</span></div>
-<div class="ttc" id="printable_8h_html_a483945f165a627e834c24e3327dfbe14"><div class="ttname"><a href="printable_8h.html#a483945f165a627e834c24e3327dfbe14">to_string_default</a></div><div class="ttdeci">char * to_string_default(printable *p)</div><div class="ttdoc">Generates a string representing the default printable. </div><div class="ttdef"><b>Definition:</b> printable.c:14</div></div>
-<div class="ttc" id="structprintable_html_a6cd5632121e612b561d44cbd6c002931"><div class="ttname"><a href="structprintable.html#a6cd5632121e612b561d44cbd6c002931">printable::to_string</a></div><div class="ttdeci">printer to_string</div><div class="ttdoc">The printing function. </div><div class="ttdef"><b>Definition:</b> printable.h:50</div></div>
-<div class="ttc" id="structprintable_html_ae2bbd15647aa6cb9d25c28e1b959c26e"><div class="ttname"><a href="structprintable.html#ae2bbd15647aa6cb9d25c28e1b959c26e">printable::size</a></div><div class="ttdeci">size_t size</div><div class="ttdoc">How much data is stored in this element (must be suitable for sizeof call). </div><div class="ttdef"><b>Definition:</b> printable.h:55</div></div>
-<div class="ttc" id="printable_8h_html_a6c9e898e21545740dc46d3923dbafa51"><div class="ttname"><a href="printable_8h.html#a6c9e898e21545740dc46d3923dbafa51">printable</a></div><div class="ttdeci">struct printable printable</div><div class="ttdef"><b>Definition:</b> printable.h:35</div></div>
-<div class="ttc" id="printable_8h_html_a562d539650b6a5247baf17e56aaae58a"><div class="ttname"><a href="printable_8h.html#a562d539650b6a5247baf17e56aaae58a">make_printable</a></div><div class="ttdeci">printable * make_printable(size_t size, void *data)</div><div class="ttdoc">Creates new printable wrapping data and returns it. </div><div class="ttdef"><b>Definition:</b> printable.c:7</div></div>
-<div class="ttc" id="printable_8h_html_a00442d787c7a58aa6e07ebe567936391"><div class="ttname"><a href="printable_8h.html#a00442d787c7a58aa6e07ebe567936391">to_string</a></div><div class="ttdeci">char * to_string(printable *p)</div><div class="ttdoc">Translates the to_string call to p. </div><div class="ttdef"><b>Definition:</b> printable.c:20</div></div>
-<div class="ttc" id="structprintable_html"><div class="ttname"><a href="structprintable.html">printable</a></div><div class="ttdoc">This struct provides the backbone for anything that can go inside a printable array. </div><div class="ttdef"><b>Definition:</b> printable.h:46</div></div>
-<div class="ttc" id="printable_8h_html_a8eea93577ac9f39111366c4b5fee186c"><div class="ttname"><a href="printable_8h.html#a8eea93577ac9f39111366c4b5fee186c">printer</a></div><div class="ttdeci">char *(* printer)(printable *p)</div><div class="ttdoc">Anything printable must have an implementation of this function (it will be called by the code using ...</div><div class="ttdef"><b>Definition:</b> printable.h:44</div></div>
-<div class="ttc" id="structprintable_html_afad175363638b5c64b6f30ef645c467c"><div class="ttname"><a href="structprintable.html#afad175363638b5c64b6f30ef645c467c">printable::val</a></div><div class="ttdeci">void * val</div><div class="ttdoc">The actual value stored inside. </div><div class="ttdef"><b>Definition:</b> printable.h:59</div></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#ifdef WITH_GC</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;gc.h&gt;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#ifdef WITH_GC</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#define ALLOCATE(X) GC_MALLOC(X)</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="printable_8h.html#aa651fc9b36c778872834b423e58b5fdf">   31</a></span>&#160;<span class="preprocessor">#define ALLOCATE(X) malloc(X)</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#ifdef _WIN32</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#ifdef ASSIGNMENTLIB_EXPORTS</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#define ASSIGNMENTLIB_API __declspec(dllexport)</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#define ASSIGNMENTLIB_API __declspec(dllimport)</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">   41</a></span>&#160;<span class="preprocessor">#define ASSIGNMENTLIB_API</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="printable_8h.html#a6c9e898e21545740dc46d3923dbafa51">   48</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structprintable.html">printable</a> <a class="code" href="structprintable.html">printable</a>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="printable_8h.html#a8eea93577ac9f39111366c4b5fee186c">   57</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">char</span>* (*printer)(<a class="code" href="structprintable.html">printable</a>* p);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="structprintable.html">   59</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structprintable.html">printable</a> {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    </div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="structprintable.html#a3a7834c54cf184f124fd2a2c9485c59a">   63</a></span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="structprintable.html#a3a7834c54cf184f124fd2a2c9485c59a">type</a>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    </div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="structprintable.html#ae2bbd15647aa6cb9d25c28e1b959c26e">   68</a></span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="structprintable.html#ae2bbd15647aa6cb9d25c28e1b959c26e">size</a>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="structprintable.html#afad175363638b5c64b6f30ef645c467c">   72</a></span>&#160;    <span class="keywordtype">void</span>* <a class="code" href="structprintable.html#afad175363638b5c64b6f30ef645c467c">val</a>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;} <a class="code" href="printable_8h.html#a6c9e898e21545740dc46d3923dbafa51">printable</a>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<a class="code" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="code" href="structprintable.html">printable</a>* <a class="code" href="printable_8h.html#af5feef8eecb2606d307ed26368d575b3">make_printable</a>(<span class="keywordtype">size_t</span> size, <span class="keywordtype">void</span>* data);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<a class="code" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <span class="keywordtype">char</span>* <a class="code" href="printable_8h.html#a5453e29dc6db05aad57afc5d50f7583a">to_string_default</a>(<a class="code" href="structprintable.html">printable</a>* p);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<a class="code" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <span class="keywordtype">char</span>* <a class="code" href="printable_8h.html#aca105e2cbd7559c620b7ae31a9b6516d">to_string</a>(<a class="code" href="structprintable.html">printable</a>* p);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#endif // PRINTABLE_H_</span></div>
+<div class="ttc" id="printable_8h_html_a9291fc24c91a6ee6e2760726d4ab617b"><div class="ttname"><a href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a></div><div class="ttdeci">#define ASSIGNMENTLIB_API</div><div class="ttdef"><b>Definition:</b> printable.h:41</div></div>
+<div class="ttc" id="printable_8h_html_a5453e29dc6db05aad57afc5d50f7583a"><div class="ttname"><a href="printable_8h.html#a5453e29dc6db05aad57afc5d50f7583a">to_string_default</a></div><div class="ttdeci">ASSIGNMENTLIB_API char * to_string_default(printable *p)</div><div class="ttdoc">Generates a string representing the default printable. </div><div class="ttdef"><b>Definition:</b> printable.c:9</div></div>
+<div class="ttc" id="printable_8h_html_af5feef8eecb2606d307ed26368d575b3"><div class="ttname"><a href="printable_8h.html#af5feef8eecb2606d307ed26368d575b3">make_printable</a></div><div class="ttdeci">ASSIGNMENTLIB_API printable * make_printable(size_t size, void *data)</div><div class="ttdoc">Creates new printable wrapping data and returns it. </div><div class="ttdef"><b>Definition:</b> printable.c:27</div></div>
+<div class="ttc" id="structprintable_html_a3a7834c54cf184f124fd2a2c9485c59a"><div class="ttname"><a href="structprintable.html#a3a7834c54cf184f124fd2a2c9485c59a">printable::type</a></div><div class="ttdeci">size_t type</div><div class="ttdoc">The printing function. </div><div class="ttdef"><b>Definition:</b> printable.h:63</div></div>
+<div class="ttc" id="structprintable_html_ae2bbd15647aa6cb9d25c28e1b959c26e"><div class="ttname"><a href="structprintable.html#ae2bbd15647aa6cb9d25c28e1b959c26e">printable::size</a></div><div class="ttdeci">size_t size</div><div class="ttdoc">How much data is stored in this element (must be suitable for sizeof call). </div><div class="ttdef"><b>Definition:</b> printable.h:68</div></div>
+<div class="ttc" id="printable_8h_html_a6c9e898e21545740dc46d3923dbafa51"><div class="ttname"><a href="printable_8h.html#a6c9e898e21545740dc46d3923dbafa51">printable</a></div><div class="ttdeci">struct printable printable</div><div class="ttdef"><b>Definition:</b> printable.h:48</div></div>
+<div class="ttc" id="structprintable_html"><div class="ttname"><a href="structprintable.html">printable</a></div><div class="ttdoc">This struct provides the backbone for anything that can go inside a printable array. </div><div class="ttdef"><b>Definition:</b> printable.h:59</div></div>
+<div class="ttc" id="printable_8h_html_aca105e2cbd7559c620b7ae31a9b6516d"><div class="ttname"><a href="printable_8h.html#aca105e2cbd7559c620b7ae31a9b6516d">to_string</a></div><div class="ttdeci">ASSIGNMENTLIB_API char * to_string(printable *p)</div><div class="ttdoc">Translates the to_string call to p. </div><div class="ttdef"><b>Definition:</b> printable.c:15</div></div>
+<div class="ttc" id="structprintable_html_afad175363638b5c64b6f30ef645c467c"><div class="ttname"><a href="structprintable.html#afad175363638b5c64b6f30ef645c467c">printable::val</a></div><div class="ttdeci">void * val</div><div class="ttdoc">The actual value stored inside. </div><div class="ttdef"><b>Definition:</b> printable.h:72</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

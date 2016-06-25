@@ -98,8 +98,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>This file defines basic functions for working with printable arrays.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;gc.h&gt;</code><br />
-<code>#include &lt;stdlib.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
 </div>
 <p><a href="printable_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -113,6 +112,8 @@ Data Structures</h2></td></tr>
 Macros</h2></td></tr>
 <tr class="memitem:aa651fc9b36c778872834b423e58b5fdf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable_8h.html#aa651fc9b36c778872834b423e58b5fdf">ALLOCATE</a>(X)&#160;&#160;&#160;malloc(X)</td></tr>
 <tr class="separator:aa651fc9b36c778872834b423e58b5fdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9291fc24c91a6ee6e2760726d4ab617b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a></td></tr>
+<tr class="separator:a9291fc24c91a6ee6e2760726d4ab617b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -124,15 +125,15 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a562d539650b6a5247baf17e56aaae58a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable_8h.html#a562d539650b6a5247baf17e56aaae58a">make_printable</a> (size_t size, void *data)</td></tr>
-<tr class="memdesc:a562d539650b6a5247baf17e56aaae58a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates new <code>printable</code> wrapping <code>data</code> and returns it.  <a href="#a562d539650b6a5247baf17e56aaae58a">More...</a><br /></td></tr>
-<tr class="separator:a562d539650b6a5247baf17e56aaae58a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a483945f165a627e834c24e3327dfbe14"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable_8h.html#a483945f165a627e834c24e3327dfbe14">to_string_default</a> (<a class="el" href="structprintable.html">printable</a> *p)</td></tr>
-<tr class="memdesc:a483945f165a627e834c24e3327dfbe14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a string representing the default <code>printable</code>.  <a href="#a483945f165a627e834c24e3327dfbe14">More...</a><br /></td></tr>
-<tr class="separator:a483945f165a627e834c24e3327dfbe14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00442d787c7a58aa6e07ebe567936391"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable_8h.html#a00442d787c7a58aa6e07ebe567936391">to_string</a> (<a class="el" href="structprintable.html">printable</a> *p)</td></tr>
-<tr class="memdesc:a00442d787c7a58aa6e07ebe567936391"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translates the <code>to_string</code> call to <code>p</code>.  <a href="#a00442d787c7a58aa6e07ebe567936391">More...</a><br /></td></tr>
-<tr class="separator:a00442d787c7a58aa6e07ebe567936391"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5feef8eecb2606d307ed26368d575b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structprintable.html">printable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable_8h.html#af5feef8eecb2606d307ed26368d575b3">make_printable</a> (size_t size, void *data)</td></tr>
+<tr class="memdesc:af5feef8eecb2606d307ed26368d575b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates new <code>printable</code> wrapping <code>data</code> and returns it.  <a href="#af5feef8eecb2606d307ed26368d575b3">More...</a><br /></td></tr>
+<tr class="separator:af5feef8eecb2606d307ed26368d575b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5453e29dc6db05aad57afc5d50f7583a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable_8h.html#a5453e29dc6db05aad57afc5d50f7583a">to_string_default</a> (<a class="el" href="structprintable.html">printable</a> *p)</td></tr>
+<tr class="memdesc:a5453e29dc6db05aad57afc5d50f7583a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a string representing the default <code>printable</code>.  <a href="#a5453e29dc6db05aad57afc5d50f7583a">More...</a><br /></td></tr>
+<tr class="separator:a5453e29dc6db05aad57afc5d50f7583a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca105e2cbd7559c620b7ae31a9b6516d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="printable_8h.html#aca105e2cbd7559c620b7ae31a9b6516d">to_string</a> (<a class="el" href="structprintable.html">printable</a> *p)</td></tr>
+<tr class="memdesc:aca105e2cbd7559c620b7ae31a9b6516d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translates the <code>to_string</code> call to <code>p</code>.  <a href="#aca105e2cbd7559c620b7ae31a9b6516d">More...</a><br /></td></tr>
+<tr class="separator:aca105e2cbd7559c620b7ae31a9b6516d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file defines basic functions for working with printable arrays. </p>
@@ -151,6 +152,18 @@ Functions</h2></td></tr>
           <td class="paramtype">&#160;</td>
           <td class="paramname">X</td><td>)</td>
           <td>&#160;&#160;&#160;malloc(X)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9291fc24c91a6ee6e2760726d4ab617b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ASSIGNMENTLIB_API</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -191,12 +204,12 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a562d539650b6a5247baf17e56aaae58a"></a>
+<a class="anchor" id="af5feef8eecb2606d307ed26368d575b3"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structprintable.html">printable</a>* make_printable </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> <a class="el" href="structprintable.html">printable</a>* make_printable </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>size</em>, </td>
@@ -219,12 +232,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a00442d787c7a58aa6e07ebe567936391"></a>
+<a class="anchor" id="aca105e2cbd7559c620b7ae31a9b6516d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">char* to_string </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> char* to_string </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structprintable.html">printable</a> *&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
@@ -243,12 +256,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a483945f165a627e834c24e3327dfbe14"></a>
+<a class="anchor" id="a5453e29dc6db05aad57afc5d50f7583a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">char* to_string_default </td>
+          <td class="memname"><a class="el" href="printable_8h.html#a9291fc24c91a6ee6e2760726d4ab617b">ASSIGNMENTLIB_API</a> char* to_string_default </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structprintable.html">printable</a> *&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>

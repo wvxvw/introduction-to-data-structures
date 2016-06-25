@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['partition',['partition',['../array_8c.html#a00ddb3a5fb426e2b505c9d955b03919e',1,'partition(array partitioned, comparison_fn_t cmp):&#160;array.c'],['../array_8h.html#a00ddb3a5fb426e2b505c9d955b03919e',1,'partition(array partitioned, comparison_fn_t cmp):&#160;array.c']]],
-  ['partition_5fat',['partition_at',['../array_8c.html#a93a923b93d2ff3780e397acca1ba61b5',1,'partition_at(array searched, size_t position, comparison_fn_t cmp):&#160;array.c'],['../array_8h.html#a93a923b93d2ff3780e397acca1ba61b5',1,'partition_at(array searched, size_t position, comparison_fn_t cmp):&#160;array.c']]]
+  ['next',['next',['../iterable_8c.html#a9d6ecea7c09c0138629d7fbf3ecbb7da',1,'next(iterator *impl):&#160;iterable.c'],['../iterable_8h.html#a2bb3621d99971a81b21e3e8944c0758e',1,'next(iterator *impl):&#160;iterable.c']]],
+  ['nth_5forder_5fstatistic',['nth_order_statistic',['../array_8c.html#a43840b4abbee0fdc1233091afb348e0a',1,'nth_order_statistic(array searched, size_t order, comparison_fn_t cmp):&#160;array.c'],['../array_8h.html#a899d757862532b301b1f04ea58ddcb19',1,'nth_order_statistic(array searched, size_t order, comparison_fn_t cmp):&#160;array.c']]]
 ];
