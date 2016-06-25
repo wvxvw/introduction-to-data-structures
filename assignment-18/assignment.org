@@ -1,9 +1,9 @@
 # -*- fill-column: 80; org-confirm-babel-evaluate: nil -*-
 
-#+TITLE:     Assignment 17, Data-Structures
+#+TITLE:     Assignment 18, Data-Structures
 #+AUTHOR:    Oleg Sivokon
 #+EMAIL:     olegsivokon@gmail.com
-#+DATE:      <2016-06-18 Sat>
+#+DATE:      <2016-06-25 Sat>
 #+DESCRIPTION: Third assignment in the course Data-Structures
 #+KEYWORDS: Data-Structures, Algorithms, Assignment
 #+LANGUAGE: en
@@ -83,66 +83,179 @@
 \clearpage
 #+END_LATEX
 
-* Problems
+* Problem Description
+  Implement a program to manage university library.  Below are the operations
+  the program must support.  The program should use query language given by ABNF
+  grammar associated to each operation:
+  1. =join_library(patron, patron_id)=.
+     #+BEGIN_EXAMPLE
+       `+` patron patron_id
+     #+END_EXAMPLE
+     Adds a new patron to the library.
+  2. =leave_library(patron, patron_id)=.
+     #+BEGIN_EXAMPLE
+       `-` patron patron_id
+     #+END_EXAMPLE
+     Removes existing patron from the library.
+  3. =borrow_book(patron, patron_id, book_id)=.
+     #+BEGIN_EXAMPLE
+       patron patron_id book_id `+`
+     #+END_EXAMPLE
+     Associates given book to patron.
+  4. =return_book(patron, patron_id, book_id)=.
+     #+BEGIN_EXAMPLE
+       patron patron_id book_id `-`
+     #+END_EXAMPLE
+     Dissasocitates the given book and patron.
+  5. =list_books(patron_id)=.
+     #+BEGIN_EXAMPLE
+       `?` patron_id
+     #+END_EXAMPLE
+     List all books borrowed by indicated patron.
+  6. =who_borrows(book_id)=.
+     #+BEGIN_EXAMPLE
+       `?` book_id
+     #+END_EXAMPLE
+     Displays the patron(s) currnetly holding the indicated book.
+  7. =borrows_most()=.
+     #+BEGIN_EXAMPLE
+       `?` `!`
+     #+END_EXAMPLE
+     Displays the patron who currently borrows most books.
 
-** Problem 1
-   Given integer $n$, suggest data-structure $S$ with following properties:
-   1. =build= takes $O(n \lg n)$ time.
-   2. =insert= takes $O(\lg n + d)$ time.
-   3. =delete= takes $O(\lg n + d)$ time.
-   4. =successor= takes $O(1)$ time.
-      
-   There was a descritption of what $d$ is, but it uses some runic Hebrew, and
-   is impossible to decypher.  I'll ignore it.
+* Discussion
 
-*** Answer 1
+** Reflection on assignment
+   There are several problems with this specification:
+   1. It isn't stated whether the same patron can join the library multiple
+      times, but I assumed patrons may only join the library once.
+   2. It isn't stated whether it is possible to leave the library while
+      borrowing any books.  I will treat this as impossible, and will prompt the
+      user to first return the books to the library.
+   3. It isn't clear whether leaving multiple times should result in an error.
+      I will not treat this as an error.
+   4. It is not clear whether =book_id= is akin to ISBN (in which case multiple
+      copies of the same book may exist), or that =book_id= is some internal
+      library code uniquely marking the book.  I will not treat is as unique.
+   5. By the same token, it may be possible to return the same book multiple
+      times, viz when the same patron holds multiple copies of the same book.
+   6. Consequently, =who_borrows= may return the list of patrons (all of which
+      hold the same book, just not the same exact copy).
+   7. Some queries provide excess information.  I am going to make the format
+      more flexible to allow shorter input while preserving the original syntax.
 
+** Data-structures used to support queries
+   If it wasn't for =borrows_most()=, two =hash-tables= would fit the bill
+   perfectly: =library_books= table would use book identifiers as keys and
+   patrons holding these books as values.  Second table, =library_patrons= would
+   use patron identifiers as keys and books held by patrons as values.  Thus,
+   adding patron to the library would take constant time, removing patron from
+   the library would also take constant time.  Removing a book from the library
+   would take constant time (since we can look up =library_books= and
+   immediately discover whether it is held by anyone.  Similarly, =who_borrows=
+   and =list_books= would all run in constant time.
 
-** Problem 2
-   Does there exist a red-black tree s.t.:
-   1. It contains 3 black and 4 red nodes.
-   2. It contains 4 black and 3 red nodes.
-   3. It contains 5 black and 2 red nodes.
-   4. It contains 6 black and 1 red node.
+   The problematic =borrows_most= would run in linear time (we would need to
+   look at all keys in =library_patrons= table to find the patron who holds most
+   books.
 
-*** Answer 2
-    Yes, this configuration is possible.  Consider root black node with two
-    black children.  Each child of the second level has only red nodes.  In this
-    tree all simple paths have the same number of black nodes.  All red nodes
-    have black children (leafs).
+   We can mitigate this in two ways: ad a special slot in the library for the
+   patron currently holding most books, and then update this slot any time the
+   library is modified: for an additional constant memory cost and constant cost
+   incured on every destructive operation we would perform every operation in
+   constant time.
 
-*** Answer 3
-    Such tree is impossible.  Since the root node must be black, we should have
-    to place 3 remaining black nodes on two paths from the root to the leafs,
-    but we cannot divide 3 evenly in two paths.  And since we cannot, we would
-    have to violate the tree property which requires the same number of black
-    nodes on all simple paths from root to be the same.
+** Extension to queries
+   To make working with the program more convenient, I will add the following
+   queries:
+   1. =add_book=.
+      #+BEGIN_EXAMPLE
+        `.` book_id+ `+` | `.` file | `.` num
+      #+END_EXAMPLE
+      Adds book to the library.  Book identifier may be repeated several times,
+      or red from a file or generated by the program.
+   2. =show_library=.
+      #+BEGIN_EXAMPLE
+        `?` `?`
+      #+END_EXAMPLE
+      This prints the current state of the library, both the books and the
+      patrons.
+   3. =borrow_book= and =return_book= don't need the name of patron returning or
+      borrowing the book (identifier is enough).  So the patron's name is
+      optional in the queries.
 
-*** Answer 4
-    Yes, such tree is possible: black root node with two red children and four
-    black grandchildren.  Each simple path from root has two black nodes.  No
-    red node is a parent of another red node.
+* Solution
+  Below is the =yacc= code for the queries grammar (auxilary code was removed
+  for brevity).
 
-*** Answer 5
-    No, such tree is impossible.  The number of black nodes in a red-black tree
-    must be odd (the root and two sub-trees with equal number of black nodes).
+  The parser:
+  #+BEGIN_EXAMPLE
+    books   :       BOOKID { $$ = cons($1, NULL); }
+            |       BOOKID books { $$ = cons($1, $2); }
+            ;
 
-** Problem 3
-   Suggest data-structure which allows the following operations:
-   1. =insert= in time $O(\lg n)$.
-   2. =delete= in time $O(\lg n)$.
-   3. =pair-diff= /(find two numbers which differ precisely by given amount)/
-      in time $O(n)$.
-   4. =sum= /(sums all numbers within given range)/ in time $O(\lg n)$.
+    rquery  :       PATRON PATRONID BOOKID PLUS {
+                        $$ = query(BORROW, $1, $2, $3); }
+            |       PATRON PATRONID BOOKID MINUS {
+                        $$ = query(RETURN, $1, $2, $3); }
+            |       PLUS PATRON PATRONID {
+                        $$ = query(JOIN, $2, $3, NULL); }
+            |       MINUS PATRON PATRONID {
+                        $$ = query(LEAVE, $2, $3, NULL); }
+            |       QUESTION PATRONID {
+                        $$ = query(BOOKS, NULL, $2, NULL); }
+            |       QUESTION BOOKID {
+                        $$ = query(WHO_BORROWS, NULL, NULL, $2); }
+            |       QUESTION BANG {
+                        $$ = query(BORROWS_MOST, NULL, NULL, NULL); }
+            |       QUESTION QUESTION {
+                        $$ = query(SHOW, NULL, NULL, NULL); }
+            ;
 
-*** Answer 6
+    populate :      DOT books { populate_library_list($2); }
+            |       DOT QUOTED { populate_library_file($2); }
+            |       DOT NUM { populate_library($2); }
+            ;
 
-** Problem 4
-   Suggest data-structure which allows the following operations:
-   1. =search= in time $O(\lg n)$.
-   2. =insert= in time $O(\lg n)$.
-   3. =delete= in time $O(\lg n)$.
-   4. =mode= in time $O(1)$.
-   5. =mark= /(insetion time)/ in $O(\lg n)$.
+    pquery  :       rquery { process_query($1); }
+            |       populate {;}
+            ;
 
-*** Answer 7
+    pqueries :      pquery {;}
+            |       pquery pqueries {;}
+            ;
+  #+END_EXAMPLE
+
+  And the lexer:
+  #+BEGIN_EXAMPLE
+    [+]                      { yylval.str = str(yytext); return PLUS; }
+    [-]                      { yylval.str = str(yytext); return MINUS; }
+    [?]                      { yylval.str = str(yytext); return QUESTION; }
+    [!]                      { yylval.str = str(yytext); return BANG; }
+    \.                       { yylval.str = str(yytext); return DOT; }
+    [0-9]{9}                 { yylval.str = str(yytext); return PATRONID; }
+    [a-zA-Z][a-zA-Z][0-9]{4} { yylval.str = str(yytext); return BOOKID; }
+    [a-zA-Z]{1,32}           { yylval.str = str(yytext); return PATRON; }
+    [\"][^\"]+[\"]           { yylval.str = quote(yytext); return QUOTED; }
+    #[0-9]{1,12}             { yylval.num = atoi(yytext + 1); return NUM; }
+    [ \t\r\n]+               ;
+    .                        printf("line: %d, Unexpeced character: %s\n",
+                                    yylineno, yytext);
+  #+END_EXAMPLE
+
+  No new data-structures are required for solving this task.  The UML diagrams
+  of the objects involved are given below:
+
+  The relevant source files are:
+  1. [[assignment18.c]] - program's entry point.
+  2. [[query.c]] - query interface.
+  3. [[library.c]] - library data-structure.
+  4. [[query_grammar.y]] - query parser.
+  5. [[queries.l]] - query lexer.
+     
+  Documentation for this code is automatically extracted from header files by
+  =Doxygen= and stored in [[../doc]] directory.
+
+  To compile the code install [[http://scons.org/doc/0.98.4/HTML/scons-user/x166.html][SCons]], [[https://geeksww.com/tutorials/miscellaneous/bison_gnu_parser_generator/installation/installing_bison_gnu_parser_generator_ubuntu_linux.php][GNU Bison (YACC)]], [[http://flex.sourceforge.net/][Flex (LEX)]].  If you
+  aren't interested in generating from YACC and LEX files, this repository
+  contains already generated C files and headers.
