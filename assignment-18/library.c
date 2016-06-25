@@ -3,6 +3,7 @@
 #include "query.h"
 #include "printable_string.h"
 #include "generic.h"
+#include "sortable.h"
 
 DEFTYPE(library);
 DEFTYPE(patron);
@@ -22,6 +23,17 @@ int compare_patrons(const void* a, const void* b) {
     size_t sb = length(pb->books);
     
     return (sa > sb) - (sa < sb);
+}
+
+int compare_patron_ids(const void* a, const void* b) {
+    patron pa = *(patron*)a;
+    patron pb = *(patron*)b;
+
+    if (pa == pb) return 0;
+    if (pa == NULL) return -1;
+    if (pb == NULL) return 1;
+    
+    return strcmp(pa->id, pb->id);
 }
 
 library make_library() {
@@ -76,8 +88,20 @@ char* library_list_books(library lib, query q) {
 }
 
 char* library_join(library lib, query q) {
-
-    return "< library_join: Not implemented\n";
+    patron p = make_patron(q->patron, q->id);
+    patron existing = (patron)find(
+        lib->patrons, (printable*)p, compare_patron_ids);
+    char* result, *pattern;
+    
+    if (existing == NULL) {
+        aput(lib->patrons, (printable*)p);
+        pattern = "< Registering %s\n";
+    } else pattern = "< Patron %s already registered\n";
+    result = ALLOCATE(
+        sizeof(char) * (strlen(pattern) + strlen(q->id) + 1));
+    int ret = sprintf(result, pattern, q->id);
+    if (ret < 0) printf("Error printing library_join\n");
+    return result;
 }
 
 char* library_leave(library lib, query q) {

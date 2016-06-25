@@ -97,7 +97,7 @@ query make_query(query_kind kind, char* patron_name, char* patron_id, char* book
 
 void process_query(query q) {
     char* result = handlers[q->kind](get_library(), q);
-    printf("Processing: %s\n%s\n> ", to_string((printable*)q), result);
+    printf("< Processing: %s\n%s\n> ", to_string((printable*)q), result);
 }
 
 char* str(char* in) {

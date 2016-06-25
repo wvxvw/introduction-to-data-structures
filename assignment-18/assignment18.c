@@ -35,6 +35,7 @@ void print_usage() {
            "  list_books    := `?` patron_id\n"
            "  who_borrows   := `?` book_id\n"
            "  borrows_most  := `?` `!`\n"
+           "  show_library  := `?` `?`\n"
            "  patron        := [a-zA-Z]{1,32}\n"
            "  patron_id     := [0-9]{9}\n"
            "  book_id       := [a-zA-Z]{2}[0-9]{4}\n"

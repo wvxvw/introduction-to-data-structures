@@ -106,4 +106,7 @@ char* to_string_aheap(aheap heap);
 ASSIGNMENTLIB_API
 aheap make_empty_aheap(comparison_fn_t cmp);
 
+ASSIGNMENTLIB_API
+printable* aheap_find(aheap heap, printable* elt, comparison_fn_t cmp);
+
 #endif // HEAP_H_

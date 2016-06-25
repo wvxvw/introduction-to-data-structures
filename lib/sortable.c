@@ -49,5 +49,9 @@ printable* find(sortable haystack, printable* needle, comparison_fn_t cmp) {
     printable* p = haystack;
     printable* (*fptr)(sortable, printable*, comparison_fn_t) = find;
     printable* (*method)(sortable, printable*, comparison_fn_t) = find_method(p->type, fptr);
+    if (method == NULL) {
+        printf("find: Couldn't find method: %p, %p\n", p->type, fptr);
+        return NULL;
+    }
     return method(haystack, needle, cmp);
 }

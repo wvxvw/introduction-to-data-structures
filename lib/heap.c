@@ -104,7 +104,6 @@ void abubble_up(aheap heap, size_t child) {
     size_t right = child << 1;
     size_t parent = child;
 
-    printf("abubble_up left: %d, right: %d, child: %d\n", (int)left, (int)right, (int)child);
     if (left < heap->size &&
         heap->cmp(&heap->elements[left], &heap->elements[parent]) > 0)
         parent = left;
@@ -140,6 +139,7 @@ aheap make_aheap(size_t size, comparison_fn_t cmp) {
     result->cmp = cmp;
     presult->type = aheap_type();
     define_method(presult->type, to_string, to_string_aheap);
+    define_method(presult->type, find, aheap_find);
     return result;
 }
 
@@ -178,6 +178,23 @@ printable* aput(aheap heap, printable* val) {
     heap->size++;
     abubble_up(heap, heap->size);
     return val;
+}
+
+printable* aheap_find(aheap heap, printable* elt, comparison_fn_t cmp) {
+    size_t i = heap->allocated;
+    
+    while (i > 0) {
+        size_t j = i >> 1;
+        size_t k = j;
+
+        while (k < i) {
+            if (k < heap->size && cmp(&heap->elements[k], &elt) == 0)
+                return heap->elements[k];
+            k++;
+        }
+        i = j;
+    }
+    return NULL;
 }
 
 char* to_string_aheap(aheap heap) {
