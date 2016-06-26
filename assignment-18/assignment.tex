@@ -1,4 +1,4 @@
-% Created 2016-06-25 Sat 01:49
+% Created 2016-06-26 Sun 00:29
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -167,8 +167,8 @@ The problematic \texttt{borrows\_most} would run in linear time (we would need t
 look at all keys in \texttt{library\_patrons} table to find the patron who holds most
 books.
 
-We can mitigate this in two ways: ad a special slot in the library for the
-patron currently holding most books, and then update this slot any time the
+We can mitigate this by adding a special slot in the library for the patron
+currently holding most books, and then updating this slot any time the
 library is modified: for an additional constant memory cost and constant cost
 incured on every destructive operation we would perform every operation in
 constant time.
@@ -273,5 +273,7 @@ Documentation for this code is automatically extracted from header files by
 To compile the code install \href{http://scons.org/doc/0.98.4/HTML/scons-user/x166.html}{SCons}, \href{https://geeksww.com/tutorials/miscellaneous/bison_gnu_parser_generator/installation/installing_bison_gnu_parser_generator_ubuntu_linux.php}{GNU Bison (YACC)}, \href{http://flex.sourceforge.net/}{Flex (LEX)}.  If you
 aren't interested in generating from YACC and LEX files, this repository
 contains already generated C files and headers.
+
+\includegraphics[width=.9\linewidth]{tryout.png}
 % Emacs 25.1.50.2 (Org mode 8.2.10)
 \end{document}

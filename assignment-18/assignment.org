@@ -159,8 +159,8 @@
    look at all keys in =library_patrons= table to find the patron who holds most
    books.
 
-   We can mitigate this in two ways: ad a special slot in the library for the
-   patron currently holding most books, and then update this slot any time the
+   We can mitigate this by adding a special slot in the library for the patron
+   currently holding most books, and then updating this slot any time the
    library is modified: for an additional constant memory cost and constant cost
    incured on every destructive operation we would perform every operation in
    constant time.
@@ -259,3 +259,55 @@
   To compile the code install [[http://scons.org/doc/0.98.4/HTML/scons-user/x166.html][SCons]], [[https://geeksww.com/tutorials/miscellaneous/bison_gnu_parser_generator/installation/installing_bison_gnu_parser_generator_ubuntu_linux.php][GNU Bison (YACC)]], [[http://flex.sourceforge.net/][Flex (LEX)]].  If you
   aren't interested in generating from YACC and LEX files, this repository
   contains already generated C files and headers.
+
+  #+BEGIN_SRC plantuml :file tryout.png
+    @startuml
+
+    package lib <<Rect>> {
+      class Printable {
+        +String toString()
+      }
+    }
+
+    package assignment18 <<Rect>> {
+      class Library {
+        +Map<String, List<Patron>> books
+        +Map<String, Patron> patrons
+        +Patron topPatron
+
+        +void addBook(String book)
+        +void joinLibrary(String name, String id)
+        +void leaveLibrary(String name, String id)
+        +void borrowBook(String book, String id, String name)
+        +void borrowBook(String book, String id)
+        +void returnBook(String book, String id, String name)
+        +void returnBook(String book, String id)
+        +void booksOf(String id)
+        +void whoBorrows(String book)
+        +void borrowsMost()
+        +void processQuery(Query query)
+      }
+      class Query {
+        +String name
+        +String id
+        +String book
+        +QueryKind kind
+        +void parse()
+      }
+      class Patron {
+        +List<String> books
+        +String name
+        +String id
+      }
+      class QueryKind {
+      }
+    }
+
+    Library <|-- Printable
+    Query <|-- Printable
+    Patron <|-- Printable
+
+    Library o-- Patron
+    Query o-- QueryKind
+    @enduml
+  #+END_SRC

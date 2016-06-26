@@ -132,7 +132,7 @@ char* library_leave(library lib, query q) {
     if (existing == NULL) pattern = "< Patron %s is not registered\n";
     else {
         printable* k = (printable*)make_printable_string(existing->id);
-        list books = (list)peek(lib->patrons, k);
+        list books = existing->books;
         if (books != NULL)
             pattern = "< Patron %s must return books before leaving\n";
         else {
